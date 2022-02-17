@@ -5,10 +5,12 @@ export const COLORS = {
     primary: "#f18af1", 
     purple:"#fedeff",
     purpleLight:"#ffd6fd",
+    black2:"#141318",
     orange: "#f17e0e",
     green: "#27AE60",
     lightGreen:"#8edccf",
     lightGreen2:"#41e5c9",
+    
     red: "#FF1717",
     blue: '#0064C0',
     darkBlue: "#111A2C",
@@ -22,7 +24,6 @@ export const COLORS = {
     white2: "#FBFBFB",
     white: '#FFFFFF',
     black: "#000000",
-    black2:"#141318",
 
 
     transparentPrimray: 'rgba(227, 120, 75, 0.4)',
