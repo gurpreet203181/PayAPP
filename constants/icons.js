@@ -8,6 +8,17 @@ const right_arrow = require("../assets/icons/right_arrow.png");
 const settings = require("../assets/icons/settings.png");
 const star = require("../assets/icons/star.png");
 const send = require("../assets/icons/send.png");
+const plus = require("../assets/icons/plus.png");
+const boy = require("../assets/dummyData/boy.png");
+const sendMoney = require("../assets/icons/sendMoney.png");
+const bill = require("../assets/icons/euro-bill.png");
+const recharge = require("../assets/icons/power-bank.png");
+const more = require("../assets/icons/menu.png");
+const addUser = require("../assets/icons/add-user.png");
+
+
+
+
 
 export default {
     back_arrow,
@@ -19,5 +30,12 @@ export default {
     right_arrow,
     settings,
     star,
-    send
+    send,
+    plus,
+    boy,
+    sendMoney,
+    bill,
+    recharge,
+    more,
+    addUser
 }

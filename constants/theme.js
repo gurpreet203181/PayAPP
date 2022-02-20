@@ -5,7 +5,9 @@ export const COLORS = {
     primary: "#f18af1", 
     purple:"#fedeff",
     purpleLight:"#ffd6fd",
+   
     black2:"#141318",
+   
     orange: "#f17e0e",
     green: "#27AE60",
     lightGreen:"#8edccf",
@@ -14,11 +16,16 @@ export const COLORS = {
     red: "#FF1717",
     blue: '#0064C0',
     darkBlue: "#111A2C",
-    darkGray: "#525C67",
-    darkGray2: "#757D85",
+    darkGray: "#92908e",
+
+    darkGray2: "#757D85",//border  gray
+
     gray: "#d0d0d2",
-    gray2: "#cfcfd1",
-    gray3: '#CFD0D7',
+
+    gray2: "#7A7A7A",//gray font
+    
+    gray3: '#ebebeb',
+
     lightGray1: "#DDDDDD",
     lightGray2: "#F5F5F8",
     white2: "#FBFBFB",
@@ -58,7 +65,7 @@ export const SIZES = {
     height
 };
 export const FONTS = {
-    largeTitle: { fontFamily: "Poppins-Black", fontSize: SIZES.largeTitle },
+    largeTitle: { fontFamily: "-Black", fontSize: SIZES.largeTitle },
     h1: { fontFamily: "Poppins-Bold", fontSize: SIZES.h1, lineHeight: 36 },
     h2: { fontFamily: "Poppins-Bold", fontSize: SIZES.h2, lineHeight: 30 },
     h3: { fontFamily: "Poppins-SemiBold", fontSize: SIZES.h3, lineHeight: 22 },

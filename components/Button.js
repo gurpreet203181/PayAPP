@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity,Text ,Image} from "react-native";
+import { TouchableOpacity,Text ,Image,StyleSheet} from "react-native";
 import { FONTS ,COLORS} from "../constants"; 
 
 
@@ -14,28 +14,27 @@ const ButtonIcon = ({icon,iconStyle,label,labelStyle,containerStyle,onPress,icon
        }}onPress={onPress}>
 
            {iconPosition=="LEFT" &&
-             <Image source={icon} style={{
-                marginLeft:5,
-                width: 20,
-                height: 20,
-                tintColor:COLORS.black,
-                ...iconStyle
-            }}/>
+             <Image source={icon} style={{...style.imgStyle, ...iconStyle}}/>
            }
            <Text style={{ ...FONTS.body3,...labelStyle,}}>
                {label}
            </Text>
 
             {iconPosition=="RIGHT" &&
-             <Image source={icon} style={{
-                marginLeft:5,
-                width: 20,
-                height: 20,
-                tintColor:COLORS.black,
-                ...iconStyle
-            }}/>}
+             <Image source={icon} style={{...style.imgStyle, ...iconStyle}}
+            />}
 
        </TouchableOpacity>
     )
 }
+
+const style = StyleSheet.create({
+   imgStyle:{
+   // marginLeft:5,
+    width: 20,
+    height: 20,
+    tintColor:COLORS.black,
+   }
+    
+})
 export default ButtonIcon;
