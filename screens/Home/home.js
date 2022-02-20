@@ -1,10 +1,11 @@
 import React from 'react';
+import {t} from '../../constants/services/i18n/config'
 
 import { View ,Text,Image} from 'react-native';
-import { icons ,COLORS,SIZES} from '../../constants';
+import { icons ,COLORS,SIZES,FONTS} from '../../constants';
+import { ButtonIcon } from '../../components';
 const Home = ()=>{
-
-
+    
     function renderHeader(){
         return(
             <View style={{ flexDirection:'row' , justifyContent:'space-between' ,alignItems:'center'}}>
@@ -15,9 +16,9 @@ const Home = ()=>{
                    style={{
                        color:COLORS.gray2,
                        fontSize:SIZES.body4}}>
-                       Hello Gurpreet</Text>
+                       {t('hello')} Gurpreet</Text>
                        <View style={{flexDirection:'row', marginTop:5}}>
-                       <Text style={{fontSize:SIZES.body4}}>Welcome Back</Text>
+                       <Text style={{fontSize:SIZES.body4}}>{t('welcome')}</Text>
                        <Image source={icons.star} style={{height:20, width:20}}/>
 
                        </View>
@@ -33,8 +34,32 @@ const Home = ()=>{
             <View style={{flexDirection:'row', justifyContent:'space-between',alignItems:'center',marginTop:SIZES.padding}}>
                 <View>
 
-                    <Text style={{fontSize:SIZES.h2}}>$525555</Text>
-                    <Text style={{fontSize: SIZES.body5}}>Your Balance</Text>
+                    <Text style={{...FONTS.h3}}>$5</Text>
+                    <Text style={{...FONTS.body5}}>{t('YourBalance')}</Text>
+                </View>
+                <View>
+                <ButtonIcon 
+                label='Add Card'
+                labelStyle={{...FONTS.body4}}
+                iconPosition='RIGHT'
+                icon={icons.home}
+                iconStyle={{
+                    marginRight:10,tintColor:COLORS.black,height:20, width:20
+                }}
+
+                containerStyle={{
+                    
+                    flex:1,
+                    justifyContent:'space-between',
+                    alignItems:'center',
+                    paddingHorizontal:SIZES.radius,
+                    borderRadius:SIZES.radius2,
+                    borderColor:COLORS.black,
+                    borderWidth: 1,
+                  
+                }}
+                />
+
                 </View>
                 
             </View>
