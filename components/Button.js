@@ -3,7 +3,7 @@ import { TouchableOpacity,Text ,Image,StyleSheet} from "react-native";
 import { FONTS ,COLORS} from "../constants"; 
 
 
-const ButtonIcon = ({icon,iconStyle,label,labelStyle,containerStyle,onPress,iconPosition}) => {
+const ButtonIcon = ({icon,iconStyle,label,labelStyle,containerStyle,onPress,iconPosition,disabled}) => {
     return(
        <TouchableOpacity 
        style={{
@@ -11,7 +11,9 @@ const ButtonIcon = ({icon,iconStyle,label,labelStyle,containerStyle,onPress,icon
            alignItems:"center",
            justifyContent:"center",
            ...containerStyle
-       }}onPress={onPress}>
+       }}
+       onPress={onPress} disabled={disabled}
+       >
 
            {iconPosition=="LEFT" &&
              <Image source={icon} style={{...style.imgStyle, ...iconStyle}}/>

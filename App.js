@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,Platform,StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
 
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -6,10 +6,22 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from '@react-navigation/native';
 import { init } from './constants/services/i18n/config';
 import Tabs from './navigation/tabs';
+import {CardDetail,SignIn,SignUp,Welcome} from './screens/index'
+import AppLoading from 'expo-app-loading';
+import { useFonts, Nunito_500Medium ,Nunito_700Bold} from '@expo-google-fonts/nunito';
+
 const Stack = createStackNavigator();
 
 export default function App() {
   init();
+  let [fontsLoaded] = useFonts({
+    Nunito_500Medium,
+    Nunito_700Bold
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
 
   return (
     
@@ -22,11 +34,41 @@ export default function App() {
           headerShown: false
           
         }}
-        initialRouteName={'Home'}
+        initialRouteName={'Welcome'}
       >
         <Stack.Screen
           name="Home"
           component={Tabs}
+          screenOptions={{
+            headerShown:false
+          }}
+        />
+
+        <Stack.Screen
+          name="CardDetail"
+          component={CardDetail}
+          screenOptions={{
+            headerShown:false
+          }}
+        />
+        <Stack.Screen
+          name="SignIn"
+          component={SignIn}
+          screenOptions={{
+            headerShown:false
+          }}
+        />
+        <Stack.Screen
+          name="SignUp"
+          component={SignUp}
+          screenOptions={{
+            headerShown:false
+          }}
+        />
+        
+        <Stack.Screen
+          name="Welcome"
+          component={Welcome}
           screenOptions={{
             headerShown:false
           }}

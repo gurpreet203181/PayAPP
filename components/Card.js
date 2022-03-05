@@ -7,9 +7,7 @@ const Card = ({})=>{
 return(
     <TouchableOpacity>
 
-          <View style={{
-              backgroundColor:COL
-          }}>
+          <View>
 
           </View>
 

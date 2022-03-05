@@ -11,6 +11,7 @@ const Cards = [
         id: 1,
         name: "Unicredit",
         icon: require("../assets/dummyData/visa.png"),
+        image: require("../assets/dummyData/card.jpg"),
         number:'9099',
         exp:'22/27'
 
@@ -19,6 +20,7 @@ const Cards = [
         id: 2,
         name: "PostPay",
         icon: require("../assets/dummyData/paypal.png"),
+        image: require("../assets/dummyData/card.jpg"),
         number:'8852',
         exp:'8/27'
 
@@ -29,6 +31,7 @@ const Cards = [
         id: 3,
         name: "Mine",
         icon: require("../assets/dummyData/american-express.png"),
+        image: require("../assets/dummyData/card.jpg"),
         number:'4585',
         exp:'5/24'
 
@@ -40,12 +43,13 @@ const Cards = [
         id: 4,
         name: "Family",
         icon: require("../assets/dummyData/american-express.png"),
+        image: require("../assets/dummyData/card.jpg"),
         number:'3855',
         exp:'28/24'
 
 
 
-    }
+    },
 ]
 const sendAgain=[
     {
@@ -91,45 +95,54 @@ const Transaction =[
       date:'20 jan, 2022',
       profileImage:require("../assets/dummyData/boy.png"),
       type:'output',
+      amount:'23.99',
       card:'1'
 
     },
     {
-        id:1,
+        id:2,
         name:'Mcdonald',
         date:'20 jan, 2022',
         profileImage:require("../assets/dummyData/boy.png"),
         type:'output',
+       amount:'23.99',
+
         card:'2'
 
   
       },
       {
-        id:1,
+        id:3,
         name:'Mcdonald',
         date:'20 jan, 2022',
         profileImage:require("../assets/dummyData/boy.png"),
-        type:'output',
+        type:'input',
+      amount:'23.99',
+
          card:'1'
 
   
       },
       {
-        id:1,
+        id:4,
         name:'Mcdonald',
         date:'20 jan, 2022',
         profileImage:require("../assets/dummyData/boy.png"),
         type:'output',
+      amount:'23.99',
+
         card:'3'
  
   
       },
       {
-        id:1,
+        id:5,
         name:'Mcdonald',
         date:'20 jan, 2022',
         profileImage:require("../assets/dummyData/boy.png"),
-        type:'output',
+        type:'input',
+        amount:'23.99',
+
         card:'1'
 
   

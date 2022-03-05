@@ -7,9 +7,8 @@ import {
     StyleSheet
 } from "react-native";
 import { createBottomTabNavigator, BottomTabBar } from "@react-navigation/bottom-tabs"
-import LinearGradient from 'react-native-linear-gradient'
 
-import { Home ,Settings} from "../screens";
+import { Home ,Settings,User} from "../screens";
 import { COLORS,FONTS,icons,SIZES } from "../constants";
 import { borderTopColor, color } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 const Tab = createBottomTabNavigator()
@@ -129,8 +128,8 @@ const Tabs = () => {
                 }}
             />
             <Tab.Screen
-                name="Transaction"
-                component={Home}
+                name="User"
+                component={User}
                 options={{
                     tabBarIcon:({focused})=>(
                         <View style={{

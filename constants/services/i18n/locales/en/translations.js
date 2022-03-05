@@ -1,4 +1,5 @@
 const en={
+  //Home
   welcome: "Welcome Back",
   hello: "Hello",
   yourBalance:'Total Balance',
@@ -8,6 +9,17 @@ const en={
   recharge:'Recharge',
   more:'More',
   sendAgain: 'Send Again',
-  transaction:'Transaction'
+  transaction:'Transaction',
+  
+  //Welcome
+  signIn:'Sign In',
+  signUp:'Sign Up',
+  
+  //AuthLayout
+  authLayout_Title:"Let’s Get Started!",
+  authLayout_SignUp_SubTitle: "Sign up with Social of fill the form to continue.",
+  email:'Email',
+  username:'Name',
+  password:'Password'
 };
 export default en;

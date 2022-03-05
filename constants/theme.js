@@ -8,9 +8,9 @@ export const COLORS = {
    
     black2:"#141318",
    
-    orange: "#f17e0e",
+    orange: "#ff7f00",
     green: "#27AE60",
-    lightGreen:"#8edccf",
+    lightGreen:"#ddf8f7",
     lightGreen2:"#41e5c9",
     
     red: "#FF1717",
@@ -65,19 +65,19 @@ export const SIZES = {
     height
 };
 export const FONTS = {
-    largeTitle: { fontFamily: "-Black", fontSize: SIZES.largeTitle },
-    h1: { fontFamily: "Poppins-Bold", fontSize: SIZES.h1, lineHeight: 36 },
-    h2: { fontFamily: "Poppins-Bold", fontSize: SIZES.h2, lineHeight: 30 },
-    h3: { fontFamily: "Poppins-SemiBold", fontSize: SIZES.h3, lineHeight: 22 },
-    h4: { fontFamily: "Poppins-SemiBold", fontSize: SIZES.h4, lineHeight: 22 },
-    h5: { fontFamily: "Poppins-SemiBold", fontSize: SIZES.h5, lineHeight: 22 },
-    body1: { fontFamily: "Poppins-Regular", fontSize: SIZES.body1, lineHeight: 36 },
-    body2: { fontFamily: "Poppins-Regular", fontSize: SIZES.body2, lineHeight: 30 },
-    body3: { fontFamily: "Poppins-Regular", fontSize: SIZES.body3, lineHeight: 22 },
-    body4: { fontFamily: "Poppins-Regular", fontSize: SIZES.body4, lineHeight: 22 },
-    body5: { fontFamily: "Poppins-Regular", fontSize: SIZES.body5, lineHeight: 22 },
+    largeTitle: { fontFamily: "Nunito_500Medium", fontSize: SIZES.largeTitle },
+    h1: { fontFamily: "Nunito_500Medium", fontSize: SIZES.h1, lineHeight: 36 },
+    h2: { fontFamily: "Nunito_700Bold", fontSize: SIZES.h2, lineHeight: 30 },
+    h3: { fontFamily: "Nunito_700Bold", fontSize: SIZES.h3, lineHeight: 22 },
+    h4: { fontFamily: "Nunito_700Bold", fontSize: SIZES.h4, lineHeight: 22 },
+    h5: { fontFamily: "Nunito_500Medium", fontSize: SIZES.h5, lineHeight: 22 },
+    body1: { fontFamily: "Nunito_500Medium", fontSize: SIZES.body1, lineHeight: 36 },
+    body2: { fontFamily: "Nunito_500Medium", fontSize: SIZES.body2, lineHeight: 30 },
+    body3: { fontFamily: "Nunito_500Medium", fontSize: SIZES.body3, lineHeight: 22 },
+    body4: { fontFamily: "Nunito_500Medium", fontSize: SIZES.body4, lineHeight: 22 },
+    body5: { fontFamily: "Nunito_500Medium", fontSize: SIZES.body5, lineHeight: 22 },
 };
 
-const appTheme = { COLORS, SIZES, FONTS };
+const appTheme = { COLORS, SIZES, FONTS ,width,height};
 
 export default appTheme;

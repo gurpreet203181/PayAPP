@@ -1,9 +1,13 @@
 import React from 'react';
 import {t} from '../../constants/services/i18n/config'
 
-import { View ,Text,Image,StyleSheet,FlatList,ScrollView} from 'react-native';
+import { View ,Text,Image,StyleSheet,FlatList,} from 'react-native';
+import { ScrollView } from 'react-native-virtualized-view';
+
 import { icons ,COLORS,SIZES,FONTS,dummyData} from '../../constants';
 import { Button ,ProfileButton,IconButton,Section,TransactionItem} from '../../components';
+import { LinearGradient } from 'expo-linear-gradient';
+import { CardsCarousel } from '../../stores';
 const Home = ()=>{
     
     function renderHeader(){
@@ -18,7 +22,7 @@ const Home = ()=>{
                        fontSize:SIZES.body4}}>
                        {t('hello')} {dummyData.myProfile.name}</Text>
                        <View style={{flexDirection:'row', marginTop:5}}>
-                       <Text  adjustsFontSizeToFit numberOfLines={1} style={{fontSize:SIZES.body4}}>{t('welcome')}</Text>
+                       <Text  adjustsFontSizeToFit numberOfLines={1} style={{...FONTS.h3}}>{t('welcome')}</Text>
                        <Image source={icons.star} style={{height:20, width:20}}/>
 
                        </View>
@@ -69,22 +73,29 @@ const Home = ()=>{
                 }}
                 />
 
+
                 </View>
-                
             </View>
         )
     }
 
     function renderCards(){
         return(
-            <View style={{ flexDirection:'row', justifyContent:'center',alignItems:'center' }}>
-
-                {dummyData.myProfile.Cards && 
-                <View>
-                    
-                </View>
-                }
-                <View style={{
+            <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                    <CardsCarousel 
+                    data={dummyData.Cards} 
+                    containerStyle={{
+                      height: 200
+                    }}
+                    cardContainerStyle={{
+                    }}
+                    cardStyle={{
+                        width: 340,
+                        height: 200,
+                       borderRadius:SIZES.radius
+                    }}
+                    />
+                  {/* <View style={{
                     flexDirection:'row',
                     justifyContent:'center',
                     alignItems:'center',
@@ -104,7 +115,7 @@ const Home = ()=>{
                         tintColor:COLORS.black
                     }}/>
 
-                </View>
+                </View>   */}
             </View>
         )
     }
@@ -181,7 +192,9 @@ const Home = ()=>{
               <Section label={t('sendAgain')} icon={null}  containerStyle={{marginTop:SIZES.padding}}/>
 
               {/* Rendering profiles */}
-               <View style={{flexDirection:'row',justifyContent:'flex-start',alignItems:'center', marginTop:SIZES.radius2}}>
+               <View style={{flexDirection:'row',justifyContent:'flex-start',alignItems:'center', 
+               marginTop:SIZES.radius2,
+               }}>
                <ProfileButton 
                  icon={icons.addUser}
                  iconStyle={{width:25, height:25, marginTop:0,tintColor:COLORS.gray2}}
@@ -197,8 +210,8 @@ const Home = ()=>{
                horizontal
                showsHorizontalScrollIndicator={false}
                renderItem={({item,index})=>(
-                     
-                 <ProfileButton 
+                     <View style={{justifyContent:'center', alignItems: 'center', height:90}}>
+                    <ProfileButton 
                  icon={item.profileImage}
                  containerStyle={{
                      backgroundColor:COLORS.primary,
@@ -207,6 +220,25 @@ const Home = ()=>{
                      width: 50
                  }} 
                  onPress={()=>console.log(item.id)}/>
+                        <LinearGradient 
+            start={{x:0,y:0}}
+            end={{x:0,y:15}}
+            colors={[COLORS.transparent, COLORS.lightGreen2]}
+            style={{
+                position: 'absolute',
+                //opacity: 0.4,
+                top: 15,
+                bottom: 0,
+                right: 0,
+                left: 0,
+                height:70,
+                width: 60,
+                marginLeft:15,
+                borderRadius:SIZES.padding
+            }}
+           />
+                 </View>
+
                )}
 
 
@@ -221,19 +253,22 @@ const Home = ()=>{
         return(
             <View>
                   <Section label={t('transaction')} 
-                   icon={icons.goArrow} 
+                   icon={icons.right_arrow} 
                    containerStyle={{marginTop:SIZES.padding}}/>
-                   <View >
                     <FlatList
                     data={dummyData.Transaction}
                     showsVerticalScrollIndicator={false}
                     keyExtractor={(item)=> `${item.id}`}
                     renderItem={({item,index})=>(
+                        <View style={[index === dummyData.Transaction.length -1 ? style.lastitem:null]}>
                         <TransactionItem item={item}/>
+                       
+                        </View>
+                        
                     )}
+                    style={{marginTop:SIZES.base}}
   
                     />
-                   </View>
             </View>
         )
     }
@@ -247,11 +282,15 @@ const Home = ()=>{
               {/* Balance and add Card */}
               {render_Balance_And_CardBtn()}
 
-              {/* Cards View */}
 
-              {renderCards()}
-              
+              {/* Cards View */}
+                   
+                {renderCards()}
+                  
               {/* options */}
+              
+              <ScrollView style={{height:450}}
+              showsVerticalScrollIndicator={false}>
               {renderOptions()}
 
               {/* send Again */}
@@ -259,7 +298,8 @@ const Home = ()=>{
 
               {/* Transactions */}
               {renderTransactions()}
-
+              </ScrollView>
+              
 
               </View>
 
@@ -288,7 +328,11 @@ const style = StyleSheet.create({
        
         marginTop:10,
         color: COLORS.gray2,
-        ...FONTS.body4
+        ...FONTS.body4,
+        
+    },
+    lastitem:{
+        marginBottom:50
     }
 
 })

@@ -15,8 +15,10 @@ const bill = require("../assets/icons/euro-bill.png");
 const recharge = require("../assets/icons/power-bank.png");
 const more = require("../assets/icons/menu.png");
 const addUser = require("../assets/icons/add-user.png");
-
-
+const close = require("../assets/icons/close.png");
+const email= require("../assets/icons/email.png");
+const user =  require("../assets/icons/person.png");
+const lock =  require("../assets/icons/lock.png")
 
 
 
@@ -37,5 +39,9 @@ export default {
     bill,
     recharge,
     more,
-    addUser
+    addUser,
+    close,
+    email,
+    user,
+    lock
 }
