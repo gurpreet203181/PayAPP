@@ -1,6 +1,8 @@
+import { trim } from 'lodash'
 import React from 'react'
 import { Text,View,TextInput,StyleSheet,Image } from 'react-native'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
+import { Button } from '.'
 
 import { COLORS, SIZES,icons,FONTS } from '../constants'
 
@@ -13,18 +15,21 @@ const FormInput=({
  prependComponenet,
  appendComponenet,
  onChange,
- pressed,
  secureTextEntry,
  keyboradType="default",
  autoCompleteType="off",
  autoCapitalize="none",
  errorMsg="",
- maxLength
+ maxLength,
+ forgotButton
 })=>{
+    const [Focus, setFocus] = React.useState(false);
     return(
         <View>
 
-            <View style={{...Styles.container,...containerStyle}} >
+            <View style={{...Styles.container,...containerStyle,
+           borderBottomColor:Focus? COLORS.black2 : COLORS.lightGray2
+            }} >
               
             {prependComponenet}
             <TextInput 
@@ -37,10 +42,19 @@ const FormInput=({
             autoCapitalize={autoCapitalize}
             maxLength={maxLength}
             onChangeText={onChange}
-                   
+            onFocus={()=> setFocus(true)}
+            onBlur={()=> setFocus(false)}
             />
             {appendComponenet}
             </View>
+            {errorMsg!="" &&
+            
+            <View style={{flexDirection:'row', justifyContent:'space-between',alignItems:'flex-start'}}>
+            <Text style={Styles.ErrorMsg}>{errorMsg}</Text>   
+              {forgotButton}
+            </View>
+            }
+            
 
 
        </View>
@@ -56,9 +70,7 @@ const Styles= StyleSheet.create({
        justifyContent:'flex-start',
        alignItems:'center',
        marginTop:20,
-       
        borderBottomWidth:1,
-       borderBottomColor: pressed? COLORS.black2:COLORS.lightGray2,
     },
     inputContainer:{
         color:COLORS.black2,
@@ -68,5 +80,9 @@ const Styles= StyleSheet.create({
         marginLeft:16
 
 
+    },
+    ErrorMsg:{
+        color:COLORS.red,
+        ...FONTS.body5
     }
 })

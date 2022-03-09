@@ -7,6 +7,7 @@ import TransactionItem from "./TransactionItem";
 import LineDivider from "./Linedivider";
 import CardSvg from "./CardSvg";
 import FormInput from "./FormInput";
+import CheckBox from "./CheckBox";
 export{
     Button,
     ProfileButton,
@@ -16,5 +17,6 @@ export{
     TransactionItem,
     LineDivider,
     CardSvg,
-    FormInput
+    FormInput,
+    CheckBox
 }

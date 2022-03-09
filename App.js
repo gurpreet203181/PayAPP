@@ -6,7 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from '@react-navigation/native';
 import { init } from './constants/services/i18n/config';
 import Tabs from './navigation/tabs';
-import {CardDetail,SignIn,SignUp,Welcome} from './screens/index'
+import {CardDetail,SignIn,SignUp,Welcome,ForgotPassword,Otp,OnBoarding} from './screens/index'
 import AppLoading from 'expo-app-loading';
 import { useFonts, Nunito_500Medium ,Nunito_700Bold} from '@expo-google-fonts/nunito';
 
@@ -34,7 +34,7 @@ export default function App() {
           headerShown: false
           
         }}
-        initialRouteName={'Welcome'}
+        initialRouteName={'OnBoarding'}
       >
         <Stack.Screen
           name="Home"
@@ -47,6 +47,13 @@ export default function App() {
         <Stack.Screen
           name="CardDetail"
           component={CardDetail}
+          screenOptions={{
+            headerShown:false
+          }}
+        />
+         <Stack.Screen
+          name="Welcome"
+          component={Welcome}
           screenOptions={{
             headerShown:false
           }}
@@ -65,14 +72,29 @@ export default function App() {
             headerShown:false
           }}
         />
-        
         <Stack.Screen
-          name="Welcome"
-          component={Welcome}
+          name="ForgotPassword"
+          component={ForgotPassword}
           screenOptions={{
             headerShown:false
           }}
         />
+         <Stack.Screen
+          name="Otp"
+          component={Otp}
+          screenOptions={{
+            headerShown:false
+          }}
+        />
+         <Stack.Screen
+          name="OnBoarding"
+          component={OnBoarding}
+          screenOptions={{
+            headerShown:false
+          }}
+        />
+        
+       
       </Stack.Navigator>
     </NavigationContainer>
     </SafeAreaProvider>

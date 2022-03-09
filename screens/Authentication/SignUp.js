@@ -1,7 +1,7 @@
 import React  from "react";
 import {t} from '../../constants/services/i18n/config';
-import { FormInput ,Button} from "../../components";
-import { View, SafeAreaView, Image, Text, StyleSheet,TouchableOpacity } from "react-native";
+import { FormInput ,Button,CheckBox} from "../../components";
+import { View, Image, Text, StyleSheet } from "react-native";
 import { AuthLayout } from "..";
 import { utils } from "../../utils";
 import { COLORS,FONTS, dummyData,SIZES,icons } from "../../constants";
@@ -18,6 +18,10 @@ const SignUp = ({navigation})=>{
     const [passwordError,setPasswordError] =React.useState("")
     
     const [showPass, setShowPass]= React.useState(false)
+
+    const [policyChecked,setPolicyChecked] = React.useState(false)
+
+
 
     function isEnableSignUP() {
         return email!="" && username!="" && password!="" &&
@@ -41,8 +45,6 @@ const SignUp = ({navigation})=>{
                     utils.validateEmail(value,setEmailError)
                     setEmail(value)
                 }}
-                onPress={()=> pressed="true"}
-                
                 errorMsg={emailError}
                 prependComponenet={
                     <Image source={icons.email} style={{width:20, height:20, tintColor:COLORS.black2, }}/>
@@ -59,15 +61,10 @@ const SignUp = ({navigation})=>{
                 }}
                 onChange={(value)=>{setUsername(value)}}
                 errorMsg={usernameError}
-                appendComponenet={
-                    <View style={{justifyContent:'center'}}>
-                        <Image source={username=="" || (username !=""&& usernameError=="")? icons.correct:icons.cross} 
-                        style={{height:20,width:20,
-                         tintColor: username==""?COLORS.gray :(username!="" && usernameError==
-                         "")?COLORS.green:COLORS.red}}/>
-
-                    </View>
+                prependComponenet={
+                    <Image source={icons.user} style={{width:27, height:27, tintColor:COLORS.black2, }}/>
                 }
+               
                 />
 
                 {/* Password */}
@@ -82,31 +79,70 @@ const SignUp = ({navigation})=>{
                     utils.validatePassword(value,setPasswordError)
                     setPassword(value)
                 }}
-                appendComponenet={
-                  <TouchableOpacity style={{
-                      width: 40,alignItems:"flex-end",justifyContent:'center'
-                  }} onPress={()=> setShowPass(!showPass)}>
-                      
-                      <Image source={showPass?icons.eye_close: icons.eye} 
-                      style={{height:20,width:20,tintColor:COLORS.gray}}/>
-                  </TouchableOpacity>
+                prependComponenet={
+                    <Image source={icons.lock} style={{width:20, height:20, tintColor:COLORS.black2, }}/>
                 }
+                
                 />
-                {/* Sign Up */}
-                <Button label="Sign UP"
-                disabled={isEnableSignUP()? false:true}
-                buttonContainerStyle={{
-                    height:55,
-                    alignItems:'center',
-                    marginTop:SIZES.padding,
-                    borderRadius:SIZES.radius,
-                    backgroundColor: isEnableSignUP()?COLORS.primary:COLORS.transparentPrimray
-                    }} onPress={()=> navigation.navigate("Otp")}/>
+                
+                <Text numberOfLines={1} adjustsFontSizeToFit style={Styles.PasswordRulesText}>{t("passwordRules")}</Text>
+               
+
+                <View style={{flexDirection:"row", justifyContent:'flex-start',  marginTop:39}}>
+                  
+                    <CheckBox value={policyChecked} onChange={(value)=> setPolicyChecked(value)}/>
+                  
+                    <Text style={Styles.policyText}>{t('policyText')}</Text>
+                </View>
 
             </View>
         }
+        bottomButton={
+            <View>
+                <Button
+                label={t('signUp')}
+                labelStyle={{...Styles.SignUpText}}
+                containerStyle={{...Styles.SignUpButton,...Styles.shadow}}
+                onPress={()=> navigation.navigate('Otp',{email: email })}
+                />
+            </View>
+        }
+
         />
     )
 }
 
 export default SignUp;
+
+const Styles = StyleSheet.create({
+    shadow:{
+        shadowColor: '#4d4d4d',
+        shadowOffset: {
+         width: 0,
+         height: 8,
+        },
+        shadowOpacity: 0.8,
+        shadowRadius: 13.51,
+        elevation: 5,
+    },
+    PasswordRulesText:{
+        marginTop:8,
+         color: COLORS.gray2,
+         ...FONTS.body5
+    },
+    policyText:{
+         marginLeft:8,
+         ...FONTS.body5
+    },
+    SignUpButton:{
+        backgroundColor:COLORS.blue2,
+        width:160,
+        height:56 ,
+        borderRadius:SIZES.padding
+    },
+    SignUpText:{
+        color:COLORS.white,
+        ...FONTS.h3
+    }
+
+})

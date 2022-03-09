@@ -18,7 +18,12 @@ const addUser = require("../assets/icons/add-user.png");
 const close = require("../assets/icons/close.png");
 const email= require("../assets/icons/email.png");
 const user =  require("../assets/icons/person.png");
-const lock =  require("../assets/icons/lock.png")
+const lock =  require("../assets/icons/lock.png");
+const checked= require("../assets/icons/check.png");
+const google= require("../assets/icons/google.png");
+const facebook= require("../assets/icons/facebook.png");
+const apple= require("../assets/icons/apple.png");
+
 
 
 
@@ -43,5 +48,9 @@ export default {
     close,
     email,
     user,
-    lock
+    lock,
+    checked,
+    google,
+    facebook,
+    apple
 }

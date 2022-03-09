@@ -8,15 +8,17 @@ import Otp from './Authentication/Otp'
 import CardDetail from './Cards.js/CardDetail'
 import Welcome from './Welcome/Welcome'
 import AuthLayout from './Authentication/AuthLayout'
+import OnBoarding from './OnBoarding/onBoarding'
 export{
     //Home
     Home,
-
-
     Settings,
+
     //User
     User,
-
+    
+    //OnBoarding
+    OnBoarding,
     //Authentication
     SignIn,
     SignUp,
