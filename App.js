@@ -4,24 +4,56 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from '@react-navigation/native';
-import { init } from './constants/services/i18n/config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { init } from './hooks/UseI18n';
 import Tabs from './navigation/tabs';
-import {CardDetail,SignIn,SignUp,Welcome,ForgotPassword,Otp,OnBoarding} from './screens/index'
+import {CardDetail,SignIn,SignUp,Welcome,ForgotPassword,Otp,OnBoarding, Home} from './screens/index'
 import AppLoading from 'expo-app-loading';
-import { useFonts, Nunito_500Medium ,Nunito_700Bold} from '@expo-google-fonts/nunito';
+import { useFonts } from 'expo-font';
+import { useEffect, useState } from 'react';
 
+
+//navgiation stack
 const Stack = createStackNavigator();
 
 export default function App() {
+
+  // multi language configuration
   init();
+  
+  //custom fonts
   let [fontsLoaded] = useFonts({
-    Nunito_500Medium,
-    Nunito_700Bold
+    'Poppins-light': require('./assets/fonts/Poppins-Light.ttf')
+   
   });
 
-  if (!fontsLoaded) {
-    return <AppLoading />;
+   const [loading, setLoading] = useState(true);
+   const [viewedOnboarding, setViewedOnboarding] = useState(false);
+   
+   //checking if user viewed onBoarding 
+   const checkOnboarding = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@viewedOnboarding');
+      if(value !== null) {
+        setViewedOnboarding(true);
+      }
+  
+    }catch (error) {
+      console.log('Errore @checkOnboarding:', error)
+    }finally{
+      setLoading(false);
+    }
+  
   }
+  
+  useEffect(()=>{
+    checkOnboarding();
+  
+  },[]);
+ //checking if custom font is loaded and laoding is false if not then retrun apploading
+ if (!fontsLoaded || loading ) {
+  return <AppLoading />;
+}
 
   return (
     
@@ -34,7 +66,8 @@ export default function App() {
           headerShown: false
           
         }}
-        initialRouteName={'OnBoarding'}
+        //checking if user as viewed onBoarding if not  initialRoute will OnBoarding 
+        initialRouteName={viewedOnboarding? 'Welcome':'OnBoarding'}
       >
         <Stack.Screen
           name="Home"
@@ -86,7 +119,7 @@ export default function App() {
             headerShown:false
           }}
         />
-         <Stack.Screen
+          <Stack.Screen
           name="OnBoarding"
           component={OnBoarding}
           screenOptions={{

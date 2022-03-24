@@ -1,5 +1,6 @@
 import React from 'react';
-import {t} from '../../constants/services/i18n/config'
+import { t } from "../../hooks/UseI18n";
+
 
 import { View ,Text,Image,StyleSheet,FlatList,} from 'react-native';
 import { ScrollView } from 'react-native-virtualized-view';

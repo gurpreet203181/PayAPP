@@ -67,17 +67,17 @@ export const SIZES = {
     height
 };
 export const FONTS = {
-    largeTitle: { fontFamily: "Nunito_500Medium", fontSize: SIZES.largeTitle },
-    h1: { fontFamily: "Nunito_500Medium", fontSize: SIZES.h1, lineHeight: 36 },
-    h2: { fontFamily: "Nunito_700Bold", fontSize: SIZES.h2, lineHeight: 30 },
-    h3: { fontFamily: "Nunito_700Bold", fontSize: SIZES.h3, lineHeight: 22 },
-    h4: { fontFamily: "Nunito_700Bold", fontSize: SIZES.h4, lineHeight: 22 },
-    h5: { fontFamily: "Nunito_500Medium", fontSize: SIZES.h5, lineHeight: 22 },
-    body1: { fontFamily: "Nunito_500Medium", fontSize: SIZES.body1, lineHeight: 36 },
-    body2: { fontFamily: "Nunito_500Medium", fontSize: SIZES.body2, lineHeight: 30 },
-    body3: { fontFamily: "Nunito_500Medium", fontSize: SIZES.body3, lineHeight: 22 },
-    body4: { fontFamily: "Nunito_500Medium", fontSize: SIZES.body4, lineHeight: 22 },
-    body5: { fontFamily: "Nunito_500Medium", fontSize: SIZES.body5, lineHeight: 22 },
+    largeTitle: { fontFamily: "Poppins-light", fontSize: SIZES.largeTitle },
+    h1: { fontFamily: "Poppins-light", fontSize: SIZES.h1, lineHeight: 36 },
+    h2: { fontFamily: "Poppins-light", fontSize: SIZES.h2, lineHeight: 30 },
+    h3: { fontFamily: "Poppins-light", fontSize: SIZES.h3, lineHeight: 22 },
+    h4: { fontFamily: "Poppins-light", fontSize: SIZES.h4, lineHeight: 22 },
+    h5: { fontFamily: "Poppins-light", fontSize: SIZES.h5, lineHeight: 22 },
+    body1: { fontFamily: "Poppins-light", fontSize: SIZES.body1, lineHeight: 36 },
+    body2: { fontFamily: "Poppins-light", fontSize: SIZES.body2, lineHeight: 30 },
+    body3: { fontFamily: "Poppins-light", fontSize: SIZES.body3, lineHeight: 22 },
+    body4: { fontFamily: "Poppins-light", fontSize: SIZES.body4, lineHeight: 22 },
+    body5: { fontFamily: "Poppins-light", fontSize: SIZES.body5, lineHeight: 22 },
 };
 
 const appTheme = { COLORS, SIZES, FONTS ,width,height};

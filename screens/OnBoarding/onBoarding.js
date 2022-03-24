@@ -1,41 +1,153 @@
-import React from  'react';
-import {t} from '../../constants/services/i18n/config';
-import { View,StyleSheet,Image,Animated,ImageBackground,Text  } from "react-native";
-import { COLORS, FONTS, SIZES ,OnBoardingData,icons, images,TextButton } from "../../constants";
-import { Button} from "../../components";
+import React, { useRef, useState } from  'react';
+import { t } from "../../hooks/UseI18n";
+import { View,StyleSheet,FlatList,Animated,Image,ImageBackground} from "react-native";
+import { COLORS, FONTS, icons, images, SIZES } from '../../constants';
+import { OnBoardingItem,Paginator,NextButton,Button} from '../../components';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import slides from './slides';
 
 const OnBoarding = ({navigation}) =>{
- 
-  return(
-       <View></View>
-    )
-}
+    const [currentIndex, setCurrentIndex]= React.useState(0); 
+    const scrollX = React.useRef(new Animated.Value(0)).current;
+    const slidesRef= useRef(null);
+    
+    //on slide change
+    const viewableItemsChanged = React.useRef(({viewableItems})=>{
+      setCurrentIndex(viewableItems[0].index);
+     
+    }).current;
 
+    const viewConfig = React.useRef({viewAreaCoveragePercentThreshold:50}).current;
+    
+    //Function to go next slide
+    const scrollTo = async () => {
+      if(currentIndex < slides.length -1){
+          slidesRef.current.scrollToIndex({index: currentIndex +1});
+      }
+      
+    }
+  async function setAsyncStorage (){
+      try {
+        await AsyncStorage.setItem('@viewedOnboarding','true'); 
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    return(
+      <View style={styles.container}>
+
+        {/* logo */}
+        <View style={styles.logoContainer}>
+        <Image source={images.Logo2} />
+        </View>
+
+        {/* Slides */}
+        <View style={{flex:3,}}>
+        <FlatList
+        data={slides}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        pagingEnabled
+        bounces={false}
+        keyExtractor={(item)=> item.id}
+        renderItem={({item})=> <OnBoardingItem data={item}/>}
+        onScroll={Animated.event([
+          {
+            nativeEvent: {
+              contentOffset: {
+                x: scrollX
+              }
+            }
+          }
+        ], 
+         { useNativeDriver: false } 
+        )}        
+        scrollEventThrottle={32}
+        onViewableItemsChanged={viewableItemsChanged}
+        viewabilityConfig={viewConfig}
+        ref={slidesRef}
+
+        /> 
+        </View>
+        <View style={styles.bottomContanier}>
+        {/* Pagination */}
+        <Paginator data={slides} scrollX={scrollX}/> 
+
+        {/* next button */}
+        { currentIndex < slides.length -1 &&
+        <Button onPress={scrollTo}
+         label={t('next')}
+         labelStyle={styles.buttonLabel}
+         containerStyle={styles.buttonContainer}
+         icon={icons.right_arrow}
+         iconStyle={styles.buttonIcon}
+         iconPosition='RIGHT'
+        /> 
+        }
+        {/* get started button */}
+        { currentIndex == slides.length -1 &&
+        <Button onPress={()=> { 
+          setAsyncStorage(); 
+          navigation.replace('Welcome')}
+        }
+         label={t('started')}
+         labelStyle={styles.buttonLabel}
+         containerStyle={{...styles.buttonContainer, width:150}}
+        /> 
+        }
+        </View>
+        {/* <View style={styles.backgroud}/> */}
+      </View>
+    ) 
+}
 export default OnBoarding;
 
+
 const styles = StyleSheet.create({
-    shadow:{
-        shadowColor: '#4d4d4d',
-        shadowOffset: {
-         width: 0,
-         height: 8,
-        },
-        shadowOpacity: 0.8,
-        shadowRadius: 13.51,
-        elevation: 5,
-    },
-    ButtonIcon:{
-        width:20,
-        height:20 ,
-        tintColor:COLORS.white,
-        marginLeft:32
-    },
-    ButtonContainer:{
-        backgroundColor:COLORS.black2,
-        width:155,
-        height:72 ,
-        borderRadius:28,
-        marginRight: 37,
-        marginBottom:47
-    }
+   
+  container :{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems:"center",
+    backgroundColor:COLORS.white
+},
+logoContainer:{
+ marginTop:25,
+ width: 40,
+ height: 40
+},
+bottomContanier:{
+  flexDirection:'row', 
+  justifyContent:'space-between',
+  alignItems:'center',
+  width:'100%',
+  marginBottom:52,
+  paddingHorizontal:48
+},
+buttonContainer:{
+  width: 120,
+  height: 56,
+  backgroundColor:COLORS.black2,
+  borderRadius:28,
+},
+buttonLabel:{
+  color: COLORS.white,
+  ...FONTS.h3
+},
+buttonIcon:{
+  tintColor:COLORS.white,
+  marginLeft:20
+},
+backgroud:{
+  position: 'absolute',
+  zIndex:-1,
+  right: 0,
+  bottom: 0,
+  marginRight:80,
+  width:400,
+  height: 420,
+  borderRadius:210,
+  backgroundColor:'#F5F6FA',
+  alignSelf:'flex-start'
+}
 })

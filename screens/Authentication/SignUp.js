@@ -1,5 +1,5 @@
 import React  from "react";
-import {t} from '../../constants/services/i18n/config';
+import { t } from "../../hooks/UseI18n";
 import { FormInput ,Button,CheckBox} from "../../components";
 import { View, Image, Text, StyleSheet } from "react-native";
 import { AuthLayout } from "..";

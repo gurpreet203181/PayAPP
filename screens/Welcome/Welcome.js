@@ -1,12 +1,19 @@
 import React  from "react";
-import {t} from '../../constants/services/i18n/config'
-
+import { t } from "../../hooks/UseI18n";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, SafeAreaView, Image, Text, StyleSheet,ImageBackground } from "react-native";
 import { color } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 import { Button } from "../../components";
 import { COLORS,FONTS, dummyData,SIZES,images } from "../../constants";
 
 const Welcome = ({navigation})=>{
+    const clearOnboarding = async () =>{
+        try {
+            await AsyncStorage.removeItem('@viewedOnboarding')
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return(
         <View style={{flex:1, backgroundColor:COLORS.white}}>
                 <ImageBackground source={images.WelcomeShape}
@@ -36,7 +43,9 @@ const Welcome = ({navigation})=>{
                 />
                 <View style={{width:134, height:5, backgroundColor:COLORS.black2,borderRadius:100, marginTop:50}}/>
                  </View>
-            
+                 <Button label='remove key onboarding'
+                onPress={clearOnboarding}
+                labelStyle={{color:COLORS.black2}}/> 
 
            
         </View>
