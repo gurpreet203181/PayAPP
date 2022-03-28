@@ -3,7 +3,7 @@ import memoize from 'lodash.memoize'; // Use for caching/memoize for better perf
 import i18n from 'i18n-js';
 import * as Localization from 'expo-localization';
 import { I18nManager } from 'react-native';
-import { en,it } from '../constants/services/i18n/locales';
+import { en,it } from '../services/i18n/locales';
 
 
 export const t = memoize(

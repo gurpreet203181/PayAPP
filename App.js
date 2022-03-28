@@ -3,12 +3,12 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { init } from './hooks/UseI18n';
-import Tabs from './navigation/tabs';
-import {CardDetail,SignIn,SignUp,Welcome,ForgotPassword,Otp,OnBoarding} from './screens/index'
+import { init } from './src/hooks/UseI18n';
+import Tabs from './src/navigation/tabs';
+import {CardDetail,SignIn,SignUp,Welcome,ForgotPassword,Otp,OnBoarding} from './src/screens/index'
 import AppLoading from 'expo-app-loading';
 import { useState } from 'react';
-import {useFonts} from './hooks/useFonts'
+import {useFonts} from './src/hooks/useFonts'
 
 //navgiation stack
 const Stack = createStackNavigator();
