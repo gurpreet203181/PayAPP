@@ -122,11 +122,12 @@ const Styles = StyleSheet.create({
         backgroundColor:COLORS.blue2,
         width:160,
         height:56 ,
-        borderRadius:SIZES.padding
+        borderRadius:SIZES.padding,
     },
     SignInText:{
         color:COLORS.white,
-        ...FONTS.h3
+        ...FONTS.body3,
+        fontFamily:'Poppins_500Medium'
     },
     LineStyle:{
         marginTop:77,

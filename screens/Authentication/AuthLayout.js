@@ -22,7 +22,7 @@ const AuthLayout =({childern,title, subTitle, onClosePress,bottomButton,screen }
 
             {/* Title && subtitle */}
             <View style={Styles.TitleContainer}>
-              <Text style={{...FONTS.h1, fontSize:28}} adjustsFontSizeToFit numberOfLines={1}>
+              <Text style={{...FONTS.h2, fontSize:28,paddingTop:10}} adjustsFontSizeToFit numberOfLines={1}>
                   {title}
             </Text>
             <Text style={{...FONTS.body5, color:COLORS.gray2}} adjustsFontSizeToFit numberOfLines={2}>
@@ -59,7 +59,7 @@ const AuthLayout =({childern,title, subTitle, onClosePress,bottomButton,screen }
                   }
 
                  {/* sign Button */}
-                 <View style={{marginTop:42}}>
+                 <View style={{marginTop:42,paddingBottom:20}}>
                   {bottomButton}
                  </View>
              </View>
@@ -85,9 +85,8 @@ const Styles = StyleSheet.create({
          alignItems:"center"
     },
     TitleContainer:{
-        marginTop:26,
+        marginTop:16,
         justifyContent:"flex-start",
-        
 
     },
     SocialBtnFrame:{

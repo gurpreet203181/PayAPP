@@ -56,7 +56,7 @@ export default Otp;
 
 const Styles= StyleSheet.create({
     Email:{
-      ...FONTS.h4,
+      ...FONTS.body4,
       fontSize:12    
     },
     underlineStyleBase: {
@@ -64,7 +64,8 @@ const Styles= StyleSheet.create({
         height: 56,
         borderWidth: 1,
         borderRadius:SIZES.padding,
-        ...FONTS.h3,
+        ...FONTS.body1,
+        fontSize:20,
         color:COLORS.black2 
 
       },
@@ -80,7 +81,9 @@ const Styles= StyleSheet.create({
     },
     OtpText:{
         color:COLORS.white,
-        ...FONTS.h3
+        
+        ...FONTS.body3,
+        fontFamily:'Poppins_500Medium'
     },
     
    

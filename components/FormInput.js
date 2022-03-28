@@ -1,10 +1,6 @@
-import { trim } from 'lodash'
 import React from 'react'
-import { Text,View,TextInput,StyleSheet,Image } from 'react-native'
-import { Colors } from 'react-native/Libraries/NewAppScreen'
-import { Button } from '.'
-
-import { COLORS, SIZES,icons,FONTS } from '../constants'
+import { Text,View,TextInput,StyleSheet } from 'react-native'
+import { COLORS,FONTS } from '../constants'
 
 const FormInput=({
  containerStyle,
@@ -77,9 +73,8 @@ const Styles= StyleSheet.create({
         backgroundColor:COLORS.white,
         width: '100%',
         height: 56,
-        marginLeft:16
-
-
+        marginLeft:16,
+      //  ...FONTS.body3
     },
     ErrorMsg:{
         color:COLORS.red,

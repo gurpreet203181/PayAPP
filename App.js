@@ -1,17 +1,14 @@
 import { StatusBar } from 'react-native';
-
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { init } from './hooks/UseI18n';
 import Tabs from './navigation/tabs';
-import {CardDetail,SignIn,SignUp,Welcome,ForgotPassword,Otp,OnBoarding, Home} from './screens/index'
+import {CardDetail,SignIn,SignUp,Welcome,ForgotPassword,Otp,OnBoarding} from './screens/index'
 import AppLoading from 'expo-app-loading';
-import { useFonts } from 'expo-font';
-import { useEffect, useState } from 'react';
-
+import { useState } from 'react';
+import {useFonts} from './hooks/useFonts'
 
 //navgiation stack
 const Stack = createStackNavigator();
@@ -21,13 +18,7 @@ export default function App() {
   // multi language configuration
   init();
   
-  //custom fonts
-  let [fontsLoaded] = useFonts({
-    'Poppins-light': require('./assets/fonts/Poppins-Light.ttf')
-   
-  });
-
-   const [loading, setLoading] = useState(true);
+   const [IsReady, SetIsReady] = useState(false);
    const [viewedOnboarding, setViewedOnboarding] = useState(false);
    
    //checking if user viewed onBoarding 
@@ -40,23 +31,30 @@ export default function App() {
   
     }catch (error) {
       console.log('Errore @checkOnboarding:', error)
-    }finally{
-      setLoading(false);
     }
   
   }
-  
-  useEffect(()=>{
-    checkOnboarding();
-  
-  },[]);
+
+  //loading font and onBoarding function
+  const LoadAsyncAndRestoreToken = async () => {
+    await useFonts();
+    await checkOnboarding();
+  };
+
  //checking if custom font is loaded and laoding is false if not then retrun apploading
- if (!fontsLoaded || loading ) {
-  return <AppLoading />;
-}
+ if (!IsReady) {
+  return (
+    <AppLoading
+      startAsync={LoadAsyncAndRestoreToken}
+      onFinish={() => SetIsReady(true)}
+      onError={() => {console.log('Font or Onborading loading error')}}
+    />
+  );
+ }
+
 
   return (
-    
+
     <SafeAreaProvider>
     <NavigationContainer>
     <StatusBar backgroundColor="#fff" barStyle="dark-content"  />

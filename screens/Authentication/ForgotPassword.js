@@ -72,7 +72,8 @@ const Styles = StyleSheet.create({
     },
     ForgotText:{
         color:COLORS.white,
-        ...FONTS.h3
+        ...FONTS.body3,
+        fontFamily:'Poppins_500Medium'
     },
    
 
