@@ -1,6 +1,6 @@
 import React from "react";
 import { View,StyleSheet,Animated, useWindowDimensions } from "react-native";
-import { COLORS } from "../constants";
+import { COLORS } from "../../constants";
 
 
 const Paginator = ({data,scrollX}) =>{

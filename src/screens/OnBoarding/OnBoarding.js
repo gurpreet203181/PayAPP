@@ -5,6 +5,7 @@ import { COLORS, FONTS, icons, images, SIZES } from '../../constants';
 import { OnBoardingItem,Paginator,NextButton,Button} from '../../components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import slides from './slides';
+import { color } from 'react-native-reanimated';
 
 const OnBoarding = ({navigation}) =>{
     const [currentIndex, setCurrentIndex]= React.useState(0); 
@@ -35,7 +36,7 @@ const OnBoarding = ({navigation}) =>{
     }
     return(
       <View style={styles.container}>
-
+        <View style={styles.background}/>
         {/* logo */}
         <View style={styles.logoContainer}>
         <Image source={images.Logo2} />
@@ -78,7 +79,7 @@ const OnBoarding = ({navigation}) =>{
         <Button onPress={scrollTo}
          label={t('next')}
          labelStyle={styles.buttonLabel}
-         containerStyle={styles.buttonContainer}
+         containerStyle={{...styles.buttonContainer,...styles.shadow}}
          icon={icons.right_arrow}
          iconStyle={styles.buttonIcon}
          iconPosition='RIGHT'
@@ -92,7 +93,7 @@ const OnBoarding = ({navigation}) =>{
         }
          label={t('started')}
          labelStyle={styles.buttonLabel}
-         containerStyle={{...styles.buttonContainer, width:150}}
+         containerStyle={{...styles.buttonContainer,...styles.shadow, width:150}}
         /> 
         }
         </View>
@@ -110,6 +111,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems:"center",
     backgroundColor:COLORS.white
+},
+shadow:{
+  shadowColor: '#4d4d4d',
+  shadowOffset: {
+   width: 0,
+   height: 8,
+  },
+  shadowOpacity: 0.8,
+  shadowRadius: 13.51,
+  elevation: 5,
 },
 logoContainer:{
  marginTop:25,
@@ -132,22 +143,20 @@ buttonContainer:{
 },
 buttonLabel:{
   color: COLORS.white,
-  ...FONTS.h3
+  ...FONTS.body3,
 },
 buttonIcon:{
   tintColor:COLORS.white,
   marginLeft:20
 },
-backgroud:{
+background:{
   position: 'absolute',
-  zIndex:-1,
-  right: 0,
-  bottom: 0,
-  marginRight:80,
-  width:400,
-  height: 420,
-  borderRadius:210,
   backgroundColor:'#F5F6FA',
-  alignSelf:'flex-start'
+  bottom: 0,
+  left: 0,
+  width: '80%',
+  height: '50%',
+  borderTopEndRadius:200,
+  borderBottomEndRadius:200,
 }
 })

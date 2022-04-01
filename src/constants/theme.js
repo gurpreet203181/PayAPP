@@ -69,7 +69,7 @@ export const SIZES = {
 export const FONTS = {
     largeTitle: { fontFamily: "Poppins_900Black", fontSize: SIZES.largeTitle },
     h1: { fontFamily: "Poppins_100Thin", fontSize: SIZES.h1, lineHeight: 36 },
-    h2: { fontFamily: "Poppins_600SemiBold", fontSize: SIZES.h2, lineHeight: 30 },
+    h2: { fontFamily: "Poppins_700Bold", fontSize: SIZES.h2, lineHeight: 30 },
     h3: { fontFamily: "Poppins_100Thin", fontSize: SIZES.h3, lineHeight: 22 },
     h4: { fontFamily: "Poppins_100Thin", fontSize: SIZES.h4, lineHeight: 22 },
     h5: { fontFamily: "Poppins_100Thin", fontSize: SIZES.h5, lineHeight: 22 },

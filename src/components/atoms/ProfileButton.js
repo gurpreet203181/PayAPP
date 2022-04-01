@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity ,Image} from "react-native";
-import { COLORS,SIZES} from "../constants"; 
+import { COLORS,SIZES} from "../../constants"; 
 
 
 const ProfileButton = ({icon,iconStyle,containerStyle,onPress}) => {

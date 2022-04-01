@@ -1,7 +1,7 @@
 import React from "react";
 
 import { View, TouchableOpacity, Image, Text,StyleSheet } from "react-native";
-import { COLORS,SIZES,FONTS,icons } from "../constants";
+import { COLORS,SIZES,FONTS,icons } from "../../constants";
 
 const TransactionItem =({item,onPress, })=>{
     return(

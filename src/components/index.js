@@ -1,14 +1,14 @@
-import Button from "./Button";
-import ProfileButton from "./ProfileButton";
-import Card from "./Card";
-import IconButton from "./IconButton";
-import Section from "./Section";
-import TransactionItem from "./TransactionItem";
-import LineDivider from "./Linedivider";
-import FormInput from "./FormInput";
-import CheckBox from "./CheckBox";
-import OnBoardingItem from "./OnBoradingItem";
-import Paginator from "./Paginator";
+import Button from "./atoms/Button";
+import ProfileButton from "./atoms/ProfileButton";
+import Card from "./atoms/Card";
+import IconButton from "./atoms/IconButton";
+import Section from "./atoms/Section";
+import TransactionItem from "./molecules/TransactionItem";
+import LineDivider from "./atoms/Linedivider";
+import FormInput from "./atoms/FormInput";
+import CheckBox from "./atoms/CheckBox";
+import OnBoardingItem from "./molecules/OnBoradingItem";
+import Paginator from "./atoms/Paginator";
 export{
     Button,
     ProfileButton,

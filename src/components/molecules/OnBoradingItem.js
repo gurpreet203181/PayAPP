@@ -1,6 +1,6 @@
 import React from "react";
 import { View,Text,Image ,StyleSheet, useWindowDimensions} from "react-native";
-import { COLORS, FONTS, SIZES } from "../constants";
+import { COLORS, FONTS, SIZES } from "../../constants";
 
 const OnBoardingItem =({data}) =>{
     const {width} = useWindowDimensions();
@@ -9,9 +9,11 @@ const OnBoardingItem =({data}) =>{
         <View style={styles.container}>
             <Image source={data.image} style={[styles.image, {width,resizeMode:'contain'}]}/>
             <View style={styles.textContainer}>
-                <View style={{width:275}}>
-                <Text style={styles.title}>{data.title}</Text>
-                <Text style={styles.description}>{data.description}</Text>
+                <View style={{width:250}}>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.title}>{data.title}</Text>
+                <View style={{marginTop:20}}>
+                <Text adjustsFontSizeToFit style={styles.description}>{data.description}</Text>
+                </View>
                 </View>
             </View>
         </View>
@@ -49,7 +51,9 @@ const styles = StyleSheet.create({
     description:{
         textAlign:"left",
         color: COLORS.black2,
-        ...FONTS.body3
+        ...FONTS.body3,
+        fontSize:18,
+        
     }
 })
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity,Text ,Image,StyleSheet} from "react-native";
-import { FONTS ,COLORS} from "../constants"; 
+import { FONTS ,COLORS} from "../../constants"; 
 
 
 const IconButton = ({icon,iconStyle,containerStyle,onPress}) => {

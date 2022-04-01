@@ -1,7 +1,7 @@
 import React from "react";
 
 import { View, Text,TouchableOpacity, Image} from "react-native";
-import { COLORS, FONTS } from "../constants";
+import { COLORS, FONTS } from "../../constants";
 
 const Section = ({ label, icon,onIconPress,iconstyle, containerStyle,})=>{
     return(

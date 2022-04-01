@@ -1,7 +1,7 @@
 import React from "react";
 
 import { View,Text,StyleSheet,TouchableWithoutFeedback,Image } from "react-native";
-import { COLORS,FONTS , SIZES,icons } from "../constants";
+import { COLORS,FONTS , SIZES,icons } from "../../constants";
 
 const CheckBox = ({value, onChange, containerStyle, CheckBoxStyle , label })=>{
     return(
