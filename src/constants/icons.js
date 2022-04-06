@@ -23,9 +23,8 @@ const checked= require("../assets/icons/check.png");
 const google= require("../assets/icons/google.png");
 const facebook= require("../assets/icons/facebook.png");
 const apple= require("../assets/icons/apple.png");
-
-
-
+const more2= require("../assets/icons/more.png");
+const option= require("../assets/icons/option.png");
 
 export default {
     back_arrow,
@@ -52,5 +51,7 @@ export default {
     checked,
     google,
     facebook,
-    apple
+    apple,
+    more2,
+    option
 }

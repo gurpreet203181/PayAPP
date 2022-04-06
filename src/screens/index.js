@@ -1,14 +1,17 @@
-import Home from './Home/Home'
-import Settings from './settings/settings'
-import User from './User/user'
-import SignIn from './Authentication/SignIn'
-import SignUp from './Authentication/SignUp'
-import ForgotPassword from './Authentication/ForgotPassword'
-import Otp from './Authentication/Otp'
-import CardDetail from './Cards.js/CardDetail'
-import Welcome from './Welcome/Welcome'
-import AuthLayout from './Authentication/AuthLayout'
-import OnBoarding from './OnBoarding/OnBoarding'
+import Home from './home/Home';
+import Home2 from './home/Home2';
+import Settings from './settings/settings';
+import User from './user/user';
+import SignIn from './authentication/SignIn';
+import SignUp from './authentication/SignUp';
+import ForgotPassword from './authentication/ForgotPassword';
+import Otp from './authentication/Otp';
+import CardDetail from './card/CardDetail';
+import Welcome from './welcome/Welcome';
+import AuthLayout from './authentication/AuthLayout';
+import OnBoarding from './onBoarding/OnBoarding';
+import TransactionDetail from './transaction/TransactionDetail';
+import Transactions from './transaction/Transactions';
 export{
     //Home
     Home,
@@ -30,5 +33,10 @@ export{
     CardDetail,
 
     //welcome
-    Welcome
+    Welcome,
+    Home2,
+
+    // Detail pages
+    TransactionDetail,
+    Transactions
 }

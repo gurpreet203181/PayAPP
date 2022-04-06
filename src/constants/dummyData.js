@@ -92,7 +92,8 @@ const Transaction =[
     {
       id:1,
       name:'Mcdonald',
-      date:'20 jan, 2022',
+      item:'Football Game',
+      date:'NOV 17',
       profileImage:require("../assets/dummyData/boy.png"),
       type:'output',
       amount:'23.99',
@@ -102,7 +103,8 @@ const Transaction =[
     {
         id:2,
         name:'Mcdonald',
-        date:'20 jan, 2022',
+        item:'Stationary',
+        date:'NOV 17',
         profileImage:require("../assets/dummyData/boy.png"),
         type:'output',
        amount:'23.99',
@@ -114,7 +116,8 @@ const Transaction =[
       {
         id:3,
         name:'Mcdonald',
-        date:'20 jan, 2022',
+        item:'DSLR Camera',
+        date:'NOV 17',
         profileImage:require("../assets/dummyData/boy.png"),
         type:'input',
       amount:'23.99',
@@ -126,7 +129,8 @@ const Transaction =[
       {
         id:4,
         name:'Mcdonald',
-        date:'20 jan, 2022',
+        item: 'Minimarket Anugrah',
+        date:'NOV 17',
         profileImage:require("../assets/dummyData/boy.png"),
         type:'output',
       amount:'23.99',
@@ -138,7 +142,8 @@ const Transaction =[
       {
         id:5,
         name:'Mcdonald',
-        date:'20 jan, 2022',
+        item:'Football Game',
+        date:'NOV 17',
         profileImage:require("../assets/dummyData/boy.png"),
         type:'input',
         amount:'23.99',
@@ -146,7 +151,34 @@ const Transaction =[
         card:'1'
 
   
-      }
+      },
+      
+      {id:6,
+      name:'Mcdonald',
+      item:'Football Game',
+      date:'NOV 17',
+      profileImage:require("../assets/dummyData/boy.png"),
+      type:'output',
+     amount:'23.99',
+
+      card:'2'
+
+
+    },
+     
+    {
+        id:7,
+        name:'Mc5donald',
+        item:'DSLR Camera',
+        date:'NOV 17',
+        profileImage:require("../assets/dummyData/boy.png"),
+        type:'output',
+       amount:'23.99',
+  
+        card:'2'
+  
+  
+      },
 ]
 
 export default {

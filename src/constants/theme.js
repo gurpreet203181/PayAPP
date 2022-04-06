@@ -2,13 +2,14 @@ import { Dimensions } from "react-native";
 const { width, height } = Dimensions.get("window");
 
 export const COLORS = {
-    primary: "#f18af1", 
+    primary: "#3838A9", 
     purple:"#fedeff",
     purpleLight:"#ffd6fd",
    
     black2:"#141318",
    
     orange: "#ff7f00",
+    orange2:'#FFBF47',
     green: "#27AE60",
     lightGreen:"#ddf8f7",
     lightGreen2:"#41e5c9",
@@ -22,7 +23,7 @@ export const COLORS = {
 
     darkGray2: "#757D85",//border  gray
 
-    gray: "#d0d0d2",
+    gray: "#D5D5E1",
 
     gray2: "#7A7A7A",//gray font
     
@@ -33,6 +34,7 @@ export const COLORS = {
     white2: "#FBFBFB",
     white: '#FFFFFF',
     black: "#000000",
+    black3:'#363636',
 
 
     transparentPrimray: 'rgba(227, 120, 75, 0.4)',
@@ -48,12 +50,13 @@ export const SIZES = {
     radius: 12,
     radius2:14,
     padding: 32,
+    marginHorizontal:{marginHorizontal:28},
 
     // font sizes
     largeTitle: 40,
     h1: 30,
     h2: 22,
-    h3: 16,
+    h3: 18,
     h4: 14,
     h5: 12,
     body1: 30,
@@ -70,14 +73,16 @@ export const FONTS = {
     largeTitle: { fontFamily: "Poppins_900Black", fontSize: SIZES.largeTitle },
     h1: { fontFamily: "Poppins_100Thin", fontSize: SIZES.h1, lineHeight: 36 },
     h2: { fontFamily: "Poppins_700Bold", fontSize: SIZES.h2, lineHeight: 30 },
-    h3: { fontFamily: "Poppins_100Thin", fontSize: SIZES.h3, lineHeight: 22 },
-    h4: { fontFamily: "Poppins_100Thin", fontSize: SIZES.h4, lineHeight: 22 },
+    h3: { fontFamily: "Poppins_400Regular", fontSize: SIZES.h3, lineHeight: 22 },
+    h4: { fontFamily: "Poppins_500Medium", fontSize: SIZES.h4, lineHeight: 22 },
     h5: { fontFamily: "Poppins_100Thin", fontSize: SIZES.h5, lineHeight: 22 },
     body1: { fontFamily: "Poppins_400Regular", fontSize: SIZES.body1, lineHeight: 36 },
     body2: { fontFamily: "Poppins_500Medium", fontSize: SIZES.body2, lineHeight: 30 },
     body3: { fontFamily: "Poppins_400Regular", fontSize: SIZES.body3, lineHeight: 22 },
     body4: { fontFamily: "Poppins_700Bold", fontSize: SIZES.body4, lineHeight: 22 },
     body5: { fontFamily: "Poppins_400Regular", fontSize: SIZES.body5, lineHeight: 22 },
+    body6: { fontFamily: "Poppins_300Light", fontSize: SIZES.body5, lineHeight: 22 },
+
 };
 
 const appTheme = { COLORS, SIZES, FONTS ,width,height};

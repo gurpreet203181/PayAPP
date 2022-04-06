@@ -1,88 +1,49 @@
-import React from 'react';
+import React from "react";
 import { t } from "../../hooks/UseI18n";
+import { View, Text, Image, StyleSheet, FlatList,ScrollView } from "react-native";
 
-
-import { View ,Text,Image,StyleSheet,FlatList,} from 'react-native';
-import { ScrollView } from 'react-native-virtualized-view';
-
-import { icons ,COLORS,SIZES,FONTS,dummyData} from '../../constants';
-import { Button ,ProfileButton,IconButton,Section,TransactionItem} from '../../components';
-import { LinearGradient } from 'expo-linear-gradient';
+import { COLORS, FONTS,icons,images,SIZES,dummyData } from "../../constants";
+import { ProfileButton,Section,TransactionItem} from "../../components";
 import { CardsCarousel } from '../../stores';
-const Home = ()=>{
-    
+
+
+const Home = ({navigation}) => {
+
     function renderHeader(){
         return(
-            <View style={{ flexDirection:'row' , justifyContent:'space-between' ,alignItems:'center'}}>
+         <View style={{ flexDirection:'row' , justifyContent:'space-between' ,alignItems:'center',...SIZES.marginHorizontal}}>
 
-                {/* Heloo && name */}
-                <View style={{marginTop:SIZES.radius}}>
-                   <Text 
-                   style={{
-                       color:COLORS.gray2,
-                       fontSize:SIZES.body4}}>
-                       {t('hello')} {dummyData.myProfile.name}</Text>
-                       <View style={{flexDirection:'row', marginTop:5}}>
-                       <Text  adjustsFontSizeToFit numberOfLines={1} style={{...FONTS.h3}}>{t('welcome')}</Text>
-                       <Image source={icons.star} style={{height:20, width:20}}/>
+              {/* Heloo && name */}
+              <View style={{marginTop:SIZES.padding}}>
+                  <View style={{flexDirection:'row',alignItems:"center"}}>
+                      <Text  style={{ color:COLORS.black3, ...FONTS.h2}}>
+                        {t('hello')} 
+                        </Text>
+                    <Image source={icons.star} style={{height:24, width:24,marginLeft:5}}/>
+                   </View>
+                    <Text  adjustsFontSizeToFit numberOfLines={1} style={{...FONTS.body3,fontSize:14}}>{dummyData.myProfile.name}</Text>
 
-                       </View>
                 </View>
-                {/* Profile */}
-                 <ProfileButton 
-                 icon={dummyData.myProfile.profile_image}
+              {/* Profile */}
+               <ProfileButton 
+                icon={dummyData.myProfile.profile_image}
                  containerStyle={{
-                     backgroundColor:COLORS.primary
-                 }}/>
-
-            </View>
-        )
-    }
-    function render_Balance_And_CardBtn(){
-        return(
-            <View style={{flexDirection:'row', justifyContent:'space-between',alignItems:'center',marginTop:SIZES.padding}}>
-                {/* Balance */}
-                <View>
-
-                    <Text style={{...FONTS.h1}}>${dummyData.myProfile.totalBalance}</Text>
-                    <Text style={{...FONTS.body4, color:COLORS.gray2}}>{t('yourBalance')}</Text>
-                </View>
-
-                {/* Button */}
-                <View>  
-                <Button 
-                label={t('addCard')}
-                labelStyle={{...FONTS.h4}}
-                iconPosition='RIGHT'
-                icon={icons.plus}
-                iconStyle={{
-                    marginLeft:20,
+                 backgroundColor:COLORS.primary,
+                 width: 27,
+                 height: 27
                 }}
-
-                containerStyle={{
-                    
-                    flex:1,
-                    justifyContent:'space-between',
-                    alignItems:'center',
-                    paddingHorizontal:SIZES.radius,
-                    borderRadius:SIZES.radius2,
-                    borderColor:COLORS.darkGray,
-                    borderWidth: 1,
-                    marginVertical:9,
-
-                  
-                }}
+                iconStyle={{with:19,height:20}}
                 />
-
-
-                </View>
-            </View>
+        </View>
         )
     }
 
     function renderCards(){
         return(
-            <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+            <View>
+                  <View style={{ justifyContent:'center', }}>
+                    <Section label={t('cards')} icon={null}  containerStyle={{marginTop:16}}/>
+
                     <CardsCarousel 
                     data={dummyData.Cards} 
                     containerStyle={{
@@ -96,244 +57,62 @@ const Home = ()=>{
                        borderRadius:SIZES.radius
                     }}
                     />
-                  {/* <View style={{
-                    flexDirection:'row',
-                    justifyContent:'center',
-                    alignItems:'center',
-                    marginTop:60,
-                    backgroundColor:COLORS.white,
-                    height: 200,
-                    width:"100%",
-                   borderRadius:SIZES.radius*2,
-                   borderColor:COLORS.darkGray2,
-                   borderWidth:1
-                   }}>
-
-                    <Image source={icons.plus}
-                    style={{
-                        height: 40,
-                        width: 40,
-                        tintColor:COLORS.black
-                    }}/>
-
-                </View>   */}
+            </View>
             </View>
         )
     }
 
-    function renderOptions(){
-        return(
-            <View style={{
-                flexDirection:'row',
-                justifyContent:'space-between',
-                alignItems:'center',
-                marginTop:SIZES.padding
 
-            }}>
-               {/* Send */}
-
-                <View 
-                style={{justifyContent:'center',alignItems:'center'}}
-                >
-                <IconButton 
-                icon={icons.sendMoney}
-                iconStyle={style.IconButton_icon}
-                containerStyle={style.IconButtonContainer}
-                />
-                <Text style={style.IconButton_text} adjustsFontSizeToFit numberOfLines={1}>
-                    {t('send')}
-                </Text>
-                </View>
-                   
-                   {/* Bill */}
-                   <View style={{justifyContent:'center',alignItems:'center'}}>
-                   <IconButton 
-                     icon={icons.bill}
-                     iconStyle={style.IconButton_icon}
-                     containerStyle={style.IconButtonContainer}
-                    />
-               
-                      <Text style={style.IconButton_text} adjustsFontSizeToFit numberOfLines={1}>
-                      {t('bill')}
-                       </Text>
-                </View>
-
-                   {/* Recharge */}
-                   <View  style={{justifyContent:'center',alignItems:'center'}}>
-                <IconButton 
-                icon={icons.recharge}
-                iconStyle={style.IconButton_icon}
-                containerStyle={style.IconButtonContainer}
-                />
-                <Text style={style.IconButton_text} adjustsFontSizeToFit numberOfLines={1}>
-                    {t('recharge')}
-                </Text>
-                </View>
-                   
-                   {/* More */}
-                   <View style={{justifyContent:'center',alignItems:'center'}} >
-                <IconButton 
-                icon={icons.more}
-                iconStyle={style.IconButton_icon}
-                containerStyle={style.IconButtonContainer}
-                />
-                <Text style={style.IconButton_text} adjustsFontSizeToFit numberOfLines={1}>
-                    {t('more')}
-                </Text>
-                </View>
-
-
-            </View>
-        )
-    }
-
-    function renderSendAgian(){
-        return(
-            <View>
-              <Section label={t('sendAgain')} icon={null}  containerStyle={{marginTop:SIZES.padding}}/>
-
-              {/* Rendering profiles */}
-               <View style={{flexDirection:'row',justifyContent:'flex-start',alignItems:'center', 
-               marginTop:SIZES.radius2,
-               }}>
-               <ProfileButton 
-                 icon={icons.addUser}
-                 iconStyle={{width:25, height:25, marginTop:0,tintColor:COLORS.gray2}}
-                 containerStyle={{
-                     backgroundColor:COLORS.gray3,
-                     height: 50,
-                     width: 50,
-                 }}
-                 onPress={()=> console.log("add user")}/>
-              <FlatList
-               data={dummyData.sendAgain}
-               keyExtractor={(item)=> `${item.id}`}
-               horizontal
-               showsHorizontalScrollIndicator={false}
-               renderItem={({item,index})=>(
-                     <View style={{justifyContent:'center', alignItems: 'center', height:90}}>
-                    <ProfileButton 
-                 icon={item.profileImage}
-                 containerStyle={{
-                     backgroundColor:COLORS.primary,
-                     marginLeft:20,
-                     height: 50,
-                     width: 50
-                 }} 
-                 onPress={()=>console.log(item.id)}/>
-                        <LinearGradient 
-            start={{x:0,y:0}}
-            end={{x:0,y:15}}
-            colors={[COLORS.transparent, COLORS.lightGreen2]}
-            style={{
-                position: 'absolute',
-                //opacity: 0.4,
-                top: 15,
-                bottom: 0,
-                right: 0,
-                left: 0,
-                height:70,
-                width: 60,
-                marginLeft:15,
-                borderRadius:SIZES.padding
-            }}
-           />
-                 </View>
-
-               )}
-
-
-              />
-               </View>
-
-           
-            </View>
-        )
-    }
     function renderTransactions(){
         return(
-            <View>
-                  <Section label={t('transaction')} 
-                   icon={icons.right_arrow} 
-                   containerStyle={{marginTop:SIZES.padding}}/>
-                    <FlatList
-                    data={dummyData.Transaction}
-                    showsVerticalScrollIndicator={false}
-                    keyExtractor={(item)=> `${item.id}`}
-                    renderItem={({item,index})=>(
-                        <View style={[index === dummyData.Transaction.length -1 ? style.lastitem:null]}>
-                        <TransactionItem item={item}/>
-                       
-                        </View>
-                        
-                    )}
-                    style={{marginTop:SIZES.base}}
-  
-                    />
-            </View>
+              <FlatList
+              data={dummyData.Transaction}
+              showsVerticalScrollIndicator={false}     
+              keyExtractor={(item)=> `${item.id}`}
+              style={{marginBottom:22}}
+              renderItem={({item,index})=>(
+                  <View style={[index === dummyData.Transaction.length -1 ? {marginBottom:50}:null]}>
+                  <TransactionItem item={item}  onPress={()=> navigation.navigate('TransactionDetail', { item })}/>
+                 
+                  </View>
+                  
+              )}
+
+              />
+    
         )
     }
+
+
     return(
-        <View style={{flex:1,backgroundColor:COLORS.white,}}>
-           
-              <View style={{marginHorizontal:SIZES.radius*2}}>
-              {/* header */}
-              {renderHeader()}
+        <View style={styles.container}>
 
-              {/* Balance and add Card */}
-              {render_Balance_And_CardBtn()}
+               {/* header */}
+               {renderHeader()}
 
-
-              {/* Cards View */}
+               {/* Cards View */}
                    
-                {renderCards()}
-                  
-              {/* options */}
+               {renderCards()}
+
+                {/* Transactions */}
+               <Section label={t('transactions')} icon={icons.right_arrow} iconstyle={{width:15,height:15,tintColor:'#273240'}} 
+                containerStyle={{marginTop:75}} 
+                onIconPress={()=> navigation.navigate('Transactions',{item:'all'})}/>
+                {renderTransactions()}
               
-              <ScrollView style={{height:450}}
-              showsVerticalScrollIndicator={false}>
-              {renderOptions()}
-
-              {/* send Again */}
-              {renderSendAgian()}
-
-              {/* Transactions */}
-              {renderTransactions()}
-              </ScrollView>
-              
-
-              </View>
 
         </View>
     )
-
 }
 
 export default Home;
 
-const style = StyleSheet.create({
-    
-    IconButton_icon:{
-        width: 30,
-        height: 30,
-        tintColor:COLORS.white
-    
+const styles = StyleSheet.create({
+    container:{
+        flex:1, 
+        backgroundColor:COLORS.white, 
     },
-    IconButtonContainer:{
-        width: 60,
-        height: 60,
-        borderRadius:SIZES.padding,
-        backgroundColor:COLORS.black2
-    },
-    IconButton_text:{
-       
-        marginTop:10,
-        color: COLORS.gray2,
-        ...FONTS.body4,
-        
-    },
-    lastitem:{
-        marginBottom:50
-    }
+
+
 
 })

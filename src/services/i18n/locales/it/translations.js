@@ -9,7 +9,8 @@ const it={
     recharge:'Ricarica',
     more:'Più',
    sendAgain: 'Invia Di Nuovo',
-  transaction:'Transazione',
+  transactions:'Transazioni',
+  cards:'carte',
 
   //Welcome
   signIn:'Sign In',
@@ -44,7 +45,25 @@ const it={
  authLayout_TitleOtp:'Verifica Email',
  authLayout_Otp_SubTitle :'Inserisci il codice a 4 cifre che ti è stato inviato a',
  resendCode:'Invia nuovo',
- done:'Fatto'
+ done:'Fatto',
+
+ next:'prossima',
+ started:'Iniziamo',
+ 
+ //card
+ cardHolder:'Titolare',
+ expires:'scadenza',
+ nearPhone:'Vicina telefono al terminale',
+ cardInfo: 'Card Info',
+ accountInfo:'Informazioni Account',
+
+ //Transaction
+ details: 'Dettagli',
+ itemDetail:'Articolo {{item}} acquistato il {{date}} con numero di carta {{card}}',
+ noResult:'Nessuna transazione trovata su questa carta',
+ noSearchResult:'Non siamo riusciti a trovare alcuna transazione in base alla tua ricerca'
+
+
 
 
   };

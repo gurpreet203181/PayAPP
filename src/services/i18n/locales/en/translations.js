@@ -9,7 +9,8 @@ const en={
   recharge:'Recharge',
   more:'More',
   sendAgain: 'Send Again',
-  transaction:'Transaction',
+  transactions:'Transactions',
+  cards:'Cards',
   
   //Welcome
   signIn:'Sign In',
@@ -47,8 +48,20 @@ const en={
 
   //OnBoarding
   next:'Next',
-  started:'Get Started'
+  started:'Get Started',
+  
+  //card
+ cardHolder:'Card holder',
+ expires:'EXPIRES',
+nearPhone:'Near phone to terminal',
+cardInfo: 'Card Info',
+accountInfo:'Account Info',
 
+ //Transaction
+ details: 'Details',
+ itemDetail:'Item {{item}} purchased on {{date}} by card numeber {{card}}',
+ noResult:'No transaction found on this card',
+ noSearchResult:'We couldnt find any transaction based on your search'
 
 
 };

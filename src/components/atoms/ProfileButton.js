@@ -7,7 +7,6 @@ const ProfileButton = ({icon,iconStyle,containerStyle,onPress}) => {
     return(
        <TouchableOpacity 
        style={{
-           flexDirection: "row",
            alignItems:"center",
            justifyContent:"center",
            height: 40,

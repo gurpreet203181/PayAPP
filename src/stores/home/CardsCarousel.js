@@ -5,13 +5,9 @@ import {
   Dimensions,
   Animated,
   TouchableOpacity,
-  View,
-  Text,
-  Image,
-  ImageBackground,
   StyleSheet,
 } from 'react-native';
-import { CardSvg } from '../../components';
+import { Carditem } from '../../components';
 import { SharedElement } from 'react-navigation-shared-element';
 import { SafeAreaView } from 'react-native-safe-area-context';
 const { width, height } = Dimensions.get('screen');
@@ -67,6 +63,7 @@ const CardsCarousel=({data, cardStyle, containerStyle, cardContainerStyle})=> {
                 width: ITEM_WIDTH,
                 height: ITEM_WIDTH ,
                 margin: SPACING,
+                marginBottom:0,
                 overflow: 'hidden',
                 ...cardContainerStyle
               }}
@@ -76,15 +73,7 @@ const CardsCarousel=({data, cardStyle, containerStyle, cardContainerStyle})=> {
                 id={`item.${item.key}.photo`}
                 style={[StyleSheet.absoluteFillObject]}
               >
-                <Animated.Image
-                  source={item.image}
-                  style={{
-                    width: 300,
-                    height: 200,
-                    resizeMode: 'cover',
-                    ...cardStyle
-                  }}
-                />
+                <Carditem item={item}/>
               </SharedElement>
              
             </TouchableOpacity>

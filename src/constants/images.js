@@ -7,6 +7,9 @@ const bill =  require("../assets/images/bill.jpg");
 const payment =  require("../assets/images/payment.jpg");
 const send =  require("../assets/images/send.jpg");
 const ellipse = require("../assets/images/ellipse.jpg");
+const card = require("../assets/images/card.png");
+const card2 = require("../assets/images/card2.png");
+
 
 export default{
     WelcomeShape,
@@ -16,5 +19,7 @@ export default{
     bill,
     payment,
     send,
-    ellipse
+    ellipse,
+    card,
+    card2
 }

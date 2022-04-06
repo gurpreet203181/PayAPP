@@ -5,7 +5,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { init } from './src/hooks/UseI18n';
 import Tabs from './src/navigation/tabs';
-import {CardDetail,SignIn,SignUp,Welcome,ForgotPassword,Otp,OnBoarding} from './src/screens/index'
+import {CardDetail,SignIn,SignUp,Welcome,ForgotPassword,Otp,OnBoarding, TransactionDetail
+,Transactions} from './src/screens/index'
 import AppLoading from 'expo-app-loading';
 import { useState } from 'react';
 import {useFonts} from './src/hooks/useFonts'
@@ -65,7 +66,7 @@ export default function App() {
           
         }}
         //checking if user as viewed onBoarding if not  initialRoute will OnBoarding 
-        initialRouteName={viewedOnboarding? 'Welcome':'OnBoarding'}
+        initialRouteName={viewedOnboarding? 'Home':'OnBoarding'}
       >
         <Stack.Screen
           name="Home"
@@ -124,7 +125,21 @@ export default function App() {
             headerShown:false
           }}
         />
+         <Stack.Screen
+          name="TransactionDetail"
+          component={TransactionDetail}
+          screenOptions={{
+            headerShown:false
+          }}
+        />
         
+        <Stack.Screen
+          name="Transactions"
+          component={Transactions}
+          screenOptions={{
+            headerShown:false
+          }}
+        />
        
       </Stack.Navigator>
     </NavigationContainer>
