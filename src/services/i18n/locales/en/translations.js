@@ -61,8 +61,9 @@ accountInfo:'Account Info',
  details: 'Details',
  itemDetail:'Item {{item}} purchased on {{date}} by card numeber {{card}}',
  noResult:'No transaction found on this card',
- noSearchResult:'We couldnt find any transaction based on your search'
-
+ noSearchResult:'We couldnt find any transaction based on your search',
+ Filter:'Filter your search',
+ apply:'Apply Filters'
 
 };
 export default en;

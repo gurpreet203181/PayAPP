@@ -72,6 +72,7 @@ const SignIn = ({navigation})=>{
             />
             
             </View>
+            {/* remmber me  */}
             <View style={{flexDirection:"row", justifyContent:'flex-start',  marginTop:44}}>
                   
                   <CheckBox value={rememberMe} onChange={(value)=> setRememberMe(value)}/>

@@ -25,6 +25,8 @@ const facebook= require("../assets/icons/facebook.png");
 const apple= require("../assets/icons/apple.png");
 const more2= require("../assets/icons/more.png");
 const option= require("../assets/icons/option.png");
+const filter= require("../assets/icons/filter.png");
+
 
 export default {
     back_arrow,
@@ -53,5 +55,6 @@ export default {
     facebook,
     apple,
     more2,
-    option
+    option,
+    filter,
 }

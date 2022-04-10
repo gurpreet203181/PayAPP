@@ -61,7 +61,8 @@ const it={
  details: 'Dettagli',
  itemDetail:'Articolo {{item}} acquistato il {{date}} con numero di carta {{card}}',
  noResult:'Nessuna transazione trovata su questa carta',
- noSearchResult:'Non siamo riusciti a trovare alcuna transazione in base alla tua ricerca'
+ noSearchResult:'Non siamo riusciti a trovare alcuna transazione in base alla tua ricerca',
+ Filter:'Filter your search'
 
 
 

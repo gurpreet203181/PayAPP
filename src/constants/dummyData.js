@@ -102,7 +102,7 @@ const Transaction =[
     },
     {
         id:2,
-        name:'Mcdonald',
+        name:'StarBucks',
         item:'Stationary',
         date:'NOV 17',
         profileImage:require("../assets/dummyData/boy.png"),
@@ -128,12 +128,12 @@ const Transaction =[
       },
       {
         id:4,
-        name:'Mcdonald',
+        name:'Kfc',
         item: 'Minimarket Anugrah',
         date:'NOV 17',
         profileImage:require("../assets/dummyData/boy.png"),
         type:'output',
-      amount:'23.99',
+      amount:'10',
 
         card:'3'
  
@@ -141,12 +141,12 @@ const Transaction =[
       },
       {
         id:5,
-        name:'Mcdonald',
+        name:'Zara',
         item:'Football Game',
         date:'NOV 17',
         profileImage:require("../assets/dummyData/boy.png"),
         type:'input',
-        amount:'23.99',
+        amount:'100',
 
         card:'1'
 
@@ -154,12 +154,12 @@ const Transaction =[
       },
       
       {id:6,
-      name:'Mcdonald',
+      name:'Hotel',
       item:'Football Game',
       date:'NOV 17',
       profileImage:require("../assets/dummyData/boy.png"),
       type:'output',
-     amount:'23.99',
+     amount:'500',
 
       card:'2'
 
@@ -168,7 +168,7 @@ const Transaction =[
      
     {
         id:7,
-        name:'Mc5donald',
+        name:'Mike',
         item:'DSLR Camera',
         date:'NOV 17',
         profileImage:require("../assets/dummyData/boy.png"),
@@ -177,6 +177,64 @@ const Transaction =[
   
         card:'2'
   
+  
+      }, {
+        id:8,
+        name:'Mike',
+        item:'DSLR Camera',
+        date:'NOV 18',
+        profileImage:require("../assets/dummyData/boy.png"),
+        type:'output',
+       amount:'23.99',
+  
+        card:'2'
+  
+  
+      }, {
+        id:9,
+        name:'Mike',
+        item:'DSLR Camera',
+        date:'NOV 17',
+        profileImage:require("../assets/dummyData/boy.png"),
+        type:'output',
+        amount:'23.99',
+  
+        card:'2'
+  
+      }, {
+        id:10,
+        name:'Mike',
+        item:'DSLR Camera',
+        date:'NOV 17',
+        profileImage:require("../assets/dummyData/boy.png"),
+        type:'output',
+       amount:'23.99',
+  
+        card:'2'
+  
+  
+      }, {
+        id:11,
+        name:'Mikes',
+        item:'DSLR Camera',
+        date:'NOV 17',
+        profileImage:require("../assets/dummyData/boy.png"),
+        type:'output',
+       amount:'23.99',
+  
+        card:'2'
+  
+  
+      }, {
+        id:12, 
+        name:'Hotel',
+        item:'Football Game',
+        date:'NOV 17',
+        profileImage:require("../assets/dummyData/boy.png"),
+        type:'output',
+       amount:'23.99',
+  
+        card:'2'
   
       },
 ]

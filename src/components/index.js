@@ -12,7 +12,9 @@ import Paginator from "./atoms/Paginator";
 import Header from './molecules/Header';
 import Carditem from './molecules/CardItem';
 import InfoItem from "./molecules/InfoItem";
-import SearchBar from "./atoms/SearchBar";
+import SearchBar from "./molecules/SearchBar";
+import List from "./organisms/List";
+import CustomMultiSlider from "./atoms/MultiSlider";
 export{
     Button,
     ProfileButton,
@@ -28,5 +30,7 @@ export{
     Header,
     Carditem,
     InfoItem,
-    SearchBar
+    SearchBar,
+    List,
+    CustomMultiSlider
 }
