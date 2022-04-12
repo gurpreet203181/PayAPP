@@ -8,12 +8,18 @@ import {
 } from "react-native";
 import { createBottomTabNavigator, BottomTabBar } from "@react-navigation/bottom-tabs"
 
-import { Home ,Settings,User,Home2} from "../screens";
+import { Home ,Settings,User,Home2,AddCardModel} from "../screens";
 import { COLORS,FONTS,icons,SIZES } from "../constants";
-import { borderTopColor, color } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
-const Tab = createBottomTabNavigator()
+import { AntDesign } from '@expo/vector-icons'; 
 
-const Tabs = () => {
+const Tab = createBottomTabNavigator()
+const AddCardPlaceHodler = () =>{
+    return(
+        <View style={{flex:1,backgroundColor:COLORS.white}}/>
+        
+    )
+}
+const Tabs = ({navigation}) => {
     return (
         <Tab.Navigator
         screenOptions={{ headerShown: false , 
@@ -75,6 +81,24 @@ const Tabs = () => {
             />
             
             <Tab.Screen
+                name="Add"
+                component={AddCardPlaceHodler}
+                options={{
+                    tabBarIcon:({focused})=>(
+                        <View style={{...styles.AddCardButton,...styles.shadow}}>
+                        <AntDesign name="plus" size={24} color="white" />
+                       </View>
+                    )
+                }}
+                listeners= {({navigation}) =>({
+                    tabPress: (e) =>{
+                        e.preventDefault();
+                        navigation.navigate('AddCard');
+                    }
+                })}
+            />
+            
+            <Tab.Screen
                 name="Portfolio"
                 component={Settings}
                 options={{
@@ -133,7 +157,7 @@ const styles = StyleSheet.create({
         right:0,
         elevation:0,
         backgroundColor:COLORS.white,
-        borderTopColor:'transparent',
+        borderTopColor:COLORS.lightGray2,
         justifyContent:"center",
     },
     tabIconContainer:{
@@ -152,7 +176,27 @@ const styles = StyleSheet.create({
         height:4,
         borderRadius:SIZES.radius,
         marginTop:SIZES.base
-    }
+    },
+    AddCardButton:{
+        bottom: 20,
+        width: 56,
+        height: 56,
+        backgroundColor:COLORS.primary,
+        borderRadius:SIZES.padding,
+        justifyContent:"center",
+        alignSelf:"center",
+        alignItems:"center"
+    },
+    shadow:{
+        shadowColor: '#4d4d4d',
+        shadowOffset: {
+         width: 0,
+         height: 8,
+        },
+        shadowOpacity: 0.8,
+        shadowRadius: 13.51,
+        elevation: 5,
+    },
 
 })
 

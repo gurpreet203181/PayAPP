@@ -28,10 +28,11 @@ const SearchBar = (props) => {
          {props.clicked &&
           <TouchableOpacity style={{height:50,width:30, justifyContent:"center", alignItems:"center"}}
            onPress={() => {
-            props.onCrossPress();
             props.onChangeText("")
             Keyboard.dismiss();
             props.setClicked(false);
+            props.onCrossPress();
+
             }}>
        
           <EvilIcons name="close" size={24} color="black" />

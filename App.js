@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { init } from './src/hooks/UseI18n';
 import Tabs from './src/navigation/tabs';
 import {CardDetail,SignIn,SignUp,Welcome,ForgotPassword,Otp,OnBoarding, TransactionDetail
-,Transactions} from './src/screens/index'
+,Transactions, PaymentSuccess,AddCard} from './src/screens/index'
 import AppLoading from 'expo-app-loading';
 import { useState } from 'react';
 import {useFonts} from './src/hooks/useFonts'
@@ -136,6 +136,22 @@ export default function App() {
         <Stack.Screen
           name="Transactions"
           component={Transactions}
+          screenOptions={{
+            headerShown:false
+          }}
+        />
+        
+        <Stack.Screen
+          name="PaymentSuccess"
+          component={PaymentSuccess}
+          screenOptions={{
+            headerShown:false
+          }}
+        />
+        
+        <Stack.Screen
+          name="AddCard"
+          component={AddCard}
           screenOptions={{
             headerShown:false
           }}

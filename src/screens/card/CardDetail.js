@@ -1,4 +1,3 @@
-import React from "react";
 import { t } from "../../hooks/UseI18n";
 import { View, ScrollView , Text ,StyleSheet ,TouchableOpacity} from "react-native";
 import { COLORS, FONTS ,icons, dummyData, SIZES} from "../../constants";
@@ -44,7 +43,10 @@ const CardDetail =({route,navigation})=>{
     function renderCard(){
         return(
             <View style={{marginHorizontal:44,justifyContent:"center", alignItems:"center"}}>
-                <Carditem item={item}/>
+                <TouchableOpacity onPress={()=> navigation.navigate('PaymentSuccess')} style={{width:'100%'}}>
+                 <Carditem item={item}/>
+                </TouchableOpacity>
+
             </View>
         )
     }

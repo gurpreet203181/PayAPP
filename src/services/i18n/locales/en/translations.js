@@ -3,7 +3,6 @@ const en={
   welcome: "Welcome Back",
   hello: "Hello",
   yourBalance:'Total Balance',
-  addCard:'Add Card',
   send:'Send',
   bill:'Bill',
   recharge:'Recharge',
@@ -53,9 +52,11 @@ const en={
   //card
  cardHolder:'Card holder',
  expires:'EXPIRES',
-nearPhone:'Near phone to terminal',
-cardInfo: 'Card Info',
-accountInfo:'Account Info',
+ nearPhone:'Near phone to terminal',
+ cardInfo: 'Card Info',
+ accountInfo:'Account Info',
+ addPayment:'Add Payment Method',
+ addCard:'Add Card',
 
  //Transaction
  details: 'Details',
@@ -63,7 +64,13 @@ accountInfo:'Account Info',
  noResult:'No transaction found on this card',
  noSearchResult:'We couldnt find any transaction based on your search',
  Filter:'Filter your search',
- apply:'Apply Filters'
+ apply:'Apply Filters',
+
+ //success
+ paymentSuccess:'Payment Sucscess',
+ procced:'Proceed',
+ paymentInfoText:'we will send order details and invoice in your contact no. and registered email',
+ 
 
 };
 export default en;

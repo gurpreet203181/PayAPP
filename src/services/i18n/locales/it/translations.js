@@ -3,7 +3,6 @@ const it={
     welcome: "Bentornto",
     hello: "Ciao",
     yourBalance:'Saldo Totale',
-    addCard:'Aggiungi carta',
     send:'Invio',
     bill:'Fattura',
     recharge:'Ricarica',
@@ -56,13 +55,24 @@ const it={
  nearPhone:'Vicina telefono al terminale',
  cardInfo: 'Card Info',
  accountInfo:'Informazioni Account',
+ addPayment:'Aggiungi metodo di pagamento',
+ addCard:'Aggiungi carta',
+
 
  //Transaction
  details: 'Dettagli',
  itemDetail:'Articolo {{item}} acquistato il {{date}} con numero di carta {{card}}',
  noResult:'Nessuna transazione trovata su questa carta',
  noSearchResult:'Non siamo riusciti a trovare alcuna transazione in base alla tua ricerca',
- Filter:'Filter your search'
+ Filter:'Filter your search',
+ apply:'Applica filtri ',
+
+ //success
+ paymentSuccess:'Pagamento Andato Buon Fine',
+ procced:'Procedere',
+ paymentInfoText:"invieremo i dettagli dell'ordine e la fattura al tuo numero di contatto. ed e-mail registrata",
+
+ 
 
 
 

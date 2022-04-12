@@ -14,7 +14,7 @@ const Header = ({title,leftIcon,onLeftIconPress,rightIcon, onRightIconPress}) =>
              {/* title */}
              <View style={{flex:1, alignItems:"center", justifyContent: "center"}}>
                  
-                 <Text style={{...FONTS.h3,letterSpacing:0.3,color:COLORS.black2}}>
+                 <Text adjustsFontSizeToFit numberOfLines={1} style={{...FONTS.h3,letterSpacing:0.3,color:COLORS.black2}}>
                      {title}
                   </Text>
 

@@ -12,6 +12,9 @@ import AuthLayout from './authentication/AuthLayout';
 import OnBoarding from './onBoarding/OnBoarding';
 import TransactionDetail from './transaction/TransactionDetail';
 import Transactions from './transaction/Transactions';
+import PaymentSuccess from './success/PaymentSuccess';
+import AddCard from './card/AddCard';
+import AddCardModel from './card/AddCardModel';
 export{
     //Home
     Home,
@@ -31,6 +34,8 @@ export{
 
     //Card
     CardDetail,
+    AddCardModel,
+    AddCard,
 
     //welcome
     Welcome,
@@ -38,5 +43,8 @@ export{
 
     // Detail pages
     TransactionDetail,
-    Transactions
+    Transactions,
+
+    //success
+    PaymentSuccess
 }

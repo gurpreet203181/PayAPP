@@ -45,7 +45,6 @@ const Transactions = ({route,navigation}) =>{
    if(searchPhrase.trim() != ""){
     setfilterData( data.filter((x) => x.name.toUpperCase().startsWith(searchPhrase.toUpperCase().trim().replace(/\s/g, ""))));
    }
-    console.log('smo');
   }
   },[data, searchPhrase,filtersApplied]);
   
