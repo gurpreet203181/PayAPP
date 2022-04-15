@@ -15,6 +15,7 @@ import Transactions from './transaction/Transactions';
 import PaymentSuccess from './success/PaymentSuccess';
 import AddCard from './card/AddCard';
 import AddCardModel from './card/AddCardModel';
+import TransferDashboard from './TransferDashboard/TransferDashboard';
 export{
     //Home
     Home,
@@ -46,5 +47,8 @@ export{
     Transactions,
 
     //success
-    PaymentSuccess
+    PaymentSuccess,
+
+    //TarnsferDashboard
+    TransferDashboard
 }

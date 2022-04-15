@@ -17,19 +17,23 @@ const FormInput=({
  autoCapitalize="none",
  errorMsg="",
  maxLength,
- forgotButton
+ forgotButton,
+ value,
+ autoFocus
 })=>{
     const [Focus, setFocus] = React.useState(false);
     return(
-        <View>
+        <View style={containerStyle}>
 
-            <View style={{...Styles.container,...containerStyle,
+            <View style={{...Styles.container,
            borderBottomColor:Focus? COLORS.black2 : COLORS.lightGray2
             }} >
               
             {prependComponenet}
             <TextInput 
             style={{...Styles.inputContainer, ...inputStyle}}
+            value={value}
+            autoFocus={autoFocus}
             placeholder={placeholder}
             placeholderTextColor={COLORS.gray}
             secureTextEntry={secureTextEntry}

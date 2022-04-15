@@ -2,9 +2,8 @@ import React from "react";
 import { t } from "../../hooks/UseI18n";
 import { View,Text,ImageBackground,StyleSheet,Image} from "react-native";
 import { FONTS, icons,SIZES,images,COLORS } from "../../constants";
-import { color } from "react-native-reanimated";
 
-const CardItem = ({item}) =>{
+const CardModelItem = (props) =>{
     return(  
         
         <ImageBackground source={images?.card}
@@ -29,7 +28,7 @@ const CardItem = ({item}) =>{
                 justifyContent:"space-between",
                 paddingHorizontal:20
             }}>
-                 <Image source={item?.icon} resizeMode="contain" style={{tintColor:COLORS.white, height: 40, width: 40, }}/>
+                 <Image source={props?.icon} resizeMode="contain" style={{tintColor:COLORS.white, height: 40, width: 40, }}/>
 
                  <Image source={icons?.option} style={{width:24, height:24, tintColor:COLORS.white}}/>
  
@@ -45,7 +44,7 @@ const CardItem = ({item}) =>{
                   alignItems:"center",
 
               }}>
-                  <Text style={{color:COLORS.white,letterSpacing:5,...FONTS.h4,fontSize:15}}>**** **** **** {item?.number}</Text>                 
+                  <Text style={{color:COLORS.white,letterSpacing:5,...FONTS.h4,fontSize:12}}>{props?.cardNumber}</Text>                 
               </View>
 
 
@@ -74,10 +73,10 @@ const CardItem = ({item}) =>{
                 }}>
                  {t('cardHolder')}
                 </Text>
-                <Text style={{
-                        flex: 1,color:COLORS.white, ...FONTS.body3,fontSize:15
+                <Text adjustsFontSizeToFit numberOfLines={1} style={{
+                        width:'80%', color:COLORS.white, ...FONTS.body3,fontSize:15
                     }}>
-                        {item?.name}
+                        {props?.cardHolder}
                     </Text>
             </View>
               {/* Expires */}
@@ -95,7 +94,7 @@ const CardItem = ({item}) =>{
                 <Text style={{
                         flex: 1,color:COLORS.white, ...FONTS.body3,fontSize:15
                     }}>
-                        {item?.exp}
+                        {props?.expiryDate}
                     </Text>
             </View>
 
@@ -108,7 +107,7 @@ const CardItem = ({item}) =>{
 }
 
 
-export default CardItem;
+export default CardModelItem;
 
 const styles = StyleSheet.create({
     shadow:{

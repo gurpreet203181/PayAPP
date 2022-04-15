@@ -1,3 +1,4 @@
+import React from "react";
 import { t } from "../../hooks/UseI18n";
 import { View, ScrollView , Text ,StyleSheet ,TouchableOpacity} from "react-native";
 import { COLORS, FONTS ,icons, dummyData, SIZES} from "../../constants";

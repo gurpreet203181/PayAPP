@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { createBottomTabNavigator, BottomTabBar } from "@react-navigation/bottom-tabs"
 
-import { Home ,Settings,User,Home2,AddCardModel} from "../screens";
+import { Home ,Settings,User,TransferDashboard} from "../screens";
 import { COLORS,FONTS,icons,SIZES } from "../constants";
 import { AntDesign } from '@expo/vector-icons'; 
 
@@ -58,8 +58,8 @@ const Tabs = ({navigation}) => {
                 
             />
             <Tab.Screen
-                name="Send"
-                component={Home2}
+                name="TransferDashboard"
+                component={TransferDashboard}
                 options={{
                     tabBarIcon:({focused})=>(
                         <View style={{...styles.tabIconContainer}}>

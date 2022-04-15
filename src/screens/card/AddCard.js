@@ -1,12 +1,20 @@
-import React from "react";
+import React,{useState} from "react";
 import { t } from "../../hooks/UseI18n";
 import { View, Text,StyleSheet, TouchableOpacity,Image} from "react-native";
 import { COLORS, FONTS, icons, SIZES } from "../../constants";
 import { Header } from "../../components";
-
+import {AddCardModel} from '../../screens'
 const AddCard = ({navigation}) =>{
+ 
+  const [isModalVisible, setModalVisible] =  useState(false);
 
-  function renderHeader(){
+    //Model show and close function
+    const toggleModal = () => {
+      setModalVisible(!isModalVisible);
+    };
+
+    //render
+   function renderHeader(){
     return(
        <Header 
        leftIcon={icons.back_arrow}
@@ -15,15 +23,17 @@ const AddCard = ({navigation}) =>{
        
        />
     )
- }
+   };
 
  function renderAddCard(){
    return(
      <View style={{...SIZES.marginHorizontal, alignItems:"center"}}>
-       <TouchableOpacity style={styles.addCard} >
+   
+       <TouchableOpacity style={styles.addCard} onPress={toggleModal}>
         <Image source={icons.plus} style={styles.plusImg}/>
         <Text style={styles.addCardText}>{t('addCard')}</Text>
        </TouchableOpacity>
+
      </View>
    )
  }
@@ -32,6 +42,12 @@ const AddCard = ({navigation}) =>{
         <View style={{flex:1, backgroundColor:COLORS.white}}>
           {renderHeader()}
           {renderAddCard()}
+          
+          {/* AddCard model  */}
+          <View>
+            <AddCardModel isVisible={isModalVisible} onClosePress={toggleModal}/>
+          </View>
+
         </View>
     )
 } 
@@ -49,7 +65,6 @@ const styles = StyleSheet.create({
     width:315,
    borderRadius:16,
    borderColor:COLORS.darkGray2,
-   borderWidth:1,
   },
   plusImg:{
     height: 20,

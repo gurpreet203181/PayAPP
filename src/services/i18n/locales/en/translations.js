@@ -1,4 +1,7 @@
 const en={
+
+  //App general 
+  appName:'PayApp',
   //Home
   welcome: "Welcome Back",
   hello: "Hello",
@@ -57,6 +60,11 @@ const en={
  accountInfo:'Account Info',
  addPayment:'Add Payment Method',
  addCard:'Add Card',
+ addCardSubTitle:'Start typing to add your credit card details.Everything will upadate according to your data.',
+ number:'Number',
+ expiryDate:'Expiry Date',
+ cvv:'CVV',
+ save:'Save',
 
  //Transaction
  details: 'Details',
@@ -70,7 +78,6 @@ const en={
  paymentSuccess:'Payment Sucscess',
  procced:'Proceed',
  paymentInfoText:'we will send order details and invoice in your contact no. and registered email',
- 
 
 };
 export default en;

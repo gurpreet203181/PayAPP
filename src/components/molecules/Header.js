@@ -3,9 +3,9 @@ import React from "react";
 import { Text, View , StyleSheet, Image,TouchableOpacity } from "react-native";
 import { COLORS, FONTS,icons, SIZES } from "../../constants";
 
-const Header = ({title,leftIcon,onLeftIconPress,rightIcon, onRightIconPress}) =>{
+const Header = ({title,leftIcon,onLeftIconPress,rightIcon, onRightIconPress,containStyle}) =>{
     return(
-        <View style={styles.container}>
+        <View style={[styles.container,containStyle]}>
              {/* left Icon */}
              <TouchableOpacity onPress={onLeftIconPress}>
                <Image source={leftIcon} style={{height:18, width:18}}/>

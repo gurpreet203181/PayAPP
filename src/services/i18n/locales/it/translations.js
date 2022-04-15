@@ -57,7 +57,11 @@ const it={
  accountInfo:'Informazioni Account',
  addPayment:'Aggiungi metodo di pagamento',
  addCard:'Aggiungi carta',
-
+ addCardSubTitle:'Inizia a digitare per aggiungere i dettagli della tua carta di credito.',
+ number:'Numero',
+ expiryDate:'Scadenza',
+ cvv:'CVV',
+ save:'salva',
 
  //Transaction
  details: 'Dettagli',

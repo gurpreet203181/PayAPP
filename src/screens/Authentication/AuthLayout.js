@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity,Image } from "react-native";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {useRoute} from '@react-navigation/native';
 
 import { COLORS,SIZES,FONTS,icons } from "../../constants";

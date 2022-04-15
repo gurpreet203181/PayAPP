@@ -26,6 +26,12 @@ const apple= require("../assets/icons/apple.png");
 const more2= require("../assets/icons/more.png");
 const option= require("../assets/icons/option.png");
 const filter= require("../assets/icons/filter.png");
+const debit_Card = require("../assets/icons/debit-cards.png");
+const expiryDate = require("../assets/icons/twelve.png");
+const cvv = require("../assets/icons/cvv.png");
+const profile = require("../assets/icons/profile.png");
+
+
 
 
 export default {
@@ -57,4 +63,8 @@ export default {
     more2,
     option,
     filter,
+    debit_Card,
+    expiryDate,
+    cvv,
+    profile
 }
