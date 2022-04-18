@@ -1,8 +1,8 @@
 import React, {useMemo, useState} from "react";
-import { t } from "../../hooks/UseI18n";
+import { t } from "../../../hooks/UseI18n";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { COLORS, FONTS, SIZES } from "../../constants";
-import { Button,CustomMultiSlider } from "../../components";
+import { COLORS, FONTS, SIZES } from "../../../constants";
+import { Button,CustomMultiSlider } from "../../../components";
 import Modal from "react-native-modal";
 
 const FilterModel = ({isVisible,onClosePress,filters}) =>{

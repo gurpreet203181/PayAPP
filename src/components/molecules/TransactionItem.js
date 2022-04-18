@@ -3,9 +3,9 @@ import React from "react";
 import { View, TouchableOpacity, Image, Text,StyleSheet } from "react-native";
 import { COLORS,SIZES,FONTS,icons } from "../../constants";
 
-const TransactionItem =({item,onPress, })=>{
+const TransactionItem =({item,onPress,containerStyle })=>{
     return(
-        <TouchableOpacity style={styles.Container}
+        <TouchableOpacity style={{...styles.Container,...containerStyle}}
          onPress={onPress}>
 
              {/* Image , name and date */}
@@ -56,7 +56,7 @@ const styles= StyleSheet.create({
         justifyContent:"space-between",
         alignItems:"center",
         marginTop:32,
-        ...SIZES.marginHorizontal
+        ...SIZES.marginHorizontal,
     },
 
     imgContainer:{

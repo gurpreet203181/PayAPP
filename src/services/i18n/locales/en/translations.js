@@ -9,7 +9,6 @@ const en={
   send:'Send',
   bill:'Bill',
   recharge:'Recharge',
-  more:'More',
   sendAgain: 'Send Again',
   transactions:'Transactions',
   cards:'Cards',
@@ -78,6 +77,17 @@ const en={
  paymentSuccess:'Payment Sucscess',
  procced:'Proceed',
  paymentInfoText:'we will send order details and invoice in your contact no. and registered email',
+
+ //TransferDashboard 
+ yourBalance:'Your Balance',
+ transfer:'Transfer',
+ link:'Link',
+ bill:'Bill',
+ more:'More',
+ incomingTransaction:'Incoming Transactions',
+ outgoingTansaction:'Outgoing Transaction',
+ noBalance:'Your balance is empty, Deposit money to transafer without fee and esay',
+ depositNow:'Deposit Now'
 
 };
 export default en;

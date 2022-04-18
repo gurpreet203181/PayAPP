@@ -3,7 +3,7 @@ import { t } from "../../hooks/UseI18n";
 import { View, Text,StyleSheet, TouchableOpacity,Image} from "react-native";
 import { COLORS, FONTS, icons, SIZES } from "../../constants";
 import { Header } from "../../components";
-import {AddCardModel} from '../../screens'
+import AddCardModel from '../addCard/AddCardModel'
 const AddCard = ({navigation}) =>{
  
   const [isModalVisible, setModalVisible] =  useState(false);

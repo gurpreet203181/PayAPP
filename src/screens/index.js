@@ -6,16 +6,17 @@ import SignIn from './authentication/SignIn';
 import SignUp from './authentication/SignUp';
 import ForgotPassword from './authentication/ForgotPassword';
 import Otp from './authentication/Otp';
-import CardDetail from './card/CardDetail';
-import Welcome from './welcome/Welcome';
+import CardDetail from './CommonScreens/cardDetail/CardDetail';
+import Welcome from './authentication/Welcome';
 import AuthLayout from './authentication/AuthLayout';
 import OnBoarding from './onBoarding/OnBoarding';
-import TransactionDetail from './transaction/TransactionDetail';
-import Transactions from './transaction/Transactions';
-import PaymentSuccess from './success/PaymentSuccess';
-import AddCard from './card/AddCard';
-import AddCardModel from './card/AddCardModel';
-import TransferDashboard from './TransferDashboard/TransferDashboard';
+import TransactionDetail from './CommonScreens/transaction/TransactionDetail';
+import Transactions from './CommonScreens/transaction/Transactions';
+import PaymentSuccess from './CommonScreens/success/PaymentSuccess';
+import TransferDashboard from './transfer/TransferDashboard';
+import Transfer from './transfer/transfer';
+import AddCard from './addCard/AddCard';
+
 export{
     //Home
     Home,
@@ -34,9 +35,9 @@ export{
     AuthLayout,
 
     //Card
-    CardDetail,
-    AddCardModel,
     AddCard,
+    CardDetail,
+    //AddCardModel,
 
     //welcome
     Welcome,
@@ -50,5 +51,6 @@ export{
     PaymentSuccess,
 
     //TarnsferDashboard
-    TransferDashboard
+    TransferDashboard,
+    Transfer
 }

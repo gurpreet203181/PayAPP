@@ -149,13 +149,13 @@ export default function App() {
           }}
         />
         
-        <Stack.Screen
+         <Stack.Screen
           name="AddCard"
           component={AddCard}
           screenOptions={{
             headerShown:false
           }}
-        />
+        /> 
        
       </Stack.Navigator>
     </NavigationContainer>

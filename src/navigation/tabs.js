@@ -6,7 +6,7 @@ import {
     Text,
     StyleSheet
 } from "react-native";
-import { createBottomTabNavigator, BottomTabBar } from "@react-navigation/bottom-tabs"
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 
 import { Home ,Settings,User,TransferDashboard} from "../screens";
 import { COLORS,FONTS,icons,SIZES } from "../constants";
@@ -90,6 +90,7 @@ const Tabs = ({navigation}) => {
                        </View>
                     )
                 }}
+                // override tab listener to navigate to addCard screen to avoid bottom tab 
                 listeners= {({navigation}) =>({
                     tabPress: (e) =>{
                         e.preventDefault();
@@ -99,7 +100,7 @@ const Tabs = ({navigation}) => {
             />
             
             <Tab.Screen
-                name="Portfolio"
+                name="Activity"
                 component={Settings}
                 options={{
                     tabBarIcon:({focused})=>(
@@ -121,7 +122,7 @@ const Tabs = ({navigation}) => {
                 }}
             />
             <Tab.Screen
-                name="User"
+                name="Profile"
                 component={User}
                 options={{
                     tabBarIcon:({focused})=>(

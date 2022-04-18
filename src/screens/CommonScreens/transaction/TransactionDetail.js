@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text,StyleSheet,TouchableOpacity,ScrollView,Image} from "react-native";
-import { COLORS,FONTS,icons,images,SIZES,dummyData} from "../../constants";
-import { Header,Section,InfoItem,ProfileButton} from "../../components";
-import { t } from "../../hooks/UseI18n";
+import { COLORS,FONTS,icons,images,SIZES,dummyData} from "../../../constants";
+import { Header,Section,InfoItem,ProfileButton} from "../../../components";
+import { t } from "../../../hooks/UseI18n";
 import { AntDesign,FontAwesome } from '@expo/vector-icons'; 
 import Dash from 'react-native-dash';
 

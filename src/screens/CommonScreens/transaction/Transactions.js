@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback, useMemo}  from "react";
-import { t } from "../../hooks/UseI18n";
+import { t } from "../../../hooks/UseI18n";
 import { View , StyleSheet,ActivityIndicator,TouchableOpacity,Image,Text } from "react-native";
-import {  COLORS,icons,dummyData, SIZES} from "../../constants";
-import { Header,Section,SearchBar, List} from "../../components";
+import {  COLORS,icons,dummyData, SIZES} from "../../../constants";
+import { Header,Section,SearchBar, List} from "../../../components";
 import FilterModel from './FilterModel';
 import {Entypo} from "@expo/vector-icons";
 const Transactions = ({route,navigation}) =>{

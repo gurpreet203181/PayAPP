@@ -1,8 +1,8 @@
 import React from "react";
-import { t } from "../../hooks/UseI18n";
+import { t } from "../../../hooks/UseI18n";
 import { View, ScrollView , Text ,StyleSheet ,TouchableOpacity} from "react-native";
-import { COLORS, FONTS ,icons, dummyData, SIZES} from "../../constants";
-import {Header,Carditem,TransactionItem,Section,InfoItem} from "../../components";
+import { COLORS, FONTS ,icons, dummyData, SIZES} from "../../../constants";
+import {Header,Carditem,TransactionItem,Section,InfoItem} from "../../../components";
 import { FontAwesome } from '@expo/vector-icons'; 
 import LottieView from "lottie-react-native";
 
@@ -29,7 +29,7 @@ const CardDetail =({route,navigation})=>{
         return(
             <LottieView
             ref={animation}
-              source={require("../../assets/images/88871-contactless-payment.json")}
+              source={require("../../../assets/images/88871-contactless-payment.json")}
               autoPlay
               loop={false}
             //  speed={2}

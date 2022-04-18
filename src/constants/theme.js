@@ -18,6 +18,7 @@ export const COLORS = {
 
     blue: '#0064C0',
     blue2:'#72c1f2',
+    darkBlue2:'#2C2C63',
     darkBlue: "#111A2C",
     darkGray: "#92908e",
 

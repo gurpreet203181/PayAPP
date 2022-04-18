@@ -1,8 +1,8 @@
 import React from 'react';
-import { t } from "../../hooks/UseI18n";
+import { t } from "../../../hooks/UseI18n";
 import {View, Text, StyleSheet} from 'react-native';
-import {COLORS, FONTS, Fonts,icons, SIZES} from '../../constants';
-import {Button, Header} from "../../components";
+import {COLORS, FONTS, Fonts,icons, SIZES} from '../../../constants';
+import {Button, Header} from "../../../components";
 import LottieView from "lottie-react-native";
 
 
@@ -12,7 +12,7 @@ const PaymentSuccess = ({navigation}) => {
     function renderLottieNfc(){
         return(
             <LottieView
-              source={require("../../assets/images/successful.json")}
+              source={require("../../../assets/images/successful.json")}
               autoPlay
               loop={false}
             //  speed={2}

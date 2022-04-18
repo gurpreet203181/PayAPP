@@ -30,8 +30,8 @@ const debit_Card = require("../assets/icons/debit-cards.png");
 const expiryDate = require("../assets/icons/twelve.png");
 const cvv = require("../assets/icons/cvv.png");
 const profile = require("../assets/icons/profile.png");
-
-
+const userIcon = require("../assets/icons/profile-user.png");
+const transfer = require("../assets/icons/transfer.png");
 
 
 export default {
@@ -66,5 +66,7 @@ export default {
     debit_Card,
     expiryDate,
     cvv,
-    profile
+    profile,
+    userIcon,
+    transfer
 }
