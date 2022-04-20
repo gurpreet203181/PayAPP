@@ -87,7 +87,16 @@ const en={
  incomingTransaction:'Incoming Transactions',
  outgoingTansaction:'Outgoing Transaction',
  noBalance:'Your balance is empty, Deposit money to transafer without fee and esay',
- depositNow:'Deposit Now'
+ depositNow:'Deposit Now',
 
+ //Transfer
+ transferMoney:'Transfer Money',
+ continue:'CONTINUE',
+  
+  //contactModel
+  contacts:'Contacts',
+  recentsContacts:'Recents Contacts',
+  allContacts:'All Contacts',
+  select:'Select'
 };
 export default en;

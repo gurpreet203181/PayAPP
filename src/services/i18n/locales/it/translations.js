@@ -6,7 +6,7 @@ const it={
     send:'Invio',
     bill:'Fattura',
     recharge:'Ricarica',
-    more:'Più',
+  
    sendAgain: 'Invia Di Nuovo',
   transactions:'Transazioni',
   cards:'carte',
@@ -76,7 +76,17 @@ const it={
  procced:'Procedere',
  paymentInfoText:"invieremo i dettagli dell'ordine e la fattura al tuo numero di contatto. ed e-mail registrata",
 
- 
+ //TransferDashboard 
+ yourBalance:'Tuo Saldo',
+ transfer:'Invia',
+ link:'Link',
+ bill:'Fattura',
+ more:'Più',
+ incomingTransaction:'Transazioni in entrata',
+ outgoingTansaction:'Transazione in uscita',
+ noBalance:'Il tuo saldo è vuoto, deposita denaro per trasferire senza commissioni e dire',
+ depositNow:'Deposita ora'
+
 
 
 

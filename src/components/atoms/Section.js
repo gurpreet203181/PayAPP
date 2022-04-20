@@ -5,7 +5,8 @@ import { COLORS, FONTS, SIZES } from "../../constants";
 
 const Section = ({ label, icon,onIconPress,iconstyle, containerStyle,labelStyle})=>{
     return(
-        <View style={{flexDirection:"row", justifyContent:"space-between",marginTop:16,alignItems:"center",...SIZES.marginHorizontal,...containerStyle}}>
+        <View style={{flexDirection:"row", justifyContent:"space-between",marginTop:16,alignItems:"center",
+        ...SIZES.marginHorizontal,...containerStyle}}>
            
            <Text style={{...FONTS.body5, fontSize:14, color:'#082431',opacity:0.5,letterSpacing:0.3,...labelStyle}}>
                {label}

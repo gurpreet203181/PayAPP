@@ -27,6 +27,7 @@ const AddCardModel = ({isVisible,onClosePress}) =>{
 
     const [clearModel, setClearModel] = useState(false);
     
+    //using memmo to clear value of filed after closing model 
     useMemo(() =>{
         setCardNumber("");
         setCardHolder("");
@@ -34,11 +35,14 @@ const AddCardModel = ({isVisible,onClosePress}) =>{
         setCvv("")
  
     },[clearModel])
-    //render
+
+
    const closeModel = () =>{
     setClearModel(!clearModel);  
     onClosePress();
    } 
+
+    //render
    function renderHeader(){
     return(
        <Header 
@@ -53,6 +57,7 @@ const AddCardModel = ({isVisible,onClosePress}) =>{
    function renderCard(){
        return(
            <View style={{...SIZES.marginHorizontal, marginTop:20}}>
+               {/* card item  */}
                 <CardModelItem 
                 cardNumber={cardnumber}
                 cardHolder={cardHolder}
@@ -136,8 +141,9 @@ const AddCardModel = ({isVisible,onClosePress}) =>{
    }
     return(
         <View>
+
          <Modal
-         isVisible={isVisible}
+          isVisible={isVisible}
           onBackButtonPress={closeModel}//onClosepress function to close model by changes isvisible value 
           onBackdropPress={closeModel}
           useNativeDriver={true}
@@ -146,20 +152,30 @@ const AddCardModel = ({isVisible,onClosePress}) =>{
         >
             <View style={styles.container}>
                 {/* <View style={styles.rectangle}/> */}
+
+                {/* render header */}
                 {renderHeader()}
+
+                {/* keyboardscroll to scroll on while typing */}
                 <KeyboardAwareScrollView
                  scrollEnabled={true}
                  enableAutomaticScroll={true}
                  extraScrollHeight={200}
                  >
+                     
                 <View style={{...SIZES.marginHorizontal, marginTop:50}}>
                   <Text style={{...FONTS.body5, color:COLORS.gray2}} adjustsFontSizeToFit numberOfLines={2}>
                   {t('addCardSubTitle')}
                 </Text>
                 </View>
 
+                {/* render card image and text on card  */}
                 {renderCard()}
+
+                {/* render card input fileds */}
                 {renderInput()}
+
+                {/* Save Button */}
                 <View style={{marginTop:46, ...SIZES.marginHorizontal, alignItems:"center", justifyContent:"center", paddingBottom:20}}>
                 <Button label={t('save')}
                  labelStyle={{...styles.saveText}}

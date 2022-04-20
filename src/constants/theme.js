@@ -3,7 +3,7 @@ const { width, height } = Dimensions.get("window");
 
 export const COLORS = {
     primary: "#3838A9", 
-    purple:"#fedeff",
+    purple:"#525298",
     purpleLight:"#ffd6fd",
    
     black2:"#141318",
@@ -18,6 +18,7 @@ export const COLORS = {
 
     blue: '#0064C0',
     blue2:'#72c1f2',
+
     darkBlue2:'#2C2C63',
     darkBlue: "#111A2C",
     darkGray: "#92908e",
@@ -76,7 +77,7 @@ export const FONTS = {
     h2: { fontFamily: "Poppins_700Bold", fontSize: SIZES.h2, lineHeight: 30 },
     h3: { fontFamily: "Poppins_400Regular", fontSize: SIZES.h3, lineHeight: 22 },
     h4: { fontFamily: "Poppins_500Medium", fontSize: SIZES.h4, lineHeight: 22 },
-    h5: { fontFamily: "Poppins_100Thin", fontSize: SIZES.h5, lineHeight: 22 },
+    h5: { fontFamily: "Poppins_600SemiBold", fontSize: SIZES.h5, lineHeight: 22 },
     body1: { fontFamily: "Poppins_400Regular", fontSize: SIZES.body1, lineHeight: 36 },
     body2: { fontFamily: "Poppins_500Medium", fontSize: SIZES.body2, lineHeight: 30 },
     body3: { fontFamily: "Poppins_400Regular", fontSize: SIZES.body3, lineHeight: 22 },

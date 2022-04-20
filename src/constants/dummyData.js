@@ -239,10 +239,77 @@ const Transaction =[
       },
 ]
 
+const contacts =[
+  {
+    id:4,
+    name:'Andrea Summer',
+    phoneNumber:9678195659,
+    profileImage: require("../assets/dummyData/boy.png")
+  },
+  
+  {
+    id:5,
+    name:'Karen William',
+    phoneNumber:9678195659,
+    profileImage: require("../assets/dummyData/boy.png")
+  },
+
+  {
+    id:1,
+    name:'Samantha',
+    phoneNumber:3278195659,
+    profileImage: require("../assets/dummyData/boy.png")
+  },
+
+  {
+    id:2,
+    name:'Rose Hope',
+    phoneNumber:7578195659,
+    profileImage: require("../assets/dummyData/boy.png")
+  },
+  
+  {
+    id:3,
+    name:'Angela Smith',
+    phoneNumber:8578195659,
+    profileImage: require("../assets/dummyData/boy.png")
+  },
+
+  
+ 
+
+]
+
+const RecentContact =[
+  {
+    id:1,
+    name:'Samantha',
+    phoneNumber:3278195659,
+    profileImage: require("../assets/dummyData/boy.png")
+  },
+
+  {
+    id:2,
+    name:'Rose Hope',
+    phoneNumber:7578195659,
+    profileImage: require("../assets/dummyData/boy.png")
+  },
+  
+  {
+    id:3,
+    name:'Angela Smith',
+    phoneNumber:8578195659,
+    profileImage: require("../assets/dummyData/boy.png")
+  },
+
+]
+
 export default {
   
     myProfile,
     Cards,
     sendAgain,
-    Transaction
+    Transaction,
+    contacts,
+    RecentContact
 }

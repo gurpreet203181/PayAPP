@@ -14,12 +14,21 @@ import TransactionDetail from './CommonScreens/transaction/TransactionDetail';
 import Transactions from './CommonScreens/transaction/Transactions';
 import PaymentSuccess from './CommonScreens/success/PaymentSuccess';
 import TransferDashboard from './transfer/TransferDashboard';
-import Transfer from './transfer/transfer';
+import Transfer from './transfer/Transfer';
 import AddCard from './addCard/AddCard';
+import TransferMethod from './transfer/TransferMethod';
 
 export{
+    //Common screens
+    CardDetail,
+    TransactionDetail,
+    Transactions,
+    PaymentSuccess,
+
     //Home
     Home,
+
+    
     Settings,
 
     //User
@@ -27,7 +36,9 @@ export{
     
     //OnBoarding
     OnBoarding,
+
     //Authentication
+    Welcome,
     SignIn,
     SignUp,
     ForgotPassword,
@@ -36,21 +47,12 @@ export{
 
     //Card
     AddCard,
-    CardDetail,
-    //AddCardModel,
 
-    //welcome
-    Welcome,
     Home2,
 
-    // Detail pages
-    TransactionDetail,
-    Transactions,
 
-    //success
-    PaymentSuccess,
-
-    //TarnsferDashboard
+    //Tarnsfer
     TransferDashboard,
-    Transfer
+    Transfer,
+    TransferMethod
 }

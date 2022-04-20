@@ -31,7 +31,7 @@ const SearchBar = (props) => {
             props.onChangeText("")
             Keyboard.dismiss();
             props.setClicked(false);
-            props.onCrossPress();
+            props.onCrossPress?.();
 
             }}>
        

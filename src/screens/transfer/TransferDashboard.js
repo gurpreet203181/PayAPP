@@ -71,7 +71,9 @@ const TransferDashboard = ({navigation}) => {
                 <IconButton 
                 containerStyle={{...styles.IconButtonContainer, backgroundColor:'#32A7E2'}}
                 icon={icons.transfer}
-                iconStyle={{...styles.IconButtonIcon}} />
+                iconStyle={{...styles.IconButtonIcon}} 
+                onPress={() => navigation.navigate('Transfer')}
+                />
 
                 <Text style={styles.IconButtonText}>{t('transfer')}</Text>
                 </View>

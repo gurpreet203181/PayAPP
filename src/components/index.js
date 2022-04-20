@@ -15,6 +15,8 @@ import InfoItem from "./molecules/InfoItem";
 import SearchBar from "./molecules/SearchBar";
 import List from "./organisms/List";
 import CustomMultiSlider from "./atoms/MultiSlider";
+import SelectedContactItem from './molecules/SelectedContactItem';
+import ContactItem from "./molecules/ContactItem";
 export{
     Button,
     ProfileButton,
@@ -32,5 +34,7 @@ export{
     InfoItem,
     SearchBar,
     List,
-    CustomMultiSlider
+    CustomMultiSlider,
+    SelectedContactItem,
+    ContactItem
 }

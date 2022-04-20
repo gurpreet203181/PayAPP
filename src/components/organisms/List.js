@@ -63,9 +63,10 @@ const List = (props) => {
           data={props.data}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item.id}
-          renderItem={({item})=> <TransactionItem item={item}  
-          
-          onPress={()=> navigation.navigate('TransactionDetail', { item })}/>}
+          renderItem={({item})=> 
+          <TransactionItem item={item}  
+          onPress={()=> navigation.navigate('TransactionDetail', { item })}
+          />}
         />   
         ):(
             //not found view with lottie animation and text
