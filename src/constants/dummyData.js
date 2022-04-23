@@ -304,6 +304,40 @@ const RecentContact =[
 
 ]
 
+const Banks=[
+  {
+    id:1,
+    number:'ITA88745O45858',
+    name:'Unicredit'
+  }
+]
+
+const myBalance=[
+  {
+    name:'My Balance',
+    amount:'2099',
+    number:'9022'
+  }
+]
+
+const paymentMethod=[
+  
+  {
+    MethodName:'balance',
+    ...myBalance
+  },
+
+  {
+    MethodName:'card',
+    ...Cards
+  },
+
+  {
+    MethodName:'bank',
+    ...Banks
+  }
+
+]
 export default {
   
     myProfile,
@@ -311,5 +345,6 @@ export default {
     sendAgain,
     Transaction,
     contacts,
-    RecentContact
+    RecentContact,
+    paymentMethod
 }

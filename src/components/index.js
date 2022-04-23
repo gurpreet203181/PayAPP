@@ -9,32 +9,34 @@ import FormInput from "./atoms/FormInput";
 import CheckBox from "./atoms/CheckBox";
 import OnBoardingItem from "./molecules/OnBoradingItem";
 import Paginator from "./atoms/Paginator";
-import Header from './molecules/Header';
-import Carditem from './molecules/CardItem';
+import Header from "./molecules/Header";
+import Carditem from "./molecules/CardItem";
 import InfoItem from "./molecules/InfoItem";
 import SearchBar from "./molecules/SearchBar";
 import List from "./organisms/List";
 import CustomMultiSlider from "./atoms/MultiSlider";
-import SelectedContactItem from './molecules/SelectedContactItem';
+import SelectedContactItem from "./molecules/SelectedContactItem";
 import ContactItem from "./molecules/ContactItem";
-export{
-    Button,
-    ProfileButton,
-    Card,
-    IconButton,
-    Section,
-    TransactionItem,
-    LineDivider,
-    FormInput,
-    CheckBox,
-    OnBoardingItem,
-    Paginator,
-    Header,
-    Carditem,
-    InfoItem,
-    SearchBar,
-    List,
-    CustomMultiSlider,
-    SelectedContactItem,
-    ContactItem
-}
+import PaymentMethodItem from "./molecules/PaymentMethodItem";
+export {
+  Button,
+  ProfileButton,
+  Card,
+  IconButton,
+  Section,
+  TransactionItem,
+  LineDivider,
+  FormInput,
+  CheckBox,
+  OnBoardingItem,
+  Paginator,
+  Header,
+  Carditem,
+  InfoItem,
+  SearchBar,
+  List,
+  CustomMultiSlider,
+  SelectedContactItem,
+  ContactItem,
+  PaymentMethodItem,
+};

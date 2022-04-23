@@ -48,8 +48,6 @@ const Transactions = ({route,navigation}) =>{
   }
   },[data, searchPhrase,filtersApplied]);
   
-
-     
     //callback to get data of applied filter by user and filter list 
     const filters = useCallback((appliedFilters) => {
       setFiltersApplied(appliedFilters);

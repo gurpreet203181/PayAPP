@@ -54,13 +54,13 @@ const List = (props) => {
     <SafeAreaView style={styles.list__container}>
       <View
         onStartShouldSetResponder={() => {
-          props.setClicked(false);
+          props.setClicked?.(false);
         }}
       >
-        {props.data.length != 0 ?(
+        {props.data?.length != 0 ?(
        
         <FlatList
-          data={props.data}
+          data={props?.data}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item.id}
           renderItem={({item})=> 

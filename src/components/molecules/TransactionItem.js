@@ -13,13 +13,13 @@ const TransactionItem =({item,onPress,containerStyle })=>{
               
               {/* img */}
              <View style={styles.imgContainer}>         
-              <Image source={item.profileImage} style={styles.ImgStyle}/>
+              <Image source={item?.profileImage} style={styles.ImgStyle}/>
              </View>
             
             {/* name and date */}
            <View style={styles.nameContainer}>
-               <Text style={{...FONTS.h4, color:'#273240', fontSize:13,letterSpacing:0.3}}>{item.name}</Text>
-               <Text style={{...FONTS.body5,color:COLORS.black3, opacity:0.5,letterSpacing:0.3}}>{item.date}</Text>
+               <Text style={{...FONTS.h4, color:'#273240', fontSize:13,letterSpacing:0.3}}>{item?.name}</Text>
+               <Text style={{...FONTS.body5,color:COLORS.black3, opacity:0.5,letterSpacing:0.3}}>{item?.date}</Text>
            </View>
 
            </View>
@@ -30,7 +30,7 @@ const TransactionItem =({item,onPress,containerStyle })=>{
            {
                item.type ==="output" &&
                
-               <Text style={{...FONTS.h4, color:'#273240', fontSize:13,letterSpacing:0.3}}>-{item.amount}</Text>
+               <Text style={{...FONTS.h4, color:'#273240', fontSize:13,letterSpacing:0.3}}>-{item?.amount}</Text>
                
                    
            }

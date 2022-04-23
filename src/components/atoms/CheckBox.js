@@ -5,7 +5,7 @@ import { COLORS,FONTS , SIZES,icons } from "../../constants";
 
 const CheckBox = ({value, onChange, containerStyle, CheckBoxStyle , label })=>{
     return(
-       <TouchableWithoutFeedback onPress={()=> onChange(!value)}>
+       <TouchableWithoutFeedback onPress={()=> onChange?.(!value)}>
             <View style={{flexDirection:"row",alignSelf:"center", ...containerStyle}}>
 
                 {/* CheckBox */}

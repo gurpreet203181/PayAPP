@@ -7,12 +7,11 @@ import {SimpleLineIcons} from "@expo/vector-icons";
 const SelectedContactItem = ({item,onIconPress}) =>{
     return(
         <View style={styles.container}>
-            
-            <Image source={item.profileImage} style={styles.profileImage}/>
+            <Image source={item?.profileImage} style={styles.profileImage}/>
                
                <View style={{marginRight:10}}>                 
-                <Text style={styles.name}>{item.name}</Text>
-                <Text style={styles.number}>{t('number')} - {item.phoneNumber}</Text>
+                <Text style={styles.name}>{item?.name}</Text>
+                <Text style={styles.number}>{t('number')} - {item?.phoneNumber}</Text>
                </View>
                <TouchableOpacity
                style={{height:'100%', justifyContent:"center", alignItems:"center",width:40}}
@@ -30,7 +29,7 @@ const styles = StyleSheet.create({
 
     container:{
       //  marginTop:58,
-        backgroundColor:'#F1F1F9',
+        backgroundColor:'rgba(8, 160, 247, 0.06)',
         width: 315,
         height: 80,
         borderRadius:20,

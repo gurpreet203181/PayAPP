@@ -27,21 +27,19 @@ const AddCardModel = ({isVisible,onClosePress}) =>{
 
     const [clearModel, setClearModel] = useState(false);
     
-    //using memmo to clear value of filed after closing model 
-    useMemo(() =>{
-        setCardNumber("");
-        setCardHolder("");
-        setExpiryDate("")
-        setCvv("")
  
-    },[clearModel])
-
-
    const closeModel = () =>{
-    setClearModel(!clearModel);  
-    onClosePress();
+       clearInputFiled();
+       onClosePress();
    } 
 
+   //setting input filed to "" when user go back from modal 
+   const clearInputFiled =() =>{
+    setCardNumber("");
+    setCardHolder("");
+    setExpiryDate("");
+    setCvv("");
+   }
     //render
    function renderHeader(){
     return(

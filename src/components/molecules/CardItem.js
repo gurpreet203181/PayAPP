@@ -4,7 +4,7 @@ import { View,Text,ImageBackground,StyleSheet,Image} from "react-native";
 import { FONTS, icons,SIZES,images,COLORS } from "../../constants";
 import { color } from "react-native-reanimated";
 
-const CardItem = ({item}) =>{
+const CardItem = ({item, containerStyle}) =>{
     return(  
         
         <ImageBackground source={images?.card}
@@ -14,7 +14,8 @@ const CardItem = ({item}) =>{
             marginTop:SIZES.radius,
             borderRadius:6,
             overflow: 'hidden',
-            ...styles.shadow
+            ...styles.shadow,
+            ...containerStyle
         }}>
 
 
