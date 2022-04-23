@@ -15,10 +15,10 @@ const Confirmation = ({ navigation }) => {
       />
     );
   }
-  const amount = useSelector((state) => state.transfer.amount);
-  const reciverId = useSelector((state) => state.transfer.receiverId);
-  const paymentMethod = useSelector((state) => state.transfer.paymentMethod);
-
+  const { amount, receiverId, paymentMethod } = useSelector(
+    (state) => state.transfer
+  );
+  console.log(amount + receiverId + paymentMethod);
   return (
     <View style={{ flex: 1, backgroundColor: "#EFF2F4" }}>
       {/* Header */}
@@ -37,11 +37,11 @@ const Confirmation = ({ navigation }) => {
         </View>
         <View style={styles.row}>
           <Text>{t("amount")}</Text>
-          <Text>{amount}</Text>
+          <Text>{receiverId}</Text>
         </View>
         <View style={styles.row}>
           <Text>{t("amount")}</Text>
-          <Text>{amount}</Text>
+          <Text>{paymentMethod}</Text>
         </View>
       </View>
     </View>

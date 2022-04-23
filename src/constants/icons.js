@@ -16,16 +16,16 @@ const recharge = require("../assets/icons/power-bank.png");
 const more = require("../assets/icons/menu.png");
 const addUser = require("../assets/icons/add-user.png");
 const close = require("../assets/icons/close.png");
-const email= require("../assets/icons/email.png");
-const user =  require("../assets/icons/person.png");
-const lock =  require("../assets/icons/lock.png");
-const checked= require("../assets/icons/check.png");
-const google= require("../assets/icons/google.png");
-const facebook= require("../assets/icons/facebook.png");
-const apple= require("../assets/icons/apple.png");
-const more2= require("../assets/icons/more.png");
-const option= require("../assets/icons/option.png");
-const filter= require("../assets/icons/filter.png");
+const email = require("../assets/icons/email.png");
+const user = require("../assets/icons/person.png");
+const lock = require("../assets/icons/lock.png");
+const checked = require("../assets/icons/check.png");
+const google = require("../assets/icons/google.png");
+const facebook = require("../assets/icons/facebook.png");
+const apple = require("../assets/icons/apple.png");
+const more2 = require("../assets/icons/more.png");
+const option = require("../assets/icons/option.png");
+const filter = require("../assets/icons/filter.png");
 const debit_Card = require("../assets/icons/debit-cards.png");
 const expiryDate = require("../assets/icons/twelve.png");
 const cvv = require("../assets/icons/cvv.png");
@@ -33,40 +33,39 @@ const profile = require("../assets/icons/profile.png");
 const userIcon = require("../assets/icons/profile-user.png");
 const transfer = require("../assets/icons/transfer.png");
 
-
 export default {
-    back_arrow,
-    home,
-    line_graph,
-    notification_color,
-    notification_white,
-    pie_chart,
-    right_arrow,
-    settings,
-    star,
-    send,
-    plus,
-    boy,
-    sendMoney,
-    bill,
-    recharge,
-    more,
-    addUser,
-    close,
-    email,
-    user,
-    lock,
-    checked,
-    google,
-    facebook,
-    apple,
-    more2,
-    option,
-    filter,
-    debit_Card,
-    expiryDate,
-    cvv,
-    profile,
-    userIcon,
-    transfer
-}
+  back_arrow,
+  home,
+  line_graph,
+  notification_color,
+  notification_white,
+  pie_chart,
+  right_arrow,
+  settings,
+  star,
+  send,
+  plus,
+  boy,
+  sendMoney,
+  bill,
+  recharge,
+  more,
+  addUser,
+  close,
+  email,
+  user,
+  lock,
+  checked,
+  google,
+  facebook,
+  apple,
+  more2,
+  option,
+  filter,
+  debit_Card,
+  expiryDate,
+  cvv,
+  profile,
+  userIcon,
+  transfer,
+};

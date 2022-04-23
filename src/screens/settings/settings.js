@@ -2,7 +2,7 @@
 // https://aboutreact.com/react-native-collapsible-toolbar/
 
 // import React in our code
-import React from 'react';
+import React from "react";
 
 // import all the components we are going to use
 import {
@@ -12,25 +12,25 @@ import {
   View,
   Animated,
   Text,
-} from 'react-native';
+} from "react-native";
 
 const Settings = () => {
   const dummyData = [
-    'Text',
-    'Input',
-    'Button',
-    'Card',
-    'CheckBox',
-    'Divider',
-    'Header',
-    'List Item',
-    'Pricing',
-    'Rating',
-    'Search Bar',
-    'Slider',
-    'Tile',
-    'Icon',
-    'Avatar',
+    "Text",
+    "Input",
+    "Button",
+    "Card",
+    "CheckBox",
+    "Divider",
+    "Header",
+    "List Item",
+    "Pricing",
+    "Rating",
+    "Search Bar",
+    "Slider",
+    "Tile",
+    "Icon",
+    "Avatar",
   ];
   let AnimatedHeaderValue = new Animated.Value(0);
   const Header_Maximum_Height = 150;
@@ -40,14 +40,14 @@ const Settings = () => {
 
   const animateHeaderBackgroundColor = AnimatedHeaderValue.interpolate({
     inputRange: [0, Header_Maximum_Height - Header_Minimum_Height],
-    outputRange: ['#4286F4', '#00BCD4'],
-    extrapolate: 'clamp',
+    outputRange: ["#4286F4", "#00BCD4"],
+    extrapolate: "clamp",
   });
 
   const animateHeaderHeight = AnimatedHeaderValue.interpolate({
     inputRange: [0, Header_Maximum_Height - Header_Minimum_Height],
     outputRange: [Header_Maximum_Height, Header_Minimum_Height],
-    extrapolate: 'clamp',
+    extrapolate: "clamp",
   });
 
   return (
@@ -60,7 +60,8 @@ const Settings = () => {
               height: animateHeaderHeight,
               backgroundColor: animateHeaderBackgroundColor,
             },
-          ]}>
+          ]}
+        >
           <Text style={styles.headerText}>
             React Native Collapsible Toolbar with Animation
           </Text>
@@ -71,7 +72,8 @@ const Settings = () => {
           onScroll={Animated.event(
             [{ nativeEvent: { contentOffset: { y: AnimatedHeaderValue } } }],
             { useNativeDriver: false }
-          )}>
+          )}
+        >
           {/* Put all your Component here inside the ScrollView */}
           {dummyData.map((item, index) => (
             <Text style={styles.textStyle} key={index}>
@@ -104,19 +106,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     left: 0,
     right: 0,
   },
   headerText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 18,
-    textAlign: 'center',
+    textAlign: "center",
   },
   textStyle: {
-    textAlign: 'center',
-    color: '#000',
+    textAlign: "center",
+    color: "#000",
     fontSize: 18,
     padding: 20,
   },
