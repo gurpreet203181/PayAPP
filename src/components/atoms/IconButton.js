@@ -2,7 +2,7 @@ import React from "react";
 import { TouchableOpacity, Text, Image, StyleSheet } from "react-native";
 import { FONTS, COLORS } from "../../constants";
 
-const IconButton = ({ icon, iconStyle, containerStyle, onPress }) => {
+const IconButton = ({ icon, iconStyle, containerStyle, onPress, disable }) => {
   return (
     <TouchableOpacity
       style={{
@@ -11,6 +11,7 @@ const IconButton = ({ icon, iconStyle, containerStyle, onPress }) => {
         justifyContent: "center",
         ...containerStyle,
       }}
+      disabled={disable}
       onPress={onPress}
     >
       <Image source={icon} style={{ ...style.imgStyle, ...iconStyle }} />

@@ -116,7 +116,14 @@ const en = {
   selectCardText:
     "Please, select a card you are willing to do the money transfer with or add a new card.",
 
-  //confirmation
+  //TransferConfirmation
+  amount: "Amount",
   paymentDetails: "Payment Details",
+  paymentSummary: "Payment Summary",
+  receiver: "Receiver",
+  promoCode: "Promo Code",
+  applyPromo: "Apply",
+  total: "Total",
+  swipeToSend: "Swipe To Send",
 };
 export default en;

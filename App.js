@@ -20,7 +20,7 @@ import {
   Transfer,
   PaymentMethod,
   SelectCard,
-  Confirmation,
+  TransferConfirmation,
 } from "./src/screens/index";
 import AppLoading from "expo-app-loading";
 import { useState } from "react";
@@ -196,8 +196,8 @@ export default function App() {
               }}
             />
             <Stack.Screen
-              name="Confirmation"
-              component={Confirmation}
+              name="TransferConfirmation"
+              component={TransferConfirmation}
               screenOptions={{
                 headerShown: false,
               }}

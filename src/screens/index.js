@@ -18,7 +18,7 @@ import Transfer from "./transfer/Transfer";
 import AddCard from "./addCard/AddCard";
 import PaymentMethod from "./CommonScreens/paymentMethod/PaymentMethod";
 import SelectCard from "./CommonScreens/selectCard/SelectCard";
-import Confirmation from "./CommonScreens/confirmation/Confirmation";
+import TransferConfirmation from "./transfer/TransferConfirmation";
 export {
   //Common screens
   CardDetail,
@@ -26,7 +26,6 @@ export {
   Transactions,
   PaymentSuccess,
   SelectCard,
-  Confirmation,
   //Home
   Home,
   Settings,
@@ -48,4 +47,5 @@ export {
   TransferDashboard,
   Transfer,
   PaymentMethod,
+  TransferConfirmation,
 };

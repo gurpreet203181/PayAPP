@@ -9,6 +9,8 @@ const send = require("../assets/images/send.jpg");
 const ellipse = require("../assets/images/ellipse.jpg");
 const card = require("../assets/images/card.png");
 const card2 = require("../assets/images/card2.png");
+const successfulLottie = require("../assets/images/successful.json");
+const successfulLottie2 = require("../assets/images/68590-safe-money-transfer.json");
 
 export default {
   WelcomeShape,
@@ -21,4 +23,6 @@ export default {
   ellipse,
   card,
   card2,
+  successfulLottie,
+  successfulLottie2,
 };

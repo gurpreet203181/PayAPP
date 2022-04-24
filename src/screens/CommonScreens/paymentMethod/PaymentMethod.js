@@ -52,7 +52,9 @@ const PaymentMethod = ({ navigation }) => {
             label={t("myCards")}
             icon={icons.userIcon}
             iconContainerStyle={{ backgroundColor: "#12CDD9" }}
-            detail={"**** **** **** " + selectedCard}
+            detail={
+              selectedMethod == "card" ? "**** **** **** " + selectedCard : null
+            }
             isSelected={selectedMethod == "card" ? true : false}
             onPress={() => {
               setSelectedMethod("card");
@@ -83,7 +85,7 @@ const PaymentMethod = ({ navigation }) => {
               ? selectedCard
               : selectedMethod;
           dispatch(setPaymentMethod(value));
-          navigation.navigate("Confirmation");
+          navigation.navigate("TransferConfirmation");
         }}
       />
     </View>

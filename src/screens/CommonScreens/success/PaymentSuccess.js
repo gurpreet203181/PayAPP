@@ -1,23 +1,34 @@
 import React from "react";
 import { t } from "../../../hooks/UseI18n";
-import { View, Text, StyleSheet } from "react-native";
-import { COLORS, FONTS, Fonts, icons, SIZES } from "../../../constants";
-import { Button, Header } from "../../../components";
+import { View, Text, StyleSheet, BackHandler } from "react-native";
+import { COLORS, FONTS, SIZES } from "../../../constants";
+import { Button } from "../../../components";
 import LottieView from "lottie-react-native";
 
-const PaymentSuccess = ({ navigation }) => {
-  //render
+const PaymentSuccess = ({ route, navigation }) => {
+  const lottie = route.params?.lottie;
+  const defaultLottie = require("../../../assets/images/successful.json");
+  React.useEffect(() => {
+    //backhandler to disable back button on device so user can't go back from  success screen
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      () => {
+        return true;
+      }
+    );
 
+    return () => backHandler.remove();
+  }, []);
   function renderLottieNfc() {
     return (
       <LottieView
-        source={require("../../../assets/images/successful.json")}
+        source={lottie ? lottie : defaultLottie}
         autoPlay
         loop={false}
         //  speed={2}
         style={{
           width: "100%",
-          height: 210,
+          height: lottie ? null : 210,
           alignSelf: "center",
         }}
       />
@@ -52,7 +63,7 @@ const PaymentSuccess = ({ navigation }) => {
           label={t("procced")}
           containerStyle={styles.buttonContainer}
           labelStyle={styles.buttonLabel}
-          onPress={() => navigation.goBack()}
+          onPress={() => navigation.popToTop()}
         />
       </View>
     </View>
