@@ -32,6 +32,8 @@ const cvv = require("../assets/icons/cvv.png");
 const profile = require("../assets/icons/profile.png");
 const userIcon = require("../assets/icons/profile-user.png");
 const transfer = require("../assets/icons/transfer.png");
+const topUp = require("../assets/icons/top-up.png");
+const down_arrow = require("../assets/icons/down_arrow.png");
 
 export default {
   back_arrow,
@@ -68,4 +70,6 @@ export default {
   profile,
   userIcon,
   transfer,
+  topUp,
+  down_arrow,
 };

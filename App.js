@@ -20,7 +20,12 @@ import {
   Transfer,
   PaymentMethod,
   SelectCard,
+  More,
   TransferConfirmation,
+  TopUp,
+  TopUpConfirmation,
+  WithDraw,
+  WithdrawConfirmation,
 } from "./src/screens/index";
 import AppLoading from "expo-app-loading";
 import { useState } from "react";
@@ -81,10 +86,10 @@ export default function App() {
               headerShown: false,
             }}
             //checking if user as viewed onBoarding if not  initialRoute will OnBoarding
-            initialRouteName={viewedOnboarding ? "Home" : "OnBoarding"}
+            initialRouteName={viewedOnboarding ? "Tabs" : "OnBoarding"}
           >
             <Stack.Screen
-              name="Home"
+              name="Tabs"
               component={Tabs}
               screenOptions={{
                 headerShown: false,
@@ -198,6 +203,43 @@ export default function App() {
             <Stack.Screen
               name="TransferConfirmation"
               component={TransferConfirmation}
+              screenOptions={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="more"
+              component={More}
+              screenOptions={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="TopUp"
+              component={TopUp}
+              screenOptions={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="TopUpConfirmation"
+              component={TopUpConfirmation}
+              screenOptions={{
+                headerShown: false,
+              }}
+            />
+
+            <Stack.Screen
+              name="WithDraw"
+              component={WithDraw}
+              screenOptions={{
+                headerShown: false,
+              }}
+            />
+
+            <Stack.Screen
+              name="withdrawConfirmation"
+              component={WithdrawConfirmation}
               screenOptions={{
                 headerShown: false,
               }}

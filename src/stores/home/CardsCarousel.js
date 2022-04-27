@@ -60,6 +60,7 @@ const CardsCarousel = ({
           });
           return (
             <TouchableOpacity
+              key={index}
               activeOpacity={0.8}
               style={{
                 width: ITEM_WIDTH,
@@ -71,12 +72,7 @@ const CardsCarousel = ({
               }}
               onPress={() => navigation.navigate("CardDetail", { item })}
             >
-              <SharedElement
-                id={`item.${item.key}.photo`}
-                style={[StyleSheet.absoluteFillObject]}
-              >
-                <Carditem item={item} />
-              </SharedElement>
+              <Carditem item={item} />
             </TouchableOpacity>
           );
         }}

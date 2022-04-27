@@ -8,6 +8,7 @@ const TransactionItem = ({ item, onPress, containerStyle }) => {
     <TouchableOpacity
       style={{ ...styles.Container, ...containerStyle }}
       onPress={onPress}
+      key={item.key}
     >
       {/* Image , name and date */}
       <View style={{ flexDirection: "row", alignItems: "center" }}>

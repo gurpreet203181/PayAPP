@@ -16,15 +16,22 @@ import {
   dummyData,
   images,
 } from "../../constants";
-import { Header, IconButton, ProfileButton } from "../../components";
+import {
+  Header,
+  IconButton,
+  ProfileButton,
+  CustomSwipeButton,
+} from "@components";
 import { useSelector } from "react-redux";
 import Dash from "react-native-dash";
 import { AntDesign } from "@expo/vector-icons";
-import SwipeButton from "rn-swipe-button";
 const TransferConfirmation = ({ navigation }) => {
-  const { amount, receiverId, paymentMethod } = useSelector(
-    (state) => state.transfer
+  const { amount, receiverId } = useSelector((state) => state.transfer); //getting deatil from transfer reduxer about ammount and id
+  //getting selected payment method detail from paymentMethodSlice which selected on paymentMethod screen
+  const paymentMethodDetail = useSelector(
+    (state) => state.paymentMethod.paymentMethodDetail
   );
+
   const [promoCode, setPromeCode] = useState();
   const [showDetail, setShowDetial] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -34,15 +41,6 @@ const TransferConfirmation = ({ navigation }) => {
   };
   const closeModel = () => {
     setShowModal(false);
-  };
-  //swipe thumb icon component
-  const swipeButton = () => {
-    return (
-      <Image
-        source={icons.right_arrow}
-        style={{ width: 20, height: 20, tintColor: COLORS.purple }}
-      />
-    );
   };
 
   //render
@@ -79,7 +77,7 @@ const TransferConfirmation = ({ navigation }) => {
         {/* payment Method */}
         <View style={styles.row}>
           <Text style={styles.rowText}>{t("paymentMethod")}</Text>
-          <Text style={styles.rowText2}>{paymentMethod}</Text>
+          <Text style={styles.rowText2}>{paymentMethodDetail.name}</Text>
         </View>
       </View>
     );
@@ -179,7 +177,7 @@ const TransferConfirmation = ({ navigation }) => {
           iconStyle={{ ...styles.IconButtonIcon }}
         />
 
-        <Text style={styles.title}>{t("Transfer Details")}</Text>
+        <Text style={styles.title}>{t("transferDetails")}</Text>
         <TouchableOpacity
           style={{
             justifyContent: "center",
@@ -233,27 +231,13 @@ const TransferConfirmation = ({ navigation }) => {
           bottom: 50,
         }}
       >
-        <SwipeButton
-          disabled={false}
-          swipeSuccessThreshold={100}
-          height={64}
-          width={315}
+        <CustomSwipeButton
           title={t("swipeToSend")}
-          titleColor="white"
-          titleFontSize={15}
-          shouldResetAfterSuccess={false}
           onSwipeSuccess={() => {
             navigation.replace("PaymentSuccess", {
               lottie: images.successfulLottie2,
             });
           }}
-          railBackgroundColor={COLORS.purple}
-          railBorderColor={COLORS.purple}
-          railFillBackgroundColor={"rgba(0,0,128, 0.3)"}
-          railFillBorderColor={"rgba(0,0,128, 0.3)"}
-          thumbIconBackgroundColor={COLORS.white}
-          thumbIconBorderColor={COLORS.purple}
-          thumbIconComponent={swipeButton}
         />
       </View>
     </View>

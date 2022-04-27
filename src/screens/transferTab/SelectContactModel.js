@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { t } from "../../hooks/UseI18n";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, ScrollView } from "react-native";
 import { COLORS, icons, SIZES, dummyData } from "../../constants";
 import {
   Header,
@@ -10,9 +10,8 @@ import {
   List,
 } from "../../components";
 import Modal from "react-native-modal";
-import { ScrollView } from "react-native-gesture-handler";
 import { useDispatch } from "react-redux";
-import { setSelectedContact } from "../../redux/reducers/selectedContactSlice";
+import { setSelectedContact } from "../../redux/reducers/contactSlice";
 
 const SelectContactModel = ({ isVisible, closeModel }) => {
   const dispatch = useDispatch(); //redux dispatch to set selectedcontact
@@ -125,7 +124,7 @@ const SelectContactModel = ({ isVisible, closeModel }) => {
               showsVerticalScrollIndicator={false}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
-                <View>
+                <View key={item.key}>
                   <ContactItem
                     item={item}
                     //isSelected={(selectedContact?.key == 'allContacts' && selectedContact?.id== item.id)}

@@ -11,8 +11,7 @@ import { Header, Carditem } from "../../../components";
 import { t } from "../../../hooks/UseI18n";
 import { Feather } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
-import { setSelectCard } from "../../../redux/reducers/selectedCardSlice";
-
+import { setIdNumber } from "@redux/reducers/paymentMethodSlice";
 /*Summray
 All user card will render in flatlist 
 and then user can select a card and  ID of selected card will be saved in selectedCardSlice reducer 
@@ -20,6 +19,7 @@ Then screen while navigate to back
 */
 const SelectCard = ({ navigation }) => {
   const dispatch = useDispatch();
+
   //render
   function renderHeader() {
     return (
@@ -63,10 +63,10 @@ const SelectCard = ({ navigation }) => {
               <TouchableOpacity
                 style={{ marginBottom: 10 }}
                 onPress={() =>
-                  //setting select card id to selectedcardSlice so other slice can take from it
+                  //setting select card id to paymentMethod idnumber  state so other slice can take from it
                   //reason for this is to get this screen as common screen which is used by ither screens
                   {
-                    dispatch(setSelectCard(item.id));
+                    dispatch(setIdNumber(item.id));
                     navigation.goBack();
                   }
                 }

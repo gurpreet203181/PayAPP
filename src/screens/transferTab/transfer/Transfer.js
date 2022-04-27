@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { t } from "../../hooks/UseI18n";
+import React, { useState } from "react";
+import { t } from "../../../hooks/UseI18n";
 import { View, Text, StyleSheet } from "react-native";
-import { FONTS, COLORS, icons, SIZES, dummyData } from "../../constants";
-import { Button, Header, SelectedContactItem } from "../../components";
-import SelectContactModel from "./SelectContactModel";
+import { FONTS, COLORS, icons, SIZES, dummyData } from "../../../constants";
+import { Button, Header, SelectedConatctItem } from "../../../components";
+import SelectContactModel from "../SelectContactModel";
 import VirtualKeyboard from "react-native-virtual-keyboard";
-import { setTransferDetails } from "../../redux/reducers/transferSlice";
+import { setTransferDetails } from "../../../redux/reducers/transferSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Transfer = ({ navigation }) => {
@@ -35,7 +35,7 @@ const Transfer = ({ navigation }) => {
     return (
       <View style={{ marginTop: 58 }}>
         {selectedContact && (
-          <SelectedContactItem
+          <SelectedConatctItem
             item={selectedContact}
             onIconPress={toggleModal}
           />
@@ -43,7 +43,7 @@ const Transfer = ({ navigation }) => {
       </View>
     );
   }
-  function renderKeyboard() {
+  function renderKeyboard_Text() {
     return (
       <View style={styles.keyboard}>
         <Text numberOfLines={1} adjustsFontSizeToFit style={styles.amount}>
@@ -73,7 +73,7 @@ const Transfer = ({ navigation }) => {
       {renderContact()}
 
       {/* render virtual keyboard  and text  */}
-      {renderKeyboard()}
+      {renderKeyboard_Text()}
 
       {/* continue button */}
       <View>
@@ -83,7 +83,11 @@ const Transfer = ({ navigation }) => {
           labelStyle={styles.continueButtonLabel}
           onPress={() => {
             dispatch(setTransferDetails({ amount, selectedContact }));
-            navigation.navigate("PaymentMethod");
+
+            //navigation to paymentMethod screen with nextscreen name as prop
+            navigation.navigate("PaymentMethod", {
+              nextScreen: "TransferConfirmation",
+            });
           }}
         />
 

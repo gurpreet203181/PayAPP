@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   amount: 0,
   receiverId: null,
-  paymentMethod: null,
+  // paymentMethod: null,
 };
 
 export const transferSlice = createSlice({
@@ -14,9 +14,6 @@ export const transferSlice = createSlice({
       state.amount = action.payload.amount;
       state.receiverId = action.payload.selectedContact.id;
       // state.paymentMethod = action.payload.paymentMethod
-    },
-    setPaymentMethod: (state, action) => {
-      state.paymentMethod = action.payload;
     },
   },
 });

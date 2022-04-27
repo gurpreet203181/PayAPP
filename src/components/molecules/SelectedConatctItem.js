@@ -4,7 +4,7 @@ import { COLORS, FONTS, icons, SIZES } from "../../constants";
 import { t } from "../../hooks/UseI18n";
 import { SimpleLineIcons } from "@expo/vector-icons";
 
-const SelectedContactItem = ({ item, onIconPress }) => {
+const SelectedConatctItem = ({ item, onIconPress }) => {
   return (
     <View style={styles.container}>
       <Image source={item?.profileImage} style={styles.profileImage} />
@@ -30,7 +30,7 @@ const SelectedContactItem = ({ item, onIconPress }) => {
   );
 };
 
-export default SelectedContactItem;
+export default SelectedConatctItem;
 
 const styles = StyleSheet.create({
   container: {

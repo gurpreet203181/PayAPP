@@ -112,18 +112,19 @@ const TransferDashboard = ({ navigation }) => {
           <Text style={styles.IconButtonText}>{t("transfer")}</Text>
         </View>
 
-        {/* Link */}
+        {/* Top UP */}
         <View style={styles.IconButtonView}>
           <IconButton
             containerStyle={{
               ...styles.IconButtonContainer,
               backgroundColor: "#B548C6",
             }}
-            icon={icons.transfer}
+            icon={icons.topUp}
             iconStyle={{ ...styles.IconButtonIcon }}
+            onPress={() => navigation.navigate("TopUp")}
           />
 
-          <Text style={styles.IconButtonText}>{t("link")}</Text>
+          <Text style={styles.IconButtonText}>{t("topUp")}</Text>
         </View>
 
         {/* Bill */}
@@ -149,6 +150,7 @@ const TransferDashboard = ({ navigation }) => {
             }}
             icon={icons.more}
             iconStyle={{ ...styles.IconButtonIcon }}
+            onPress={() => navigation.navigate("more")}
           />
 
           <Text style={styles.IconButtonText}>{t("more")}</Text>

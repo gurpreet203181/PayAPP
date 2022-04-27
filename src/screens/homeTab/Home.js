@@ -58,7 +58,7 @@ const Home = ({ navigation }) => {
             width: 27,
             height: 27,
           }}
-          iconStyle={{ with: 19, height: 20 }}
+          iconStyle={{ width: 19, height: 20 }}
         />
       </View>
     );

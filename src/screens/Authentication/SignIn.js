@@ -2,7 +2,7 @@ import React from "react";
 import { t } from "../../hooks/UseI18n";
 import { View, SafeAreaView, Image, Text, StyleSheet } from "react-native";
 import { FormInput, Button, LineDivider, CheckBox } from "../../components";
-import { AuthLayout } from "..";
+import AuthLayout from "./AuthLayout";
 import { COLORS, FONTS, dummyData, SIZES, icons } from "../../constants";
 import { utils } from "../../utils";
 

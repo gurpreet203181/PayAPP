@@ -15,9 +15,12 @@ import InfoItem from "./molecules/InfoItem";
 import SearchBar from "./molecules/SearchBar";
 import List from "./organisms/List";
 import CustomMultiSlider from "./atoms/MultiSlider";
-import SelectedContactItem from "./molecules/SelectedContactItem";
+import SelectedConatctItem from "./molecules/SelectedConatctItem";
 import ContactItem from "./molecules/ContactItem";
 import PaymentMethodItem from "./molecules/PaymentMethodItem";
+import MoreItem from "./molecules/moreItem";
+import CustomSwipeButton from "./atoms/CustomSwipeButton";
+import SelectedBankItem from "./molecules/selectBankItem";
 export {
   Button,
   ProfileButton,
@@ -36,7 +39,10 @@ export {
   SearchBar,
   List,
   CustomMultiSlider,
-  SelectedContactItem,
+  SelectedConatctItem,
   ContactItem,
   PaymentMethodItem,
+  MoreItem,
+  CustomSwipeButton,
+  SelectedBankItem,
 };

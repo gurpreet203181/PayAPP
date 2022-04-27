@@ -2,7 +2,8 @@ import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { COLORS, FONTS, icons, SIZES } from "../../constants";
 
-import { LineDivider } from "../../components";
+import LineDivider from "../../components/atoms/LineDivider";
+
 const InfoItem = ({ icon, label, value }) => {
   return (
     <View style={{ marginTop: 32 }}>

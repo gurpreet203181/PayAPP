@@ -30,7 +30,8 @@ const Header = ({
           adjustsFontSizeToFit
           numberOfLines={1}
           style={{
-            ...FONTS.h3,
+            ...FONTS.h4,
+            fontSize: 18,
             letterSpacing: 0.3,
             color: COLORS.black2,
             ...titleStyle,

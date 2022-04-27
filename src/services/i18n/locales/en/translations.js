@@ -125,5 +125,36 @@ const en = {
   applyPromo: "Apply",
   total: "Total",
   swipeToSend: "Swipe To Send",
+  transferDetails: "Transfer Details",
+
+  //more
+  menu: "Menu",
+  shortcuts: "Shortcuts",
+  topupWallet: "Top up Wallet",
+  billPayment: "Bill Payment",
+  withdraw: "Withdraw",
+  otherMenu: "Other Menu",
+  historyTransactions: "History Transactions",
+  requestPayment: "Request Payment",
+  settings: "Settings",
+  help: "Help",
+
+  //top up
+  topUp: "Top Up",
+  enterAmount: "Enter amount:",
+  topUpFee: "Top up fee",
+  confirmTopUp: "Confirm Top Up",
+  total: "TOTAL",
+  fee: "Fee",
+  topUpDetail: "TopUp Details",
+
+  //withdraw
+  withdraw: "Withdraw",
+  maxAmount: "Maximum",
+  selectBank: "Select your bank",
+  addBank: "Add new bank",
+  confirm: "Confirm",
+  withdrawDetails: "Withdraw Detail",
+  confirmWithdraw: "Confirm Withdraw",
 };
 export default en;

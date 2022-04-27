@@ -2,7 +2,7 @@ import React from "react";
 import { View, Image, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { Home, Settings, User, TransferDashboard } from "../screens";
+import { Home, Activity, User, TransferDashboard } from "../screens";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -15,12 +15,9 @@ const Tabs = ({ navigation }) => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarStyle: [{ ...styles.tabBarStyle }, null],
-      }}
-      tabBarOptions={{
-        showLabel: false,
+
+        tabBarStyle: [{ ...styles.tabBarStyle, display: "flex" }, null],
         tabBarShowLabel: false,
-        tabBarStyle: [{ display: "flex" }, null],
       }}
     >
       <Tab.Screen
@@ -91,7 +88,7 @@ const Tabs = ({ navigation }) => {
 
       <Tab.Screen
         name="Activity"
-        component={Settings}
+        component={Activity}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ ...styles.tabIconContainer }}>

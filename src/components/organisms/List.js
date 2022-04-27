@@ -1,7 +1,7 @@
 import React from "react";
 import { t } from "../../hooks/UseI18n";
 import { StyleSheet, Text, View, FlatList, SafeAreaView } from "react-native";
-import { TransactionItem } from "../../components";
+import TransactionItem from "../../components/molecules/TransactionItem";
 import { useNavigation } from "@react-navigation/native";
 import LottieView from "lottie-react-native";
 import { FONTS } from "../../constants";

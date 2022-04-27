@@ -3,7 +3,7 @@ import { t } from "../../hooks/UseI18n";
 import { View, SafeAreaView, Image, Text, StyleSheet } from "react-native";
 import { COLORS, FONTS, dummyData, SIZES } from "../../constants";
 import { Button } from "../../components";
-import { AuthLayout } from "..";
+import AuthLayout from "./AuthLayout";
 import { utils } from "../../utils";
 import OTPInputView from "@twotalltotems/react-native-otp-input";
 

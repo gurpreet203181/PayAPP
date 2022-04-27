@@ -1,12 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import transferSlice from "./reducers/transferSlice";
-import selectedContactSlice from "./reducers/selectedContactSlice";
-import selectedCardSlice from "./reducers/selectedCardSlice";
-
+import contactSlice from "./reducers/contactSlice";
+import paymentMethodSlice from "./reducers/paymentMethodSlice";
+import topUpSlice from "./reducers/topUpSlice";
+import withdrawSlice from "./reducers/withdrawSlice";
 export const store = configureStore({
   reducer: {
     transfer: transferSlice,
-    selectedContact: selectedContactSlice,
-    selectedCard: selectedCardSlice,
+    selectedContact: contactSlice,
+    paymentMethod: paymentMethodSlice,
+    topUp: topUpSlice,
+    withdraw: withdrawSlice,
   },
 });

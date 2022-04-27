@@ -63,7 +63,7 @@ const PaymentSuccess = ({ route, navigation }) => {
           label={t("procced")}
           containerStyle={styles.buttonContainer}
           labelStyle={styles.buttonLabel}
-          onPress={() => navigation.popToTop()}
+          onPress={() => navigation.navigate("Tabs")}
         />
       </View>
     </View>
