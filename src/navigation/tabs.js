@@ -2,7 +2,7 @@ import React from "react";
 import { View, Image, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { Home, Activity, User, TransferDashboard } from "../screens";
+import { Home, Activity, Profile, TransferDashboard } from "../screens";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -111,7 +111,7 @@ const Tabs = ({ navigation }) => {
       />
       <Tab.Screen
         name="Profile"
-        component={User}
+        component={Profile}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ ...styles.tabIconContainer }}>

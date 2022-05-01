@@ -19,6 +19,7 @@ export const COLORS = {
   blue: "#0064C0",
   blue2: "#72c1f2",
 
+  darkBlue3: "#1D3A70",
   darkBlue2: "#2C2C63",
   darkBlue: "#111A2C",
   darkGray: "#92908e",
@@ -33,8 +34,10 @@ export const COLORS = {
 
   lightGray1: "#DDDDDD",
   lightGray2: "#F5F5F8",
+  lightGray3: "#6B7280",
   white2: "#FBFBFB",
   white: "#FFFFFF",
+  white3: "#F9FAFB",
   black: "#000000",
   black3: "#363636",
 

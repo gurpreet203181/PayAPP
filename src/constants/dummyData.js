@@ -1,6 +1,6 @@
 const myProfile = {
-  name: "Gurpreet",
-  profile_image: require("../assets/dummyData/boy.png"),
+  name: "Gurpreet Singh",
+  profileImage: require("../assets/dummyData/boy.png"),
   totalBalance: "29092",
   Cards: [1, 2, 3],
 };
@@ -296,6 +296,8 @@ const paymentMethod = [
     ...Banks,
   },
 ];
+
+const notification = [];
 export default {
   myProfile,
   Cards,
@@ -304,4 +306,5 @@ export default {
   contacts,
   RecentContact,
   paymentMethod,
+  notification,
 };

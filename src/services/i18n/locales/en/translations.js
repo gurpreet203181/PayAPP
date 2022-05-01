@@ -2,7 +2,7 @@ const en = {
   //App general
   appName: "PayApp",
   //Home
-  welcome: "Welcome Back",
+  welcome: "Welcome Back!",
   hello: "Hello",
   yourBalance: "Total Balance",
   send: "Send",
@@ -156,5 +156,30 @@ const en = {
   confirm: "Confirm",
   withdrawDetails: "Withdraw Detail",
   confirmWithdraw: "Confirm Withdraw",
+  //activity tab
+
+  activity: "Activity",
+  totalSpending: "Total Spending",
+  income: "Income",
+  expense: "Expense",
+  categories: "Categories",
+  investments: "Investments",
+  //profile tab
+  profile: "Profile",
+  referralCode: "Referral Code",
+  accountInfo: "Account Info",
+  contactList: "Contact List",
+  language: "Language",
+  generalSetting: "General Setting",
+  changePassword: "Change Password",
+  changePin: "Change Log In PIN",
+  FAQs: "FAQs",
+  rateUs: "Rate Us",
+  //notification
+  notification: "Notification",
+  today: "Today",
+  older: "Older",
+  noNotification: "No notifications yet! ",
+  noNotificationText: "we'll notify you when something arrives!",
 };
 export default en;

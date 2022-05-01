@@ -26,6 +26,7 @@ import {
   TopUpConfirmation,
   WithDraw,
   WithdrawConfirmation,
+  Notification,
 } from "./src/screens/index";
 import AppLoading from "expo-app-loading";
 import { useState } from "react";
@@ -240,6 +241,14 @@ export default function App() {
             <Stack.Screen
               name="withdrawConfirmation"
               component={WithdrawConfirmation}
+              screenOptions={{
+                headerShown: false,
+              }}
+            />
+
+            <Stack.Screen
+              name="Notification"
+              component={Notification}
               screenOptions={{
                 headerShown: false,
               }}

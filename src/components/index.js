@@ -21,6 +21,8 @@ import PaymentMethodItem from "./molecules/PaymentMethodItem";
 import MoreItem from "./molecules/moreItem";
 import CustomSwipeButton from "./atoms/CustomSwipeButton";
 import SelectedBankItem from "./molecules/selectBankItem";
+import CategorieItem from "./molecules/categorieItem";
+import NotificationItem from "./molecules/notificationItem";
 export {
   Button,
   ProfileButton,
@@ -45,4 +47,6 @@ export {
   MoreItem,
   CustomSwipeButton,
   SelectedBankItem,
+  CategorieItem,
+  NotificationItem,
 };

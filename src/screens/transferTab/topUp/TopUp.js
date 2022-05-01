@@ -26,7 +26,7 @@ const TopUp = ({ navigation }) => {
   function renderHeader() {
     return (
       <Header
-        title={t("Top UP")}
+        title={t("topUp")}
         leftIcon={icons.back_arrow}
         onLeftIconPress={() => navigation.goBack()}
       />

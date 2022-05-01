@@ -1,6 +1,5 @@
 import Home from "./homeTab/Home";
 import Home2 from "./homeTab/Home2";
-import User from "./user/user";
 import SignIn from "./authentication/SignIn";
 import SignUp from "./authentication/SignUp";
 import ForgotPassword from "./authentication/ForgotPassword";
@@ -23,6 +22,8 @@ import TopUpConfirmation from "./transferTab/topUp/TopUpConfirmation";
 import WithDraw from "./transferTab/withdraw/Withdraw";
 import WithdrawConfirmation from "./transferTab/withdraw/withdrawConfirmation";
 import Activity from "./activityTab/activity";
+import Profile from "./profileTab/profile";
+import Notification from "./CommonScreens/notification/notification";
 export {
   //Common screens
   CardDetail,
@@ -35,8 +36,8 @@ export {
   //activityTab
 
   Activity,
-  //User
-  User,
+  //Profile
+  Profile,
   //OnBoarding
   OnBoarding,
   //Authentication
@@ -61,4 +62,6 @@ export {
   //Withdraw
   WithDraw,
   WithdrawConfirmation,
+  //notification
+  Notification,
 };

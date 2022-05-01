@@ -1,22 +1,15 @@
 import React from "react";
-import { t } from "../../hooks/UseI18n";
+import { t } from "@hooks/UseI18n";
 import {
   View,
   Text,
   Image,
   StyleSheet,
   FlatList,
-  ScrollView,
+  TouchableOpacity,
 } from "react-native";
 
-import {
-  COLORS,
-  FONTS,
-  icons,
-  images,
-  SIZES,
-  dummyData,
-} from "../../constants";
+import { COLORS, FONTS, icons, SIZES, dummyData } from "../../constants";
 import { ProfileButton, Section, TransactionItem } from "../../components";
 import { CardsCarousel } from "../../stores";
 
@@ -29,37 +22,26 @@ const Home = ({ navigation }) => {
           justifyContent: "space-between",
           alignItems: "center",
           ...SIZES.marginHorizontal,
+          marginTop: 13,
         }}
       >
-        {/* Heloo && name */}
-        <View style={{ marginTop: SIZES.padding }}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={{ color: COLORS.black3, ...FONTS.h2 }}>
-              {t("hello")}
-            </Text>
-            <Image
-              source={icons.star}
-              style={{ height: 24, width: 24, marginLeft: 5 }}
-            />
-          </View>
-          <Text
-            adjustsFontSizeToFit
-            numberOfLines={1}
-            style={{ ...FONTS.body3, fontSize: 14 }}
-          >
-            {dummyData.myProfile.name}
-          </Text>
+        {/* Hello & name */}
+        <View>
+          <Text style={styles.welcomeText}>{t("welcome")}</Text>
+          {/* Name */}
+          <Text style={styles.nameText}>{dummyData.myProfile.name}</Text>
         </View>
-        {/* Profile */}
-        <ProfileButton
-          icon={dummyData.myProfile.profile_image}
-          containerStyle={{
-            backgroundColor: COLORS.primary,
-            width: 27,
-            height: 27,
-          }}
-          iconStyle={{ width: 19, height: 20 }}
-        />
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Notification")}
+          style={styles.notificationContainer}
+        >
+          {/* dot */}
+          <View style={styles.notificationDot} />
+          <Image
+            source={icons.bell}
+            style={{ width: 24, height: 24, tintColor: "#1D2734" }}
+          />
+        </TouchableOpacity>
       </View>
     );
   }
@@ -144,5 +126,33 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.white,
+  },
+  notificationContainer: {
+    width: 48,
+    height: 48,
+    backgroundColor: "#F9FAFB",
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  notificationDot: {
+    backgroundColor: "#1D3A70",
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    position: "absolute",
+    top: 13,
+    right: 13,
+  },
+  welcomeText: {
+    ...FONTS.body2,
+    color: COLORS.lightGray3,
+    fontSize: 12,
+  },
+  nameText: {
+    ...FONTS.h5,
+    fontSize: 20,
+    color: COLORS.darkBlue3,
+    marginTop: 4,
   },
 });

@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import { FONTS, COLORS, icons, SIZES } from "@constants";
 import IconButton from "../atoms/IconButton";
 
-const MoreItem = ({ icon, title, iconStyle, onPress }) => {
+const MoreItem = ({ icon, title, iconStyle, onPress, containerStyle }) => {
   return (
     <TouchableOpacity
       style={{
@@ -14,6 +14,7 @@ const MoreItem = ({ icon, title, iconStyle, onPress }) => {
         //  width: "100%",
         marginTop: 8,
         ...SIZES.marginHorizontal,
+        ...containerStyle,
       }}
       onPress={onPress}
     >
@@ -45,7 +46,10 @@ const MoreItem = ({ icon, title, iconStyle, onPress }) => {
           {title}
         </Text>
       </View>
-      <Image source={icons.right_arrow} style={{ width: 16, height: 16 }} />
+      <Image
+        source={icons.right_arrow}
+        style={{ tintColor: "#6B7280", width: 16, height: 16 }}
+      />
     </TouchableOpacity>
   );
 };

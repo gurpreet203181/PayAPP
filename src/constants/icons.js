@@ -34,6 +34,9 @@ const userIcon = require("../assets/icons/profile-user.png");
 const transfer = require("../assets/icons/transfer.png");
 const topUp = require("../assets/icons/top-up.png");
 const down_arrow = require("../assets/icons/down_arrow.png");
+const bell = require("../assets/icons/bell.png");
+const seen = require("../assets/icons/seen.png");
+const left_arrow = require("../assets/icons/left-arrow.png");
 
 export default {
   back_arrow,
@@ -72,4 +75,7 @@ export default {
   transfer,
   topUp,
   down_arrow,
+  bell,
+  seen,
+  left_arrow,
 };

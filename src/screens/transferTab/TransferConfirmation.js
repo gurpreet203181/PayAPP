@@ -108,7 +108,7 @@ const TransferConfirmation = ({ navigation }) => {
           />
 
           <ProfileButton
-            icon={dummyData.myProfile.profile_image}
+            icon={dummyData.myProfile.profileImage}
             containerStyle={{
               backgroundColor: COLORS.primary,
               marginHorizontal: 20,

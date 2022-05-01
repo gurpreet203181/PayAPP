@@ -99,7 +99,7 @@ const SignIn = ({ navigation }) => {
             label={t("signIn")}
             labelStyle={{ ...Styles.SignInText }}
             containerStyle={{ ...Styles.SignInButton, ...Styles.shadow }}
-            onPress={() => navigation.navigate("Home")}
+            onPress={() => navigation.navigate("Tabs")}
           />
         </View>
       }
