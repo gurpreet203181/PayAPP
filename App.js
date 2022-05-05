@@ -27,6 +27,9 @@ import {
   WithDraw,
   WithdrawConfirmation,
   Notification,
+  ContactsList,
+  AccountInfo,
+  ContactUs,
 } from "./src/screens/index";
 import AppLoading from "expo-app-loading";
 import { useState } from "react";
@@ -249,6 +252,27 @@ export default function App() {
             <Stack.Screen
               name="Notification"
               component={Notification}
+              screenOptions={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="ContactsList"
+              component={ContactsList}
+              screenOptions={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="AccountInfo"
+              component={AccountInfo}
+              screenOptions={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="ContactUs"
+              component={ContactUs}
               screenOptions={{
                 headerShown: false,
               }}

@@ -19,7 +19,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import LottieView from "lottie-react-native";
 
 const CardDetail = ({ route, navigation }) => {
-  const item = route.params.item;
+  const item = route.params?.item;
   const animation = React.useRef(null);
 
   React.useEffect(() => {

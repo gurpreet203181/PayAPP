@@ -3,12 +3,21 @@ import { t } from "@hooks/UseI18n";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import { COLORS, icons, SIZES, dummyData, FONTS } from "@constants";
 import { Header, MoreItem, LineDivider } from "@components";
+import LogoutModal from "./logout/logoutModal";
+import { Modal } from "react-native-web";
 const Profile = ({ navigation }) => {
+  const [isModalVisible, setModalVisible] = useState(false);
   const [data, setData] = useState();
 
   useEffect(() => {
     setData(dummyData.myProfile);
   }, []);
+
+  //Model show and close function
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
   //render
   function renderHeader() {
     return (
@@ -31,7 +40,6 @@ const Profile = ({ navigation }) => {
           alignItems: "center",
         }}
       >
-        {console.log()}
         <Image
           style={styles.img}
           source={data?.profileImage ? data.profileImage : icons.user}
@@ -41,20 +49,23 @@ const Profile = ({ navigation }) => {
       </View>
 
       {/* Options */}
-      <ScrollView style={{ marginTop: 24 }}>
+      <ScrollView
+        style={{ marginTop: 24 }}
+        showsVerticalScrollIndicator={false}
+      >
         {/* Referral Code */}
 
         <MoreItem
           icon={icons.user}
           title={t("accountInfo")}
-          iconStyle={{ tintColor: "#203C71" }}
-          onPress={() => navigation.navigate("Transfer")}
+          iconStyle={{ tintColor: "#203C71", width: 24, height: 24 }}
+          onPress={() => navigation.navigate("AccountInfo")}
         />
         <MoreItem
-          icon={icons.option}
+          icon={icons.users}
           title={t("contactList")}
           iconStyle={{ tintColor: "#1DAB87" }}
-          onPress={() => navigation.navigate("Transfer")}
+          onPress={() => navigation.navigate("ContactsList")}
         />
         <MoreItem
           icon={icons.option}
@@ -99,19 +110,36 @@ const Profile = ({ navigation }) => {
           }}
         />
         <MoreItem
-          icon={icons.option}
-          title={t("FAQs")}
+          icon={icons.email}
+          title={t("contactsUs")}
           iconStyle={{ tintColor: "#55BBC5" }}
-          onPress={() => navigation.navigate("Transfer")}
+          onPress={() => navigation.navigate("ContactUs")}
         />
         <MoreItem
           icon={icons.option}
           title={t("rateUs")}
           iconStyle={{ tintColor: "#FACC15" }}
-          containerStyle={{ marginBottom: 90 }}
+          containerStyle={{ marginBottom: 40 }}
           onPress={() => navigation.navigate("Transfer")}
         />
+        <MoreItem
+          icon={icons.logout}
+          title={t("logout")}
+          iconStyle={{ tintColor: "#5FA8EE" }}
+          hideLeftIcon={true}
+          containerStyle={{ marginBottom: 90 }}
+          onPress={toggleModal}
+        />
       </ScrollView>
+
+      <LogoutModal
+        isVisible={isModalVisible}
+        onClosePress={toggleModal}
+        onLogoutPress={() => {
+          toggleModal();
+          navigation.navigate("Welcome");
+        }}
+      />
     </View>
   );
 };

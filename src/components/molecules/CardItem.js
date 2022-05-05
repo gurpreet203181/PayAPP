@@ -2,12 +2,10 @@ import React from "react";
 import { t } from "../../hooks/UseI18n";
 import { View, Text, ImageBackground, StyleSheet, Image } from "react-native";
 import { FONTS, icons, SIZES, images, COLORS } from "../../constants";
-import { color } from "react-native-reanimated";
-
 const CardItem = ({ item, containerStyle }) => {
   return (
     <ImageBackground
-      source={images?.card}
+      source={item?.image}
       style={{
         height: 174,
         width: "100%",

@@ -35,7 +35,7 @@ const SignUp = ({ navigation }) => {
     <AuthLayout
       title={t("authLayout_Title")}
       subTitle={t("authLayout_SignUp_SubTitle")}
-      onClosePress={() => navigation.goBack()}
+      onClosePress={() => navigation.navigate("Welcome")}
       childern={
         <View>
           {/* Email */}

@@ -23,6 +23,7 @@ import CustomSwipeButton from "./atoms/CustomSwipeButton";
 import SelectedBankItem from "./molecules/selectBankItem";
 import CategorieItem from "./molecules/categorieItem";
 import NotificationItem from "./molecules/notificationItem";
+import HomeCardItem from "./molecules/homeCardItem";
 export {
   Button,
   ProfileButton,
@@ -49,4 +50,5 @@ export {
   SelectedBankItem,
   CategorieItem,
   NotificationItem,
+  HomeCardItem,
 };

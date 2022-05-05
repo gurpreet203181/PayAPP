@@ -36,6 +36,7 @@ const CardsCarousel = ({
         decelerationRate="fast"
         showsHorizontalScrollIndicator={false}
         scrollEventThrottle={16}
+        useNativeDriver={true}
         contentContainerStyle={{
           ...containerStyle,
         }}

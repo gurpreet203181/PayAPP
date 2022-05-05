@@ -14,12 +14,7 @@ const SearchBar = (props) => {
   return (
     <View style={styles.searchBarContanier}>
       <View style={{ flexDirection: "row" }}>
-        <Feather
-          name="search"
-          size={24}
-          color="black"
-          style={{ opacity: 0.3 }}
-        />
+        <Feather name="search" size={24} color={COLORS.darkBlue3} />
 
         <TextInput
           style={styles.TextInput}

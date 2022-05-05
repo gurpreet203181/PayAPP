@@ -17,7 +17,6 @@ import {
 } from "../../components";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import slides from "./slides";
-import { color } from "react-native-reanimated";
 
 const OnBoarding = ({ navigation }) => {
   const [currentIndex, setCurrentIndex] = React.useState(0);

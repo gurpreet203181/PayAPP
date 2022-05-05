@@ -4,6 +4,7 @@ import { COLORS, FONTS } from "../../constants";
 
 const FormInput = ({
   containerStyle,
+  textContainerStyle,
   inputContainerStyle,
   label,
   placeholder,
@@ -20,6 +21,8 @@ const FormInput = ({
   forgotButton,
   value,
   autoFocus,
+  multiline = false,
+  numberOfLines,
 }) => {
   const [Focus, setFocus] = React.useState(false);
   return (
@@ -27,6 +30,7 @@ const FormInput = ({
       <View
         style={{
           ...Styles.container,
+          ...textContainerStyle,
           borderBottomColor: Focus ? COLORS.black2 : COLORS.lightGray2,
         }}
       >
@@ -34,6 +38,8 @@ const FormInput = ({
         <TextInput
           style={{ ...Styles.inputContainer, ...inputStyle }}
           value={value}
+          multiline={multiline}
+          numberOfLines={numberOfLines}
           autoFocus={autoFocus}
           placeholder={placeholder}
           placeholderTextColor={COLORS.gray}
@@ -76,7 +82,7 @@ const Styles = StyleSheet.create({
   inputContainer: {
     color: COLORS.black2,
     backgroundColor: COLORS.white,
-    width: "100%",
+    width: "90%",
     height: 56,
     marginLeft: 16,
     //  ...FONTS.body3

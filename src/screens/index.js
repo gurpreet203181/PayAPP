@@ -24,6 +24,9 @@ import WithdrawConfirmation from "./transferTab/withdraw/withdrawConfirmation";
 import Activity from "./activityTab/activity";
 import Profile from "./profileTab/profile";
 import Notification from "./CommonScreens/notification/notification";
+import ContactsList from "./profileTab/contacts/ContactsList";
+import AccountInfo from "./profileTab/accountInfo/accountInfo";
+import ContactUs from "./profileTab/contact/contactUs";
 export {
   //Common screens
   CardDetail,
@@ -64,4 +67,10 @@ export {
   WithdrawConfirmation,
   //notification
   Notification,
+  //contacts
+  ContactsList,
+  //Accountinfo
+  AccountInfo,
+  //ContactUs
+  ContactUs,
 };

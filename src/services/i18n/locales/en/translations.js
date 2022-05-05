@@ -138,7 +138,7 @@ const en = {
   requestPayment: "Request Payment",
   settings: "Settings",
   help: "Help",
-
+  logout: "Logout",
   //top up
   topUp: "Top Up",
   enterAmount: "Enter amount:",
@@ -175,11 +175,36 @@ const en = {
   changePin: "Change Log In PIN",
   FAQs: "FAQs",
   rateUs: "Rate Us",
+  contactsUs: "Contact us",
   //notification
   notification: "Notification",
   today: "Today",
   older: "Older",
   noNotification: "No notifications yet! ",
   noNotificationText: "we'll notify you when something arrives!",
+
+  //contactList
+  friends: "Friends",
+  invite: "Invite",
+  yourContacts: "Your contacts on PayApp",
+  poke: "Poke",
+  poked: "Poked",
+
+  //AccountInfo
+  accountInfo: "Account Info",
+  personalInfo: "Personal Info",
+  contactInfo: "Contact Info",
+  yourName: "Your Name",
+  username: "Username",
+  AccountPhonenumber: "Phone number",
+  AccountEmail: "Email",
+  //Logout
+  logoutText: "Are you sure want to logout?",
+  cancel: "Cancel",
+  yesLogout: "Yes,Logout",
+  //contactus
+  maxWords: "Max 250 words",
+  sendMessage: "Send Message",
+  contactUsText: "Don't be shy, ask any Questions",
 };
 export default en;

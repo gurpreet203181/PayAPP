@@ -24,10 +24,9 @@ const Section = ({
     >
       <Text
         style={{
-          ...FONTS.body5,
+          ...FONTS.h5,
           fontSize: 14,
-          color: "#082431",
-          opacity: 0.5,
+          color: COLORS.lightGray3,
           letterSpacing: 0.3,
           ...labelStyle,
         }}

@@ -1,9 +1,9 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
-import { COLORS, FONTS, icons, SIZES } from "../../constants";
+import { COLORS, FONTS, icons, images, SIZES } from "../../constants";
 import { t } from "../../hooks/UseI18n";
 
-const ContactItem = ({ item, onPress, isSelected }) => {
+const ContactItem = ({ item, onPress, isSelected, buttonComponent }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -12,14 +12,20 @@ const ContactItem = ({ item, onPress, isSelected }) => {
         borderColor: isSelected ? COLORS.gray : COLORS.white,
       }}
     >
-      <Image source={item.profileImage} style={styles.profileImage} />
+      <View style={{ flexDirection: "row" }}>
+        <Image
+          source={item?.imageAvailable ? item?.image : images.boy}
+          style={styles.profileImage}
+        />
 
-      <View style={{ marginLeft: 15 }}>
-        <Text style={styles.name}>{item.name}</Text>
-        <Text style={styles.number}>
-          {t("number")} - {item.phoneNumber}
-        </Text>
+        <View style={{ marginLeft: 15 }}>
+          <Text numberOfLines={1} style={styles.name}>
+            {item.name}
+          </Text>
+          <Text style={styles.number}>{item?.phoneNumbers?.[0].number}</Text>
+        </View>
       </View>
+      {buttonComponent}
     </TouchableOpacity>
   );
 };
@@ -28,11 +34,10 @@ export default ContactItem;
 
 const styles = StyleSheet.create({
   container: {
-    width: 315,
     height: 80,
     borderRadius: 20,
     flexDirection: "row",
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
     alignItems: "center",
     borderWidth: 1,
   },
@@ -42,15 +47,15 @@ const styles = StyleSheet.create({
     borderRadius: SIZES.padding,
   },
   name: {
-    ...FONTS.h4,
+    ...FONTS.h5,
     fontSize: 13,
-    color: COLORS.black,
+    color: COLORS.darkBlue3,
     letterSpacing: 0.3,
+    width: 200,
   },
   number: {
     ...FONTS.body5,
-    color: COLORS.black,
-    opacity: 0.5,
+    color: COLORS.lightGray3,
     letterSpacing: 0.3,
   },
 });

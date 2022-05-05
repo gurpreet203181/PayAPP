@@ -22,7 +22,7 @@ const SignIn = ({ navigation }) => {
     <AuthLayout
       title={t("authLayout_TitleSignIn")}
       subTitle={t("authLayout_SignIn_SubTitle")}
-      onClosePress={() => navigation.goBack()}
+      onClosePress={() => navigation.navigate("Welcome")}
       childern={
         <View>
           {/* LineDivider */}
@@ -99,7 +99,11 @@ const SignIn = ({ navigation }) => {
             label={t("signIn")}
             labelStyle={{ ...Styles.SignInText }}
             containerStyle={{ ...Styles.SignInButton, ...Styles.shadow }}
-            onPress={() => navigation.navigate("Tabs")}
+            onPress={() =>
+              navigation.navigate("Tabs", {
+                screen: "Home",
+              })
+            }
           />
         </View>
       }

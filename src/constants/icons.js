@@ -37,6 +37,15 @@ const down_arrow = require("../assets/icons/down_arrow.png");
 const bell = require("../assets/icons/bell.png");
 const seen = require("../assets/icons/seen.png");
 const left_arrow = require("../assets/icons/left-arrow.png");
+const optionsMore = require("../assets/icons/element-plus.png");
+const optionsTopUp = require("../assets/icons/money-recive.png");
+const optionsWithdraw = require("../assets/icons/money-send.png");
+const optionsTransfer = require("../assets/icons/refresh-circle.png");
+const contactless = require("../assets/icons/contactless.png");
+const logout = require("../assets/icons/logout.png");
+const pencil = require("../assets/icons/pencil.png");
+const users = require("../assets/icons/users.png");
+const message = require("../assets/icons/comment.png");
 
 export default {
   back_arrow,
@@ -78,4 +87,13 @@ export default {
   bell,
   seen,
   left_arrow,
+  optionsMore,
+  optionsTopUp,
+  optionsWithdraw,
+  optionsTransfer,
+  contactless,
+  logout,
+  pencil,
+  users,
+  message,
 };

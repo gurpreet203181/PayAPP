@@ -13,7 +13,7 @@ const Otp = ({ route, navigation }) => {
     <AuthLayout
       title={t("authLayout_TitleOtp")}
       subTitle={t("authLayout_Otp_SubTitle")}
-      onClosePress={() => navigation.goBack()}
+      onClosePress={() => navigation.navigate("Welcome")}
       childern={
         <View style={{ alignItems: "flex-start", height: 300 }}>
           <Text style={Styles.Email}>{email}</Text>
