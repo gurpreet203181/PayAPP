@@ -79,7 +79,7 @@ const WithDraw = ({ navigation }) => {
         <Text style={styles.maxText}>{t("maxAmount")} $999</Text>
 
         <VirtualKeyboard
-          color="#9494AD"
+          color={COLORS.darkBlue3}
           decimal={true}
           pressMode="string"
           clearOnLongPress={true}
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     // ...SIZES.marginHorizontal
   },
   amount: {
-    color: "#525298",
+    color: COLORS.darkBlue3,
     ...FONTS.h3,
     fontSize: 50,
     paddingTop: 40,
@@ -163,17 +163,17 @@ const styles = StyleSheet.create({
     color: "#6B7280",
   },
   continueButton: {
-    width: 315,
-    height: 64,
-    borderRadius: 36,
-    backgroundColor: COLORS.purple,
+    width: 327,
+    height: 56,
+    borderRadius: 16,
+    backgroundColor: COLORS.darkBlue3,
     marginTop: 30,
     justifyContent: "center",
     alignItems: "center",
     ...SIZES.marginHorizontal,
   },
   continueButtonLabel: {
-    ...FONTS.h3,
+    ...FONTS.h4,
     fontSize: 15,
     letterSpacing: 2,
     color: COLORS.white,

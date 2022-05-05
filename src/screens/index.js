@@ -10,18 +10,17 @@ import OnBoarding from "./onBoarding/OnBoarding";
 import TransactionDetail from "./CommonScreens/transaction/TransactionDetail";
 import Transactions from "./CommonScreens/transaction/Transactions";
 import PaymentSuccess from "./CommonScreens/success/PaymentSuccess";
-import TransferDashboard from "./transferTab/TransferDashboard";
-import Transfer from "./transferTab/transfer/Transfer";
+import Transfer from "./homeTab/transfer/transfer/Transfer";
 import AddCard from "./addCardTab/AddCard";
 import PaymentMethod from "./CommonScreens/paymentMethod/PaymentMethod";
 import SelectCard from "./CommonScreens/selectCard/SelectCard";
-import TransferConfirmation from "./transferTab/TransferConfirmation";
-import More from "./transferTab/more/More";
-import TopUp from "./transferTab/topUp/TopUp";
-import TopUpConfirmation from "./transferTab/topUp/TopUpConfirmation";
-import WithDraw from "./transferTab/withdraw/Withdraw";
-import WithdrawConfirmation from "./transferTab/withdraw/withdrawConfirmation";
-import Activity from "./activityTab/activity";
+import TransferConfirmation from "./homeTab/transfer/TransferConfirmation";
+import More from "./homeTab/transfer/more/More";
+import TopUp from "./homeTab/transfer/topUp/TopUp";
+import TopUpConfirmation from "./homeTab/transfer/topUp/TopUpConfirmation";
+import WithDraw from "./homeTab/transfer/withdraw/Withdraw";
+import WithdrawConfirmation from "./homeTab/transfer/withdraw/withdrawConfirmation";
+import Activity from "./profileTab/activity/activity";
 import Profile from "./profileTab/profile";
 import Notification from "./CommonScreens/notification/notification";
 import ContactsList from "./profileTab/contacts/ContactsList";
@@ -54,7 +53,6 @@ export {
   Home2,
   //Transfer
   Transfer,
-  TransferDashboard,
   PaymentMethod,
   TransferConfirmation,
   //more

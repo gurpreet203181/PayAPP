@@ -2,10 +2,10 @@ import React from "react";
 import { t } from "@hooks/UseI18n";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import { COLORS, icons, SIZES, FONTS } from "@constants";
-import { Button, Header, IconButton, CategorieItem } from "@components";
+import { Header, IconButton, CategorieItem } from "@components";
 import { BarChart } from "react-native-gifted-charts";
 
-const Activity = () => {
+const Activity = ({ navigation }) => {
   //render
   const data = [
     {
@@ -69,6 +69,7 @@ const Activity = () => {
       <Header
         title={t("activity")}
         rightIcon={icons.option}
+        leftIcon={icons.left_arrow}
         onLeftIconPress={() => navigation.goBack()}
       />
     );

@@ -30,6 +30,7 @@ import {
   ContactsList,
   AccountInfo,
   ContactUs,
+  Activity,
 } from "./src/screens/index";
 import AppLoading from "expo-app-loading";
 import { useState } from "react";
@@ -273,6 +274,13 @@ export default function App() {
             <Stack.Screen
               name="ContactUs"
               component={ContactUs}
+              screenOptions={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="Activity"
+              component={Activity}
               screenOptions={{
                 headerShown: false,
               }}

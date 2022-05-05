@@ -22,7 +22,6 @@ module.exports = function (api) {
 
             //screens alias screens which other folder inside
             "@commonScreens": "@screens/CommonScreens",
-            "@transferTab": "@screens/transferTab",
           },
         },
       ],

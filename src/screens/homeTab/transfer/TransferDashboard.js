@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { t } from "../../hooks/UseI18n";
+import { t } from "@hooks/UseI18n";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { COLORS, dummyData, FONTS, icons, SIZES } from "../../constants";
+import { COLORS, dummyData, FONTS, icons, SIZES } from "@constants";
 import {
   Button,
   Header,
   IconButton,
   TransactionItem,
   Section,
-} from "../../components";
+} from "@components";
 import { FontAwesome } from "@expo/vector-icons";
 
 const TransferDashboard = ({ navigation }) => {

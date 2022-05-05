@@ -66,14 +66,13 @@ const Styles = StyleSheet.create({
   },
 
   ForgotButton: {
-    backgroundColor: COLORS.blue2,
-    width: 160,
+    backgroundColor: COLORS.darkBlue3,
+    width: 327,
     height: 56,
-    borderRadius: SIZES.padding,
+    borderRadius: 15,
   },
   ForgotText: {
     color: COLORS.white,
-    ...FONTS.body3,
-    fontFamily: "Poppins_500Medium",
+    ...FONTS.h4,
   },
 });

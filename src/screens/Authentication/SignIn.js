@@ -131,15 +131,15 @@ const Styles = StyleSheet.create({
   },
 
   SignInButton: {
-    backgroundColor: COLORS.blue2,
-    width: 160,
+    backgroundColor: COLORS.darkBlue3,
+    width: 327,
     height: 56,
-    borderRadius: SIZES.padding,
+    borderRadius: 16,
   },
   SignInText: {
     color: COLORS.white,
-    ...FONTS.body3,
-    fontFamily: "Poppins_500Medium",
+    ...FONTS.h4,
+    fontSize: 15,
   },
   LineStyle: {
     marginTop: 77,

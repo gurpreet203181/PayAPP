@@ -1,23 +1,23 @@
 import React from "react";
-import { View, Image, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { Home, Activity, Profile, TransferDashboard } from "../screens";
+import { Home, Profile } from "../screens";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
 import { AntDesign } from "@expo/vector-icons";
+import { t } from "@hooks/UseI18n";
 
 const Tab = createBottomTabNavigator();
 const AddCardPlaceHodler = () => {
   return <View style={{ flex: 1, backgroundColor: COLORS.white }} />;
 };
-const Tabs = ({ navigation }) => {
+const Tabs = () => {
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-
-        tabBarStyle: [{ ...styles.tabBarStyle, display: "flex" }, null],
-        tabBarShowLabel: false,
+        tabBarShowLabel: true,
+        tabBarStyle: [{ ...styles.tabBarStyle, display: "flex" }],
       }}
     >
       <Tab.Screen
@@ -27,42 +27,17 @@ const Tabs = ({ navigation }) => {
           tabBarIcon: ({ focused }) => (
             <View style={{ ...styles.tabIconContainer }}>
               <Image
-                source={icons.home}
+                source={focused ? icons.homeFilled : icons.home}
                 style={{
                   ...styles.tabIcon,
-                  tintColor: focused ? COLORS.primary : COLORS.gray,
                 }}
               />
-
-              {/* <View 
-                            style={{
-                                ...styles.tabDot, 
-                                backgroundColor:focused? COLORS.primary:COLORS.white,
-                                 }}/> */}
             </View>
           ),
-        }}
-      />
-      <Tab.Screen
-        name="TransferDashboard"
-        component={TransferDashboard}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <View style={{ ...styles.tabIconContainer }}>
-              <Image
-                source={icons.send}
-                style={{
-                  ...styles.tabIcon,
-                  tintColor: focused ? COLORS.primary : COLORS.gray,
-                }}
-              />
-
-              {/* <View 
-                        style={{
-                            ...styles.tabDot, 
-                            backgroundColor:focused? COLORS.primary:COLORS.white,
-                             }}/> */}
-            </View>
+          tabBarLabel: ({ focused }) => (
+            <Text style={focused ? styles.tabLabelActive : styles.tabLabel}>
+              {t("tabHome")}
+            </Text>
           ),
         }}
       />
@@ -76,6 +51,7 @@ const Tabs = ({ navigation }) => {
               <AntDesign name="plus" size={24} color="white" />
             </View>
           ),
+          tabBarLabel: () => <View />,
         }}
         // override tab listener to navigate to addCard screen to avoid bottom tab
         listeners={({ navigation }) => ({
@@ -87,48 +63,23 @@ const Tabs = ({ navigation }) => {
       />
 
       <Tab.Screen
-        name="Activity"
-        component={Activity}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <View style={{ ...styles.tabIconContainer }}>
-              <Image
-                source={icons.pie_chart}
-                style={{
-                  ...styles.tabIcon,
-                  tintColor: focused ? COLORS.primary : COLORS.gray,
-                }}
-              />
-
-              {/* <View 
-                        style={{
-                            ...styles.tabDot, 
-                            backgroundColor:focused? COLORS.primary:COLORS.white,
-                             }}/> */}
-            </View>
-          ),
-        }}
-      />
-      <Tab.Screen
         name="Profile"
         component={Profile}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ ...styles.tabIconContainer }}>
               <Image
-                source={icons.settings}
+                source={focused ? icons.userFilled : icons.userOutline}
                 style={{
                   ...styles.tabIcon,
-                  tintColor: focused ? COLORS.primary : COLORS.gray,
                 }}
               />
-
-              {/* <View 
-                        style={{
-                            ...styles.tabDot, 
-                            backgroundColor:focused? COLORS.primary:COLORS.white,
-                             }}/> */}
             </View>
+          ),
+          tabBarLabel: ({ focused }) => (
+            <Text style={focused ? styles.tabLabelActive : styles.tabLabel}>
+              {t("tabProfile")}
+            </Text>
           ),
         }}
       />
@@ -146,17 +97,16 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     borderTopColor: COLORS.lightGray2,
     justifyContent: "center",
+    height: 64,
   },
   tabIconContainer: {
     alignItems: "center",
     justifyContent: "center",
-
-    height: 24,
-    width: 24,
   },
   tabIcon: {
-    height: 20,
-    width: 20,
+    height: 30,
+    width: 30,
+    marginTop: 10,
   },
   tabDot: {
     width: 4,
@@ -164,11 +114,22 @@ const styles = StyleSheet.create({
     borderRadius: SIZES.radius,
     marginTop: SIZES.base,
   },
+  tabLabel: {
+    ...FONTS.body3,
+    fontSize: 10,
+    color: COLORS.lightGray3,
+  },
+  tabLabelActive: {
+    ...FONTS.h2,
+    lineHeight: 22,
+    fontSize: 10,
+    color: COLORS.darkBlue3,
+  },
   AddCardButton: {
-    bottom: 20,
-    width: 56,
-    height: 56,
-    backgroundColor: COLORS.primary,
+    //bottom: 20,
+    width: 48,
+    height: 48,
+    backgroundColor: COLORS.darkBlue3,
     borderRadius: SIZES.padding,
     justifyContent: "center",
     alignSelf: "center",
@@ -182,7 +143,18 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.8,
     shadowRadius: 13.51,
-    elevation: 5,
+    elevation: 3,
+  },
+
+  shadow2: {
+    shadowColor: "#4d4d4d",
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.8,
+    shadowRadius: 13.51,
+    elevation: 8,
   },
 });
 

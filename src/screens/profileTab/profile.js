@@ -18,19 +18,8 @@ const Profile = ({ navigation }) => {
     setModalVisible(!isModalVisible);
   };
 
-  //render
-  function renderHeader() {
-    return (
-      <Header
-        title={t("profile")}
-        onLeftIconPress={() => navigation.goBack()}
-      />
-    );
-  }
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.white }}>
-      {/* Header */}
-      {renderHeader()}
       {/* Img ,name and gmail */}
       <View
         style={{
@@ -62,17 +51,18 @@ const Profile = ({ navigation }) => {
           onPress={() => navigation.navigate("AccountInfo")}
         />
         <MoreItem
+          icon={icons.activity}
+          title={t("activity")}
+          iconStyle={{ tintColor: "#7B61FF" }}
+          onPress={() => navigation.navigate("Activity")}
+        />
+        <MoreItem
           icon={icons.users}
           title={t("contactList")}
           iconStyle={{ tintColor: "#1DAB87" }}
           onPress={() => navigation.navigate("ContactsList")}
         />
-        <MoreItem
-          icon={icons.option}
-          title={t("language")}
-          iconStyle={{ tintColor: "#7B61FF" }}
-          onPress={() => navigation.navigate("Transfer")}
-        />
+
         <LineDivider
           lineStyle={{
             height: 1,

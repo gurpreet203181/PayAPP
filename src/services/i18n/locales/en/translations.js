@@ -1,6 +1,9 @@
 const en = {
   //App general
   appName: "PayApp",
+  //bottomTab
+  tabHome: "Home",
+  tabProfile: "Profile",
   //Home
   welcome: "Welcome Back!",
   hello: "Hello",

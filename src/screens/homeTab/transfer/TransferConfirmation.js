@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { t } from "../../hooks/UseI18n";
+import { t } from "@hooks/UseI18n";
 import {
   View,
   Text,
@@ -8,14 +8,7 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import {
-  COLORS,
-  FONTS,
-  SIZES,
-  icons,
-  dummyData,
-  images,
-} from "../../constants";
+import { COLORS, FONTS, SIZES, icons, dummyData, images } from "@constants";
 import {
   Header,
   IconButton,
@@ -129,6 +122,7 @@ const TransferConfirmation = ({ navigation }) => {
           style={{
             marginTop: 13,
             ...FONTS.h4,
+            color: COLORS.darkBlue3,
             fontSize: 18,
             letterSpacing: 0.3,
           }}
@@ -137,8 +131,7 @@ const TransferConfirmation = ({ navigation }) => {
         </Text>
         <Text
           style={{
-            color: COLORS.black,
-            opacity: 0.5,
+            color: COLORS.lightGray3,
             ...FONTS.body5,
             fontSize: 15,
             marginTop: 10,
@@ -263,12 +256,11 @@ const styles = StyleSheet.create({
 
   rowText: {
     ...FONTS.body5,
-    color: COLORS.black,
-    opacity: 0.4,
+    color: COLORS.lightGray3,
   },
   rowText2: {
-    ...FONTS.body5,
-    color: COLORS.black,
+    ...FONTS.h4,
+    color: COLORS.darkBlue3,
   },
 
   IconButtonContainer: {
@@ -305,13 +297,13 @@ const styles = StyleSheet.create({
   totalText: {
     ...FONTS.h4,
     fontSize: 16,
-    color: "#3F3F65",
+    color: COLORS.darkBlue3,
     letterSpacing: 0.3,
   },
   totalAmount: {
     ...FONTS.h4,
     fontSize: 22,
-    color: "#3F3F65",
+    color: COLORS.darkBlue3,
     paddingTop: 7,
   },
 });

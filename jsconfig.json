@@ -15,8 +15,7 @@
       "@utlis": ["src/utlis"],
 
       //screens alias screens which other folder inside
-      "@commonScreens": ["@screens/CommonScreens"],
-      "@transferTab": ["@screens/transferTab"]
+      "@commonScreens": ["@screens/CommonScreens"]
     }
   },
   "exclude": ["node_modules"]

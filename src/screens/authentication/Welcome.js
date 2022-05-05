@@ -48,7 +48,7 @@ const Welcome = ({ navigation }) => {
           label={t("signUp")}
           labelStyle={{ color: COLORS.white, ...styles.btnLabel }}
           containerStyle={{
-            backgroundColor: COLORS.black2,
+            backgroundColor: COLORS.darkBlue3,
             ...styles.BtnContainer,
           }}
           onPress={() => navigation.navigate("SignUp")}
@@ -87,14 +87,15 @@ export default Welcome;
 
 const styles = StyleSheet.create({
   BtnContainer: {
-    width: 315,
+    width: 327,
     height: 56,
-    borderRadius: 60,
+    borderRadius: 15,
     borderWidth: 1,
-    borderColor: COLORS.black2,
+    borderColor: COLORS.darkBlue3,
   },
   btnLabel: {
-    ...FONTS.body3,
+    ...FONTS.h4,
+    fontSize: 15,
   },
   BackgroudImage: {
     width: "100%",

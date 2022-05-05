@@ -25,7 +25,7 @@ const CheckBox = ({
         <View
           style={{
             ...styles.CheckBox,
-            backgroundColor: value ? "#259CD5" : COLORS.lightGray2,
+            backgroundColor: value ? COLORS.darkBlue3 : COLORS.lightGray2,
             ...CheckBoxStyle,
           }}
         >

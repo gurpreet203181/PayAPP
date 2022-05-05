@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
   successText2: {
     ...FONTS.body3,
     fontSize: 14,
+    color: COLORS.black,
     opacity: 0.5,
     textAlign: "center",
     marginTop: 5,

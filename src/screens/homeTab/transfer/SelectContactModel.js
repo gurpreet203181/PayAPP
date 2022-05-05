@@ -1,17 +1,11 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { t } from "../../hooks/UseI18n";
+import { t } from "@hooks/UseI18n";
 import { View, Text, StyleSheet, FlatList, ScrollView } from "react-native";
-import { COLORS, icons, SIZES, dummyData } from "../../constants";
-import {
-  Header,
-  SearchBar,
-  Section,
-  ContactItem,
-  List,
-} from "../../components";
+import { COLORS, icons, SIZES, dummyData } from "@constants";
+import { Header, SearchBar, Section, ContactItem, List } from "@components";
 import Modal from "react-native-modal";
 import { useDispatch } from "react-redux";
-import { setSelectedContact } from "../../redux/reducers/contactSlice";
+import { setSelectedContact } from "@redux/reducers/contactSlice";
 
 const SelectContactModel = ({ isVisible, closeModel }) => {
   const dispatch = useDispatch(); //redux dispatch to set selectedcontact

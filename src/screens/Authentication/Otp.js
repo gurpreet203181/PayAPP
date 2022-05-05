@@ -1,10 +1,9 @@
 import React from "react";
-import { t } from "../../hooks/UseI18n";
+import { t } from "@hooks/UseI18n";
 import { View, SafeAreaView, Image, Text, StyleSheet } from "react-native";
-import { COLORS, FONTS, dummyData, SIZES } from "../../constants";
-import { Button } from "../../components";
+import { COLORS, FONTS, dummyData, SIZES } from "@constants";
+import { Button } from "@components";
 import AuthLayout from "./AuthLayout";
-import { utils } from "../../utils";
 import OTPInputView from "@twotalltotems/react-native-otp-input";
 
 const Otp = ({ route, navigation }) => {
@@ -72,22 +71,17 @@ const Styles = StyleSheet.create({
     borderRadius: SIZES.padding,
     ...FONTS.body1,
     fontSize: 20,
-    color: COLORS.black2,
+    color: COLORS.darkBlue3,
   },
 
   underlineStyleHighLighted: {
     borderColor: "#03DAC6",
   },
   OtpButton: {
-    backgroundColor: COLORS.blue2,
-    width: 160,
+    backgroundColor: COLORS.darkBlue3,
+    width: 327,
     height: 56,
-    borderRadius: SIZES.padding,
+    borderRadius: 16,
   },
-  OtpText: {
-    color: COLORS.white,
-
-    ...FONTS.body3,
-    fontFamily: "Poppins_500Medium",
-  },
+  OtpText: { color: COLORS.white, ...FONTS.h4, fontSize: 15 },
 });

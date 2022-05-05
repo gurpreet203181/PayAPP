@@ -24,10 +24,10 @@ const CustomSwipeButton = ({ title, onSwipeSuccess, IconComponent }) => {
         titleFontSize={15}
         shouldResetAfterSuccess={false}
         onSwipeSuccess={onSwipeSuccess}
-        railBackgroundColor={COLORS.purple}
-        railBorderColor={COLORS.purple}
-        railFillBackgroundColor={"rgba(0,0,128, 0.3)"}
-        railFillBorderColor={"rgba(0,0,128, 0.3)"}
+        railBackgroundColor={COLORS.darkBlue3}
+        railBorderColor={COLORS.darkBlue3}
+        railFillBackgroundColor={"rgba(118,153,219, 0.4)"}
+        railFillBorderColor={"rgba(118,153,219, 0.4)"}
         thumbIconBackgroundColor={COLORS.white}
         thumbIconBorderColor={COLORS.purple}
         thumbIconComponent={IconComponent ? IconComponent : ButtonIconComponent}

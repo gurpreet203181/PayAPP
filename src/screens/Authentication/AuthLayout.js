@@ -31,7 +31,12 @@ const AuthLayout = ({
           {/* Title && subtitle */}
           <View style={Styles.TitleContainer}>
             <Text
-              style={{ ...FONTS.h2, fontSize: 28, paddingTop: 10 }}
+              style={{
+                ...FONTS.h5,
+                fontSize: 24,
+                paddingTop: 10,
+                color: COLORS.darkBlue3,
+              }}
               adjustsFontSizeToFit
               numberOfLines={1}
             >

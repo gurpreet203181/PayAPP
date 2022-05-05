@@ -1,5 +1,6 @@
 const back_arrow = require("../assets/icons/back_arrow.png");
 const home = require("../assets/icons/home.png");
+const homeFilled = require("../assets/icons/homeFilled.png");
 const line_graph = require("../assets/icons/line_graph.png");
 const notification_color = require("../assets/icons/notification_color.png");
 const notification_white = require("../assets/icons/notification_white.png");
@@ -46,10 +47,14 @@ const logout = require("../assets/icons/logout.png");
 const pencil = require("../assets/icons/pencil.png");
 const users = require("../assets/icons/users.png");
 const message = require("../assets/icons/comment.png");
+const userOutline = require("../assets/icons/userOutline.png");
+const userFilled = require("../assets/icons/userFilled.png");
+const activity = require("../assets/icons/activity.png");
 
 export default {
   back_arrow,
   home,
+  homeFilled,
   line_graph,
   notification_color,
   notification_white,
@@ -96,4 +101,7 @@ export default {
   pencil,
   users,
   message,
+  userOutline,
+  userFilled,
+  activity,
 };

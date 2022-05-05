@@ -71,7 +71,7 @@ const TopUp = ({ navigation }) => {
           label={"$150.00"}
           labelStyle={{
             ...styles.amountButtonText,
-            color: selectedAmountButton == 1 ? COLORS.white : COLORS.black,
+            color: selectedAmountButton == 1 ? COLORS.white : COLORS.darkBlue3,
           }}
           containerStyle={{
             ...styles.amountButton,
@@ -83,7 +83,7 @@ const TopUp = ({ navigation }) => {
           label={"$200.00"}
           labelStyle={{
             ...styles.amountButtonText,
-            color: selectedAmountButton == 2 ? COLORS.white : COLORS.black,
+            color: selectedAmountButton == 2 ? COLORS.white : COLORS.darkBlue3,
           }}
           containerStyle={{
             ...styles.amountButton,
@@ -95,7 +95,7 @@ const TopUp = ({ navigation }) => {
           label={"$400.00"}
           labelStyle={{
             ...styles.amountButtonText,
-            color: selectedAmountButton == 3 ? COLORS.white : COLORS.black,
+            color: selectedAmountButton == 3 ? COLORS.white : COLORS.darkBlue3,
           }}
           containerStyle={{
             ...styles.amountButton,
@@ -212,25 +212,25 @@ const styles = StyleSheet.create({
     // ...SIZES.marginHorizontal
   },
   amount: {
-    color: "#525298",
-    ...FONTS.h3,
+    color: COLORS.darkBlue3,
+    ...FONTS.h4,
     lineHeight: null,
     fontSize: 24,
     marginLeft: 20,
     width: 250,
   },
   continueButton: {
-    width: 315,
-    height: 64,
-    borderRadius: 36,
-    backgroundColor: COLORS.purple,
+    width: 327,
+    height: 56,
+    borderRadius: 16,
+    backgroundColor: COLORS.darkBlue3,
     marginTop: 30,
     justifyContent: "center",
     alignItems: "center",
     ...SIZES.marginHorizontal,
   },
   continueButtonLabel: {
-    ...FONTS.h3,
+    ...FONTS.h4,
     fontSize: 15,
     letterSpacing: 2,
     color: COLORS.white,

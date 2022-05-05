@@ -80,7 +80,7 @@ const Styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   inputContainer: {
-    color: COLORS.black2,
+    color: COLORS.darkBlue3,
     backgroundColor: COLORS.white,
     width: "90%",
     height: 56,
