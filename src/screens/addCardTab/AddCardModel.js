@@ -239,15 +239,15 @@ const styles = StyleSheet.create({
   },
 
   saveButton: {
-    backgroundColor: COLORS.black2,
+    backgroundColor: COLORS.darkBlue3,
     width: 160,
     height: 56,
-    borderRadius: SIZES.padding,
+    borderRadius: 16,
   },
   saveText: {
     color: COLORS.white,
-    ...FONTS.body3,
-    fontFamily: "Poppins_500Medium",
+    ...FONTS.h4,
+    fontSize: 15,
   },
   TextInputMaskContainer: {
     flexDirection: "row",
