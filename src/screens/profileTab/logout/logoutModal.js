@@ -4,8 +4,19 @@ import { View, StyleSheet, Text, Image } from "react-native";
 import { COLORS, SIZES, icons, FONTS } from "@constants";
 import Modal from "react-native-modal";
 import { Button } from "@components";
+import { auth } from "@config/firebase";
 
 const LogoutModal = ({ isVisible, onClosePress, onLogoutPress }) => {
+  const handleSignOut = async () => {
+    try {
+      await auth.signOut();
+
+      // onLogoutPress();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Modal
       isVisible={isVisible}
@@ -57,7 +68,9 @@ const LogoutModal = ({ isVisible, onClosePress, onLogoutPress }) => {
             containerStyle={styles.buttonLogout}
             labelStyle={{ color: COLORS.white, ...FONTS.h4, fontSize: 14 }}
             label={t("yesLogout")}
-            onPress={onLogoutPress}
+            onPress={() => {
+              handleSignOut();
+            }}
           />
         </View>
       </View>

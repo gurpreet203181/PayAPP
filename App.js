@@ -1,37 +1,11 @@
 import { StatusBar } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { init } from "./src/hooks/UseI18n";
-import Tabs from "./src/navigation/tabs";
-import {
-  CardDetail,
-  SignIn,
-  SignUp,
-  Welcome,
-  ForgotPassword,
-  Otp,
-  OnBoarding,
-  TransactionDetail,
-  Transactions,
-  PaymentSuccess,
-  AddCard,
-  Transfer,
-  PaymentMethod,
-  SelectCard,
-  More,
-  TransferConfirmation,
-  TopUp,
-  TopUpConfirmation,
-  WithDraw,
-  WithdrawConfirmation,
-  Notification,
-  ContactsList,
-  AccountInfo,
-  ContactUs,
-  Activity,
-} from "./src/screens/index";
+
+import RootNavigation from "@navigation";
+
 import AppLoading from "expo-app-loading";
 import { useState } from "react";
 import { useFonts } from "./src/hooks/useFonts";
@@ -83,7 +57,9 @@ export default function App() {
   return (
     <Provider store={store}>
       <SafeAreaProvider>
-        <NavigationContainer>
+        <StatusBar backgroundColor="#fff" barStyle="dark-content" />
+        <RootNavigation />
+        {/* <NavigationContainer>
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
 
           <Stack.Navigator
@@ -93,56 +69,11 @@ export default function App() {
             //checking if user as viewed onBoarding if not  initialRoute will OnBoarding
             initialRouteName={viewedOnboarding ? "Tabs" : "OnBoarding"}
           >
-            <Stack.Screen
-              name="Tabs"
-              component={Tabs}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
+           
 
-            <Stack.Screen
-              name="CardDetail"
-              component={CardDetail}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="Welcome"
-              component={Welcome}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="SignIn"
-              component={SignIn}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="SignUp"
-              component={SignUp}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="ForgotPassword"
-              component={ForgotPassword}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="Otp"
-              component={Otp}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
+         
+     
+         
             <Stack.Screen
               name="OnBoarding"
               component={OnBoarding}
@@ -150,143 +81,13 @@ export default function App() {
                 headerShown: false,
               }}
             />
-            <Stack.Screen
-              name="TransactionDetail"
-              component={TransactionDetail}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
+         
+            
 
-            <Stack.Screen
-              name="Transactions"
-              component={Transactions}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-
-            <Stack.Screen
-              name="PaymentSuccess"
-              component={PaymentSuccess}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-
-            <Stack.Screen
-              name="AddCard"
-              component={AddCard}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-
-            <Stack.Screen
-              name="Transfer"
-              component={Transfer}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-
-            <Stack.Screen
-              name="PaymentMethod"
-              component={PaymentMethod}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-
-            <Stack.Screen
-              name="SelectCard"
-              component={SelectCard}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="TransferConfirmation"
-              component={TransferConfirmation}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="more"
-              component={More}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="TopUp"
-              component={TopUp}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="TopUpConfirmation"
-              component={TopUpConfirmation}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-
-            <Stack.Screen
-              name="WithDraw"
-              component={WithDraw}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-
-            <Stack.Screen
-              name="withdrawConfirmation"
-              component={WithdrawConfirmation}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-
-            <Stack.Screen
-              name="Notification"
-              component={Notification}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="ContactsList"
-              component={ContactsList}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="AccountInfo"
-              component={AccountInfo}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="ContactUs"
-              component={ContactUs}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="Activity"
-              component={Activity}
-              screenOptions={{
-                headerShown: false,
-              }}
-            />
+           
+           
           </Stack.Navigator>
-        </NavigationContainer>
+        </NavigationContainer> */}
       </SafeAreaProvider>
     </Provider>
   );

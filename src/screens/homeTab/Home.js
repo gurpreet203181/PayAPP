@@ -19,7 +19,11 @@ import {
   HomeCardItem,
 } from "@components";
 
+//import { useAuthentication } from "@hooks/authentication/useAuthentication";
+
 const Home = ({ navigation }) => {
+  // const { user } = useAuthentication();
+
   const SLIDER_WIDTH = Dimensions.get("window").width - 80;
   const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 
@@ -47,7 +51,7 @@ const Home = ({ navigation }) => {
           <View>
             <Text style={styles.welcomeText}>{t("welcome")}</Text>
             {/* Name */}
-            <Text style={styles.nameText}>{dummyData.myProfile.name}</Text>
+            <Text style={styles.nameText}>{"Gurpreet Singh"}</Text>
           </View>
 
           {/* notification */}

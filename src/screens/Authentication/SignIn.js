@@ -1,23 +1,33 @@
 import React from "react";
-import { t } from "../../hooks/UseI18n";
+import { t } from "@hooks/UseI18n";
 import { View, SafeAreaView, Image, Text, StyleSheet } from "react-native";
-import { FormInput, Button, LineDivider, CheckBox } from "../../components";
+import { FormInput, Button, LineDivider, CheckBox } from "@components";
 import AuthLayout from "./AuthLayout";
-import { COLORS, FONTS, dummyData, SIZES, icons } from "../../constants";
-import { utils } from "../../utils";
+import { COLORS, FONTS, dummyData, SIZES, icons } from "@constants";
+import { auth } from "@config/firebase";
 
 const SignIn = ({ navigation }) => {
-  const [email, setEmail] = React.useState("");
-  const [emailError, setEmailError] = React.useState("");
-
-  const [username, setUsername] = React.useState("");
-  const [usernameError, setUsernameError] = React.useState("");
-
-  const [password, setPassword] = React.useState("");
-  const [passwordError, setPasswordError] = React.useState("");
-
   const [rememberMe, setRememberMe] = React.useState(false);
   const [showPass, setShowPass] = React.useState(false);
+  const [value, setValue] = React.useState({
+    email: "",
+    password: "",
+    error: "",
+  });
+
+  const signIn = async () => {
+    try {
+      if (value.email !== "" && value.password !== "") {
+        await auth.signInWithEmailAndPassword(value.email, value.password);
+      }
+    } catch (error) {
+      setValue({
+        ...value,
+        error: error.message,
+      });
+    }
+  };
+
   return (
     <AuthLayout
       title={t("authLayout_TitleSignIn")}
@@ -32,15 +42,14 @@ const SignIn = ({ navigation }) => {
           <View style={{ marginTop: 28 }}>
             {/* Email */}
             <FormInput
-              value={email}
+              value={value.email}
               placeholder={t("email")}
               keyboradType="email-address"
               autoCompleteType="email"
-              onChange={(value) => {
-                utils.validateEmail(value, setEmailError);
-                setEmail(value);
+              onChange={(text) => {
+                setValue({ ...value, email: text });
               }}
-              errorMsg={emailError}
+              errorMsg={value.error}
               prependComponenet={
                 <Image
                   source={icons.email}
@@ -51,15 +60,14 @@ const SignIn = ({ navigation }) => {
             {/* Password */}
 
             <FormInput
-              value={password}
+              value={value.password}
               placeholder={t("password")}
               secureTextEntry={!showPass}
-              errorMsg={passwordError}
+              errorMsg={value.error}
               autoCompleteType="password"
               contentContainerStyle={{ marginTop: SIZES.radius }}
-              onChange={(value) => {
-                utils.validatePassword(value, setPasswordError);
-                setPassword(value);
+              onChange={(text) => {
+                setValue({ ...value, password: text });
               }}
               prependComponenet={
                 <Image
@@ -99,11 +107,7 @@ const SignIn = ({ navigation }) => {
             label={t("signIn")}
             labelStyle={{ ...Styles.SignInText }}
             containerStyle={{ ...Styles.SignInButton, ...Styles.shadow }}
-            onPress={() =>
-              navigation.navigate("Tabs", {
-                screen: "Home",
-              })
-            }
+            onPress={() => signIn()}
           />
         </View>
       }

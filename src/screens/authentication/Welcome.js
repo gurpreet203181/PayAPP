@@ -9,7 +9,6 @@ import {
   StyleSheet,
   ImageBackground,
 } from "react-native";
-import { color } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 import { Button } from "../../components";
 import { COLORS, FONTS, dummyData, SIZES, images } from "../../constants";
 

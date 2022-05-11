@@ -6,7 +6,6 @@ import { Home, Profile } from "../screens";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
 import { AntDesign } from "@expo/vector-icons";
 import { t } from "@hooks/UseI18n";
-
 const Tab = createBottomTabNavigator();
 const AddCardPlaceHodler = () => {
   return <View style={{ flex: 1, backgroundColor: COLORS.white }} />;

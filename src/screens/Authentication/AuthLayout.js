@@ -2,8 +2,18 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useRoute } from "@react-navigation/native";
+import { COLORS, SIZES, FONTS, icons } from "@constants";
 
-import { COLORS, SIZES, FONTS, icons } from "../../constants";
+//Google login
+import * as Google from "expo-google-app-auth";
+//facebook login
+import * as Facebook from "expo-facebook";
+
+//Firbase
+import firebase from "firebase";
+import { auth, firestoreDb } from "@config/firebase";
+
+import Constants from "expo-constants";
 
 const AuthLayout = ({
   childern,
@@ -14,9 +24,75 @@ const AuthLayout = ({
   screen,
 }) => {
   const route = useRoute();
+  //Google sign in
+  const GoogleSignIn = async () => {
+    try {
+      //await GoogleSignIn.askForPlayServicesAsync();
+      const result = await Google.logInAsync({
+        //return an object with result token and user
+        //  iosClientId: Constants.manifest.extra.IOS_KEY, //From app.json
+        androidClientId: Constants.manifest?.extra?.googleAndroidKey, //From app.json
+      });
+      if (result.type === "success") {
+        //setIsLoading(true);
+        const credential = firebase.auth.GoogleAuthProvider.credential(
+          //Set the tokens to Firebase
+          result.idToken,
+          result.accessToken
+        );
+        await auth
+          .signInWithCredential(credential) //Login to Firebase
+          .then((user) => {
+            if (user?.additionalUserInfo?.isNewUser) {
+              firestoreDb.collection("users").doc(user?.user?.uid).set({
+                username: user?.user?.displayName, //getting user googel display name only once for default
+                // avater: user?.photoURL,
+              });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        //CANCEL
+      }
+    } catch ({ message }) {
+      console.log("login: Error:" + message);
+    }
+  };
+  //faceboom sign in
+  const facebookSignIn = async () => {
+    try {
+      await Facebook.initializeAsync({
+        appId: Constants.manifest?.extra?.facebookAppId,
+      });
+      const { type, token, expirationDate, permissions, declinedPermissions } =
+        await Facebook.logInWithReadPermissionsAsync({
+          permissions: ["public_profile"],
+          behavior: "web",
+        });
+      if (type === "success") {
+        // SENDING THE TOKEN TO FIREBASE TO HANDLE AUTH
+        const credential = firebase.auth.FacebookAuthProvider.credential(token);
+        auth
+          .signInWithCredential(credential)
+          .then((user) => {
+            console.log("Logged in successfully", user);
+          })
+          .catch((error) => {
+            console.log("Error occurred ", error);
+          });
+      } else {
+        // type === 'cancel'
+      }
+    } catch ({ message }) {
+      alert(`Facebook Login Error: ${message}`);
+    }
+  };
+
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.white }}>
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <View style={{ marginHorizontal: 30 }}>
           {/* Close button */}
           <View style={{ alignItems: "flex-end" }}>
@@ -68,19 +144,25 @@ const AuthLayout = ({
                 style={{ flexDirection: "row", justifyContent: "space-around" }}
               >
                 {/* Google */}
-                <TouchableOpacity style={{ ...Styles.SocialBtnFrame }}>
+                <TouchableOpacity
+                  style={{ ...Styles.SocialBtnFrame }}
+                  onPress={GoogleSignIn}
+                >
                   <Image source={icons.google} style={Styles.SocialImg} />
                 </TouchableOpacity>
 
                 {/* Facebook */}
-                <TouchableOpacity style={{ ...Styles.SocialBtnFrame }}>
+                <TouchableOpacity
+                  style={{ ...Styles.SocialBtnFrame }}
+                  onPress={facebookSignIn}
+                >
                   <Image source={icons.facebook} style={Styles.SocialImg} />
                 </TouchableOpacity>
 
                 {/* Apple */}
-                <TouchableOpacity style={{ ...Styles.SocialBtnFrame }}>
+                {/* <TouchableOpacity style={{ ...Styles.SocialBtnFrame }}>
                   <Image source={icons.apple} style={Styles.SocialImg} />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </View>
             )}
 

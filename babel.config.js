@@ -6,7 +6,8 @@ module.exports = function (api) {
       [
         "module-resolver",
         {
-          extensions: [".tsx", ".ts", ".js", ".json"],
+          root: ["./"],
+          extensions: [".tsx", ".ts", ".js", ".json", ".cjs"],
           alias: {
             "@assets": "./src/assets",
             "@components": "./src/components",
@@ -19,7 +20,7 @@ module.exports = function (api) {
             "@services": "./src/services",
             "@styles": "./src/styles",
             "@utlis": "./src/utlis",
-
+            "@config": "./src/config",
             //screens alias screens which other folder inside
             "@commonScreens": "@screens/CommonScreens",
           },

@@ -1,35 +1,55 @@
-import React from "react";
-import { t } from "../../hooks/UseI18n";
-import { FormInput, Button, CheckBox } from "../../components";
+import React, { useState } from "react";
+import { t } from "@hooks/UseI18n";
+import { FormInput, Button, CheckBox } from "@components";
 import { View, Image, Text, StyleSheet } from "react-native";
 import AuthLayout from "./AuthLayout";
 import { utils } from "../../utils";
-import { COLORS, FONTS, dummyData, SIZES, icons } from "../../constants";
+import { COLORS, FONTS, dummyData, SIZES, icons } from "@constants";
+
+import { auth, firestoreDb } from "@config/firebase";
 
 const SignUp = ({ navigation }) => {
-  const [email, setEmail] = React.useState("");
-  const [emailError, setEmailError] = React.useState("");
-
-  const [username, setUsername] = React.useState("");
-  const [usernameError, setUsernameError] = React.useState("");
-
-  const [password, setPassword] = React.useState("");
-  const [passwordError, setPasswordError] = React.useState("");
-
+  const [value, setValue] = useState({
+    email: "",
+    username: "",
+    password: "",
+    error: "",
+  });
   const [showPass, setShowPass] = React.useState(false);
 
   const [policyChecked, setPolicyChecked] = React.useState(false);
 
-  function isEnableSignUP() {
-    return (
-      email != "" &&
-      username != "" &&
-      password != "" &&
-      emailError == "" &&
-      passwordError == "" &&
-      usernameError == ""
-    );
-  }
+  const signUp = async () => {
+    try {
+      if (value.email !== "" && value.password !== "") {
+        await auth
+          .createUserWithEmailAndPassword(value.email, value.password)
+          .then((user) => {
+            if (user?.additionalUserInfo?.isNewUser) {
+              firestoreDb.collection("users").doc(user?.user?.uid).set({
+                username: value.username,
+                // avater: user?.photoURL,
+              });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    } catch (error) {
+      setValue({
+        ...value,
+        error: error.message,
+      });
+    }
+    /*  if (value.email === "" || value.password === "") {
+      setValue({
+        ...value,
+        error: "Email and password are mandatory.",
+      });
+      return;
+    }*/
+  };
 
   return (
     <AuthLayout
@@ -40,15 +60,14 @@ const SignUp = ({ navigation }) => {
         <View>
           {/* Email */}
           <FormInput
-            value={email}
+            value={value.email}
             placeholder={t("email")}
             keyboradType="email-address"
             autoCompleteType="email"
-            onChange={(value) => {
-              utils.validateEmail(value, setEmailError);
-              setEmail(value);
+            onChange={(text) => {
+              setValue({ ...value, email: text });
             }}
-            errorMsg={emailError}
+            errorMsg={value.error}
             prependComponenet={
               <Image
                 source={icons.email}
@@ -59,15 +78,15 @@ const SignUp = ({ navigation }) => {
           {/* Name */}
 
           <FormInput
-            value={username}
+            value={value.username}
             placeholder={t("username")}
             containStyle={{
               marginTop: SIZES.radius,
             }}
-            onChange={(value) => {
-              setUsername(value);
+            onChange={(text) => {
+              setValue({ ...value, username: text });
             }}
-            errorMsg={usernameError}
+            errorMsg={value.error}
             prependComponenet={
               <Image
                 source={icons.user}
@@ -78,15 +97,14 @@ const SignUp = ({ navigation }) => {
 
           {/* Password */}
           <FormInput
-            value={password}
+            value={value.password}
             placeholder={t("password")}
             secureTextEntry={!showPass}
-            errorMsg={passwordError}
+            errorMsg={value.error}
             autoCompleteType="password"
             contentContainerStyle={{ marginTop: SIZES.radius }}
-            onChange={(value) => {
-              utils.validatePassword(value, setPasswordError);
-              setPassword(value);
+            onChange={(text) => {
+              setValue({ ...value, password: text });
             }}
             prependComponenet={
               <Image
@@ -126,7 +144,10 @@ const SignUp = ({ navigation }) => {
             label={t("signUp")}
             labelStyle={{ ...Styles.SignUpText }}
             containerStyle={{ ...Styles.SignUpButton, ...Styles.shadow }}
-            onPress={() => navigation.navigate("Otp", { email: email })}
+            onPress={() =>
+              //navigation.navigate("Otp", { email: email })
+              signUp()
+            }
           />
         </View>
       }

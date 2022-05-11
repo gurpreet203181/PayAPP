@@ -7,7 +7,7 @@ import AuthLayout from "./AuthLayout";
 import OTPInputView from "@twotalltotems/react-native-otp-input";
 
 const Otp = ({ route, navigation }) => {
-  const email = route.params.email;
+  const email = route?.params?.email;
   return (
     <AuthLayout
       title={t("authLayout_TitleOtp")}
