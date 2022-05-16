@@ -5,7 +5,6 @@ import { View, Image, Text, StyleSheet } from "react-native";
 import AuthLayout from "./AuthLayout";
 import { utils } from "../../utils";
 import { COLORS, FONTS, dummyData, SIZES, icons } from "@constants";
-
 import { auth, firestoreDb } from "@config/firebase";
 
 const SignUp = ({ navigation }) => {
@@ -13,42 +12,41 @@ const SignUp = ({ navigation }) => {
     email: "",
     username: "",
     password: "",
-    error: "",
   });
+  const [error, setError] = useState();
   const [showPass, setShowPass] = React.useState(false);
-
   const [policyChecked, setPolicyChecked] = React.useState(false);
 
   const signUp = async () => {
     try {
-      if (value.email !== "" && value.password !== "") {
+      if (utils.validateCredentials(value, setError, policyChecked)) {
         await auth
           .createUserWithEmailAndPassword(value.email, value.password)
           .then((user) => {
             if (user?.additionalUserInfo?.isNewUser) {
               firestoreDb.collection("users").doc(user?.user?.uid).set({
-                username: value.username,
+                email: value?.email,
+                username: value?.username,
+
                 // avater: user?.photoURL,
               });
             }
+          });
+
+        //setting user displayname
+        /*const userUpdate = auth.currentUser;
+        await userUpdate
+          .updateProfile({
+            displayName: value.username,
+            // photoURL: "https://example.com/jane-q-user/profile.jpg"
           })
           .catch((error) => {
             console.log(error);
-          });
+          });*/
       }
     } catch (error) {
-      setValue({
-        ...value,
-        error: error.message,
-      });
+      setError(error.message);
     }
-    /*  if (value.email === "" || value.password === "") {
-      setValue({
-        ...value,
-        error: "Email and password are mandatory.",
-      });
-      return;
-    }*/
   };
 
   return (
@@ -58,6 +56,8 @@ const SignUp = ({ navigation }) => {
       onClosePress={() => navigation.navigate("Welcome")}
       childern={
         <View>
+          {/* Error message */}
+          <Text style={styles.erroMsg}>{error}</Text>
           {/* Email */}
           <FormInput
             value={value.email}
@@ -66,8 +66,9 @@ const SignUp = ({ navigation }) => {
             autoCompleteType="email"
             onChange={(text) => {
               setValue({ ...value, email: text });
+              setError("");
             }}
-            errorMsg={value.error}
+            // errorMsg={value.error}
             prependComponenet={
               <Image
                 source={icons.email}
@@ -85,8 +86,9 @@ const SignUp = ({ navigation }) => {
             }}
             onChange={(text) => {
               setValue({ ...value, username: text });
+              setError("");
             }}
-            errorMsg={value.error}
+            // errorMsg={value.error}
             prependComponenet={
               <Image
                 source={icons.user}
@@ -100,11 +102,12 @@ const SignUp = ({ navigation }) => {
             value={value.password}
             placeholder={t("password")}
             secureTextEntry={!showPass}
-            errorMsg={value.error}
+            //errorMsg={value.error}
             autoCompleteType="password"
             contentContainerStyle={{ marginTop: SIZES.radius }}
             onChange={(text) => {
               setValue({ ...value, password: text });
+              setError("");
             }}
             prependComponenet={
               <Image
@@ -117,7 +120,7 @@ const SignUp = ({ navigation }) => {
           <Text
             numberOfLines={1}
             adjustsFontSizeToFit
-            style={Styles.PasswordRulesText}
+            style={styles.PasswordRulesText}
           >
             {t("passwordRules")}
           </Text>
@@ -134,7 +137,7 @@ const SignUp = ({ navigation }) => {
               onChange={(value) => setPolicyChecked(value)}
             />
 
-            <Text style={Styles.policyText}>{t("policyText")}</Text>
+            <Text style={styles.policyText}>{t("policyText")}</Text>
           </View>
         </View>
       }
@@ -142,10 +145,13 @@ const SignUp = ({ navigation }) => {
         <View>
           <Button
             label={t("signUp")}
-            labelStyle={{ ...Styles.SignUpText }}
-            containerStyle={{ ...Styles.SignUpButton, ...Styles.shadow }}
+            labelStyle={{ ...styles.SignUpText }}
+            containerStyle={{ ...styles.SignUpButton, ...styles.shadow }}
             onPress={() =>
               //navigation.navigate("Otp", { email: email })
+
+              //after signup in firbase authentication onAuthStateChanged listener get triggred (in file useAuthentication)
+              // and it change navigation stack in index.js if naviagtion folder
               signUp()
             }
           />
@@ -157,7 +163,7 @@ const SignUp = ({ navigation }) => {
 
 export default SignUp;
 
-const Styles = StyleSheet.create({
+const styles = StyleSheet.create({
   shadow: {
     shadowColor: "#4d4d4d",
     shadowOffset: {
@@ -187,5 +193,11 @@ const Styles = StyleSheet.create({
     color: COLORS.white,
     ...FONTS.h4,
     fontSize: 15,
+  },
+  erroMsg: {
+    paddingTop: 20,
+    textAlign: "center",
+    color: COLORS.red,
+    ...FONTS.body5,
   },
 });

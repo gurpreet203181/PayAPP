@@ -1,10 +1,13 @@
 import { StatusBar } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { init } from "./src/hooks/UseI18n";
 
 import RootNavigation from "@navigation";
+
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import AppLoading from "expo-app-loading";
 import { useState } from "react";
@@ -13,12 +16,14 @@ import { useFonts } from "./src/hooks/useFonts";
 //redux configuration
 import { store } from "./src/redux/store";
 import { Provider } from "react-redux";
+import { OnBoarding } from "@screens";
 //navgiation stack
 const Stack = createStackNavigator();
 
 export default function App() {
   // multi language configuration
   init();
+  const Stack = createStackNavigator();
 
   const [IsReady, SetIsReady] = useState(false);
   const [viewedOnboarding, setViewedOnboarding] = useState(false);
@@ -58,36 +63,25 @@ export default function App() {
     <Provider store={store}>
       <SafeAreaProvider>
         <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-        <RootNavigation />
-        {/* <NavigationContainer>
-          <StatusBar backgroundColor="#fff" barStyle="dark-content" />
 
-          <Stack.Navigator
-            screenOptions={{
-              headerShown: false,
-            }}
-            //checking if user as viewed onBoarding if not  initialRoute will OnBoarding
-            initialRouteName={viewedOnboarding ? "Tabs" : "OnBoarding"}
-          >
-           
-
-         
-     
-         
-            <Stack.Screen
-              name="OnBoarding"
-              component={OnBoarding}
+        {viewedOnboarding ? (
+          <RootNavigation />
+        ) : (
+          <NavigationContainer>
+            <Stack.Navigator
               screenOptions={{
                 headerShown: false,
               }}
-            />
-         
-            
-
-           
-           
-          </Stack.Navigator>
-        </NavigationContainer> */}
+            >
+              <Stack.Screen
+                name="OnBoarding"
+                component={OnBoarding}
+                //setting viewedOnboarding value to true from onborading last slide button
+                initialParams={{ setViewedOnboarding: setViewedOnboarding }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        )}
       </SafeAreaProvider>
     </Provider>
   );

@@ -19,7 +19,7 @@ const it = {
   email: "Email",
   username: "Nome",
   password: "Password",
-  passwordRules: "Almeno 8 caratteri, 1 lettera maiuscola, 1 numero, 1 simbolo",
+  passwordRules: "Almeno 6 caratteri, 1 lettera maiuscola, 1 numero, 1 simbolo",
   policyText:
     "Registrandoti, accetti i Termini di servizio e l'Informativa sulla privacy",
   passwordError: "Password errata",
@@ -42,14 +42,15 @@ const it = {
     "Se hai bisogno di aiuto per reimpostare la tua password, possiamo aiutarti inviandoti un link per reimpostarla.",
   next: "Prossima",
   back: "Indietro",
-
+  errorMsg: "Email o password errati.",
   //Otp
-  authLayout_TitleOtp: "Verifica Email",
+  authLayout_TitleOtp: "Verifica numero di telefono",
   authLayout_Otp_SubTitle:
     "Inserisci il codice a 4 cifre che ti è stato inviato a",
   resendCode: "Invia nuovo",
   done: "Fatto",
-
+  errorCodeMsg: "Codice non valido o codice scaduto",
+  resendCodeMsg: "Il nuovo codice viene inviato sul tuo numero di cellulare",
   next: "prossima",
   started: "Iniziamo",
 

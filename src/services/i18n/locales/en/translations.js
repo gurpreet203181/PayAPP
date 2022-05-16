@@ -24,7 +24,7 @@ const en = {
   username: "Name",
   password: "Password",
   passwordRules:
-    "At least 8 characters, 1 uppercase letter, 1 number, 1 symbol",
+    "At least 6 characters, 1 uppercase letter, 1 number, 1 symbol",
   policyText:
     "By Signing up, you agree to the Terms of Service and Privacy Policy",
   passwordError: "Incorrect password",
@@ -47,13 +47,23 @@ const en = {
     "If you need help resetting your password we can help by sending you a link to reset it.",
   next: "Next",
   back: "Back",
+  reset: "Reset",
+  checkEmail: "Check your email",
+  resetConfirmation: "We've sent password reset instructions to: ",
+  ifNotArrived:
+    "If it dosen't arrive soon, check you span folder or send the email agian",
 
   //Otp
-  authLayout_TitleOtp: "Email Verification",
+  authLayout_TitleOtp: "Phone number Verification",
   authLayout_Otp_SubTitle: "Please enter the 4-digit code send to you at",
   resendCode: "Resend Code",
   done: "Done",
+  errorCodeMsg: "Invalid code or code expired",
+  resendCodeMsg: "The new code is sent to your mobile number",
+  //Auth error message
 
+  emailNotValid: "Email is invalid",
+  errorMsg: "Incorrect email or password.",
   //OnBoarding
   next: "Next",
   started: "Get Started",
@@ -201,6 +211,7 @@ const en = {
   username: "Username",
   AccountPhonenumber: "Phone number",
   AccountEmail: "Email",
+  edit: "Edit",
   //Logout
   logoutText: "Are you sure want to logout?",
   cancel: "Cancel",
@@ -209,5 +220,18 @@ const en = {
   maxWords: "Max 250 words",
   sendMessage: "Send Message",
   contactUsText: "Don't be shy, ask any Questions",
+
+  //emailverfication
+
+  emailVerfication_Title: "Email Verification",
+  emailVerfication_SubTitle:
+    "We have the send link to the email for verification at",
+  resendEmail: "Resend email",
+  resendLinkmsg: "new link is sent to email",
+  emailVerficationErrorMsg:
+    "Please check the link sent on the email. you do not receive it, press resend email",
+
+  //edit profile
+  editAccount: "Edit Account",
 };
 export default en;

@@ -1,9 +1,16 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  ActivityIndicator,
+} from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useRoute } from "@react-navigation/native";
 import { COLORS, SIZES, FONTS, icons } from "@constants";
-
+import { Loading } from "@components";
 //Google login
 import * as Google from "expo-google-app-auth";
 //facebook login
@@ -24,6 +31,8 @@ const AuthLayout = ({
   screen,
 }) => {
   const route = useRoute();
+  const [isLoading, SetIsLoading] = useState(false);
+
   //Google sign in
   const GoogleSignIn = async () => {
     try {
@@ -54,7 +63,7 @@ const AuthLayout = ({
             console.log(error);
           });
       } else {
-        //CANCEL
+        SetIsLoading(false);
       }
     } catch ({ message }) {
       console.log("login: Error:" + message);
@@ -83,13 +92,12 @@ const AuthLayout = ({
             console.log("Error occurred ", error);
           });
       } else {
-        // type === 'cancel'
+        SetIsLoading(false);
       }
     } catch ({ message }) {
       alert(`Facebook Login Error: ${message}`);
     }
   };
-
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.white }}>
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
@@ -139,32 +147,43 @@ const AuthLayout = ({
             }}
           >
             {/* Social Buttons */}
-            {route.name != "ForgotPassword" && route.name != "Otp" && (
-              <View
-                style={{ flexDirection: "row", justifyContent: "space-around" }}
-              >
-                {/* Google */}
-                <TouchableOpacity
-                  style={{ ...Styles.SocialBtnFrame }}
-                  onPress={GoogleSignIn}
+            {route.name != "ForgotPassword" &&
+              route.name != "Otp" &&
+              route.name != "EmailVerfication" && (
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                  }}
                 >
-                  <Image source={icons.google} style={Styles.SocialImg} />
-                </TouchableOpacity>
+                  {/* Google */}
+                  <TouchableOpacity
+                    style={{ ...Styles.SocialBtnFrame }}
+                    onPress={() => {
+                      GoogleSignIn();
+                      SetIsLoading(true);
+                    }}
+                  >
+                    <Image source={icons.google} style={Styles.SocialImg} />
+                  </TouchableOpacity>
 
-                {/* Facebook */}
-                <TouchableOpacity
-                  style={{ ...Styles.SocialBtnFrame }}
-                  onPress={facebookSignIn}
-                >
-                  <Image source={icons.facebook} style={Styles.SocialImg} />
-                </TouchableOpacity>
+                  {/* Facebook */}
+                  <TouchableOpacity
+                    style={{ ...Styles.SocialBtnFrame }}
+                    onPress={() => {
+                      facebookSignIn();
+                      SetIsLoading(true);
+                    }}
+                  >
+                    <Image source={icons.facebook} style={Styles.SocialImg} />
+                  </TouchableOpacity>
 
-                {/* Apple */}
-                {/* <TouchableOpacity style={{ ...Styles.SocialBtnFrame }}>
+                  {/* Apple */}
+                  {/* <TouchableOpacity style={{ ...Styles.SocialBtnFrame }}>
                   <Image source={icons.apple} style={Styles.SocialImg} />
                 </TouchableOpacity> */}
-              </View>
-            )}
+                </View>
+              )}
 
             {/* sign Button */}
             <View style={{ marginTop: 42, paddingBottom: 20 }}>
@@ -173,6 +192,7 @@ const AuthLayout = ({
           </View>
         </View>
       </KeyboardAwareScrollView>
+      {isLoading && <Loading />}
     </View>
   );
 };

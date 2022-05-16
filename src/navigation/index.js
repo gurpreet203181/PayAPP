@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useAuthentication } from "@hooks/authentication/useAuthentication";
 import UserStack from "./userStack ";
 import AuthStack from "./authStack";
+import { Loading } from "@components";
+import { images, COLORS } from "@constants";
+const RootNavigation = () => {
+  const [isUserReady, setIsUserReady] = useState();
 
-export default function RootNavigation() {
-  const { user } = useAuthentication(); //checking if user is logged in or not
+  const { user } = useAuthentication();
 
-  return user ? <UserStack /> : <AuthStack />;
-}
+  if (user == undefined) {
+    return (
+      <Loading
+        containerStyle={{
+          backgroundColor: COLORS.transparent,
+        }}
+        lottieSrc={images.loading2}
+        lottieSpeed={1}
+      />
+    );
+  } else {
+    return user ? <UserStack /> : <AuthStack />;
+  }
+};
+export default RootNavigation;

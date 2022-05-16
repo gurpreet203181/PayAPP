@@ -40,6 +40,9 @@ export default {
       googleAndroidKey: process.env.FIREBASE_ANDROID_KEY,
       //facebook Login
       facebookAppId: process.env.FACEBOOK_APP_ID,
+
+      //twilio
+      twilioBaseUrl: process.env.TWILIO_BASE_URL,
     },
     plugins: [
       [

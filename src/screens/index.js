@@ -26,6 +26,9 @@ import Notification from "./CommonScreens/notification/notification";
 import ContactsList from "./profileTab/contacts/ContactsList";
 import AccountInfo from "./profileTab/accountInfo/accountInfo";
 import ContactUs from "./profileTab/contact/contactUs";
+import EmailVerfication from "./authentication/EmailVerification";
+import PhoneNumber from "./profileTab/accountInfo/phoneVerfication";
+import EditAccount from "./profileTab/accountInfo/editAccount/editAccount";
 export {
   //Common screens
   CardDetail,
@@ -71,4 +74,7 @@ export {
   AccountInfo,
   //ContactUs
   ContactUs,
+  PhoneNumber,
+  EmailVerfication,
+  EditAccount,
 };

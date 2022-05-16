@@ -2,21 +2,18 @@ import React, { useState, useEffect } from "react";
 import { t } from "@hooks/UseI18n";
 import { View, StyleSheet, Image, Text, ScrollView } from "react-native";
 import { COLORS, icons, FONTS, SIZES, dummyData } from "@constants";
-import { Header, Section } from "@components";
-
+import { Header, Section, FormInput, Button } from "@components";
+import { useSelector } from "react-redux";
 const AccountInfo = ({ navigation }) => {
-  const [data, setData] = useState();
+  const { user } = useSelector((state) => state.userInfo);
 
-  useEffect(() => {
-    setData(dummyData.myProfile);
-  }, []);
   //render
   function renderHeader() {
     return (
       <Header
         title={t("accountInfo")}
         leftIcon={icons.left_arrow}
-        onLeftIconPress={() => navigation.goBack()}
+        onLeftIconPress={() => navigation.popToTop()}
       />
     );
   }
@@ -40,7 +37,13 @@ const AccountInfo = ({ navigation }) => {
       >
         <Image
           style={styles.img}
-          source={data?.profileImage ? data.profileImage : icons.user}
+          source={
+            user?.profileUrl
+              ? {
+                  uri: user.profileUrl,
+                }
+              : icons.user
+          }
         />
         <View style={styles.imgEdit}>
           <Image
@@ -77,7 +80,7 @@ const AccountInfo = ({ navigation }) => {
                 adjustsFontSizeToFit
                 numberOfLines={1}
               >
-                {data?.name}
+                {user?.username}
               </Text>
             </View>
             {/* username */}
@@ -88,19 +91,23 @@ const AccountInfo = ({ navigation }) => {
                 adjustsFontSizeToFit
                 numberOfLines={1}
               >
-                {data?.username}
+                {user?.username}
               </Text>
             </View>
             {/* phone number */}
             <View style={{ ...styles.infoRow, marginTop: 8 }}>
               <Text style={styles.infoTitle}>{t("AccountPhonenumber")}</Text>
-              <Text
-                style={styles.infoData}
-                adjustsFontSizeToFit
-                numberOfLines={1}
-              >
-                {data?.phoneNumber}
-              </Text>
+              {user?.phoneNumber !== null ? (
+                <Text
+                  style={styles.infoData}
+                  adjustsFontSizeToFit
+                  numberOfLines={1}
+                >
+                  {user?.phoneNumber}
+                </Text>
+              ) : (
+                <Text>-</Text>
+              )}
             </View>
             {/* email */}
             <View style={styles.infoRow}>
@@ -110,11 +117,18 @@ const AccountInfo = ({ navigation }) => {
                 adjustsFontSizeToFit
                 numberOfLines={1}
               >
-                {data?.email}
+                {user?.email}
               </Text>
             </View>
           </View>
         </View>
+
+        <Button
+          containerStyle={styles.editButton}
+          labelStyle={styles.editButtonLabel}
+          label={t("edit")}
+          onPress={() => navigation.navigate("EditAccount")}
+        />
       </ScrollView>
     </View>
   );
@@ -175,5 +189,17 @@ const styles = StyleSheet.create({
     textAlign: "right",
     color: COLORS.darkBlue3,
     paddingLeft: 10,
+  },
+  editButton: {
+    marginTop: 34,
+    height: 56,
+    width: 327,
+    borderRadius: 16,
+    backgroundColor: "#F9FAFB",
+  },
+  editButtonLabel: {
+    color: COLORS.darkBlue3,
+    ...FONTS.h5,
+    fontSize: 15,
   },
 });

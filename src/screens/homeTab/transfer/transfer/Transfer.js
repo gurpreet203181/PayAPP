@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { t } from "@hooks/UseI18n";
 import { View, Text, StyleSheet } from "react-native";
-import { FONTS, COLORS, icons, SIZES, dummyData } from "@constants";
+import { FONTS, COLORS, icons, SIZES } from "@constants";
 import { Button, Header, SelectedConatctItem } from "@components";
 import SelectContactModel from "../SelectContactModel";
 import VirtualKeyboard from "react-native-virtual-keyboard";

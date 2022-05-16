@@ -24,6 +24,7 @@ import SelectedBankItem from "./molecules/selectBankItem";
 import CategorieItem from "./molecules/categorieItem";
 import NotificationItem from "./molecules/notificationItem";
 import HomeCardItem from "./molecules/homeCardItem";
+import Loading from "./atoms/loading";
 export {
   Button,
   ProfileButton,
@@ -51,4 +52,5 @@ export {
   CategorieItem,
   NotificationItem,
   HomeCardItem,
+  Loading,
 };

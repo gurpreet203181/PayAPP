@@ -18,7 +18,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import slides from "./slides";
 
-const OnBoarding = ({ navigation }) => {
+const OnBoarding = ({ route }) => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const scrollX = React.useRef(new Animated.Value(0)).current;
   const slidesRef = useRef(null);
@@ -102,7 +102,7 @@ const OnBoarding = ({ navigation }) => {
           <Button
             onPress={() => {
               setAsyncStorage();
-              navigation.replace("Welcome");
+              route?.params?.setViewedOnboarding(true);
             }}
             label={t("started")}
             labelStyle={styles.buttonLabel}

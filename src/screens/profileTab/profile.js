@@ -4,14 +4,10 @@ import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import { COLORS, icons, SIZES, dummyData, FONTS } from "@constants";
 import { Header, MoreItem, LineDivider } from "@components";
 import LogoutModal from "./logout/logoutModal";
-import { Modal } from "react-native-web";
+import { useSelector } from "react-redux";
 const Profile = ({ navigation }) => {
   const [isModalVisible, setModalVisible] = useState(false);
-  const [data, setData] = useState();
-
-  useEffect(() => {
-    setData(dummyData.myProfile);
-  }, []);
+  const { user } = useSelector((state) => state.userInfo);
 
   //Model show and close function
   const toggleModal = () => {
@@ -31,10 +27,16 @@ const Profile = ({ navigation }) => {
       >
         <Image
           style={styles.img}
-          source={data?.profileImage ? data.profileImage : icons.user}
+          source={
+            user?.profileUrl
+              ? {
+                  uri: user.profileUrl,
+                }
+              : icons.user
+          }
         />
-        <Text style={styles.nameText}>{data?.name}</Text>
-        <Text style={styles.gmailText}>gurpreet@gmail.com</Text>
+        <Text style={styles.nameText}>{user?.username}</Text>
+        <Text style={styles.gmailText}>{user?.email}</Text>
       </View>
 
       {/* Options */}
@@ -82,7 +84,11 @@ const Profile = ({ navigation }) => {
           icon={icons.option}
           title={t("changePassword")}
           iconStyle={{ tintColor: "#FFB9AA" }}
-          onPress={() => navigation.navigate("Transfer")}
+          onPress={() =>
+            navigation.navigate("ForgotPassword", {
+              email: user?.email,
+            })
+          }
         />
         <MoreItem
           icon={icons.option}

@@ -12,6 +12,9 @@ const card2 = require("../assets/images/card2.png");
 const successfulLottie = require("../assets/images/successful.json");
 const successfulLottie2 = require("../assets/images/68590-safe-money-transfer.json");
 const boy = require("../assets/images/boy.png");
+const loading2 = require("../assets/images/97798-loading.json");
+const emailSent = require("../assets/images/emailsend2.json");
+
 export default {
   WelcomeShape,
   Logo,
@@ -26,4 +29,6 @@ export default {
   successfulLottie,
   successfulLottie2,
   boy,
+  loading2,
+  emailSent,
 };

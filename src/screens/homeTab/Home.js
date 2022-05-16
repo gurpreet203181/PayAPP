@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { t } from "@hooks/UseI18n";
 import {
   View,
@@ -18,11 +18,16 @@ import {
   LineDivider,
   HomeCardItem,
 } from "@components";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserInfo } from "src/redux/reducers/userInfoSlice";
 
+import { auth, firestoreDb } from "src/config/firebase";
 //import { useAuthentication } from "@hooks/authentication/useAuthentication";
 
 const Home = ({ navigation }) => {
   // const { user } = useAuthentication();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.userInfo);
 
   const SLIDER_WIDTH = Dimensions.get("window").width - 80;
   const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
@@ -30,6 +35,21 @@ const Home = ({ navigation }) => {
   const isCarousel = React.useRef(null);
   const [index, setIndex] = React.useState(0);
 
+  useEffect(() => {
+    const subscriber = firestoreDb
+      .collection("users")
+      .doc(auth.currentUser.uid)
+      .onSnapshot((documentSnapshot) => {
+        const data = documentSnapshot.data();
+        dispatch(
+          setUserInfo({
+            username: data.username,
+          })
+        );
+      });
+    // Stop listening for updates when no longer required
+    return () => subscriber();
+  }, []);
   //render
   function renderHeader() {
     return (
@@ -51,7 +71,7 @@ const Home = ({ navigation }) => {
           <View>
             <Text style={styles.welcomeText}>{t("welcome")}</Text>
             {/* Name */}
-            <Text style={styles.nameText}>{"Gurpreet Singh"}</Text>
+            <Text style={styles.nameText}>{user?.username}</Text>
           </View>
 
           {/* notification */}
@@ -78,7 +98,7 @@ const Home = ({ navigation }) => {
         >
           <Text style={styles.welcomeText}>{t("yourBalance")}</Text>
           {/* Name */}
-          <Text style={styles.balance}>Rp 8.250.000</Text>
+          <Text style={styles.balance}>€ {user.balance} </Text>
         </View>
       </View>
     );

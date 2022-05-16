@@ -6,7 +6,7 @@ function isValidEmail(value) {
 
 function validateEmail(value, setEmailError) {
   if (value == "") {
-    setEmailError("");
+    setEmailError("email is requierd");
   } else if (isValidEmail(value)) {
     setEmailError("");
   } else {
@@ -15,8 +15,8 @@ function validateEmail(value, setEmailError) {
 }
 
 function validatePassword(value, setPasswordError) {
-  if (value.length < 9) {
-    setPasswordError("Password must be 9 characters");
+  if (value.length < 6) {
+    setPasswordError("Password must be 6 characters");
   } else {
     setPasswordError("");
   }
@@ -39,6 +39,28 @@ function calculateAngle(coordinates) {
 
   return (Math.atan2(dy, dx) * 180) / Math.PI;
 }
+function validateCredentials(credentials, setError, policyChecked) {
+  var errorMsg = "";
+
+  if (credentials.password.length < 6) {
+    errorMsg = "Password must be 6 characters";
+  }
+  if (credentials.username.length < 3) {
+    errorMsg = "Username have to 3 character";
+  }
+  if (!isValidEmail(credentials.email)) {
+    errorMsg = "email not valid";
+  }
+  if (!policyChecked) {
+    errorMsg = "Please check policy conditons ";
+  }
+  if (errorMsg == "") {
+    return true;
+  } else {
+    setError(errorMsg);
+    return false;
+  }
+}
 
 const utils = {
   isValidEmail,
@@ -46,6 +68,7 @@ const utils = {
   validatePassword,
   validateInput,
   calculateAngle,
+  validateCredentials,
 };
 
 export default utils;

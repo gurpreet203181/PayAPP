@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
@@ -22,17 +22,33 @@ import {
   AccountInfo,
   Activity,
   ForgotPassword,
+  PhoneNumber,
+  EmailVerfication,
+  Otp,
+  EditAccount,
 } from "@screens";
 import Tabs from "./tabs";
+import { auth } from "../config/firebase";
 const Stack = createStackNavigator();
 
 export default function UserStack() {
+  useEffect(() => {
+    //reloading firbase user to get update user
+    // to check if user is emailVerified
+    const reloadUser = async () => {
+      await auth.currentUser.reload();
+    };
+    reloadUser();
+  }, []);
+  const user = auth.currentUser;
+
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
         }}
+        initialRouteName={user.emailVerified ? "Tabs" : "EmailVerfication"}
       >
         {/* Tabs load home and profile screen as tabs */}
         <Stack.Screen name="Tabs" component={Tabs} />
@@ -63,10 +79,18 @@ export default function UserStack() {
 
         {/* Profile  screens */}
         <Stack.Screen name="ContactsList" component={ContactsList} />
+        {/* account screen */}
         <Stack.Screen name="AccountInfo" component={AccountInfo} />
+        <Stack.Screen name="EditAccount" component={EditAccount} />
+
         <Stack.Screen name="ContactUs" component={ContactUs} />
         <Stack.Screen name="Activity" component={Activity} />
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+        <Stack.Screen name="PhoneNumber" component={PhoneNumber} />
+
+        {/* auth screen for user stack */}
+        <Stack.Screen name="Otp" component={Otp} />
+        <Stack.Screen name="EmailVerfication" component={EmailVerfication} />
       </Stack.Navigator>
     </NavigationContainer>
   );

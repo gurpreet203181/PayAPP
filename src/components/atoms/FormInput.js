@@ -18,8 +18,8 @@ const FormInput = ({
   autoCapitalize = "none",
   errorMsg = "",
   maxLength,
-  forgotButton,
   value,
+  editable,
   autoFocus,
   multiline = false,
   numberOfLines,
@@ -49,6 +49,7 @@ const FormInput = ({
           autoCapitalize={autoCapitalize}
           maxLength={maxLength}
           onChangeText={onChange}
+          editable={editable}
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
         />
@@ -63,7 +64,6 @@ const FormInput = ({
           }}
         >
           <Text style={Styles.ErrorMsg}>{errorMsg}</Text>
-          {forgotButton}
         </View>
       )}
     </View>
