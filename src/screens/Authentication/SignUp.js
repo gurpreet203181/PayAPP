@@ -17,6 +17,7 @@ const SignUp = ({ navigation }) => {
   const [showPass, setShowPass] = React.useState(false);
   const [policyChecked, setPolicyChecked] = React.useState(false);
 
+  //sign up function
   const signUp = async () => {
     try {
       if (utils.validateCredentials(value, setError, policyChecked)) {
@@ -24,28 +25,21 @@ const SignUp = ({ navigation }) => {
           .createUserWithEmailAndPassword(value.email, value.password)
           .then((user) => {
             if (user?.additionalUserInfo?.isNewUser) {
+              //after sign up user as created in database
+              console.log(user);
               firestoreDb.collection("users").doc(user?.user?.uid).set({
-                email: value?.email,
-                username: value?.username,
-
-                // avater: user?.photoURL,
+                email: value.email,
+                username: value.username,
+                firstName: null,
+                lastName: null,
+                phoneNumber: null,
+                profileURL: null,
               });
             }
           });
-
-        //setting user displayname
-        /*const userUpdate = auth.currentUser;
-        await userUpdate
-          .updateProfile({
-            displayName: value.username,
-            // photoURL: "https://example.com/jane-q-user/profile.jpg"
-          })
-          .catch((error) => {
-            console.log(error);
-          });*/
       }
     } catch (error) {
-      setError(error.message);
+      console.log(error);
     }
   };
 

@@ -28,7 +28,6 @@ const Home = ({ navigation }) => {
   // const { user } = useAuthentication();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userInfo);
-
   const SLIDER_WIDTH = Dimensions.get("window").width - 80;
   const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 
@@ -36,6 +35,8 @@ const Home = ({ navigation }) => {
   const [index, setIndex] = React.useState(0);
 
   useEffect(() => {
+    //getting user data from databse and adding to redux state
+    //creating a listener if any somthing change document to get real time update
     const subscriber = firestoreDb
       .collection("users")
       .doc(auth.currentUser.uid)
@@ -43,7 +44,14 @@ const Home = ({ navigation }) => {
         const data = documentSnapshot.data();
         dispatch(
           setUserInfo({
-            username: data.username,
+            email: data?.email,
+            username: data?.username,
+            phoneNumber: data?.phoneNumber,
+            phoneNumberVerified: data?.phoneNumber ? true : false,
+            firstName: data?.firstName,
+            lastName: data?.lastName,
+            profileUrl: data?.profileURL,
+            uid: auth?.currentUser?.uid,
           })
         );
       });

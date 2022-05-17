@@ -1,5 +1,4 @@
 import Home from "./homeTab/Home";
-import Home2 from "./homeTab/Home2";
 import SignIn from "./authentication/SignIn";
 import SignUp from "./authentication/SignUp";
 import ForgotPassword from "./authentication/ForgotPassword";
@@ -53,7 +52,6 @@ export {
   Otp,
   //Card
   AddCard,
-  Home2,
   //Transfer
   Transfer,
   PaymentMethod,

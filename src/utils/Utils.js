@@ -42,18 +42,16 @@ function calculateAngle(coordinates) {
 function validateCredentials(credentials, setError, policyChecked) {
   var errorMsg = "";
 
-  if (credentials.password.length < 6) {
+  if (credentials.password.length < 6)
     errorMsg = "Password must be 6 characters";
-  }
-  if (credentials.username.length < 3) {
+
+  if (credentials.username.length < 3)
     errorMsg = "Username have to 3 character";
-  }
-  if (!isValidEmail(credentials.email)) {
-    errorMsg = "email not valid";
-  }
-  if (!policyChecked) {
-    errorMsg = "Please check policy conditons ";
-  }
+
+  if (!isValidEmail(credentials.email)) errorMsg = "email not valid";
+
+  if (!policyChecked) errorMsg = "Please check policy conditons ";
+
   if (errorMsg == "") {
     return true;
   } else {
@@ -62,6 +60,36 @@ function validateCredentials(credentials, setError, policyChecked) {
   }
 }
 
+function editAccountValidateCredentials(credentials, setError) {
+  var errorMsg = "";
+
+  if (!isValidEmail(credentials.email)) errorMsg = "email not valid";
+
+  if (
+    credentials.phoneNumber?.length < 4 ||
+    credentials.phoneNumber == undefined ||
+    isNaN(credentials.phoneNumber)
+  ) {
+    errorMsg = "Phone Number is  invalid";
+  }
+
+  if (credentials.username.length < 3)
+    errorMsg = "Username have to 3 character";
+
+  if (credentials.lastName?.length == "" || credentials.lastName == undefined)
+    errorMsg = "Last Name can't be empty ";
+
+  if (credentials.firstName?.length == "" || credentials.firstName == undefined)
+    errorMsg = "First Name can't be empty ";
+
+  if (errorMsg == "") {
+    setError();
+    return true;
+  } else {
+    setError(errorMsg);
+    return false;
+  }
+}
 const utils = {
   isValidEmail,
   validateEmail,
@@ -69,6 +97,7 @@ const utils = {
   validateInput,
   calculateAngle,
   validateCredentials,
+  editAccountValidateCredentials,
 };
 
 export default utils;

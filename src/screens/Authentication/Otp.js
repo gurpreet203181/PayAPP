@@ -130,6 +130,7 @@ export default Otp;
 const Styles = StyleSheet.create({
   Email: {
     ...FONTS.body4,
+    letterSpacing: 0.3,
     fontSize: 12,
   },
   underlineStyleBase: {

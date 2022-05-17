@@ -53,9 +53,14 @@ const AuthLayout = ({
           .signInWithCredential(credential) //Login to Firebase
           .then((user) => {
             if (user?.additionalUserInfo?.isNewUser) {
+              //if user is new creating user in database
               firestoreDb.collection("users").doc(user?.user?.uid).set({
-                username: user?.user?.displayName, //getting user googel display name only once for default
-                // avater: user?.photoURL,
+                username: user?.user?.displayName,
+                email: user?.user?.email,
+                firstName: user?.additionalUserInfo?.profile?.given_name,
+                lastName: user?.additionalUserInfo?.profile?.family_name,
+                profileURL: user?.user?.photoURL,
+                phoneNumber: null,
               });
             }
           })
@@ -86,7 +91,18 @@ const AuthLayout = ({
         auth
           .signInWithCredential(credential)
           .then((user) => {
-            console.log("Logged in successfully", user);
+            if (user?.additionalUserInfo?.isNewUser) {
+              firestoreDb.collection("users").doc(user?.user?.uid).set({
+                username: user?.user?.displayName,
+                email: user?.user?.email,
+                firstName: user?.user?.firstName,
+                lastName: user?.user?.lastName,
+                profileURL: user?.profileURL,
+                phoneNumber: null,
+                //getting user googel display name only once for default
+                // avater: user?.photoURL,
+              });
+            }
           })
           .catch((error) => {
             console.log("Error occurred ", error);

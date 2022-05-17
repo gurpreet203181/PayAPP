@@ -6,7 +6,6 @@ import AuthLayout from "./AuthLayout";
 import { COLORS, FONTS, dummyData, SIZES, icons } from "@constants";
 import { auth } from "@config/firebase";
 import { utils } from "../../utils";
-import { TouchableOpacity } from "react-native-gesture-handler";
 const SignIn = ({ navigation }) => {
   const [rememberMe, setRememberMe] = useState(false);
   const [showPass, setShowPass] = useState(true);

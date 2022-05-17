@@ -6,7 +6,8 @@ import { Header, Section, FormInput, Button } from "@components";
 import { useSelector } from "react-redux";
 const AccountInfo = ({ navigation }) => {
   const { user } = useSelector((state) => state.userInfo);
-
+  console.log("account info user");
+  console.log(user);
   //render
   function renderHeader() {
     return (
@@ -80,7 +81,7 @@ const AccountInfo = ({ navigation }) => {
                 adjustsFontSizeToFit
                 numberOfLines={1}
               >
-                {user?.username}
+                {user?.firstName} {user?.lastName}
               </Text>
             </View>
             {/* username */}
@@ -97,17 +98,25 @@ const AccountInfo = ({ navigation }) => {
             {/* phone number */}
             <View style={{ ...styles.infoRow, marginTop: 8 }}>
               <Text style={styles.infoTitle}>{t("AccountPhonenumber")}</Text>
-              {user?.phoneNumber !== null ? (
-                <Text
-                  style={styles.infoData}
-                  adjustsFontSizeToFit
-                  numberOfLines={1}
-                >
-                  {user?.phoneNumber}
-                </Text>
-              ) : (
-                <Text>-</Text>
-              )}
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                {user?.phoneNumber !== null ? (
+                  <Text
+                    style={styles.infoData}
+                    adjustsFontSizeToFit
+                    numberOfLines={1}
+                  >
+                    {user?.phoneNumber}
+                  </Text>
+                ) : (
+                  <Text>-</Text>
+                )}
+                {user?.phoneNumberVerified && (
+                  <Image
+                    source={icons.checked}
+                    style={{ width: 15, height: 15, marginLeft: 12 }}
+                  />
+                )}
+              </View>
             </View>
             {/* email */}
             <View style={styles.infoRow}>
@@ -127,7 +136,7 @@ const AccountInfo = ({ navigation }) => {
           containerStyle={styles.editButton}
           labelStyle={styles.editButtonLabel}
           label={t("edit")}
-          onPress={() => navigation.navigate("EditAccount")}
+          onPress={() => navigation.navigate("EditAccount", { user: user })}
         />
       </ScrollView>
     </View>

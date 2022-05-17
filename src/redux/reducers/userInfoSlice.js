@@ -2,10 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 //userobject
 const user = {
-  email: null,
   username: null,
+  firstName: null,
+  lastName: null,
+  email: null,
   profileUrl: null,
   phoneNumber: null,
+  phoneNumberVerified: false,
   uid: null,
   balance: 0,
   cardsID: [null],
@@ -21,24 +24,34 @@ export const userInfoSlice = createSlice({
     setUserInfo: (state, action) => {
       const payload = action.payload;
       //email
-      payload.email != null && (state.user.email = payload.email);
+      state.user.email = payload?.email;
       //username
-      payload.username != null && (state.user.username = payload.username);
+      state.user.username = payload?.username;
+
+      //firstName
+      state.user.firstName = payload?.firstName;
+
+      //lastName
+      state.user.lastName = payload?.lastName;
+
       //profileurl
-      payload.profileUrl != null &&
-        (state.user.profileUrl = payload.profileUrl);
+      state.user.profileUrl = payload?.profileUrl;
       //uid
-      payload.uid != null && (state.user.uid = payload.uid);
+      state.user.uid = payload?.uid;
 
       //phoneNumber
-      payload.phoneNumber != null &&
-        (state.user.phoneNumber = payload.phoneNumber);
+      state.user.phoneNumber = payload?.phoneNumber;
+
+      //phoneNumber verified
+      // setting user number verfied to true after it verfied with tiwil otp and
+      //phone number in update in database
+      state.user.phoneNumberVerified = payload?.phoneNumberVerified;
     },
     setUserBalance: (state, action) => {
-      state.user.balance = action.payload;
+      state.user.balance = action?.payload;
     },
     setUserCardsId: (state, action) => {
-      state.user.cardsID = action.payload;
+      state.user.cardsID = action?.payload;
     },
   },
 });

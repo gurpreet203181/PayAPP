@@ -19,7 +19,7 @@ const EmailVerfication = ({ route, navigation }) => {
 
   //caling send email function to send email on page loading
   useEffect(() => {
-    // sendEmail();
+    sendEmail();
   }, []);
 
   //logout function
@@ -95,7 +95,7 @@ const EmailVerfication = ({ route, navigation }) => {
                 auth.currentUser.reload().then(() => {
                   const user = auth.currentUser;
                   user?.emailVerified
-                    ? navigation.navigate("Tabs")
+                    ? navigation.replace("Tabs")
                     : setError(t("emailVerficationErrorMsg"));
                 });
               }}

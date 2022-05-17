@@ -5,8 +5,11 @@ import { COLORS, SIZES, icons, FONTS } from "@constants";
 import Modal from "react-native-modal";
 import { Button } from "@components";
 import { auth } from "@config/firebase";
-
+import { setUserInfo } from "@redux/reducers/userInfoSlice";
+import { useDispatch } from "react-redux";
 const LogoutModal = ({ isVisible, onClosePress, onLogoutPress }) => {
+  const dispatch = useDispatch();
+
   const handleSignOut = async () => {
     try {
       await auth.signOut();
@@ -70,6 +73,7 @@ const LogoutModal = ({ isVisible, onClosePress, onLogoutPress }) => {
             label={t("yesLogout")}
             onPress={() => {
               handleSignOut();
+              dispatch(setUserInfo()); //setting redux state to null
             }}
           />
         </View>

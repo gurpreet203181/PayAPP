@@ -30,8 +30,8 @@ const FormInput = ({
       <View
         style={{
           ...Styles.container,
-          ...textContainerStyle,
           borderBottomColor: Focus ? COLORS.black2 : COLORS.lightGray2,
+          ...textContainerStyle,
         }}
       >
         {prependComponenet}

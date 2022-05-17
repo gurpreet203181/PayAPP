@@ -233,5 +233,10 @@ const en = {
 
   //edit profile
   editAccount: "Edit Account",
+  firstName: "First Name",
+  lastName: "Last Name",
+  phoneNumber: "Phone Number",
+  save: "Save",
+  invaildNumber: " Phone is invaild",
 };
 export default en;
