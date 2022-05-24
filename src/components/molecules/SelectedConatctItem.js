@@ -7,7 +7,7 @@ import { SimpleLineIcons } from "@expo/vector-icons";
 const SelectedConatctItem = ({ item, onIconPress }) => {
   return (
     <View style={styles.container}>
-      <Image source={item?.profileImage} style={styles.profileImage} />
+      <Image source={item?.image} style={styles.profileImage} />
 
       <View style={{ marginRight: 10 }}>
         <Text style={styles.name}>{item?.name}</Text>

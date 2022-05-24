@@ -6,7 +6,7 @@ const initialState = {
     id: 1,
     name: "Samantha",
     phoneNumber: 3278195659,
-    profileImage: require("../../assets/dummyData/boy.png"),
+    image: require("../../assets/dummyData/boy.png"),
   },
 };
 

@@ -50,6 +50,7 @@ const message = require("../assets/icons/comment.png");
 const userOutline = require("../assets/icons/userOutline.png");
 const userFilled = require("../assets/icons/userFilled.png");
 const activity = require("../assets/icons/activity.png");
+const up_arrow = require("../assets/icons/upload.png");
 
 export default {
   back_arrow,
@@ -104,4 +105,5 @@ export default {
   userOutline,
   userFilled,
   activity,
+  up_arrow,
 };

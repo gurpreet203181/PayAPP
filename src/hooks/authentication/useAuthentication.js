@@ -1,7 +1,6 @@
 import React from "react";
 import { auth, firestoreDb } from "@config/firebase";
 import { useDispatch } from "react-redux";
-import { setUserInfo } from "@redux/reducers/userInfoSlice";
 export function useAuthentication() {
   const [user, setUser] = React.useState();
   const dispatch = useDispatch();

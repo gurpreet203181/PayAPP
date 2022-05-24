@@ -93,12 +93,12 @@ const Transaction = [
   },
   {
     id: 2,
-    name: "Unicredit",
-    item: "Deposit",
+    name: "Rose Hope",
+    item: "Received",
     date: "NOV 17",
     profileImage: require("../assets/dummyData/boy.png"),
     type: "input",
-    amount: "2399.00",
+    amount: "29.00",
 
     card: "2",
   },
@@ -108,7 +108,7 @@ const Transaction = [
     item: "Send",
     date: "NOV 17",
     profileImage: require("../assets/dummyData/boy.png"),
-    type: "input",
+    type: "output",
     amount: "23.99",
 
     card: "1",

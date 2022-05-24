@@ -18,8 +18,13 @@ export default {
     assetBundlePatterns: ["**/*"],
     ios: {
       supportsTablet: true,
+      bundleIdentifier: "com.payapp.live",
+      buildNumber: "1.0.0",
     },
     android: {
+      package: "com.payapp.live",
+      googleServicesFile: "./google-services.json",
+      versionCode: 1,
       adaptiveIcon: {
         foregroundImage: "./src/assets/adaptive-icon.png",
         backgroundColor: "#FFFFFF",
@@ -51,6 +56,8 @@ export default {
           userTrackingPermission: false,
         },
       ],
+
+      "@react-native-firebase/crashlytics",
     ],
   },
 };

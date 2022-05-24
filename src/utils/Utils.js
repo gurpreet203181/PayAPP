@@ -1,3 +1,5 @@
+import { t } from "@hooks/UseI18n";
+
 function isValidEmail(value) {
   const re =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -16,7 +18,7 @@ function validateEmail(value, setEmailError) {
 
 function validatePassword(value, setPasswordError) {
   if (value.length < 6) {
-    setPasswordError("Password must be 6 characters");
+    setPasswordError(t("passwordError"));
   } else {
     setPasswordError("");
   }
@@ -42,15 +44,13 @@ function calculateAngle(coordinates) {
 function validateCredentials(credentials, setError, policyChecked) {
   var errorMsg = "";
 
-  if (credentials.password.length < 6)
-    errorMsg = "Password must be 6 characters";
+  if (credentials.password.length < 6) errorMsg = t("passwordError");
 
-  if (credentials.username.length < 3)
-    errorMsg = "Username have to 3 character";
+  if (credentials.username.length < 3) errorMsg = t("usernameError");
 
-  if (!isValidEmail(credentials.email)) errorMsg = "email not valid";
+  if (!isValidEmail(credentials.email)) errorMsg = t("emailError");
 
-  if (!policyChecked) errorMsg = "Please check policy conditons ";
+  if (!policyChecked) errorMsg = t("checkPolicyError");
 
   if (errorMsg == "") {
     return true;
@@ -63,24 +63,23 @@ function validateCredentials(credentials, setError, policyChecked) {
 function editAccountValidateCredentials(credentials, setError) {
   var errorMsg = "";
 
-  if (!isValidEmail(credentials.email)) errorMsg = "email not valid";
+  if (!isValidEmail(credentials.email)) errorMsg = t("emailError");
 
   if (
     credentials.phoneNumber?.length < 4 ||
     credentials.phoneNumber == undefined ||
     isNaN(credentials.phoneNumber)
   ) {
-    errorMsg = "Phone Number is  invalid";
+    errorMsg = t("phoneNumberInvaildErorr");
   }
 
-  if (credentials.username.length < 3)
-    errorMsg = "Username have to 3 character";
+  if (credentials.username.length < 3) errorMsg = t("usernameError");
 
   if (credentials.lastName?.length == "" || credentials.lastName == undefined)
-    errorMsg = "Last Name can't be empty ";
+    errorMsg = t("lastNameError");
 
   if (credentials.firstName?.length == "" || credentials.firstName == undefined)
-    errorMsg = "First Name can't be empty ";
+    errorMsg = t("firstNameError");
 
   if (errorMsg == "") {
     setError();

@@ -109,26 +109,26 @@ const Activity = ({ navigation }) => {
         {/* income */}
         <View style={styles.contanier}>
           <IconButton
-            icon={icons.back_arrow}
-            iconStyle={{ width: 20, height: 20 }}
+            icon={icons.down_arrow}
+            iconStyle={{ width: 30, height: 30 }}
             containerStyle={styles.iconContanier}
           />
           <View>
             <Text style={styles.text}>{t("income")}</Text>
-            <Text style={styles.amount}>$5,300.00</Text>
+            <Text style={styles.amount}>$1,300.00</Text>
           </View>
         </View>
         {/* expense */}
         <View style={styles.contanier}>
           <IconButton
-            icon={icons.back_arrow}
+            icon={icons.up_arrow}
             iconStyle={{ width: 20, height: 20 }}
             containerStyle={styles.iconContanier}
           />
           <View>
             <Text style={styles.text}>{t("expense")}</Text>
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.amount}>
-              $2,265.80
+              $265.80
             </Text>
           </View>
         </View>
@@ -193,22 +193,22 @@ const Activity = ({ navigation }) => {
           <CategorieItem
             icon={icons.home}
             iconStyle={{ tintColor: "#1DAB87" }}
-            label={t("investments")}
-            amount={"$595.20"}
+            label={t("Shopping")}
+            amount={"$85.20"}
+            containerStyle={{ marginLeft: 20 }}
+          />
+          <CategorieItem
+            icon={icons.home}
+            iconStyle={{ tintColor: "#1DAB87" }}
+            label={t("Fitness ")}
+            amount={"$350"}
             containerStyle={{ marginLeft: 20 }}
           />
           <CategorieItem
             icon={icons.home}
             iconStyle={{ tintColor: "#1DAB87" }}
             label={t("investments")}
-            amount={"$595.20"}
-            containerStyle={{ marginLeft: 20 }}
-          />
-          <CategorieItem
-            icon={icons.home}
-            iconStyle={{ tintColor: "#1DAB87" }}
-            label={t("investments")}
-            amount={"$595.20"}
+            amount={"$350"}
             containerStyle={{ marginLeft: 20 }}
           />
         </ScrollView>

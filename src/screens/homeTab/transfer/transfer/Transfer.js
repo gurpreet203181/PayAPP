@@ -26,7 +26,7 @@ const Transfer = ({ navigation }) => {
     return (
       <Header
         title={t("transferMoney")}
-        leftIcon={icons.left_arrow}
+        leftIcon={icons.close}
         onLeftIconPress={() => navigation.goBack()}
       />
     );
@@ -64,19 +64,48 @@ const Transfer = ({ navigation }) => {
   }
   return (
     <View
-      style={{ flex: 1, backgroundColor: COLORS.white, alignItems: "center" }}
+      style={{ flex: 1, backgroundColor: COLORS.red, alignItems: "center" }}
     >
       {/* header */}
-      {renderHeader()}
+      <View
+        style={{ flex: 0.05, width: "100%", backgroundColor: COLORS.white }}
+      >
+        {renderHeader()}
+      </View>
 
       {/* reder latest recent contact */}
-      {renderContact()}
+      <View
+        style={{
+          flex: 0.25,
+          width: "100%",
+          alignItems: "center",
+          backgroundColor: COLORS.white,
+        }}
+      >
+        {renderContact()}
+      </View>
 
       {/* render virtual keyboard  and text  */}
-      {renderKeyboard_Text()}
+      <View
+        style={{
+          flex: 0.6,
+          width: "100%",
+          alignItems: "center",
+          backgroundColor: COLORS.white,
+        }}
+      >
+        {renderKeyboard_Text()}
+      </View>
 
       {/* continue button */}
-      <View>
+      <View
+        style={{
+          flex: 0.1,
+          width: "100%",
+          alignItems: "center",
+          backgroundColor: COLORS.white,
+        }}
+      >
         <Button
           label={t("continue")}
           containerStyle={styles.continueButton}
@@ -109,7 +138,6 @@ const styles = StyleSheet.create({
   keyboard: {
     justifyContent: "flex-start",
     alignItems: "center",
-    marginTop: 45,
     // ...SIZES.marginHorizontal
   },
   amount: {
@@ -124,7 +152,6 @@ const styles = StyleSheet.create({
     height: 56,
     borderRadius: 16,
     backgroundColor: COLORS.darkBlue3,
-    marginTop: 30,
     justifyContent: "center",
     alignItems: "center",
     ...SIZES.marginHorizontal,

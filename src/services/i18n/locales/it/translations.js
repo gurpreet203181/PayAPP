@@ -1,4 +1,10 @@
 const it = {
+  //App general
+  appName: "PayApp",
+  //bottomTab
+  tabHome: "Home",
+  tabProfile: "profilo",
+
   //Home
   welcome: "Bentornto",
   hello: "Ciao",
@@ -29,11 +35,17 @@ const it = {
   authLayout_Title: "Iniziamo ora!",
   authLayout_SignUp_SubTitle:
     "Iscriviti con Social o compila il form per continuare.",
+
+  passwordError: "La password deve essere di 6 caratteri",
+  usernameError: "Il nome utente deve essere lungo 3 caratteri",
+  checkPolicyError: "Si prega di accettare condizioni della polizza",
+
   //SignIN
   authLayout_TitleSignIn: "Benvenuto",
   authLayout_SignIn_SubTitle:
     "Accedi con Social o compila il form per continuare",
   rememberMe: "Ricordati di me la prossima volta",
+  errorMsg: "Email o password errati.",
 
   //Forgot Password
   restPassword: "Resetta la password",
@@ -42,7 +54,13 @@ const it = {
     "Se hai bisogno di aiuto per reimpostare la tua password, possiamo aiutarti inviandoti un link per reimpostarla.",
   next: "Prossima",
   back: "Indietro",
-  errorMsg: "Email o password errati.",
+  reset: "Ripristina",
+  checkEmail: "Controlla la tua e-mail",
+  resetConfirmation:
+    "Abbiamo inviato le istruzioni per la reimpostazione della password a:",
+  ifNotArrived:
+    "Se non è ancora arrivata  controlla la tua cartella spam  o invia l'e-mail di nuovo",
+
   //Otp
   authLayout_TitleOtp: "Verifica numero di telefono",
   authLayout_Otp_SubTitle:
@@ -106,7 +124,7 @@ const it = {
   recentsContacts: "Contatti recenti",
   allContacts: "Tutti i contatti",
   select: "Selezionare",
-
+  noContacts: "Nessun contatto trovato",
   //PaymentMethod
   paymentMethod: "Metodo di pagamento",
   choosePaymentMethod: "Scegli il metodo di pagament",
@@ -126,7 +144,7 @@ const it = {
   applyPromo: "Applicare",
   total: "Totale",
   swipeToSend: "Swipe per inviare",
-
+  transferDetails: "Dettagli del trasferimento  ",
   //more
   menu: "Menu",
   shortcuts: "Shortcuts",
@@ -139,12 +157,79 @@ const it = {
   settings: "Impostazioni",
   help: "Aiuto",
 
-  //top up
-  topUp: "Riempire",
-  enterAmount: "Inserire l'importo:",
-  topUpFee: "Tariffa di ricarica",
-  confirmTopUp: "Conferma Ricarica",
-  total: "Totale",
-  fee: "Tassa",
+  //withdraw
+  withdraw: "Prelievo",
+  maxAmount: "Massimo",
+  selectBank: "Seleziona la tua banca",
+  addBank: "Aggiungi nuova bancak",
+  confirm: "Confermare",
+  withdrawDetails: "Prelievo Detail",
+  confirmWithdraw: "Confermare Prelievo",
+  //activity tab
+  activity: "Attività",
+  totalSpending: "Spesa totale",
+  income: "Reddito",
+  expense: "Spese",
+  categories: "Categorie",
+  investments: "Investimenti",
+  //profile tab
+  profile: "Profilo",
+  referralCode: "Codice di riferimento",
+  accountInfo: "Informazioni sull'account",
+  contactList: "Lista dei contatti",
+  language: "Lingua",
+  generalSetting: "Impostazioni generali",
+  changePassword: "Cambia la password",
+  changePin: "Modifica il PIN di accesso",
+  FAQs: "FAQs",
+  rateUs: "Rate Us",
+  contactsUs: "Contattaci",
+  //notification
+  notification: "Notifica",
+  today: "Oggi",
+  older: "Vecchio",
+  noNotification: "Ancora nessuna notifica!",
+  noNotificationText: "Ti avviseremo quando arriverà qualcosa!",
+  //contactList
+  friends: "Amici",
+  invite: "Invitare",
+  yourContacts: "I tuoi contatti su PayApp",
+  poke: "Poke",
+  poked: "Poked",
+  //AccountInfo
+  accountInfo: "Informazioni sull'account",
+  personalInfo: "Informazioni personali",
+  contactInfo: "Informazioni di contatto",
+  yourName: "Tuo nome",
+  username: "To cognome",
+  AccountPhonenumber: "Numero di telefono",
+  AccountEmail: "Email",
+  edit: "Modificare",
+  //Logout
+  logoutText: "Sei sicuro di voler uscire?",
+  cancel: "Annulla",
+  yesLogout: "Sì, esci",
+  //contactus
+  maxWords: "Max 250 parole",
+  sendMessage: "Invia messaggio",
+  contactUsText: "Non essere timido, fai domande",
+  //emailverfication
+  emailVerfication_Title: "verifica email",
+  emailVerfication_SubTitle:
+    "Abbiamo inviato link sul tuo email per verificare questo email",
+  resendEmail: "Rinvia l'e-mail",
+  resendLinkmsg: "Nuovo link è stata inviato all'e-mail",
+  emailVerficationErrorMsg:
+    "Si prega di controllare il link inviato nell'e-mail. non lo ricevi, premi invia di nuovo e-mail",
+  //edit profile
+  editAccount: "Modifica account",
+  firstName: "Nome",
+  lastName: "Cognome",
+  phoneNumber: "Numero di telefono",
+  save: "Salva",
+  invaildNumber: "Il numero  non è valido",
+  phoneNumberInvaildError: "Il numero non è valido",
+  lastNameError: "Il cognome non può essere vuoto ",
+  firstNameError: "Il nome non può essere vuoto ",
 };
 export default it;

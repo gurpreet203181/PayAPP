@@ -17,7 +17,6 @@ const SignIn = ({ navigation }) => {
 
   const signIn = async () => {
     try {
-      console.log(utils.isValidEmail(value.email));
       if (utils.isValidEmail(value.email) && value.password.length > 6) {
         await auth.signInWithEmailAndPassword(value.email, value.password);
       } else setError(t("errorMsg"));

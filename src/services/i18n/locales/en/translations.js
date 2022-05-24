@@ -34,7 +34,10 @@ const en = {
   authLayout_Title: "Let’s Get Started!",
   authLayout_SignUp_SubTitle:
     "Sign up with Social of fill the form to continue.",
-
+  passwordError: "Password must be 6 characters",
+  usernameError: "Username have to 3 character",
+  emailError: "Email not valid",
+  checkPolicyError: "Please check policy conditons",
   //SignIN
   authLayout_TitleSignIn: "Welcome",
   authLayout_SignIn_SubTitle:
@@ -118,6 +121,7 @@ const en = {
   recentsContacts: "Recents Contacts",
   allContacts: "All Contacts",
   select: "Select",
+  noContacts: "No contacts found ",
 
   //PaymentMethod
   paymentMethod: "Payment Method",
@@ -238,5 +242,8 @@ const en = {
   phoneNumber: "Phone Number",
   save: "Save",
   invaildNumber: " Phone is invaild",
+  phoneNumberInvaildError: "Phone Number is  invalid",
+  lastNameError: "Last Name can't be empty ",
+  firstNameError: "First Name can't be empty",
 };
 export default en;

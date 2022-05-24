@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { t } from "@hooks/UseI18n";
 import { View, Text, StyleSheet, FlatList, ScrollView } from "react-native";
-import { COLORS, icons, SIZES, dummyData } from "@constants";
+import { COLORS, icons, SIZES, dummyData, FONTS } from "@constants";
 import { Header, SearchBar, Section, ContactItem, List } from "@components";
 import Modal from "react-native-modal";
 import { useDispatch } from "react-redux";
 import { setSelectedContact } from "@redux/reducers/contactSlice";
+import LottieView from "lottie-react-native";
 
 const SelectContactModel = ({ isVisible, closeModel }) => {
   const dispatch = useDispatch(); //redux dispatch to set selectedcontact
@@ -46,7 +47,21 @@ const SelectContactModel = ({ isVisible, closeModel }) => {
     }
   }, [searchPhrase]);
 
-  //render
+  //redner
+  function renderLottie() {
+    return (
+      <LottieView
+        source={require("../../../assets/images/61372-404-error-not-found.json")}
+        autoPlay
+        loop={true}
+        style={{
+          width: "100%",
+          height: 200,
+          alignSelf: "center",
+        }}
+      />
+    );
+  }
   function renderHeader() {
     return (
       <Header
@@ -163,8 +178,17 @@ const SelectContactModel = ({ isVisible, closeModel }) => {
 
         {/* render not found view in case not found contact on search */}
         {filterContacts.length == 0 && (
-          <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <Text>Not Found</Text>
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 80,
+            }}
+          >
+            {renderLottie()}
+            <Text style={{ marginTop: 40, ...FONTS.h2, fontSize: 15 }}>
+              {t("noContacts")}
+            </Text>
           </View>
         )}
       </View>
