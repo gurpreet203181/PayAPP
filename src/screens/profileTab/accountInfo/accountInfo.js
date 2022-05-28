@@ -27,7 +27,7 @@ const AccountInfo = ({ navigation }) => {
   function renderProfileImage() {
     return (
       <TouchableOpacity
-        onPress={() => navigation.navigate("EditProfileImg")}
+        // onPress={() => navigation.navigate("EditProfileImg")}
         style={{
           ...SIZES.marginHorizontal,
           justifyContent: "center",
