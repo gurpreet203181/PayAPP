@@ -32,8 +32,8 @@ const WithDraw = ({ navigation }) => {
     return (
       <Header
         title={t("withdraw")}
-        rightIcon={icons.right_arrow}
-        onRightIconPress={() => navigation.goBack()}
+        leftIcon={icons.close}
+        onLeftIconPress={() => navigation.goBack()}
       />
     );
   }
@@ -98,11 +98,29 @@ const WithDraw = ({ navigation }) => {
       {renderHeader()}
 
       {/* Bank  */}
-      {renderBankItem()}
-
+      <View
+        style={{
+          flex: 0.25,
+          width: "100%",
+          alignItems: "center",
+          backgroundColor: COLORS.white,
+        }}
+      >
+        {renderBankItem()}
+      </View>
       {/* Virutal keyborad and typed text */}
-      {renderKeyboard_Text()}
-      <View>
+      <View
+        style={{
+          flex: 0.6,
+          width: "100%",
+          alignItems: "center",
+          backgroundColor: COLORS.white,
+        }}
+      >
+        {renderKeyboard_Text()}
+      </View>
+
+      <View style={{ flex: 0.1 }}>
         {/* continue button  */}
         <Button
           label={t("continue")}
@@ -147,7 +165,6 @@ const styles = StyleSheet.create({
   keyboard: {
     justifyContent: "flex-start",
     alignItems: "center",
-    marginTop: 45,
     // ...SIZES.marginHorizontal
   },
   amount: {

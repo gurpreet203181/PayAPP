@@ -1,17 +1,21 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Alert, Image } from "react-native";
 import { t } from "@hooks/UseI18n";
 import { MoreItem, Header, LineDivider } from "@components";
-import { FONTS, COLORS, icons, SIZES } from "@constants";
+import { FONTS, COLORS, icons, SIZES, images } from "@constants";
 
 const More = ({ navigation }) => {
+  const createTwoButtonAlert = () =>
+    Alert.alert("", t("commingSoon"), [
+      { text: "OK", onPress: () => console.log("OK Pressed") },
+    ]);
   //header
   function renderHeader() {
     return (
       <Header
-        title={t("menu")}
-        rightIcon={icons.right_arrow}
-        onRightIconPress={() => navigation.goBack()}
+        title={t("more")}
+        leftIcon={icons.left_arrow}
+        onLeftIconPress={() => navigation.goBack()}
       />
     );
   }
@@ -37,6 +41,7 @@ const More = ({ navigation }) => {
           icon={icons.transfer}
           title={t("billPayment")}
           iconContainerStyle={{ backgroundColor: "#32A7E2" }}
+          onPress={createTwoButtonAlert}
         />
         <MoreItem
           icon={icons.transfer}
@@ -58,22 +63,24 @@ const More = ({ navigation }) => {
           icon={icons.transfer}
           title={t("historyTransactions")}
           iconContainerStyle={{ backgroundColor: "#32A7E2" }}
+          onPress={() => navigation.navigate("Transactions", { item: "all" })}
         />
         <MoreItem
           icon={icons.transfer}
           title={t("requestPayment")}
           iconContainerStyle={{ backgroundColor: "#32A7E2" }}
+          onPress={createTwoButtonAlert}
         />
-        <MoreItem
+        {/* <MoreItem
           icon={icons.transfer}
           title={t("settings")}
           iconContainerStyle={{ backgroundColor: "#32A7E2" }}
-        />
-        <MoreItem
+        /> */}
+        {/* <MoreItem
           icon={icons.transfer}
           title={t("help")}
           iconContainerStyle={{ backgroundColor: "#32A7E2" }}
-        />
+        /> */}
       </ScrollView>
     );
   }
@@ -87,10 +94,14 @@ const More = ({ navigation }) => {
           height: 206,
           justifyContent: "center",
           alignItems: "center",
+          marginTop: 30,
           ...SIZES.marginHorizontal,
         }}
       >
-        <Text>comming soon</Text>
+        <Image
+          source={images.moreFeatures}
+          style={{ width: "100%", height: 250, resizeMode: "cover" }}
+        />
       </View>
       {/* Menu */}
       {renderItems()}

@@ -4,6 +4,12 @@ import { View, StyleSheet, Image, Text, ScrollView } from "react-native";
 import { COLORS, icons, FONTS, SIZES, dummyData } from "@constants";
 import { Header, Section, FormInput, Button } from "@components";
 import { useSelector } from "react-redux";
+import { TouchableOpacity } from "react-native-gesture-handler";
+
+//avater
+import { createAvatar } from "@dicebear/avatars";
+import * as style from "@dicebear/avatars-avataaars-sprites";
+
 const AccountInfo = ({ navigation }) => {
   const { user } = useSelector((state) => state.userInfo);
   console.log("account info user");
@@ -20,7 +26,8 @@ const AccountInfo = ({ navigation }) => {
   }
   function renderProfileImage() {
     return (
-      <View
+      <TouchableOpacity
+        onPress={() => navigation.navigate("EditProfileImg")}
         style={{
           ...SIZES.marginHorizontal,
           justifyContent: "center",
@@ -46,13 +53,14 @@ const AccountInfo = ({ navigation }) => {
               : icons.user
           }
         />
+
         <View style={styles.imgEdit}>
           <Image
             source={icons.pencil}
             style={{ width: 12, height: 12, tintColor: COLORS.white }}
           />
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
   return (

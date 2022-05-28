@@ -27,7 +27,7 @@ const TopUp = ({ navigation }) => {
     return (
       <Header
         title={t("topUp")}
-        leftIcon={icons.back_arrow}
+        leftIcon={icons.close}
         onLeftIconPress={() => navigation.goBack()}
       />
     );
@@ -38,7 +38,7 @@ const TopUp = ({ navigation }) => {
         <View style={styles.boxRow}>
           <Text style={styles.boxText}>{t("enterAmount")}</Text>
           <Text adjustsFontSizeToFit lineHeight={1} style={styles.boxText}>
-            {t("topUpFee")} $3
+            {t("topUpFee")} €0
           </Text>
         </View>
 
@@ -108,7 +108,7 @@ const TopUp = ({ navigation }) => {
   }
   function renderKeyboard_Text() {
     return (
-      <View style={styles.keyboard}>
+      <View style={{ ...styles.keyboard, flex: 0.6 }}>
         {/* <Text numberOfLines={1} adjustsFontSizeToFit style={styles.amount}>
           {amount}
         </Text> */}
@@ -134,16 +134,21 @@ const TopUp = ({ navigation }) => {
     >
       {/* Header */}
       {renderHeader()}
+      <View style={{ flex: 0.25 }}>
+        {/* Select PaymentMethod */}
+        {renderAmount()}
 
-      {/* Select PaymentMethod */}
-      {renderAmount()}
-
-      {/* amount Buttons */}
-      {rednerButtons()}
+        {/* amount Buttons */}
+        {rednerButtons()}
+      </View>
 
       {/* render virtual keyboard  and text  */}
       {renderKeyboard_Text()}
-      <View>
+      <View
+        style={{
+          flex: 0.1,
+        }}
+      >
         <Button
           label={t("continue")}
           containerStyle={styles.continueButton}

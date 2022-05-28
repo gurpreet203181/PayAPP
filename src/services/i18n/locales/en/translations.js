@@ -5,7 +5,7 @@ const en = {
   tabHome: "Home",
   tabProfile: "Profile",
   //Home
-  welcome: "Welcome Back!",
+  welcome: "Welcome ",
   hello: "Hello",
   yourBalance: "Total Balance",
   send: "Send",
@@ -71,6 +71,20 @@ const en = {
   next: "Next",
   started: "Get Started",
 
+  slide1Title: "Easy, Fast & Trusted",
+  slide1description:
+    "Fast money transfer and gauranteed safe transactions with others.",
+
+  slide2Title: "Free Transactions",
+  slide2description:
+    "Provides the quality of the financial system with free money transactions without any fees.",
+
+  slide3Title: "Multiple Credit Cards",
+  slide3description:
+    "Provides the 100% freedom of the financial management with Multiple Payment Options for local & International Payments.",
+
+  slide4Title: "Bills Payment Made Easy",
+  slide4description: "Pay monthly or daily bills at home with PayApp",
   //card
   cardHolder: "Card holder",
   expires: "EXPIRES",
@@ -93,6 +107,7 @@ const en = {
   noSearchResult: "We couldnt find any transaction based on your search",
   Filter: "Filter your search",
   apply: "Apply Filters",
+  PriceRange: "Amount Spent ",
 
   //success
   paymentSuccess: "Payment Sucscess",
@@ -155,6 +170,7 @@ const en = {
   requestPayment: "Request Payment",
   settings: "Settings",
   help: "Help",
+  commingSoon: "Comming soon",
   logout: "Logout",
   //top up
   topUp: "Top Up",
@@ -245,5 +261,8 @@ const en = {
   phoneNumberInvaildError: "Phone Number is  invalid",
   lastNameError: "Last Name can't be empty ",
   firstNameError: "First Name can't be empty",
+
+  //editprofileImg
+  selectImg: "Set a picture for yourself,{{name}}",
 };
 export default en;

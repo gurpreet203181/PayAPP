@@ -6,7 +6,7 @@ const it = {
   tabProfile: "profilo",
 
   //Home
-  welcome: "Bentornto",
+  welcome: "Benvenuto",
   hello: "Ciao",
   yourBalance: "Saldo Totale",
   send: "Invio",
@@ -30,6 +30,22 @@ const it = {
     "Registrandoti, accetti i Termini di servizio e l'Informativa sulla privacy",
   passwordError: "Password errata",
   emailErrore: "E-mail non valido",
+
+  //onBoarding
+  slide1Title: "Facile, veloce e affidabile",
+  slide1description:
+    "Trasferimento di denaro veloce e transazioni sicure garantite con gli altri.",
+
+  slide2Title: "Transazioni gratuite",
+  slide2description:
+    "Fornisce la qualità del sistema finanziario con transazioni di denaro gratuite senza commissioni.",
+
+  slide3Title: "Multiple carte di credito",
+  slide3description:
+    "Fornisce il 100% di libertà di gestione finanziaria con opzioni di pagamento multiple per pagamenti locali e internazionali.",
+
+  slide4Title: "Pagamento delle bollette reso facile",
+  slide4description: "Paga le bollette mensili o giornaliere a casa con PayApp",
 
   //SignUp
   authLayout_Title: "Iniziamo ora!",
@@ -96,7 +112,7 @@ const it = {
     "Non siamo riusciti a trovare alcuna transazione in base alla tua ricerca",
   Filter: "Filter your search",
   apply: "Applica filtri ",
-
+  PriceRange: "Importo speso",
   //success
   paymentSuccess: "Pagamento Andato Buon Fine",
   procced: "Procedere",
@@ -109,6 +125,7 @@ const it = {
   link: "Link",
   bill: "Fattura",
   more: "Più",
+
   incomingTransaction: "Transazioni in entrata",
   outgoingTansaction: "Transazione in uscita",
   noBalance:
@@ -156,6 +173,7 @@ const it = {
   requestPayment: "Richiesta di pagamento",
   settings: "Impostazioni",
   help: "Aiuto",
+  commingSoon: "Prossimamente",
 
   //withdraw
   withdraw: "Prelievo",
@@ -231,5 +249,8 @@ const it = {
   phoneNumberInvaildError: "Il numero non è valido",
   lastNameError: "Il cognome non può essere vuoto ",
   firstNameError: "Il nome non può essere vuoto ",
+
+  //editprofileImg
+  selectImg: "Imposta una foto per te stesso,{{name}}",
 };
 export default it;

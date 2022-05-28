@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { t } from "@hooks/UseI18n";
-import { View, SafeAreaView, Image, Text, StyleSheet } from "react-native";
+import {
+  View,
+  SafeAreaView,
+  Image,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import { FormInput, Button, LineDivider, CheckBox } from "@components";
 import AuthLayout from "./AuthLayout";
 import { COLORS, FONTS, dummyData, SIZES, icons } from "@constants";
@@ -68,11 +75,23 @@ const SignIn = ({ navigation }) => {
                 setValue({ ...value, password: text });
                 setError("");
               }}
+              inputStyle={{ width: "80%" }}
               prependComponenet={
                 <Image
                   source={icons.lock}
                   style={{ width: 20, height: 20, tintColor: COLORS.black2 }}
                 />
+              }
+              appendComponenet={
+                <TouchableOpacity
+                  style={{ width: 30 }}
+                  onPress={() => setShowPass(!showPass)}
+                >
+                  <Image
+                    source={showPass ? icons.eye : icons.eyeOff}
+                    style={{ width: 20, height: 20, tintColor: COLORS.black2 }}
+                  />
+                </TouchableOpacity>
               }
             />
 

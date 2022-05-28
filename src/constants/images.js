@@ -1,6 +1,5 @@
 const WelcomeShape = require("../assets/images/WelcomeShape.jpg");
-const Logo = require("../assets/images/Logo.png");
-const Logo2 = require("../assets/images/logo2.png");
+const Logo = require("../assets/adaptive-icon.png");
 
 const nfc = require("../assets/images/nfc.jpg");
 const bill = require("../assets/images/bill.jpg");
@@ -14,11 +13,15 @@ const successfulLottie2 = require("../assets/images/68590-safe-money-transfer.js
 const boy = require("../assets/images/boy.png");
 const loading2 = require("../assets/images/97798-loading.json");
 const emailSent = require("../assets/images/emailsend2.json");
-
+const onBorading1 = require("../assets/images/onboarding1.png");
+const onBorading2 = require("../assets/images/onboarding2.png");
+const onBorading3 = require("../assets/images/onboarding3.png");
+const onBorading4 = require("../assets/images/onboarding4.png");
+const userPlaceholder = require("../assets/images/userPlaceholder.png");
+const moreFeatures = require("../assets/images/moreFeatures.jpg");
 export default {
   WelcomeShape,
   Logo,
-  Logo2,
   nfc,
   bill,
   payment,
@@ -31,4 +34,10 @@ export default {
   boy,
   loading2,
   emailSent,
+  onBorading1,
+  onBorading2,
+  onBorading3,
+  onBorading4,
+  userPlaceholder,
+  moreFeatures,
 };

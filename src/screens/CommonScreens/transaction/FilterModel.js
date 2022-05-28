@@ -43,7 +43,9 @@ const FilterModel = ({ isVisible, onClosePress, filters }) => {
             showsVerticalScrollIndicator={false}
           >
             <View style={{ flex: 1 }} onStartShouldSetResponder={() => true}>
-              <Text style={{ ...FONTS.h4, fontSize: 14 }}>Price Range</Text>
+              <Text style={{ ...FONTS.h4, fontSize: 14 }}>
+                {t("PriceRange")}
+              </Text>
 
               {/* Custom multi slider which use @ptomasroos/react-native-multi-slider library with custom desgin  */}
               <CustomMultiSlider
@@ -68,6 +70,8 @@ const FilterModel = ({ isVisible, onClosePress, filters }) => {
                            onPress get useCallBack function and pass appliedFilters array filter trasaction list later */}
               <Button
                 label={t("apply")}
+                containerStyle={styles.filterButton}
+                labelStyle={styles.filterButtonLabel}
                 onPress={() => {
                   filters(appliedFilters);
                 }}
@@ -86,5 +90,17 @@ const styles = StyleSheet.create({
   view: {
     justifyContent: "flex-end",
     margin: 0,
+  },
+  filterButton: {
+    alignSelf: "center",
+    backgroundColor: COLORS.darkBlue3,
+    width: 160,
+    height: 56,
+    borderRadius: 16,
+  },
+  filterButtonLabel: {
+    color: COLORS.white,
+    ...FONTS.h4,
+    fontSize: 15,
   },
 });

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { t } from "@hooks/UseI18n";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
-import { COLORS, icons, SIZES, dummyData, FONTS } from "@constants";
+import { COLORS, icons, SIZES, dummyData, FONTS, images } from "@constants";
 import { Header, MoreItem, LineDivider } from "@components";
 import LogoutModal from "./logout/logoutModal";
 import { useSelector } from "react-redux";
@@ -33,7 +33,7 @@ const Profile = ({ navigation }) => {
               ? {
                   uri: user.profileUrl,
                 }
-              : icons.user
+              : images.userPlaceholder
           }
         />
         <Text style={styles.nameText}>{user?.username}</Text>
@@ -75,12 +75,12 @@ const Profile = ({ navigation }) => {
             width: "85%",
           }}
         />
-        <MoreItem
+        {/* <MoreItem
           icon={icons.option}
           title={t("generalSetting")}
           iconStyle={{ tintColor: "#5FA8EE" }}
           onPress={() => navigation.navigate("Transfer")}
-        />
+        /> */}
         <MoreItem
           icon={icons.option}
           title={t("changePassword")}
@@ -91,12 +91,12 @@ const Profile = ({ navigation }) => {
             })
           }
         />
-        <MoreItem
+        {/* <MoreItem
           icon={icons.option}
           title={t("changePin")}
           iconStyle={{ tintColor: "#AB92F0" }}
           onPress={() => navigation.navigate("Transfer")}
-        />
+        /> */}
         <LineDivider
           lineStyle={{
             height: 1,
@@ -112,13 +112,13 @@ const Profile = ({ navigation }) => {
           iconStyle={{ tintColor: "#55BBC5" }}
           onPress={() => navigation.navigate("ContactUs")}
         />
-        <MoreItem
+        {/* <MoreItem
           icon={icons.option}
           title={t("rateUs")}
           iconStyle={{ tintColor: "#FACC15" }}
           containerStyle={{ marginBottom: 40 }}
           onPress={() => navigation.navigate("Transfer")}
-        />
+        /> */}
         <MoreItem
           icon={icons.logout}
           title={t("logout")}

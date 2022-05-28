@@ -26,6 +26,7 @@ import {
   EmailVerfication,
   Otp,
   EditAccount,
+  EditProfileImg,
 } from "@screens";
 import Tabs from "./tabs";
 import { auth } from "../config/firebase";
@@ -82,6 +83,7 @@ export default function UserStack() {
         {/* account screen */}
         <Stack.Screen name="AccountInfo" component={AccountInfo} />
         <Stack.Screen name="EditAccount" component={EditAccount} />
+        <Stack.Screen name="EditProfileImg" component={EditProfileImg} />
 
         <Stack.Screen name="ContactUs" component={ContactUs} />
         <Stack.Screen name="Activity" component={Activity} />

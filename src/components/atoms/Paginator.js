@@ -12,7 +12,7 @@ const Paginator = ({ data, scrollX }) => {
 
         const doWidth = scrollX.interpolate({
           inputRange,
-          outputRange: [10, 22, 10],
+          outputRange: [10, 10, 10],
           extrapolate: "clamp",
         });
         const opacity = scrollX.interpolate({
@@ -20,9 +20,21 @@ const Paginator = ({ data, scrollX }) => {
           outputRange: [0.3, 1, 0.3],
           extrapolate: "clamp",
         });
+        const backgroundColor = scrollX.interpolate({
+          inputRange,
+          outputRange: ["#8EDFEB", COLORS.darkBlue3, "#8EDFEB"],
+          extrapolate: "clamp",
+        });
         return (
           <Animated.View
-            style={[styles.dot, { width: doWidth, opacity }]}
+            style={[
+              styles.dot,
+              {
+                width: doWidth,
+                //  opacity,
+                backgroundColor,
+              },
+            ]}
             key={i.toString()}
           />
         );
@@ -36,8 +48,8 @@ export default Paginator;
 const styles = StyleSheet.create({
   dot: {
     height: 10,
-    borderRadius: 20,
-    backgroundColor: COLORS.black2,
-    marginHorizontal: 8,
+    borderRadius: 5,
+    backgroundColor: COLORS.darkBlue3,
+    marginHorizontal: 16,
   },
 });

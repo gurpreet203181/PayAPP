@@ -139,28 +139,31 @@ const Activity = ({ navigation }) => {
     <View style={{ flex: 1, backgroundColor: COLORS.white }}>
       {/* Header */}
       {renderHeader()}
-      {/* Total spending */}
-      <View style={styles.spendingView}>
-        <View>
-          <Text style={styles.totalSpendText}>{t("totalSpending")}</Text>
-          <Text style={styles.total}>$2,265.80</Text>
-        </View>
-        {/* Period */}
-        <View style={styles.periodBox}>
-          <Text style={styles.periodText}>Month</Text>
-          <Image
-            source={icons.down_arrow}
-            style={{ width: 16, height: 16, marginLeft: 8 }}
-          />
+      <View style={{ flex: 2 }}>
+        {/* Total spending */}
+        <View style={styles.spendingView}>
+          <View>
+            <Text style={styles.totalSpendText}>{t("totalSpending")}</Text>
+            <Text style={styles.total}>$2,265.80</Text>
+          </View>
+          {/* Period */}
+          <View style={styles.periodBox}>
+            <Text style={styles.periodText}>Month</Text>
+            <Image
+              source={icons.down_arrow}
+              style={{ width: 16, height: 16, marginLeft: 8 }}
+            />
+          </View>
         </View>
       </View>
+
       {/* Bar Chart */}
       {renderBarChart()}
       {/* Income and Expense */}
       {renderIncome_ExpenseButton()}
 
       {/* Categories */}
-      <View style={{ marginTop: 50, ...SIZES.marginHorizontal }}>
+      <View style={{ flex: 5, marginTop: 50, ...SIZES.marginHorizontal }}>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <Text
             adjustsFontSizeToFit

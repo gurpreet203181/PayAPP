@@ -55,10 +55,11 @@ const LogoutModal = ({ isVisible, onClosePress, onLogoutPress }) => {
         </Text>
         <View
           style={{
-            width: "70%",
+            width: "100%",
             flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent: "space-around",
             marginTop: 30,
+            paddingHorizontal: 40,
           }}
         >
           <Button

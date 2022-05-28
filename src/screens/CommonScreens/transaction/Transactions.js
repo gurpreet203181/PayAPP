@@ -13,7 +13,7 @@ import { Header, Section, SearchBar, List } from "../../../components";
 import FilterModel from "./FilterModel";
 import { Entypo } from "@expo/vector-icons";
 const Transactions = ({ route, navigation }) => {
-  const item = route.params.item;
+  const item = route?.params?.item;
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
   const [data, Setdata] = useState();
@@ -87,7 +87,7 @@ const Transactions = ({ route, navigation }) => {
     return (
       <Header
         title={t("transactions")}
-        leftIcon={icons.back_arrow}
+        leftIcon={icons.close}
         onLeftIconPress={() => navigation.goBack()}
       />
     );
@@ -118,6 +118,7 @@ const Transactions = ({ route, navigation }) => {
               height: 50,
               justifyContent: "center",
               alignItems: "center",
+              paddingLeft: 10,
             }}
             onPress={toggleModal}
           >

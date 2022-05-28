@@ -1,6 +1,8 @@
 import React from "react";
 import { auth, firestoreDb } from "@config/firebase";
 import { useDispatch } from "react-redux";
+//import crashlytics from "@react-native-firebase/crashlytics";
+
 export function useAuthentication() {
   const [user, setUser] = React.useState();
   const dispatch = useDispatch();

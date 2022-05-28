@@ -17,17 +17,11 @@ const OnBoardingItem = ({ data }) => {
         source={data.image}
         style={[styles.image, { width, resizeMode: "contain" }]}
       />
-      <View style={styles.textContainer}>
-        <View style={{ width: 250 }}>
-          <Text adjustsFontSizeToFit numberOfLines={1} style={styles.title}>
-            {data.title}
-          </Text>
-          <View style={{ marginTop: 20 }}>
-            <Text adjustsFontSizeToFit style={styles.description}>
-              {data.description}
-            </Text>
-          </View>
-        </View>
+      <View style={{ width: 320, alignItems: "center" }}>
+        <Text numberOfLines={2} adjustsFontSizeToFit style={styles.title}>
+          {data.title}
+        </Text>
+        <Text style={styles.description}>{data.description}</Text>
       </View>
     </View>
   );
@@ -42,28 +36,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    flex: 0.4,
-    justifyContent: "center",
-  },
-  textContainer: {
-    flex: 0.3,
-    marginTop: 50,
-    marginLeft: 30,
-    width: "100%",
-    alignContent: "flex-start",
+    flex: 0.7,
     justifyContent: "center",
   },
   title: {
-    ...FONTS.h2,
-    fontSize: 25,
-    marginBottom: 22,
-    color: COLORS.black2,
-    textAlign: "left",
+    ...FONTS.h3,
+    fontSize: 35,
+    color: COLORS.darkBlue3,
+    marginTop: 34,
+    lineHeight: 38,
+    textAlign: "center",
   },
   description: {
-    textAlign: "left",
-    color: COLORS.black2,
-    ...FONTS.body3,
-    fontSize: 18,
+    textAlign: "center",
+    marginTop: 18,
+    color: "#878787",
+    ...FONTS.h3,
+    fontSize: 13,
   },
 });

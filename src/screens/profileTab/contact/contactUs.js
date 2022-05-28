@@ -3,11 +3,22 @@ import { t } from "@hooks/UseI18n";
 import { View, Image, Text } from "react-native";
 import { COLORS, FONTS, icons, SIZES } from "@constants";
 import { Header, FormInput, Button } from "@components";
-
+import { sendContactEmail } from "@api/emailjs/sendEmail";
+import { useSelector } from "react-redux";
 const ContactUs = ({ navigation }) => {
+  const userId = useSelector((state) => state.userInfo.user.uid);
+
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [message, setMessage] = useState();
+
+  //sending mail from conatct form
+  const sendEmail = () => {
+    sendContactEmail().then((response) => {
+      console.log(response);
+    });
+  };
+
   //render
   function renderHeader() {
     return (
@@ -105,6 +116,7 @@ const ContactUs = ({ navigation }) => {
         />
         <Button
           label={t("sendMessage")}
+          onPress={sendEmail}
           labelStyle={{ ...FONTS.h3, fontSize: 16, color: COLORS.white }}
           containerStyle={{
             height: 56,

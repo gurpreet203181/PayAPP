@@ -51,6 +51,8 @@ const userOutline = require("../assets/icons/userOutline.png");
 const userFilled = require("../assets/icons/userFilled.png");
 const activity = require("../assets/icons/activity.png");
 const up_arrow = require("../assets/icons/upload.png");
+const eye = require("../assets/icons/eye.png");
+const eyeOff = require("../assets/icons/eyeOff.png");
 
 export default {
   back_arrow,
@@ -106,4 +108,6 @@ export default {
   userFilled,
   activity,
   up_arrow,
+  eye,
+  eyeOff,
 };

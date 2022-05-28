@@ -1,6 +1,5 @@
 import React from "react";
 import { t } from "../../hooks/UseI18n";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   View,
   SafeAreaView,
@@ -11,15 +10,16 @@ import {
 } from "react-native";
 import { Button } from "../../components";
 import { COLORS, FONTS, dummyData, SIZES, images } from "../../constants";
+import SVGImg from "@assets/images/whiteLogo.svg";
 
 const Welcome = ({ navigation }) => {
-  const clearOnboarding = async () => {
+  /*const clearOnboarding = async () => {
     try {
       await AsyncStorage.removeItem("@viewedOnboarding");
     } catch (error) {
       console.log(error);
     }
-  };
+  };*/
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.white }}>
       <ImageBackground
@@ -28,7 +28,7 @@ const Welcome = ({ navigation }) => {
         style={styles.BackgroudImage}
       >
         <View style={{ marginLeft: 40, marginTop: 50 }}>
-          <Image source={images.Logo} style={styles.logo} />
+          <SVGImg width={100} height={100} />
           <Text style={{ marginTop: 20, ...styles.logoText }}>
             {t("welcome")}
           </Text>
@@ -41,6 +41,7 @@ const Welcome = ({ navigation }) => {
           position: "absolute",
           alignSelf: "center",
           bottom: 57,
+          flex: 0.4,
         }}
       >
         <Button
@@ -73,11 +74,6 @@ const Welcome = ({ navigation }) => {
           }}
         />
       </View>
-      <Button
-        label="remove key onboarding"
-        onPress={clearOnboarding}
-        labelStyle={{ color: COLORS.black2 }}
-      />
     </View>
   );
 };
@@ -99,6 +95,7 @@ const styles = StyleSheet.create({
   BackgroudImage: {
     width: "100%",
     height: "90%",
+    flex: 0.7,
   },
   logo: {
     height: 60,

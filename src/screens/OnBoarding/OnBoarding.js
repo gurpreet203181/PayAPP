@@ -47,14 +47,7 @@ const OnBoarding = ({ route }) => {
   }
   return (
     <View style={styles.container}>
-      <View style={styles.background} />
-      {/* logo */}
-      <View style={styles.logoContainer}>
-        <Image source={images.Logo2} />
-      </View>
-
-      {/* Slides */}
-      <View style={{ flex: 3 }}>
+      <View style={{ flex: 0.9 }}>
         <FlatList
           data={slides}
           horizontal
@@ -81,7 +74,7 @@ const OnBoarding = ({ route }) => {
           ref={slidesRef}
         />
       </View>
-      <View style={styles.bottomContanier}>
+      <View style={{ alignItems: "center", flex: 0.3, marginTop: 20 }}>
         {/* Pagination */}
         <Paginator data={slides} scrollX={scrollX} />
 
@@ -89,12 +82,9 @@ const OnBoarding = ({ route }) => {
         {currentIndex < slides.length - 1 && (
           <Button
             onPress={scrollTo}
-            label={t("next")}
+            label={t("continue")}
+            containerStyle={styles.button}
             labelStyle={styles.buttonLabel}
-            containerStyle={{ ...styles.buttonContainer, ...styles.shadow }}
-            icon={icons.right_arrow}
-            iconStyle={styles.buttonIcon}
-            iconPosition="RIGHT"
           />
         )}
         {/* get started button */}
@@ -105,16 +95,11 @@ const OnBoarding = ({ route }) => {
               route?.params?.setViewedOnboarding(true);
             }}
             label={t("started")}
+            containerStyle={styles.button}
             labelStyle={styles.buttonLabel}
-            containerStyle={{
-              ...styles.buttonContainer,
-              ...styles.shadow,
-              width: 150,
-            }}
           />
         )}
       </View>
-      {/* <View style={styles.backgroud}/> */}
     </View>
   );
 };
@@ -123,8 +108,6 @@ export default OnBoarding;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: COLORS.white,
   },
   shadow: {
@@ -137,41 +120,17 @@ const styles = StyleSheet.create({
     shadowRadius: 13.51,
     elevation: 5,
   },
-  logoContainer: {
+  button: {
+    width: 200,
+    height: 59,
+    backgroundColor: COLORS.darkBlue3,
+    borderRadius: 20,
     marginTop: 25,
-    width: 40,
-    height: 40,
-  },
-  bottomContanier: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: "100%",
-    marginBottom: 52,
-    paddingHorizontal: 48,
-  },
-  buttonContainer: {
-    width: 120,
-    height: 56,
-    backgroundColor: COLORS.black2,
-    borderRadius: 28,
   },
   buttonLabel: {
+    ...FONTS.h4,
+    fontSize: 15,
+    letterSpacing: 2,
     color: COLORS.white,
-    ...FONTS.body3,
-  },
-  buttonIcon: {
-    tintColor: COLORS.white,
-    marginLeft: 20,
-  },
-  background: {
-    position: "absolute",
-    backgroundColor: "#F5F6FA",
-    bottom: 0,
-    left: 0,
-    width: "80%",
-    height: "50%",
-    borderTopEndRadius: 200,
-    borderBottomEndRadius: 200,
   },
 });

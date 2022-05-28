@@ -64,14 +64,11 @@ const Transfer = ({ navigation }) => {
   }
   return (
     <View
-      style={{ flex: 1, backgroundColor: COLORS.red, alignItems: "center" }}
+      style={{ flex: 1, backgroundColor: COLORS.white, alignItems: "center" }}
     >
       {/* header */}
-      <View
-        style={{ flex: 0.05, width: "100%", backgroundColor: COLORS.white }}
-      >
-        {renderHeader()}
-      </View>
+
+      {renderHeader()}
 
       {/* reder latest recent contact */}
       <View

@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { t } from "@hooks/UseI18n";
-import { View, SafeAreaView, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet } from "react-native";
 import { COLORS, FONTS, SIZES, icons } from "@constants";
 import { Button, Loading, FormInput } from "@components";
 import AuthLayout from "./AuthLayout";
-import OTPInputView from "@twotalltotems/react-native-otp-input";
-import {
-  checkVerification,
-  sendSmsVerification,
-} from "../../api/twilio/verify";
-import { auth, firestoreDb } from "src/config/firebase";
+
+import { auth } from "src/config/firebase";
 
 const EmailVerfication = ({ route, navigation }) => {
   const [codeResend, setCodeResend] = useState(false);

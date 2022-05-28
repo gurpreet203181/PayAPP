@@ -27,5 +27,6 @@ if (firebase.apps.length === 0) {
 
 const auth = firebase.auth();
 const firestoreDb = firebase.firestore();
-export { auth, firestoreDb };
+const storage = firebase.storage();
+export { auth, firestoreDb, storage };
 //const analytics = getAnalytics(app);

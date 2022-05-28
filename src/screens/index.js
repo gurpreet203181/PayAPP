@@ -28,6 +28,7 @@ import ContactUs from "./profileTab/contact/contactUs";
 import EmailVerfication from "./authentication/EmailVerification";
 import PhoneNumber from "./profileTab/accountInfo/phoneVerfication";
 import EditAccount from "./profileTab/accountInfo/editAccount/editAccount";
+import EditProfileImg from "./profileTab/accountInfo/editProfileImg/editProfileImg";
 export {
   //Common screens
   CardDetail,
@@ -75,4 +76,6 @@ export {
   PhoneNumber,
   EmailVerfication,
   EditAccount,
+  //editProfileimg
+  EditProfileImg,
 };
