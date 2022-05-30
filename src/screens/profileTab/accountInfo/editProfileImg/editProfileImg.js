@@ -34,7 +34,6 @@ const EditProfileImg = ({ navigation }) => {
   };
   const url = async () => {
     const url = await storage.ref("boy.png").getDownloadURL();
-    console.log(url);
   };
   // function to Generate random avatar
   const createRandomAvatar = () => {

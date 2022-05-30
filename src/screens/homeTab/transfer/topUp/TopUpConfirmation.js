@@ -28,7 +28,7 @@ const TopUpConfirmation = ({ navigation }) => {
         {/* amount */}
         <View style={styles.row}>
           <Text style={styles.rowText}>{t("amount")}</Text>
-          <Text style={styles.rowText2}>£ 78</Text>
+          <Text style={styles.rowText2}>€ 78</Text>
         </View>
 
         {/* receiverId */}

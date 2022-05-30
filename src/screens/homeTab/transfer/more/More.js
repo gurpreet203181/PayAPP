@@ -26,27 +26,26 @@ const More = ({ navigation }) => {
         style={{ marginTop: 24 }}
       >
         <MoreItem
-          icon={icons.option}
+          icon={icons.optionsTransfer}
           title={t("transferMoney")}
           iconStyle={{ tintColor: "#32A7E2" }}
           onPress={() => navigation.navigate("Transfer")}
         />
         <MoreItem
-          icon={icons.userIcon}
+          icon={icons.optionsTopUp}
           title={t("topupWallet")}
           iconStyle={{ tintColor: "#FB923C" }}
           onPress={() => navigation.navigate("TopUp")}
         />
         <MoreItem
-          icon={icons.transfer}
+          icon={icons.optionsBill}
           title={t("billPayment")}
-          iconContainerStyle={{ backgroundColor: "#32A7E2" }}
+          iconStyle={{ tintColor: "#1DAB87" }}
           onPress={createTwoButtonAlert}
         />
         <MoreItem
-          icon={icons.transfer}
+          icon={icons.optionsWithdraw}
           title={t("withdraw")}
-          iconContainerStyle={{ backgroundColor: "#32A7E2" }}
           onPress={() => navigation.navigate("WithDraw")}
         />
 
@@ -60,15 +59,15 @@ const More = ({ navigation }) => {
           }}
         />
         <MoreItem
-          icon={icons.transfer}
+          icon={icons.transactions}
           title={t("historyTransactions")}
-          iconContainerStyle={{ backgroundColor: "#32A7E2" }}
+          iconStyle={{ tintColor: "#FB923C" }}
           onPress={() => navigation.navigate("Transactions", { item: "all" })}
         />
         <MoreItem
-          icon={icons.transfer}
+          icon={icons.request}
           title={t("requestPayment")}
-          iconContainerStyle={{ backgroundColor: "#32A7E2" }}
+          iconStyle={{ tintColor: "#5FA8EE" }}
           onPress={createTwoButtonAlert}
         />
         {/* <MoreItem

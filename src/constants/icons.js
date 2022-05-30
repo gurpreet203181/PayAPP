@@ -42,6 +42,7 @@ const optionsMore = require("../assets/icons/element-plus.png");
 const optionsTopUp = require("../assets/icons/money-recive.png");
 const optionsWithdraw = require("../assets/icons/money-send.png");
 const optionsTransfer = require("../assets/icons/refresh-circle.png");
+const optionsBill = require("../assets/icons/bill.png");
 const contactless = require("../assets/icons/contactless.png");
 const logout = require("../assets/icons/logout.png");
 const pencil = require("../assets/icons/pencil.png");
@@ -53,6 +54,8 @@ const activity = require("../assets/icons/activity.png");
 const up_arrow = require("../assets/icons/upload.png");
 const eye = require("../assets/icons/eye.png");
 const eyeOff = require("../assets/icons/eyeOff.png");
+const transactions = require("../assets/icons/transaction.png");
+const request = require("../assets/icons/request.png");
 
 export default {
   back_arrow,
@@ -110,4 +113,7 @@ export default {
   up_arrow,
   eye,
   eyeOff,
+  optionsBill,
+  transactions,
+  request,
 };

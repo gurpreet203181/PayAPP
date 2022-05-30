@@ -147,7 +147,7 @@ const Home = ({ navigation }) => {
               style={styles.IconButtonView}
               //onPress={() => navigation.navigate("WithDraw")}
             >
-              <Image source={icons.optionsWithdraw} style={styles.optionLogo} />
+              <Image source={icons.optionsBill} style={styles.optionLogo} />
               <Text style={styles.optionText}>{t("bill")}</Text>
             </TouchableOpacity>
             {/* more */}

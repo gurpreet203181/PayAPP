@@ -59,7 +59,7 @@ const TransferConfirmation = ({ navigation }) => {
         {/* amount */}
         <View style={styles.row}>
           <Text style={styles.rowText}>{t("amount")}</Text>
-          <Text style={styles.rowText2}>£ {amount}</Text>
+          <Text style={styles.rowText2}>€ {amount}</Text>
         </View>
 
         {/* receiverId */}
@@ -146,7 +146,7 @@ const TransferConfirmation = ({ navigation }) => {
     return (
       <View style={styles.totalContainer}>
         <Text style={styles.totalText}>{t("total")}</Text>
-        <Text style={styles.totalAmount}>$ {amount}</Text>
+        <Text style={styles.totalAmount}>€ {amount}</Text>
       </View>
     );
   }

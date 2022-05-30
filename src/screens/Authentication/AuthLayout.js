@@ -41,6 +41,9 @@ const AuthLayout = ({
         //return an object with result token and user
         //  iosClientId: Constants.manifest.extra.IOS_KEY, //From app.json
         androidClientId: Constants.manifest?.extra?.googleAndroidKey, //From app.json
+        androidStandaloneAppClientId:
+          Constants.manifest?.extra?.googleAndroidKey,
+        //  iosStandaloneAppClientId: 'IOS_STANDALONE_APP_CLIENT_ID',
       });
       if (result.type === "success") {
         //setIsLoading(true);

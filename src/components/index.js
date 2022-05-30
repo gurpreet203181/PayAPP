@@ -4,7 +4,7 @@ import Card from "./atoms/Card";
 import IconButton from "./atoms/IconButton";
 import Section from "./atoms/Section";
 import TransactionItem from "./molecules/TransactionItem";
-import LineDivider from "./atoms/LineDivider";
+import LineDivider from "./atoms/Linedivider";
 import FormInput from "./atoms/FormInput";
 import CheckBox from "./atoms/CheckBox";
 import OnBoardingItem from "./molecules/OnBoradingItem";

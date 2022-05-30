@@ -76,7 +76,7 @@ const WithDraw = ({ navigation }) => {
         <Text numberOfLines={1} adjustsFontSizeToFit style={styles.amount}>
           {amount}
         </Text>
-        <Text style={styles.maxText}>{t("maxAmount")} $999</Text>
+        <Text style={styles.maxText}>{t("maxAmount")}€ 999</Text>
 
         <VirtualKeyboard
           color={COLORS.darkBlue3}

@@ -26,7 +26,7 @@ const SignUp = ({ navigation }) => {
           .then((user) => {
             if (user?.additionalUserInfo?.isNewUser) {
               //after sign up user as created in database
-              console.log(user);
+
               firestoreDb.collection("users").doc(user?.user?.uid).set({
                 email: value.email,
                 username: value.username,

@@ -13,7 +13,6 @@ const Profile = ({ navigation }) => {
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
-  console.log(user);
 
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.white }}>

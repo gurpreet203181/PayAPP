@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   buttonContainer: {
-    backgroundColor: "#1b49ff",
+    backgroundColor: COLORS.darkBlue3,
     width: 200,
     height: 62,
     borderRadius: 16,

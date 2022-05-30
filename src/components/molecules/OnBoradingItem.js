@@ -7,6 +7,7 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { COLORS, FONTS, SIZES } from "../../constants";
+import { t } from "@hooks/UseI18n";
 
 const OnBoardingItem = ({ data }) => {
   const { width } = useWindowDimensions();
@@ -19,9 +20,9 @@ const OnBoardingItem = ({ data }) => {
       />
       <View style={{ width: 320, alignItems: "center" }}>
         <Text numberOfLines={2} adjustsFontSizeToFit style={styles.title}>
-          {data.title}
+          {t(data.title)}
         </Text>
-        <Text style={styles.description}>{data.description}</Text>
+        <Text style={styles.description}>{t(data.description)}</Text>
       </View>
     </View>
   );
