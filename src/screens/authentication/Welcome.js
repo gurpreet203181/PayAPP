@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Button } from "../../components";
 import { COLORS, FONTS, dummyData, SIZES, images } from "../../constants";
-import SVGImg from "@assets/images/whiteLogo.svg";
+import SVGImg from "@assets/images/logo.svg";
 
 const Welcome = ({ navigation }) => {
   /*const clearOnboarding = async () => {
@@ -28,7 +28,7 @@ const Welcome = ({ navigation }) => {
         style={styles.BackgroudImage}
       >
         <View style={{ marginLeft: 40, marginTop: 50 }}>
-          <SVGImg width={100} height={100} />
+          <SVGImg width={50} height={50} />
           <Text style={{ marginTop: 20, ...styles.logoText }}>
             {t("welcome")}
           </Text>

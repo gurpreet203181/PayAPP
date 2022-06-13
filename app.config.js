@@ -4,7 +4,7 @@ export default {
   expo: {
     name: "PayAPP",
     slug: "PayAPP",
-    version: "1.0.2",
+    version: "1.0.4                                                   ",
     orientation: "portrait",
     icon: "./src/assets/icon.png",
     splash: {
@@ -19,12 +19,12 @@ export default {
     ios: {
       supportsTablet: true,
       bundleIdentifier: "com.payapp.live",
-      buildNumber: "1.0.2",
+      buildNumber: "1.0.4",
     },
     android: {
       package: "com.payapp.live",
       googleServicesFile: "./google-services.json",
-      versionCode: "1.0.2",
+      versionCode: 5,
       adaptiveIcon: {
         foregroundImage: "./src/assets/adaptive-icon.png",
         backgroundColor: "#FFFFFF",
