@@ -17,12 +17,27 @@ import {
 } from "../../../components";
 import { FontAwesome } from "@expo/vector-icons";
 import LottieView from "lottie-react-native";
+import HCESession, { NFCContentType, NFCTagType4 } from "react-native-hce";
 
 const CardDetail = ({ route, navigation }) => {
   const item = route.params?.item;
   const animation = React.useRef(null);
 
+  //host-base card emulation
+  let simulation;
+
+  const startSimulation = async () => {
+    const tag = new NFCTagType4(NFCContentType.Text, "try2 ");
+    simulation = await new HCESession(tag).start();
+  };
+
   React.useEffect(() => {
+    try {
+      startSimulation();
+    } catch (error) {
+      console.log(error);
+    }
+
     animation.current.play(0, 226);
   }, []);
   //render
@@ -41,7 +56,7 @@ const CardDetail = ({ route, navigation }) => {
         ref={animation}
         source={require("../../../assets/images/88871-contactless-payment.json")}
         autoPlay
-        loop={false}
+        loop={true}
         //  speed={2}
         style={{
           width: "100%",

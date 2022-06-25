@@ -54,6 +54,12 @@ export default {
       emailjsServiceId: process.env.EMAILJS_SERVICE_ID,
       emailjsTemplateId: process.env.EMAILJS_TEMPLATE_ID,
       emailjsPublicKey: process.env.EMAILJS_PUBLIC_KEY,
+
+      //Rapyd
+
+      rapyd_access_key: process.env.RAPYD_ACCESS_KEY,
+      rapyd_secret_key: process.env.RAPYD_SECRET_KEY,
+      rapyd_base_uri: process.env.RAPYD_BASE_URI,
     },
     plugins: [
       [
