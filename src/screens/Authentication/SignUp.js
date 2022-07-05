@@ -6,6 +6,7 @@ import AuthLayout from "./AuthLayout";
 import { utils } from "../../utils";
 import { COLORS, FONTS, dummyData, SIZES, icons } from "@constants";
 import { auth, firestoreDb } from "@config/firebase";
+import { create_Personal_Wallet } from "../../api/rapyd/walletObject";
 
 const SignUp = ({ navigation }) => {
   const [value, setValue] = useState({
@@ -18,28 +19,41 @@ const SignUp = ({ navigation }) => {
   const [policyChecked, setPolicyChecked] = React.useState(false);
 
   //sign up function
+
   const signUp = async () => {
+    var ewalletId = "";
+
     try {
       if (utils.validateCredentials(value, setError, policyChecked)) {
         await auth
           .createUserWithEmailAndPassword(value.email, value.password)
           .then((user) => {
             if (user?.additionalUserInfo?.isNewUser) {
-              //after sign up user as created in database
+              //creating user personal in rapyd
+              create_Personal_Wallet(user).then((response) => {
+                if (response?.status?.status == "SUCCESS") {
+                  ewalletId = response?.data?.id;
+                }
+                //after sign up user as created in database and
+                // trigger onAuthStateChanged method in useAuthentication.js to make user login in app
 
-              firestoreDb.collection("users").doc(user?.user?.uid).set({
-                email: value.email,
-                username: value.username,
-                firstName: null,
-                lastName: null,
-                phoneNumber: null,
-                profileURL: null,
+                firestoreDb.collection("users").doc(user?.user?.uid).set({
+                  uid: user?.user?.uid,
+                  email: value.email,
+                  username: value.username,
+                  firstName: null,
+                  lastName: null,
+                  phoneNumber: null,
+                  profileURL: null,
+                  ewalletId: ewalletId,
+                });
               });
             }
           });
       }
     } catch (error) {
       console.log(error);
+      setError(t("userExists"));
     }
   };
 

@@ -11,8 +11,8 @@ import { firestoreDb, auth } from "src/config/firebase";
 
 //twilio api function
 import { sendSmsVerification } from "../../../../api/twilio/verify";
-
 import { utils } from "src/utils";
+import { update_Personal_Wallet } from "src/api/rapyd/walletObject";
 
 const EditAccount = ({ navigation, route }) => {
   const user = route?.params?.user;
@@ -41,6 +41,7 @@ const EditAccount = ({ navigation, route }) => {
         username: user?.username,
         phoneNumber: user?.phoneNumber,
         email: user?.email,
+        ewalletId: user?.ewalletId,
       });
     };
 
@@ -50,9 +51,15 @@ const EditAccount = ({ navigation, route }) => {
   //sending verfication otp to user phone number
   const sendSms = () => {
     sendSmsVerification(value.phoneNumber).then((response) => {
-      response.success
-        ? navigation.navigate("Otp", { phoneNumber: value.phoneNumber })
-        : setError(t("invaildNumber"));
+      if (response.success) {
+        setLoading(false);
+        navigation.navigate("Otp", { phoneNumber: value.phoneNumber });
+      } else {
+        setError(t("invaildNumber"));
+      }
+      /*  response.success 
+        ?
+        : setError(t("invaildNumber"));*/
     });
   };
 
@@ -66,6 +73,8 @@ const EditAccount = ({ navigation, route }) => {
       if (utils.editAccountValidateCredentials(value, setError)) {
         //checking if user has number verified whcih mean user has number in database
         // or user want to change number so his number enter is not same has in databse
+        setLoading(true);
+
         if (
           !user?.phoneNumberVerified ||
           !value.phoneNumber == user?.phoneNumber
@@ -76,6 +85,8 @@ const EditAccount = ({ navigation, route }) => {
             lastName: value.lastName,
             username: value.username,
           });
+          update_Personal_Wallet(value);
+
           sendSms();
           // sending otp code to user to verifiy number
         } else {
@@ -85,6 +96,7 @@ const EditAccount = ({ navigation, route }) => {
             lastName: value.lastName,
             username: value.username,
           });
+
           navigation.goBack();
         }
       }
@@ -183,7 +195,6 @@ const EditAccount = ({ navigation, route }) => {
             labelStyle={styles.editButtonLabel}
             label={t("save")}
             onPress={() => {
-              setLoading(true);
               updateDatabase();
             }}
           />

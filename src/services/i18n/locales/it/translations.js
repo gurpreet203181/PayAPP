@@ -1,6 +1,6 @@
 const it = {
   //App general
-  appName: "PayApp",
+  appName: "Zemmo Pay",
   //bottomTab
   tabHome: "Home",
   tabProfile: "profilo",
@@ -45,7 +45,8 @@ const it = {
     "Fornisce il 100% di libertà di gestione finanziaria con opzioni di pagamento multiple per pagamenti locali e internazionali.",
 
   slide4Title: "Pagamento delle bollette reso facile",
-  slide4description: "Paga le bollette mensili o giornaliere a casa con PayApp",
+  slide4description:
+    "Paga le bollette mensili o giornaliere a casa con Zemmo Pay",
 
   //SignUp
   authLayout_Title: "Iniziamo ora!",
@@ -211,7 +212,7 @@ const it = {
   //contactList
   friends: "Amici",
   invite: "Invitare",
-  yourContacts: "I tuoi contatti su PayApp",
+  yourContacts: "I tuoi contatti su Zemmo Pay",
   poke: "Poke",
   poked: "Poked",
   //AccountInfo
@@ -249,6 +250,7 @@ const it = {
   phoneNumberInvaildError: "Il numero non è valido",
   lastNameError: "Il cognome non può essere vuoto ",
   firstNameError: "Il nome non può essere vuoto ",
+  phoneNumberLinked: "Il numero di telefono è già collegato a un account",
 
   //editprofileImg
   selectImg: "Imposta una foto per te stesso,{{name}}",

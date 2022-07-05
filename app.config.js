@@ -2,9 +2,9 @@ import "dotenv/config";
 
 export default {
   expo: {
-    name: "PayAPP",
-    slug: "PayAPP",
-    version: "1.0.4                                                   ",
+    name: "Zemmo Pay",
+    slug: "ZemmoPay",
+    version: "1.0.4",
     orientation: "portrait",
     icon: "./src/assets/icon.png",
     splash: {

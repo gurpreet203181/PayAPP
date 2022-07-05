@@ -22,10 +22,12 @@ const SignIn = ({ navigation }) => {
   });
   const [error, setError] = useState();
 
+  //signin
   const signIn = async () => {
     try {
       if (utils.isValidEmail(value.email) && value.password.length > 6) {
         await auth.signInWithEmailAndPassword(value.email, value.password);
+        // and then trigger onAuthStateChanged method in useAuthentication.js to make user login in app
       } else setError(t("errorMsg"));
     } catch (error) {
       setError(t("errorMsg"));

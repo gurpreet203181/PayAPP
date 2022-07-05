@@ -44,7 +44,7 @@ const Loading = ({
           color: COLORS.darkBlue3,
         }}
       >
-        PayAPP
+        Zemmo Pay
       </Text>
       {renderLottie()}
     </View>

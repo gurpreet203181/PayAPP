@@ -19,11 +19,9 @@ import {
   HomeCardItem,
 } from "@components";
 import { useSelector, useDispatch } from "react-redux";
-import { setUserInfo } from "src/redux/reducers/userInfoSlice";
-
+import { setUserInfo, setUserBalance } from "src/redux/reducers/userInfoSlice";
 import { auth, firestoreDb } from "src/config/firebase";
-//import { useAuthentication } from "@hooks/authentication/useAuthentication";
-
+import { get_Wallet_Balance } from "src/api/rapyd/WalletTransactionObject";
 const Home = ({ navigation }) => {
   // const { user } = useAuthentication();
   const dispatch = useDispatch();
@@ -52,9 +50,16 @@ const Home = ({ navigation }) => {
             lastName: data?.lastName,
             profileUrl: data?.profileURL,
             uid: auth?.currentUser?.uid,
+            ewalletId: data?.ewalletId,
           })
         );
+        get_Wallet_Balance(data?.ewalletId).then((response) => {
+          if (response.length > 0) {
+            dispatch(setUserBalance(response[0]?.balance));
+          }
+        });
       });
+
     // Stop listening for updates when no longer required
     return () => subscriber();
   }, []);

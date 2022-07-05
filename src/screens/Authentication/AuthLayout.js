@@ -21,6 +21,7 @@ import firebase from "firebase";
 import { auth, firestoreDb } from "@config/firebase";
 
 import Constants from "expo-constants";
+import { create_Personal_Wallet } from "../../api/rapyd/walletObject";
 
 const AuthLayout = ({
   childern,
@@ -34,7 +35,10 @@ const AuthLayout = ({
   const [isLoading, SetIsLoading] = useState(false);
 
   //Google sign in
+  //after sign in   onAuthStateChanged method is trigged in useAuthentication.js to make user login in app
   const GoogleSignIn = async () => {
+    var ewalletId = "";
+
     try {
       //await GoogleSignIn.askForPlayServicesAsync();
       const result = await Google.logInAsync({
@@ -56,14 +60,21 @@ const AuthLayout = ({
           .signInWithCredential(credential) //Login to Firebase
           .then((user) => {
             if (user?.additionalUserInfo?.isNewUser) {
-              //if user is new creating user in database
-              firestoreDb.collection("users").doc(user?.user?.uid).set({
-                username: user?.user?.displayName,
-                email: user?.user?.email,
-                firstName: user?.additionalUserInfo?.profile?.given_name,
-                lastName: user?.additionalUserInfo?.profile?.family_name,
-                profileURL: user?.user?.photoURL,
-                phoneNumber: null,
+              //creating user personal in rapyd
+              create_Personal_Wallet(user).then((response) => {
+                if (response?.status?.status == "SUCCESS") {
+                  ewalletId = response?.data?.id;
+                }
+                //if user is new creating user in database
+                firestoreDb.collection("users").doc(user?.user?.uid).set({
+                  username: user?.user?.displayName,
+                  email: user?.user?.email,
+                  firstName: user?.additionalUserInfo?.profile?.given_name,
+                  lastName: user?.additionalUserInfo?.profile?.family_name,
+                  profileURL: user?.user?.photoURL,
+                  phoneNumber: null,
+                  ewalletId: ewalletId,
+                });
               });
             }
           })
@@ -77,7 +88,9 @@ const AuthLayout = ({
       console.log("login: Error:" + message);
     }
   };
-  //faceboom sign in
+  //facebook sign in
+  //after sign in   onAuthStateChanged method is trigged in useAuthentication.js to make user login in app
+
   const facebookSignIn = async () => {
     try {
       await Facebook.initializeAsync({

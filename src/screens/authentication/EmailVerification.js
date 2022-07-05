@@ -5,6 +5,14 @@ import { COLORS, FONTS, SIZES, icons } from "@constants";
 import { Button, Loading, FormInput } from "@components";
 import AuthLayout from "./AuthLayout";
 
+/*summary
+
+after signup 
+onAuthStateChanged method  is trigged method in useAuthentication.js to make user login in app
+and then in userstack navigatio if user is not verfied it land on this screen else on homescreen
+
+*/
+
 import { auth } from "src/config/firebase";
 
 const EmailVerfication = ({ route, navigation }) => {

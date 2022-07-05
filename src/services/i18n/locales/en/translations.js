@@ -1,6 +1,6 @@
 const en = {
   //App general
-  appName: "PayApp",
+  appName: "Zemmo Pay",
   //bottomTab
   tabHome: "Home",
   tabProfile: "Profile",
@@ -38,6 +38,7 @@ const en = {
   usernameError: "Username have to 3 character",
   emailError: "Email not valid",
   checkPolicyError: "Please check policy conditons",
+  userExists: "The email address is already in use by another account",
   //SignIN
   authLayout_TitleSignIn: "Welcome",
   authLayout_SignIn_SubTitle:
@@ -84,7 +85,7 @@ const en = {
     "Provides the 100% freedom of the financial management with Multiple Payment Options for local & International Payments.",
 
   slide4Title: "Bills Payment Made Easy",
-  slide4description: "Pay monthly or daily bills at home with PayApp",
+  slide4description: "Pay monthly or daily bills at home with Zemmo Pay",
   //card
   cardHolder: "Card holder",
   expires: "EXPIRES",
@@ -219,7 +220,7 @@ const en = {
   //contactList
   friends: "Friends",
   invite: "Invite",
-  yourContacts: "Your contacts on PayApp",
+  yourContacts: "Your contacts on Zemmo Pay",
   poke: "Poke",
   poked: "Poked",
 
@@ -261,7 +262,8 @@ const en = {
   phoneNumberInvaildError: "Phone Number is  invalid",
   lastNameError: "Last Name can't be empty ",
   firstNameError: "First Name can't be empty",
-
+  phoneNumberInvaildErorr: "Invaild Phone number",
+  phoneNumberLinked: "The phone number is already linked to an account ",
   //editprofileImg
   selectImg: "Set a picture for yourself,{{name}}",
 };
