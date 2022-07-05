@@ -1,7 +1,10 @@
 // Import the functions you need from the SDKs you need
 import * as firebase from "firebase";
+import { initializeAuth } from "firebase/auth";
 
 import Constants from "expo-constants";
+import { getReactNativePersistence } from "firebase";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 //import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -23,10 +26,15 @@ let Firebase;
 
 if (firebase.apps.length === 0) {
   Firebase = firebase.initializeApp(firebaseConfig);
+  /*initializeAuth(Firebase, {
+    persistence: getReactNativePersistence(AsyncStorage),
+  });*/
 } else Firebase = firebase.app();
 
 const auth = firebase.auth();
 const firestoreDb = firebase.firestore();
+
+firestoreDb.settings({ experimentalAutoDetectLongPolling: true });
 const storage = firebase.storage();
 export { auth, firestoreDb, storage };
 //const analytics = getAnalytics(app);
