@@ -1,10 +1,8 @@
 // Import the functions you need from the SDKs you need
 import * as firebase from "firebase";
-import { initializeAuth } from "firebase/auth";
 
 import Constants from "expo-constants";
-import { getReactNativePersistence } from "firebase";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import functions from "@react-native-firebase/functions";
 
 //import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -26,15 +24,15 @@ let Firebase;
 
 if (firebase.apps.length === 0) {
   Firebase = firebase.initializeApp(firebaseConfig);
-  /*initializeAuth(Firebase, {
-    persistence: getReactNativePersistence(AsyncStorage),
-  });*/
 } else Firebase = firebase.app();
 
 const auth = firebase.auth();
 const firestoreDb = firebase.firestore();
 
+// If you are running on a physical device, replace http://localhost with the local ip of your PC. (http://192.168.x.x)
+const cloudFunction = functions().useEmulator("http://192.168.1.4", 5001);
+
 firestoreDb.settings({ experimentalAutoDetectLongPolling: true });
 const storage = firebase.storage();
-export { auth, firestoreDb, storage };
+export { auth, firestoreDb, storage, cloudFunction };
 //const analytics = getAnalytics(app);

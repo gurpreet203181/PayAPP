@@ -5,9 +5,10 @@ import { COLORS, FONTS } from "@constants";
 import { icons, SIZES } from "@constants";
 import { FormInput, Header, Button, Loading } from "@components";
 import PhoneInput from "react-native-phone-number-input";
+import functions from "@react-native-firebase/functions";
 
 //firbase
-import { firestoreDb, auth } from "src/config/firebase";
+import { firestoreDb, auth, cloudFunction } from "src/config/firebase";
 
 //twilio api function
 import { sendSmsVerification } from "../../../../api/twilio/verify";
@@ -43,6 +44,15 @@ const EditAccount = ({ navigation, route }) => {
         email: user?.email,
         ewalletId: user?.ewalletId,
       });
+      functions()
+        .useEmulator.httpsCallable("listProducts")()
+        .then((response) => {
+          console.log(response.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
 
     updateInputFields();
