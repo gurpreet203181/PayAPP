@@ -10,7 +10,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import AppLoading from "expo-app-loading";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFonts } from "./src/hooks/useFonts";
 
 //redux configuration
@@ -21,6 +21,9 @@ import { OnBoarding } from "@screens";
 const Stack = createStackNavigator();
 
 export default function App() {
+  useEffect(() => {
+    console.log("app function");
+  }, []);
   // multi language configuration
   init();
   const Stack = createStackNavigator();

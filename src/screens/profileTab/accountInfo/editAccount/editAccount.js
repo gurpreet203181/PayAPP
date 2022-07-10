@@ -5,7 +5,6 @@ import { COLORS, FONTS } from "@constants";
 import { icons, SIZES } from "@constants";
 import { FormInput, Header, Button, Loading } from "@components";
 import PhoneInput from "react-native-phone-number-input";
-import functions from "@react-native-firebase/functions";
 
 //firbase
 import { firestoreDb, auth, cloudFunction } from "src/config/firebase";
@@ -26,6 +25,7 @@ const EditAccount = ({ navigation, route }) => {
     username: "",
     phoneNumber: "",
     email: "",
+    ewalletId: "",
   });
 
   const [error, setError] = useState();
@@ -35,6 +35,7 @@ const EditAccount = ({ navigation, route }) => {
 
   useEffect(() => {
     //updating user value
+    console.log("editAccount" + user?.ewalletId);
     const updateInputFields = () => {
       setValue({
         firstName: user?.firstName,
@@ -44,15 +45,6 @@ const EditAccount = ({ navigation, route }) => {
         email: user?.email,
         ewalletId: user?.ewalletId,
       });
-      functions()
-        .useEmulator.httpsCallable("listProducts")()
-        .then((response) => {
-          console.log(response.data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
     };
 
     updateInputFields();
@@ -63,7 +55,10 @@ const EditAccount = ({ navigation, route }) => {
     sendSmsVerification(value.phoneNumber).then((response) => {
       if (response.success) {
         setLoading(false);
-        navigation.navigate("Otp", { phoneNumber: value.phoneNumber });
+        navigation.navigate("Otp", {
+          phoneNumber: value.phoneNumber,
+          user: user,
+        });
       } else {
         setError(t("invaildNumber"));
       }
@@ -95,9 +90,29 @@ const EditAccount = ({ navigation, route }) => {
             lastName: value.lastName,
             username: value.username,
           });
+          //updating user information
           update_Personal_Wallet(value);
 
-          sendSms();
+          //checking if number isn't linked to account
+          //sending request to firebase function
+          await cloudFunction
+            .httpsCallable("isPhoneNumberLinked")({
+              phoneNumber: value.phoneNumber,
+            })
+            .then((response) => {
+              if (response.data == false) {
+                //sending otp sms and navigate to otp screen
+                sendSms();
+              } else {
+                setError(t("phoneNumberLinked"));
+                setLoading(false);
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+              setError(error);
+            });
+
           // sending otp code to user to verifiy number
         } else {
           //updating only name and username

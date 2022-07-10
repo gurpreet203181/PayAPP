@@ -10,10 +10,11 @@ import {
   sendSmsVerification,
 } from "../../api/twilio/verify";
 import { auth, firestoreDb } from "src/config/firebase";
-import { update_Personal_Wallet } from "src/api/rapyd/walletObject";
+import { update_Personal_Wallet_phonenumber } from "src/api/rapyd/walletObject";
 
 const Otp = ({ route, navigation }) => {
   const phoneNumber = route?.params?.phoneNumber;
+  const user = route?.params?.user;
   const [invalidCode, setInvalidCode] = useState(false);
   const [codeResend, setCodeResend] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -35,7 +36,8 @@ const Otp = ({ route, navigation }) => {
         if (response.success) {
           //if success is true than updating user database with phonenumber
           updateDb().then(() => {
-            //updating rapyd wallet data
+            //updating rapyd wallet phonenumber
+            update_Personal_Wallet_phonenumber(phoneNumber, user);
             //  update_Personal_Wallet(value);
             navigation.replace("AccountInfo");
           });

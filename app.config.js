@@ -68,8 +68,6 @@ export default {
           userTrackingPermission: false,
         },
       ],
-
-      "@react-native-firebase/crashlytics",
     ],
   },
 };

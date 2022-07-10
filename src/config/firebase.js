@@ -2,7 +2,11 @@
 import * as firebase from "firebase";
 
 import Constants from "expo-constants";
+
+//using React Native Firebase is the officially recommended
+//collection of packages that brings React Native support for all Firebase services on both Android and iOS apps.
 import functions from "@react-native-firebase/functions";
+import messaging from "@react-native-firebase/messaging";
 
 //import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -29,10 +33,15 @@ if (firebase.apps.length === 0) {
 const auth = firebase.auth();
 const firestoreDb = firebase.firestore();
 
-// If you are running on a physical device, replace http://localhost with the local ip of your PC. (http://192.168.x.x)
-const cloudFunction = functions().useEmulator("http://192.168.1.4", 5001);
+// Use a local emulator in development
+if (__DEV__) {
+  // If you are running on a physical device, replace http://localhost with the local ip of your PC. (http://192.168.x.x)
+  functions().useFunctionsEmulator("http://localhost:5001");
+}
 
+const cloudFunction = functions();
+const notification = messaging();
 firestoreDb.settings({ experimentalAutoDetectLongPolling: true });
 const storage = firebase.storage();
-export { auth, firestoreDb, storage, cloudFunction };
+export { auth, firestoreDb, storage, cloudFunction, notification };
 //const analytics = getAnalytics(app);

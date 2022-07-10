@@ -20,7 +20,7 @@
     <meta-data android:name="expo.modules.updates.EXPO_SDK_VERSION" android:value="44.0.0"/>
     <meta-data android:name="expo.modules.updates.EXPO_UPDATES_CHECK_ON_LAUNCH" android:value="ALWAYS"/>
     <meta-data android:name="expo.modules.updates.EXPO_UPDATES_LAUNCH_WAIT_MS" android:value="0"/>
-    <meta-data android:name="expo.modules.updates.EXPO_UPDATE_URL" android:value="https://exp.host/@gurpreet2031/ZemmoPay"/>
+    <meta-data android:name="expo.modules.updates.EXPO_UPDATE_URL" android:value="https://exp.host/@anonymous/ZemmoPay"/>
     <service android:name="com.reactnativehce.services.CardService" android:exported="true" android:enabled="false" android:permission="android.permission.BIND_NFC_SERVICE">
       <intent-filter>
         <action android:name="android.nfc.cardemulation.action.HOST_APDU_SERVICE"/>

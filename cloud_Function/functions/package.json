@@ -2,7 +2,7 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint",
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
@@ -14,6 +14,9 @@
   },
   "main": "index.js",
   "dependencies": {
+    "busboy": "^1.6.0",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
     "firebase-admin": "^10.0.2",
     "firebase-functions": "^3.18.0"
   },

@@ -12,7 +12,7 @@ import * as style from "@dicebear/avatars-avataaars-sprites";
 
 const AccountInfo = ({ navigation }) => {
   const { user } = useSelector((state) => state.userInfo);
-  console.log("account info user");
+  console.log(user);
 
   //render
   function renderHeader() {

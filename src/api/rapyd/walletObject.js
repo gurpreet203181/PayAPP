@@ -53,25 +53,11 @@ const create_Personal_Wallet = async (user) => {
       type: "person",
       contact: {
         phone_number: "",
-        email: userData?.additionalUserInfo?.profile?.email,
+        email: userData?.email,
         first_name: userData?.additionalUserInfo?.profile?.given_name,
         last_name: userData?.additionalUserInfo?.profile?.family_name,
         mothers_name: "",
         contact_type: "personal",
-        address: {
-          name: "",
-          line_1: "",
-          line_2: "",
-          line_3: "",
-          city: "",
-          state: "",
-          country: "",
-          zip: "",
-          phone_number: "",
-          metadata: {},
-          canton: "",
-          district: "",
-        },
         identification_type: "",
         identification_number: "",
         date_of_birth: "",
@@ -110,6 +96,7 @@ const create_Personal_Wallet = async (user) => {
 const update_Personal_Wallet = async (user) => {
   const http_method = "put";
   try {
+    console.log(user);
     //setting data for api call
     const data = JSON.stringify({
       ewallet: user?.ewalletId,
@@ -120,7 +107,61 @@ const update_Personal_Wallet = async (user) => {
         merchant_defined: "updated",
       },
       contact: {
-        phone_number: "",
+        // phone_number: "",
+        first_name: user?.firstName,
+        last_name: user?.lastName,
+        mothers_name: "",
+        contact_type: "personal",
+        identification_type: "",
+        identification_number: "",
+        date_of_birth: "",
+        country: "",
+        nationality: "",
+        metadata: {
+          merchant_defined: true,
+        },
+      },
+    });
+
+    //API request header
+    const headers = {
+      access_key,
+      signature: getSignature(data, http_method),
+      salt,
+      timeStamp,
+      "Content-Type": `application/json`,
+    };
+
+    const response = await fetch(`${base_uri + url_path}`, {
+      method: http_method,
+      headers: headers,
+      body: data,
+    });
+    const json = await response.json();
+    console.log(json);
+
+    return json;
+  } catch (error) {
+    console.log(error);
+
+    return false;
+  }
+};
+
+//updating ewallet phonenumber after otp  verification
+const update_Personal_Wallet_phonenumber = async (phoneNumber, user) => {
+  const http_method = "put";
+  try {
+    console.log(phoneNumber);
+    //setting data for api call
+    const data = JSON.stringify({
+      ewallet: user?.ewalletId,
+      phone_number: phoneNumber,
+      metadata: {
+        merchant_defined: "updated",
+      },
+      contact: {
+        phone_number: phoneNumber,
       },
     });
 
@@ -147,4 +188,8 @@ const update_Personal_Wallet = async (user) => {
   }
 };
 
-export { create_Personal_Wallet, update_Personal_Wallet };
+export {
+  create_Personal_Wallet,
+  update_Personal_Wallet,
+  update_Personal_Wallet_phonenumber,
+};

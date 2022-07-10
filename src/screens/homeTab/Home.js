@@ -53,9 +53,12 @@ const Home = ({ navigation }) => {
             ewalletId: data?.ewalletId,
           })
         );
+        console.log(data?.ewalletId);
         get_Wallet_Balance(data?.ewalletId).then((response) => {
-          if (response.length > 0) {
+          if (response && response.length > 0) {
             dispatch(setUserBalance(response[0]?.balance));
+          } else {
+            dispatch(setUserBalance(0));
           }
         });
       });
