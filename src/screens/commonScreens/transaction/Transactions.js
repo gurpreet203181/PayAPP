@@ -1,26 +1,27 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { t } from "../../../hooks/UseI18n";
+import React, { useState, useEffect } from "react";
+import { t } from "@hooks/UseI18n";
 import {
   View,
   StyleSheet,
   ActivityIndicator,
-  TouchableOpacity,
-  Image,
   Text,
+  FlatList,
 } from "react-native";
-import { COLORS, icons, dummyData, SIZES } from "../../../constants";
-import { Header, Section, SearchBar, List } from "../../../components";
-import FilterModel from "./FilterModel";
-import { Entypo } from "@expo/vector-icons";
+import { COLORS, icons, dummyData, SIZES, FONTS } from "@constants";
+import { Header, Section, TransactionItem } from "@components";
+import { get_Wallet_Transactions } from "src/api/rapyd/WalletTransactionObject";
+import { useSelector } from "react-redux";
+import { utils } from "src/utils";
+import LottieView from "lottie-react-native";
+
 const Transactions = ({ route, navigation }) => {
   const item = route?.params?.item;
-  const [searchPhrase, setSearchPhrase] = useState("");
-  const [clicked, setClicked] = useState(false);
-  const [data, Setdata] = useState();
-  const [filterData, setfilterData] = useState();
-  const [isModalVisible, setModalVisible] = useState(false);
-  const [filtersApplied, setFiltersApplied] = useState();
 
+  const { user } = useSelector((state) => state.userInfo);
+
+  const [data, Setdata] = useState();
+  const [page, setPage] = useState(1);
+  const [allDataLoaded, setAllDataLoaded] = useState(false);
   //getData from dummydata only once
 
   useEffect(() => {
@@ -28,7 +29,11 @@ const Transactions = ({ route, navigation }) => {
       //Filter
       if (item === "all") {
         //if user want to view all trasactions
-        Setdata(dummyData.Transaction);
+        await get_Wallet_Transactions(user?.ewalletId, page, 15).then(
+          (data) => {
+            data != "no_data" ? Setdata(data) : Setdata([]);
+          }
+        );
       } else if (item) {
         // if user want to view specific card's transactions
         Setdata(dummyData.Transaction.filter((x) => x.card == item.id));
@@ -37,49 +42,21 @@ const Transactions = ({ route, navigation }) => {
     getData();
   }, []);
 
-  //code will run every time searchphrase is changed and fliter data base on search
-  const filterList = useMemo(() => {
-    if (!filtersApplied) {
-      // if search is different then blank
-      if (searchPhrase.trim() == "") {
-        setfilterData(data);
-      }
-
-      if (searchPhrase.trim() != "") {
-        setfilterData(
-          data.filter((x) =>
-            x.name
-              .toUpperCase()
-              .startsWith(searchPhrase.toUpperCase().trim().replace(/\s/g, ""))
-          )
-        );
-      }
-    }
-  }, [data, searchPhrase, filtersApplied]);
-
-  //callback to get data of applied filter by user and filter list
-  const filters = useCallback((appliedFilters) => {
-    setFiltersApplied(appliedFilters);
-    setModalVisible(false);
-    //setting filter data with filter applied
-    //using appliedFilters instead of filtersApplied where apllied filters is store
-    //becasue rect don't guarantee state is not update immediately
-    setfilterData((curent) => [
-      ...curent.filter(
-        (x) =>
-          x.amount >= appliedFilters[0][0] && x.amount <= appliedFilters[0][1]
-      ),
-    ]);
-  }, []);
-
-  //Model show and close function
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
-
-  //function to clear applied filters and set list to searchphrase or to all
-  const removeFilter = () => {
-    setFiltersApplied();
+  //loading new data after end of flatlist
+  const onEndReached = async () => {
+    if (!allDataLoaded) {
+      const pageNumber = page + 1;
+      //calling api call to get next  trasaction page
+      await get_Wallet_Transactions(user?.ewalletId, pageNumber, 15).then(
+        (response) => {
+          if (response == "no_data") {
+            setAllDataLoaded(true);
+          }
+          setPage(pageNumber);
+          Setdata((data) => [...data.concat(response)]);
+        }
+      );
+    } else return;
   };
 
   //render
@@ -93,94 +70,77 @@ const Transactions = ({ route, navigation }) => {
     );
   }
 
+  function renderLottie() {
+    return (
+      <LottieView
+        source={require("@assets/images/61372-404-error-not-found.json")}
+        autoPlay
+        loop={true}
+        style={{
+          width: "100%",
+          height: 200,
+          alignSelf: "center",
+        }}
+      />
+    );
+  }
   return (
     <View style={{ backgroundColor: COLORS.white, flex: 1 }}>
       {/* Header */}
       {renderHeader()}
-      {/* SearchBar 
-              on input change setSearchPhrase get search value 
-              which trigger useEfect to filter data and set filterData which passed to transaction list  */}
-      <View style={styles.SearchBarContainer}>
-        {filtersApplied && searchPhrase.trim() == "" ? (
-          <View />
-        ) : (
-          <SearchBar
-            searchPhrase={searchPhrase}
-            onChangeText={setSearchPhrase}
-            onCrossPress={removeFilter}
-            clicked={clicked}
-            setClicked={setClicked}
-          />
-        )}
-        {!filtersApplied ? (
-          <TouchableOpacity
-            style={{
-              height: 50,
-              justifyContent: "center",
-              alignItems: "center",
-              paddingLeft: 10,
-            }}
-            onPress={toggleModal}
-          >
-            <Image source={icons.filter} style={{ width: 24, height: 25 }} />
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity
-            style={{
-              height: 50,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-            onPress={removeFilter}
-          >
-            <View
-              style={{
-                position: "absolute",
-                top: 4,
-                right: -10,
-                zIndex: 1,
-                backgroundColor: COLORS.white,
-              }}
-            >
-              <Entypo name="circle-with-cross" size={18} color="red" />
-            </View>
-            <Image source={icons.filter} style={{ width: 24, height: 25 }} />
-          </TouchableOpacity>
-        )}
-      </View>
-      {/* Model for applying filters  */}
-      {/* onClosePress a function passed which close model   */}
-      {/* filters get a useCallback whick  trigger on  apply filter button press and get applied Filters data in callback 
-               which is set on filter useState to filter list  */}
-      <FilterModel
-        isVisible={isModalVisible}
-        onClosePress={toggleModal}
-        filters={filters}
-      />
-
-      {!filterData ? (
-        <View style={{ marginTop: 40 }}>
-          <ActivityIndicator color={COLORS.black} size="large" />
+      {!data ? (
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            flex: 1,
+          }}
+        >
+          <ActivityIndicator color={COLORS.darkBlue3} size="large" />
         </View>
       ) : (
-        <View>
-          {/*filtersApplied &&
-                         <View style={{justifyContent:"center", alignItems:"center", marginTop:30, ...SIZES.marginHorizontal}}>
-                          
-                        </View>*/}
-
+        <View style={{ flex: 1, marginBottom: 20 }}>
           {/* Transaction */}
           <Section
             label={t("transactions")}
-            containerStyle={{ marginTop: 60 }}
+            containerStyle={{ marginTop: 60, marginBottom: 10 }}
           />
 
           {/* //Transaction list */}
-
-          <List
-            searchPhrase={searchPhrase}
-            data={filterData}
-            setClicked={setClicked}
+          <FlatList
+            data={data}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => {
+              const cleanItem = utils.cleanItem(item);
+              return (
+                <TransactionItem
+                  item={cleanItem}
+                  onPress={() =>
+                    navigation.navigate("TransactionDetail", { item })
+                  }
+                />
+              );
+            }}
+            onEndReached={onEndReached}
+            onEndReachedThreshold={0.5}
+            ListEmptyComponent={
+              <View
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: 80,
+                }}
+              >
+                {renderLottie()}
+                <Text style={{ marginTop: 40, ...FONTS.h2, fontSize: 15 }}>
+                  {t("noResult")}
+                </Text>
+                <Text style={{ ...FONTS.body5, fontSize: 12, opacity: 0.5 }}>
+                  {t("noSearchResult")}
+                </Text>
+              </View>
+            }
           />
         </View>
       )}

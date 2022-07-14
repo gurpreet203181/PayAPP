@@ -11,7 +11,7 @@ import {
 import { FormInput, Button, LineDivider, CheckBox } from "@components";
 import AuthLayout from "./AuthLayout";
 import { COLORS, FONTS, dummyData, SIZES, icons } from "@constants";
-import { auth } from "@config/firebase";
+import { firebaseAuth } from "@config/firebase";
 import { utils } from "../../utils";
 const SignIn = ({ navigation }) => {
   const [rememberMe, setRememberMe] = useState(false);
@@ -26,7 +26,10 @@ const SignIn = ({ navigation }) => {
   const signIn = async () => {
     try {
       if (utils.isValidEmail(value.email) && value.password.length > 6) {
-        await auth.signInWithEmailAndPassword(value.email, value.password);
+        await firebaseAuth.signInWithEmailAndPassword(
+          value.email,
+          value.password
+        );
         // and then trigger onAuthStateChanged method in useAuthentication.js to make user login in app
       } else setError(t("errorMsg"));
     } catch (error) {

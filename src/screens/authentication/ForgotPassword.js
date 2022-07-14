@@ -5,7 +5,7 @@ import { FormInput, Button } from "@components";
 import { COLORS, FONTS, SIZES, icons, images } from "@constants";
 import AuthLayout from "./AuthLayout";
 import { utils } from "../../utils";
-import { auth } from "src/config/firebase";
+import { firebaseAuth } from "src/config/firebase";
 import Modal from "react-native-modal";
 import LottieView from "lottie-react-native";
 
@@ -20,7 +20,7 @@ const ForgotPassword = ({ navigation, route }) => {
   const resetPassword = async (email) => {
     try {
       if (utils.isValidEmail(email)) {
-        await auth.sendPasswordResetEmail(email).then(() => {
+        await firebaseAuth.sendPasswordResetEmail(email).then(() => {
           setIsVisible(true);
         });
       } else setEmailError(t("emailNotValid"));

@@ -5,6 +5,7 @@ import paymentMethodSlice from "./reducers/paymentMethodSlice";
 import topUpSlice from "./reducers/topUpSlice";
 import withdrawSlice from "./reducers/withdrawSlice";
 import userInfoSlice from "./reducers/userInfoSlice";
+import newNotification from "./reducers/newNotification";
 export const store = configureStore({
   reducer: {
     transfer: transferSlice,
@@ -13,5 +14,6 @@ export const store = configureStore({
     topUp: topUpSlice,
     withdraw: withdrawSlice,
     userInfo: userInfoSlice,
+    isNewNotification: newNotification,
   },
 });

@@ -9,7 +9,7 @@ import {
   checkVerification,
   sendSmsVerification,
 } from "../../api/twilio/verify";
-import { auth, firestoreDb } from "src/config/firebase";
+import { firebaseAuth, firestoreDb } from "src/config/firebase";
 import { update_Personal_Wallet_phonenumber } from "src/api/rapyd/walletObject";
 
 const Otp = ({ route, navigation }) => {
@@ -21,7 +21,7 @@ const Otp = ({ route, navigation }) => {
 
   //updating db with new or first phone number after user verfied his phone number
   const updateDb = async () => {
-    const currentUser = auth.currentUser;
+    const currentUser = firebaseAuth.currentUser;
     console.log(currentUser);
     await firestoreDb.collection("users").doc(currentUser?.uid).update({
       phoneNumber: phoneNumber,

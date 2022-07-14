@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import { COLORS, FONTS, SIZES, icons } from "@constants";
 import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
-const NotificationItem = ({ item, iconsStyle }) => {
+const NotificationItem = ({ item }) => {
   return (
     <View style={styles.container}>
       {/* logo */}
@@ -18,13 +18,13 @@ const NotificationItem = ({ item, iconsStyle }) => {
         }}
       >
         <Text adjustsFontSizeToFit numberOfLines={1} style={styles.name}>
-          {item.name}
+          {item?.title}
         </Text>
         <Text numberOfLines={2} style={styles.description}>
           {item.description}
         </Text>
       </View>
-      <Text style={styles.date}>{item.date}</Text>
+      <Text style={styles.date}>{"33/21/22"}</Text>
     </View>
   );
 };
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     height: 65,
     width: 327,
     alignItems: "center",
-
+    justifyContent: "center",
     flexDirection: "row",
   },
   imgContanier: {

@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
-import * as firebase from "firebase";
+//import * as firebase from "firebase";
+import firebase from "@react-native-firebase/app";
 
 import Constants from "expo-constants";
 
@@ -7,6 +8,8 @@ import Constants from "expo-constants";
 //collection of packages that brings React Native support for all Firebase services on both Android and iOS apps.
 import functions from "@react-native-firebase/functions";
 import messaging from "@react-native-firebase/messaging";
+import auth from "@react-native-firebase/auth";
+import firestore from "@react-native-firebase/firestore";
 
 //import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -30,8 +33,8 @@ if (firebase.apps.length === 0) {
   Firebase = firebase.initializeApp(firebaseConfig);
 } else Firebase = firebase.app();
 
-const auth = firebase.auth();
-const firestoreDb = firebase.firestore();
+const firebaseAuth = auth();
+const firestoreDb = firestore();
 
 // Use a local emulator in development
 if (__DEV__) {
@@ -42,6 +45,6 @@ if (__DEV__) {
 const cloudFunction = functions();
 const notification = messaging();
 firestoreDb.settings({ experimentalAutoDetectLongPolling: true });
-const storage = firebase.storage();
-export { auth, firestoreDb, storage, cloudFunction, notification };
+//const storage = firebase.storage();
+export { firebaseAuth, firestoreDb, cloudFunction, notification };
 //const analytics = getAnalytics(app);

@@ -29,7 +29,7 @@ import {
   EditProfileImg,
 } from "@screens";
 import Tabs from "./tabs";
-import { auth } from "../config/firebase";
+import { firebaseAuth } from "../config/firebase";
 const Stack = createStackNavigator();
 
 export default function UserStack() {
@@ -37,11 +37,11 @@ export default function UserStack() {
     //reloading firbase user to get update user
     // to check if user is emailVerified
     const reloadUser = async () => {
-      await auth.currentUser.reload();
+      await firebaseAuth.currentUser.reload();
     };
     reloadUser();
   }, []);
-  const user = auth.currentUser;
+  const user = firebaseAuth.currentUser;
 
   return (
     <NavigationContainer>

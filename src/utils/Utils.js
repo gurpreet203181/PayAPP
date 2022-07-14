@@ -1,4 +1,55 @@
 import { t } from "@hooks/UseI18n";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+//set item data
+function cleanItem(data) {
+  const date = new Date(data?.created_at * 1000);
+  var itemObj = {
+    amount: data?.amount,
+    type: null,
+    description: null,
+    date: `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}   ${date.getHours()}:${date.getMinutes()}`,
+  };
+  switch (data.type) {
+    case "p2p_transfer":
+      if (!data?.source_ewallet_id) {
+        itemObj.type = "Fund received";
+        itemObj.description = "";
+      } else if (data?.source_ewallet_id) {
+        itemObj.type = "Fund transferred";
+        itemObj.description = "";
+      }
+
+      break;
+    case "payment_funds_in":
+      itemObj.type = "Fund Add";
+      itemObj.description = "";
+
+      break;
+
+    default:
+      break;
+  }
+  return itemObj;
+}
+//set notifications in async storage
+const setNotificationsAsyncStorage = async (value) => {
+  let data = await AsyncStorage.getItem("@notifications");
+
+  let arr = data ? JSON.parse(data) : [];
+  const notificationObj = {
+    id: value?.messageId,
+    title: value?.notification?.title,
+    description: value?.notification?.body + " 😘",
+    //date: value.sentTime.format("dd/mm/yyyy"),
+  };
+
+  arr.push(notificationObj);
+
+  const jsonValue = JSON.stringify(arr);
+  console.log(jsonValue);
+  await AsyncStorage.setItem("@notifications", jsonValue);
+};
 
 function isValidEmail(value) {
   const re =
@@ -97,6 +148,8 @@ const utils = {
   calculateAngle,
   validateCredentials,
   editAccountValidateCredentials,
+  setNotificationsAsyncStorage,
+  cleanItem,
 };
 
 export default utils;

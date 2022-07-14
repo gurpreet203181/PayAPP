@@ -96,7 +96,7 @@ const create_Personal_Wallet = async (user) => {
 const update_Personal_Wallet = async (user) => {
   const http_method = "put";
   try {
-    console.log(user);
+    //  console.log(user);
     //setting data for api call
     const data = JSON.stringify({
       ewallet: user?.ewalletId,

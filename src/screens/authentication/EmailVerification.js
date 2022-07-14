@@ -13,13 +13,13 @@ and then in userstack navigatio if user is not verfied it land on this screen el
 
 */
 
-import { auth } from "src/config/firebase";
+import { firebaseAuth } from "src/config/firebase";
 
 const EmailVerfication = ({ route, navigation }) => {
   const [codeResend, setCodeResend] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
-  const user = auth.currentUser;
+  const user = firebaseAuth.currentUser;
 
   //caling send email function to send email on page loading
   useEffect(() => {
@@ -29,7 +29,7 @@ const EmailVerfication = ({ route, navigation }) => {
   //logout function
   const SignOut = async () => {
     try {
-      await auth.signOut();
+      await firebaseAuth.signOut();
 
       // onLogoutPress();
     } catch (error) {
@@ -40,7 +40,7 @@ const EmailVerfication = ({ route, navigation }) => {
   //email verfication function
   const sendEmail = async () => {
     try {
-      await auth.currentUser.sendEmailVerification().then(() => {
+      await firebaseAuth.currentUser.sendEmailVerification().then(() => {
         console.log("sent");
       });
     } catch (error) {

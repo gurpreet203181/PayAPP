@@ -23,6 +23,10 @@ export const userInfoSlice = createSlice({
   initialState,
   reducers: {
     setUserInfo: (state, action) => {
+      // Clear all data in redux store to initial.
+      if (action.payload?.type === "DESTROY_SESSION") {
+        state = initialState;
+      }
       const payload = action.payload;
       //email
       state.user.email = payload?.email;

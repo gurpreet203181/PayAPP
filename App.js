@@ -17,15 +17,21 @@ import { useFonts } from "./src/hooks/useFonts";
 import { store } from "./src/redux/store";
 import { Provider } from "react-redux";
 import { OnBoarding } from "@screens";
+import { notification } from "src/config/firebase";
+import { utils } from "src/utils";
 //navgiation stack
 const Stack = createStackNavigator();
 
 export default function App() {
-  useEffect(() => {
-    console.log("app function");
-  }, []);
   // multi language configuration
   init();
+
+  // Register background handler
+  notification.setBackgroundMessageHandler(async (remoteMessage) => {
+    console.log("Message handled in the background!", remoteMessage);
+    utils.setNotificationsAsyncStorage(remoteMessage);
+  });
+
   const Stack = createStackNavigator();
 
   const [IsReady, SetIsReady] = useState(false);

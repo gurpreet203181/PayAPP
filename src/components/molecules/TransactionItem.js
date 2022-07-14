@@ -1,20 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { View, TouchableOpacity, Image, Text, StyleSheet } from "react-native";
-import { COLORS, SIZES, FONTS } from "../../constants";
+import { COLORS, SIZES, FONTS, icons } from "../../constants";
 
 const TransactionItem = ({ item, onPress, containerStyle }) => {
   return (
     <TouchableOpacity
       style={{ ...styles.Container, ...containerStyle }}
       onPress={onPress}
-      key={item.key}
+      key={item?.key}
     >
       {/* Image , name and date */}
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         {/* img */}
         <View style={styles.imgContainer}>
-          <Image source={item?.profileImage} style={styles.ImgStyle} />
+          <Image source={icons.transactions} style={styles.ImgStyle} />
         </View>
 
         {/* name and date */}
@@ -27,7 +27,7 @@ const TransactionItem = ({ item, onPress, containerStyle }) => {
               letterSpacing: 0.3,
             }}
           >
-            {item?.name}
+            {item?.type}
           </Text>
           <Text
             style={{
@@ -37,7 +37,7 @@ const TransactionItem = ({ item, onPress, containerStyle }) => {
               letterSpacing: 0.3,
             }}
           >
-            {item?.item}
+            {item?.date}
           </Text>
         </View>
       </View>
@@ -45,13 +45,13 @@ const TransactionItem = ({ item, onPress, containerStyle }) => {
       {/* amount  */}
       <View style={{ justifyContent: "center", alignItems: "flex-end" }}>
         {/* input amount */}
-        {item.type == "input" ? (
+        {!item?.amount?.toString().includes("-") ? (
           <Text style={{ ...styles.amount, color: "#1DAB87" }}>
-            + {item.amount}
+            + {item?.amount}
           </Text>
         ) : (
           // output name
-          <Text style={{ ...styles.amount }}>- {item.amount}</Text>
+          <Text style={{ ...styles.amount }}> {item?.amount}</Text>
         )}
       </View>
     </TouchableOpacity>

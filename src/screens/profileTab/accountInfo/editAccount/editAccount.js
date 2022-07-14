@@ -7,7 +7,7 @@ import { FormInput, Header, Button, Loading } from "@components";
 import PhoneInput from "react-native-phone-number-input";
 
 //firbase
-import { firestoreDb, auth, cloudFunction } from "src/config/firebase";
+import { firestoreDb, firebaseAuth, cloudFunction } from "src/config/firebase";
 
 //twilio api function
 import { sendSmsVerification } from "../../../../api/twilio/verify";
@@ -71,7 +71,7 @@ const EditAccount = ({ navigation, route }) => {
   //updating databse
   const updateDatabase = async () => {
     try {
-      const currentUser = auth.currentUser;
+      const currentUser = firebaseAuth.currentUser;
 
       // checking if user input field (firtName, LASTnAME, username,email,phone number)
       // are correct

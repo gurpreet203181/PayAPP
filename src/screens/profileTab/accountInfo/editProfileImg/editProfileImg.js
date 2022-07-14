@@ -12,7 +12,7 @@ import { SvgXml } from "react-native-svg";
 //firebase
 import { utils } from "@react-native-firebase/app";
 
-import { auth, storage, firestoreDb } from "src/config/firebase";
+import { firebaseAuth, storage, firestoreDb } from "src/config/firebase";
 const EditProfileImg = ({ navigation }) => {
   const name = useSelector((state) => state.userInfo.user.username);
 

@@ -4,15 +4,37 @@ import { View, StyleSheet, Text, Image } from "react-native";
 import { COLORS, SIZES, icons, FONTS } from "@constants";
 import Modal from "react-native-modal";
 import { Button } from "@components";
-import { auth } from "@config/firebase";
+import { firebaseAuth, notification, firestoreDb } from "@config/firebase";
+import firestore from "@react-native-firebase/firestore";
+
 import { setUserInfo } from "@redux/reducers/userInfoSlice";
 import { useDispatch } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const LogoutModal = ({ isVisible, onClosePress, onLogoutPress }) => {
   const dispatch = useDispatch();
-
+  const userId = firebaseAuth.currentUser.uid;
   const handleSignOut = async () => {
     try {
-      await auth.signOut();
+      //gettingfcm token for deleting in firestore record
+      //before deleting from device
+      await notification.getToken().then((token) => {
+        // remove the token to the users datastore
+        firestoreDb
+          .collection("users")
+          .doc(userId)
+          .update({
+            tokens: firestore.FieldValue.arrayRemove(token),
+          });
+
+        //removing fcm token from device after logout
+        //when user login new token will created
+        notification.deleteToken();
+        //signout user
+        firebaseAuth.signOut().then(() => {
+          dispatch(setUserInfo({ type: "DESTROY_SESSION" }));
+          AsyncStorage.setItem("@notifications", JSON.stringify([]));
+        });
+      });
 
       // onLogoutPress();
     } catch (error) {
@@ -74,7 +96,7 @@ const LogoutModal = ({ isVisible, onClosePress, onLogoutPress }) => {
             label={t("yesLogout")}
             onPress={() => {
               handleSignOut();
-              dispatch(setUserInfo()); //setting redux state to null
+              //dispatch(setUserInfo()); //setting redux state to null
             }}
           />
         </View>

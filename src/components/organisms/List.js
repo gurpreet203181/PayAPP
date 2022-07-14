@@ -5,28 +5,10 @@ import TransactionItem from "../../components/molecules/TransactionItem";
 import { useNavigation } from "@react-navigation/native";
 import LottieView from "lottie-react-native";
 import { FONTS } from "../../constants";
-
+import { utils } from "src/utils";
 const List = (props) => {
   const navigation = useNavigation();
 
-  /*const renderItem = ({ item }) => {
-    // when no input, show all
-    if (props.searchPhrase === "") {
-      return <TransactionItem item={item}  
-      onPress={()=> navigation.navigate('TransactionDetail', { item })}/>;
-    }
-    // filter of the name
-    if (item.name.toUpperCase().includes(props.searchPhrase.toUpperCase().trim().replace(/\s/g, ""))) {
-      return <TransactionItem item={item}  
-      onPress={()=> navigation.navigate('TransactionDetail', { item })}/>;
-    }
-    // filter of the description
-    if (item.item.toUpperCase().includes(props.searchPhrase.toUpperCase().trim().replace(/\s/g, ""))) {
-      return <TransactionItem item={item}  
-      onPress={()=> navigation.navigate('TransactionDetail', { item })}/>;
-    }
-
-  };*/
   function renderLottie() {
     return (
       <LottieView
@@ -44,24 +26,26 @@ const List = (props) => {
 
   return (
     <SafeAreaView style={styles.list__container}>
-      <View
-        onStartShouldSetResponder={() => {
-          props.setClicked?.(false);
-        }}
-      >
+      <View>
         {props.data?.length != 0 ? (
           <FlatList
             data={props?.data}
             showsVerticalScrollIndicator={false}
             keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <TransactionItem
-                item={item}
-                onPress={() =>
-                  navigation.navigate("TransactionDetail", { item })
-                }
-              />
-            )}
+            renderItem={({ item }) => {
+              const cleanItem = utils.cleanItem(item);
+              //console.log(item.id);
+              return (
+                <TransactionItem
+                  item={cleanItem}
+                  onPress={() =>
+                    navigation.navigate("TransactionDetail", { item })
+                  }
+                />
+              );
+            }}
+            onEndReachedThreshold={0}
+            onEndReached={props.endReached}
           />
         ) : (
           //not found view with lottie animation and text
@@ -92,6 +76,5 @@ const styles = StyleSheet.create({
   list__container: {
     height: "85%",
     width: "100%",
-    paddingBottom: 55,
   },
 });

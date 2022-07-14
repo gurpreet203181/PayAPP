@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { t } from "@hooks/UseI18n";
 import {
   View,
@@ -20,8 +20,12 @@ import {
 } from "@components";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo, setUserBalance } from "src/redux/reducers/userInfoSlice";
-import { auth, firestoreDb } from "src/config/firebase";
-import { get_Wallet_Balance } from "src/api/rapyd/WalletTransactionObject";
+import { firebaseAuth, firestoreDb, notification } from "src/config/firebase";
+import {
+  get_Wallet_Balance,
+  get_Wallet_Transactions,
+} from "src/api/rapyd/WalletTransactionObject";
+import { utils } from "src/utils";
 const Home = ({ navigation }) => {
   // const { user } = useAuthentication();
   const dispatch = useDispatch();
@@ -31,15 +35,16 @@ const Home = ({ navigation }) => {
 
   const isCarousel = React.useRef(null);
   const [index, setIndex] = React.useState(0);
+  const [transactionsList, settransactionsList] = useState([]);
 
   useEffect(() => {
     //getting user data from databse and adding to redux state
     //creating a listener if any somthing change document to get real time update
     const subscriber = firestoreDb
       .collection("users")
-      .doc(auth.currentUser.uid)
+      .doc(firebaseAuth.currentUser.uid)
       .onSnapshot((documentSnapshot) => {
-        const data = documentSnapshot.data();
+        const data = documentSnapshot?.data();
         dispatch(
           setUserInfo({
             email: data?.email,
@@ -49,7 +54,7 @@ const Home = ({ navigation }) => {
             firstName: data?.firstName,
             lastName: data?.lastName,
             profileUrl: data?.profileURL,
-            uid: auth?.currentUser?.uid,
+            uid: firebaseAuth?.currentUser?.uid,
             ewalletId: data?.ewalletId,
           })
         );
@@ -61,10 +66,21 @@ const Home = ({ navigation }) => {
             dispatch(setUserBalance(0));
           }
         });
+        get_Wallet_Transactions(data?.ewalletId).then((data) => {
+          settransactionsList(data);
+        });
       });
 
+    const unsubscribe = notification.onMessage(async (remoteMessage) => {
+      console.log("Message handled in the home screen!", remoteMessage);
+      utils.setNotificationsAsyncStorage(remoteMessage);
+    });
+
     // Stop listening for updates when no longer required
-    return () => subscriber();
+    return () => {
+      subscriber();
+      unsubscribe();
+    };
   }, []);
   //render
   function renderHeader() {
@@ -222,34 +238,40 @@ const Home = ({ navigation }) => {
   function renderTransactions() {
     return (
       <FlatList
-        data={dummyData.Transaction}
+        data={transactionsList}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item) => `${item.id}`}
         style={{ marginBottom: 22 }}
-        renderItem={({ item, index }) => (
-          <View
-            style={[
-              index === dummyData.Transaction.length - 1
-                ? { marginBottom: 50 }
-                : null,
-            ]}
-          >
-            <TransactionItem
-              item={item}
-              containerStyle={{ marginTop: 16 }}
-              onPress={() => navigation.navigate("TransactionDetail", { item })}
-            />
-            <LineDivider
-              lineStyle={{
-                height: index === dummyData.Transaction.length - 1 ? 0 : 1,
-                backgroundColor: "#F3F4F6",
-                marginTop: 16,
-                ...SIZES.marginHorizontal,
-                width: "85%",
-              }}
-            />
-          </View>
-        )}
+        renderItem={({ item, index }) => {
+          const cleanItem = utils.cleanItem(item);
+          console.log(cleanItem);
+          return (
+            <View
+              style={[
+                index === transactionsList.length - 1
+                  ? { marginBottom: 50 }
+                  : null,
+              ]}
+            >
+              <TransactionItem
+                item={cleanItem}
+                containerStyle={{ marginTop: 16 }}
+                onPress={() =>
+                  navigation.navigate("TransactionDetail", { item })
+                }
+              />
+              <LineDivider
+                lineStyle={{
+                  height: index === transactionsList.length - 1 ? 0 : 1,
+                  backgroundColor: "#F3F4F6",
+                  marginTop: 16,
+                  ...SIZES.marginHorizontal,
+                  width: "85%",
+                }}
+              />
+            </View>
+          );
+        }}
       />
     );
   }

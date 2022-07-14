@@ -310,7 +310,6 @@ const paymentMethod = [
 ];
 
 const notification = [
-  /*
   {
     id: 1,
     name: "Rewards",
@@ -413,7 +412,7 @@ const notification = [
     name: "Rewards",
     description: "Loyal user rewards!😘",
     date: "02/01/22",
-  },*/
+  },
 ];
 export default {
   myProfile,

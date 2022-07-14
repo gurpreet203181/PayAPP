@@ -18,7 +18,7 @@ import * as Facebook from "expo-facebook";
 
 //Firbase
 import firebase from "firebase";
-import { auth, firestoreDb } from "@config/firebase";
+import { firebaseAuth, firestoreDb } from "@config/firebase";
 
 import Constants from "expo-constants";
 import { create_Personal_Wallet } from "../../api/rapyd/walletObject";
@@ -56,7 +56,7 @@ const AuthLayout = ({
           result.idToken,
           result.accessToken
         );
-        await auth
+        await firebaseAuth
           .signInWithCredential(credential) //Login to Firebase
           .then((user) => {
             if (user?.additionalUserInfo?.isNewUser) {
@@ -104,7 +104,7 @@ const AuthLayout = ({
       if (type === "success") {
         // SENDING THE TOKEN TO FIREBASE TO HANDLE AUTH
         const credential = firebase.auth.FacebookAuthProvider.credential(token);
-        auth
+        firebaseAuth
           .signInWithCredential(credential)
           .then((user) => {
             if (user?.additionalUserInfo?.isNewUser) {

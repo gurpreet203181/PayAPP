@@ -5,7 +5,7 @@ import { View, Image, Text, StyleSheet } from "react-native";
 import AuthLayout from "./AuthLayout";
 import { utils } from "../../utils";
 import { COLORS, FONTS, dummyData, SIZES, icons } from "@constants";
-import { auth, firestoreDb } from "@config/firebase";
+import { firebaseAuth, firestoreDb } from "@config/firebase";
 import { create_Personal_Wallet } from "../../api/rapyd/walletObject";
 
 const SignUp = ({ navigation }) => {
@@ -25,7 +25,7 @@ const SignUp = ({ navigation }) => {
 
     try {
       if (utils.validateCredentials(value, setError, policyChecked)) {
-        await auth
+        await firebaseAuth
           .createUserWithEmailAndPassword(value.email, value.password)
           .then((user) => {
             if (user?.additionalUserInfo?.isNewUser) {

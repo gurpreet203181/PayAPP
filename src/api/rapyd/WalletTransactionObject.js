@@ -32,8 +32,7 @@ const getSignature = (http_method, url_path) => {
 
   return signature;
 };
-
-//create ewallet
+//get wallet balance
 const get_Wallet_Balance = async (ewalletId) => {
   const http_method = "get";
   const url_path = "/v1/user/" + ewalletId + "/accounts";
@@ -61,4 +60,40 @@ const get_Wallet_Balance = async (ewalletId) => {
   }
 };
 
-export { get_Wallet_Balance };
+//get wallet transactions
+const get_Wallet_Transactions = async (ewalletId, page_number, page_size) => {
+  const http_method = "get";
+
+  const pageNumber = page_number ? page_number : 1;
+  const pageSize = page_size ? page_size : 3;
+  const url_path =
+    "/v1/user/" +
+    ewalletId +
+    `/transactions?page_number=${pageNumber}&page_size=${pageSize}`;
+  try {
+    //API request header
+    const headers = {
+      access_key,
+      signature: getSignature(http_method, url_path),
+      salt,
+      timeStamp,
+      "Content-Type": `application/json`,
+    };
+    const response = await fetch(`${base_uri + url_path}`, {
+      method: http_method,
+      headers: headers,
+      //body: data,
+    });
+    const json = await response.json();
+    if (json?.data.length != 0 || json?.data != undefined) {
+      return json.data;
+    } else {
+      return "no_data";
+    }
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export { get_Wallet_Balance, get_Wallet_Transactions };
