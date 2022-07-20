@@ -1,51 +1,56 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { t } from "@hooks/UseI18n";
-import { View, Text, StyleSheet, FlatList, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import { COLORS, icons, SIZES, dummyData, FONTS } from "@constants";
 import { Header, SearchBar, Section, ContactItem, List } from "@components";
 import Modal from "react-native-modal";
 import { useDispatch } from "react-redux";
 import { setSelectedContact } from "@redux/reducers/contactSlice";
 import LottieView from "lottie-react-native";
-
-const SelectContactModel = ({ isVisible, closeModel }) => {
+import { cloudFunction } from "src/config/firebase";
+import { useSelector } from "react-redux";
+const SelectContactModel = ({ isVisible, closeModel, navigation }) => {
   const dispatch = useDispatch(); //redux dispatch to set selectedcontact
 
-  const [searchPhrase, setSearchPhrase] = useState("");
-  const [clicked, setClicked] = useState(false);
-
-  const [allContacts, setAllContacts] = useState();
+  const [allContacts, setAllContacts] = useState([]);
   const [recentContacts, setRecentContacts] = useState();
-  const [filterContacts, setFilterContacts] = useState();
+  const [listIndex, setListIndex] = useState(0);
+  const { friendList } = useSelector((state) => state.userInfo.user);
 
   //  const [selectedContact, setselectedContact] = useState();
 
+  const getFriendListData = async () => {
+    const list = friendList.slice(listIndex, listIndex + 10);
+    if (list.length == 0) return [];
+    await cloudFunction
+      .httpsCallable("getFriendListData")({
+        friendList: list,
+      })
+      .then((response) => {
+        console.log(response);
+        setAllContacts((data) => [...data.concat(response.data)]);
+        const index = listIndex;
+        setListIndex(listIndex + 10);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   //getData from dummydata only once
   useEffect(() => {
-    const getData = async () => {
-      setAllContacts(dummyData.contacts);
-      setRecentContacts(dummyData.RecentContact);
-    };
-    getData();
+    getFriendListData();
   }, []);
 
-  //code will run every time searchphrase is changed and fliter data base on search
-  const filterContact = useMemo(() => {
-    // if search is different then blank
-    if (searchPhrase.trim() == "") {
-      setFilterContacts();
-    }
-
-    if (searchPhrase.trim() != "") {
-      setFilterContacts(
-        allContacts.filter((x) =>
-          x.name
-            .toUpperCase()
-            .startsWith(searchPhrase.toUpperCase().trim().replace(/\s/g, ""))
-        )
-      );
-    }
-  }, [searchPhrase]);
+  const loadOtherFriend = () => {
+    getFriendListData();
+  };
 
   //redner
   function renderLottie() {
@@ -83,10 +88,8 @@ const SelectContactModel = ({ isVisible, closeModel }) => {
         }}
       >
         <SearchBar
-          searchPhrase={searchPhrase}
-          onChangeText={setSearchPhrase}
-          clicked={clicked}
-          setClicked={setClicked}
+          onFocus={() => navigation.navigate("SearchFriends")}
+          placeHolder={"Search new friend"}
         />
       </View>
     );
@@ -132,6 +135,8 @@ const SelectContactModel = ({ isVisible, closeModel }) => {
               data={allContacts}
               showsVerticalScrollIndicator={false}
               keyExtractor={(item) => item.id}
+              onEndReachedThreshold={0.8}
+              onEndReached={loadOtherFriend}
               renderItem={({ item }) => (
                 <View key={item.key}>
                   <ContactItem
@@ -140,7 +145,8 @@ const SelectContactModel = ({ isVisible, closeModel }) => {
                     onPress={() => {
                       dispatch(setSelectedContact(item)); //setting selected item on redux state
                       closeModel();
-                    }} //on parent useCallBack is triggered with selected item as parm
+                    }}
+                    onAddPress={addFriend} //on parent useCallBack is triggered with selected item as parm
                   />
                 </View>
               )}
@@ -149,7 +155,7 @@ const SelectContactModel = ({ isVisible, closeModel }) => {
         ) : (
           //No contact view
           <View>
-            <Text>Add Contact</Text>
+            <Text>Add Friends</Text>
           </View>
         )}
       </View>
@@ -159,7 +165,7 @@ const SelectContactModel = ({ isVisible, closeModel }) => {
     return (
       <View style={styles.listsContainer}>
         <FlatList
-          data={filterContacts}
+          data={allContacts}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
@@ -177,7 +183,7 @@ const SelectContactModel = ({ isVisible, closeModel }) => {
         />
 
         {/* render not found view in case not found contact on search */}
-        {filterContacts.length == 0 && (
+        {allContacts.length == 0 && (
           <View
             style={{
               justifyContent: "center",
@@ -213,9 +219,9 @@ const SelectContactModel = ({ isVisible, closeModel }) => {
 
           <ScrollView>
             {/* render Contacts */}
-            {/* if user searced then filterContacts get list with filtered list so render 
+            {/* if user searced then allContacts get list with filtered list so render 
                      list with filterList else render all contacts and recent contacts section */}
-            {!filterContacts ? renderContacts() : renderFilterList()}
+            {!allContacts ? renderContacts() : renderFilterList()}
           </ScrollView>
         </View>
       </Modal>

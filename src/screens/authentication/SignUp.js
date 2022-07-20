@@ -87,7 +87,7 @@ const SignUp = ({ navigation }) => {
           {/* Name */}
 
           <FormInput
-            value={value.username}
+            value={value.username.toLowerCase()}
             placeholder={t("username")}
             containStyle={{
               marginTop: SIZES.radius,

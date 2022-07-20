@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "77208043248",
+    "firebase_url": "https://payapp-13f92-default-rtdb.firebaseio.com",
     "project_id": "payapp-13f92",
     "storage_bucket": "payapp-13f92.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "77208043248-v2rnhj033cu0hj4jdnl4r7prjsfom2jr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.payapp.live",
+            "certificate_hash": "b264ea18b76c6f170998018073ccf1767daa9713"
+          }
+        },
         {
           "client_id": "77208043248-ppnlmfqpcshetiejruf6rrr1skc2fg5h.apps.googleusercontent.com",
           "client_type": 3

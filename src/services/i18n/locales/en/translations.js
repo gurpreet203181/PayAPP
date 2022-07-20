@@ -131,7 +131,7 @@ const en = {
   //Transfer
   transferMoney: "Transfer Money",
   continue: "CONTINUE",
-
+  selectFriend: "Select a Friend ",
   //contactModel
   contacts: "Contacts",
   recentsContacts: "Recents Contacts",
@@ -140,6 +140,7 @@ const en = {
   noContacts: "No contacts found ",
 
   //PaymentMethod
+  inAppBalance: "Zemmo balance",
   paymentMethod: "Payment Method",
   choosePaymentMethod: "Choose Payment Method",
   personalAccount: "Personal Account",
@@ -266,5 +267,8 @@ const en = {
   phoneNumberLinked: "The phone number is already linked to an account ",
   //editprofileImg
   selectImg: "Set a picture for yourself,{{name}}",
+
+  //username
+  usernameTaken: "Username already taken ",
 };
 export default en;

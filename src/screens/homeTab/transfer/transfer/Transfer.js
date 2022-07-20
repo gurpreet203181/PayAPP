@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { t } from "@hooks/UseI18n";
 import { View, Text, StyleSheet } from "react-native";
 import { FONTS, COLORS, icons, SIZES } from "@constants";
@@ -7,10 +7,13 @@ import SelectContactModel from "../SelectContactModel";
 import VirtualKeyboard from "react-native-virtual-keyboard";
 import { setTransferDetails } from "@redux/reducers/transferSlice";
 import { useDispatch, useSelector } from "react-redux";
-
+import { showMessage } from "react-native-flash-message";
+import { utils } from "src/utils";
 const Transfer = ({ navigation }) => {
   const dispatch = useDispatch();
+
   const selectedContact = useSelector((state) => state.selectedContact.contact);
+  const { balance } = useSelector((state) => state.userInfo.user);
 
   const [amount, setAmount] = useState("0");
 
@@ -21,12 +24,49 @@ const Transfer = ({ navigation }) => {
     setModalVisible(!isModalVisible);
   };
 
+  //function to check amount valid and contact is selected
+  function isValid() {
+    if (amount <= 0) {
+      showMessage({
+        message: "Amount not vaild",
+        // description: "Amount not vaild",
+        type: "danger",
+      });
+      return false;
+    }
+    if (amount > balance) {
+      showMessage({
+        message: "Insufficient balance",
+        type: "danger",
+      });
+      return false;
+    }
+    if (selectedContact.username == null) {
+      showMessage({
+        message: "Please select a friend",
+        //description: "Please select a friend",
+        type: "danger",
+      });
+      return false;
+    }
+    return true;
+  }
+  //on press of continue button
+  const onContinuePress = async () => {
+    if (isValid()) {
+      const formattedAmount = utils.ammountFormat(amount, "EUR");
+      dispatch(setTransferDetails({ formattedAmount, selectedContact }));
+      //navigation to paymentMethod screen with nextscreen name as prop
+      navigation.navigate("TransferConfirmation");
+    }
+  };
   //render
+
   function renderHeader() {
     return (
       <Header
         title={t("transferMoney")}
-        leftIcon={icons.close}
+        leftIcon={icons.back_arrow}
         onLeftIconPress={() => navigation.goBack()}
       />
     );
@@ -55,7 +95,7 @@ const Transfer = ({ navigation }) => {
           decimal={true}
           pressMode="string"
           clearOnLongPress={true}
-          rowStyle={{ height: 80 }}
+          rowStyle={{ flex: 0.2 }}
           // cellStyle={{width:125}}
           onPress={(val) => setAmount(val ? val : 0)}
         />
@@ -85,7 +125,7 @@ const Transfer = ({ navigation }) => {
       {/* render virtual keyboard  and text  */}
       <View
         style={{
-          flex: 0.6,
+          flex: 0.7,
           width: "100%",
           alignItems: "center",
           backgroundColor: COLORS.white,
@@ -107,14 +147,7 @@ const Transfer = ({ navigation }) => {
           label={t("continue")}
           containerStyle={styles.continueButton}
           labelStyle={styles.continueButtonLabel}
-          onPress={() => {
-            dispatch(setTransferDetails({ amount, selectedContact }));
-
-            //navigation to paymentMethod screen with nextscreen name as prop
-            navigation.navigate("PaymentMethod", {
-              nextScreen: "TransferConfirmation",
-            });
-          }}
+          onPress={onContinuePress}
         />
 
         {/* select contact model  */}
@@ -122,6 +155,7 @@ const Transfer = ({ navigation }) => {
           <SelectContactModel
             isVisible={isModalVisible}
             closeModel={toggleModal} //useCallBack to get selected contact from modal
+            navigation={navigation}
           />
         </View>
       </View>
@@ -142,7 +176,6 @@ const styles = StyleSheet.create({
     ...FONTS.h3,
     fontSize: 50,
     paddingTop: 40,
-    height: 80,
   },
   continueButton: {
     width: 327,

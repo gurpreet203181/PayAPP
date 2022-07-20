@@ -1,28 +1,18 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  ActivityIndicator,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useRoute } from "@react-navigation/native";
 import { COLORS, SIZES, FONTS, icons } from "@constants";
 import { Loading } from "@components";
-//Google login
-import * as Google from "expo-google-app-auth";
-//facebook login
-import * as Facebook from "expo-facebook";
 
 //Firbase
-import firebase from "firebase";
+import auth from "@react-native-firebase/auth";
 import { firebaseAuth, firestoreDb } from "@config/firebase";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 import Constants from "expo-constants";
 import { create_Personal_Wallet } from "../../api/rapyd/walletObject";
-
+import MultistepFormModal from "./MultistepFormModal";
 const AuthLayout = ({
   childern,
   title,
@@ -33,6 +23,58 @@ const AuthLayout = ({
 }) => {
   const route = useRoute();
   const [isLoading, SetIsLoading] = useState(false);
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  //Model show and close function
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  async function onGoogleButtonPress() {
+    GoogleSignin.configure({
+      //  iosClientId: Constants.manifest.extra.IOS_KEY, //From app.json
+      webClientId:
+        "77208043248-ppnlmfqpcshetiejruf6rrr1skc2fg5h.apps.googleusercontent.com",
+      //androidClientId: Constants.manifest?.extra?.googleAndroidKey, //From app.json
+      //androidStandaloneAppClientId: Constants.manifest?.extra?.googleAndroidKey,
+      // androidStandaloneAppClientId: Constants.manifest?.extra?.googleAndroidKey,
+      //  iosStandaloneAppClientId: 'IOS_STANDALONE_APP_CLIENT_ID',
+    });
+    // Get the users ID token
+    const { idToken } = await GoogleSignin.signIn();
+
+    // Create a Google credential with the token
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+    // Sign-in the user with the credential
+    return firebaseAuth
+      .signInWithCredential(googleCredential)
+      .then((user) => {
+        if (user?.additionalUserInfo?.isNewUser) {
+          //creating user personal in rapyd
+          create_Personal_Wallet(user).then((response) => {
+            if (response?.status?.status == "SUCCESS") {
+              ewalletId = response?.data?.id;
+            }
+            //if user is new creating user in database
+            firestoreDb.collection("users").doc(user?.user?.uid).set({
+              username: user?.user?.displayName,
+              email: user?.user?.email,
+              firstName: user?.additionalUserInfo?.profile?.given_name,
+              lastName: user?.additionalUserInfo?.profile?.family_name,
+              profileURL: user?.user?.photoURL,
+              phoneNumber: null,
+              ewalletId: ewalletId,
+            });
+
+            setModalVisible(true);
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   //Google sign in
   //after sign in   onAuthStateChanged method is trigged in useAuthentication.js to make user login in app
@@ -75,6 +117,8 @@ const AuthLayout = ({
                   phoneNumber: null,
                   ewalletId: ewalletId,
                 });
+
+                setModalVisible(true);
               });
             }
           })
@@ -192,8 +236,8 @@ const AuthLayout = ({
                   <TouchableOpacity
                     style={{ ...Styles.SocialBtnFrame }}
                     onPress={() => {
-                      GoogleSignIn();
-                      SetIsLoading(true);
+                      onGoogleButtonPress();
+                      // SetIsLoading(true);
                     }}
                   >
                     <Image source={icons.google} style={Styles.SocialImg} />
@@ -224,6 +268,13 @@ const AuthLayout = ({
           </View>
         </View>
       </KeyboardAwareScrollView>
+      {/* select contact model  */}
+      <View>
+        <MultistepFormModal
+          isVisible={isModalVisible}
+          closeModel={toggleModal} //useCallBack to get selected contact from modal
+        />
+      </View>
       {isLoading && <Loading />}
     </View>
   );

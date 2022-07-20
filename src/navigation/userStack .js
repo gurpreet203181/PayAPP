@@ -27,6 +27,7 @@ import {
   Otp,
   EditAccount,
   EditProfileImg,
+  SearchFriends,
 } from "@screens";
 import Tabs from "./tabs";
 import { firebaseAuth } from "../config/firebase";
@@ -93,6 +94,9 @@ export default function UserStack() {
         {/* auth screen for user stack */}
         <Stack.Screen name="Otp" component={Otp} />
         <Stack.Screen name="EmailVerfication" component={EmailVerfication} />
+
+        {/* commonScreens */}
+        <Stack.Screen name="SearchFriends" component={SearchFriends} />
       </Stack.Navigator>
     </NavigationContainer>
   );

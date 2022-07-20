@@ -1,19 +1,28 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
-import { COLORS, FONTS, icons, SIZES } from "../../constants";
+import { COLORS, FONTS, images, SIZES } from "../../constants";
 import { t } from "../../hooks/UseI18n";
 import { SimpleLineIcons } from "@expo/vector-icons";
 
 const SelectedConatctItem = ({ item, onIconPress }) => {
   return (
     <View style={styles.container}>
-      <Image source={item?.image} style={styles.profileImage} />
+      <Image
+        source={
+          item?.images
+            ? {
+                uri: item?.images,
+              }
+            : images.userPlaceholder
+        }
+        style={styles.profileImage}
+      />
 
       <View style={{ marginRight: 10 }}>
-        <Text style={styles.name}>{item?.name}</Text>
-        <Text style={styles.number}>
-          {t("number")} - {item?.phoneNumber}
+        <Text style={styles.name}>
+          {item?.username ? item?.username : t("selectFriend")}
         </Text>
+        <Text style={styles.number}>{item?.name}</Text>
       </View>
       <TouchableOpacity
         style={{

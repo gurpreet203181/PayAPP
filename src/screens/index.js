@@ -13,7 +13,7 @@ import Transfer from "./homeTab/transfer/transfer/Transfer";
 import AddCard from "./addCardTab/AddCard";
 import PaymentMethod from "./commonScreens/paymentMethod/PaymentMethod";
 import SelectCard from "./commonScreens/selectCard/SelectCard";
-import TransferConfirmation from "./homeTab/transfer/TransferConfirmation";
+import TransferConfirmation from "./homeTab/transfer/transfer/TransferConfirmation";
 import More from "./homeTab/transfer/more/More";
 import TopUp from "./homeTab/transfer/topUp/TopUp";
 import TopUpConfirmation from "./homeTab/transfer/topUp/TopUpConfirmation";
@@ -29,6 +29,7 @@ import EmailVerfication from "./authentication/EmailVerification";
 import PhoneNumber from "./profileTab/accountInfo/phoneVerfication";
 import EditAccount from "./profileTab/accountInfo/editAccount/editAccount";
 import EditProfileImg from "./profileTab/accountInfo/editProfileImg/editProfileImg";
+import SearchFriends from "./commonScreens/searchFriends/SearchFriends";
 export {
   //Common screens
   CardDetail,
@@ -78,4 +79,6 @@ export {
   EditAccount,
   //editProfileimg
   EditProfileImg,
+  //search friends
+  SearchFriends,
 };

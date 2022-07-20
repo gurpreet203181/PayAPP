@@ -16,13 +16,19 @@ const setSalt = () => {
 };
 
 //getting crypto signature
-const getSignature = (http_method, url_path) => {
+const getSignature = (http_method, url_path, data) => {
   //calling method setTimeStamp and setSalt here to get updated value
   setTimeStamp(); //setting time stamp
   setSalt(); //setting salt
 
   const to_sign =
-    http_method + url_path + salt + timeStamp + access_key + secret_key;
+    http_method +
+    url_path +
+    salt +
+    timeStamp +
+    access_key +
+    secret_key +
+    (data ? data : "");
 
   let signature = CryptoJS.enc.Hex.stringify(
     CryptoJS.HmacSHA256(to_sign, secret_key)
@@ -32,6 +38,48 @@ const getSignature = (http_method, url_path) => {
 
   return signature;
 };
+
+// Transfer Funds Between Wallets
+const Transfer_Funds_Between_Wallets = async (transferObj) => {
+  const http_method = "post";
+  const url_path = "/v1/account/transfer";
+
+  try {
+    //setting data for api call
+    const data = JSON.stringify({
+      source_ewallet: transferObj?.source_ewallet,
+      amount: transferObj.amount,
+      currency: transferObj.currency,
+      destination_ewallet: transferObj?.destination_ewallet,
+      metadata: {
+        merchant_defined: true,
+      },
+    });
+
+    //API request header
+    const headers = {
+      access_key,
+      signature: getSignature(http_method, url_path, data),
+      salt,
+      timeStamp,
+      "Content-Type": `application/json`,
+    };
+
+    const response = await fetch(`${base_uri + url_path}`, {
+      method: http_method,
+      headers: headers,
+      body: data,
+    });
+    const json = await response.json();
+
+    return json;
+  } catch (error) {
+    console.log(error);
+
+    return false;
+  }
+};
+
 //get wallet balance
 const get_Wallet_Balance = async (ewalletId) => {
   const http_method = "get";
@@ -96,4 +144,8 @@ const get_Wallet_Transactions = async (ewalletId, page_number, page_size) => {
   }
 };
 
-export { get_Wallet_Balance, get_Wallet_Transactions };
+export {
+  get_Wallet_Balance,
+  get_Wallet_Transactions,
+  Transfer_Funds_Between_Wallets,
+};

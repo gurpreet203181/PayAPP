@@ -18,22 +18,49 @@ import {
 import { useSelector } from "react-redux";
 import Dash from "react-native-dash";
 import { AntDesign } from "@expo/vector-icons";
+import { Transfer_Funds_Between_Wallets } from "src/api/rapyd/WalletTransactionObject";
+import { showMessage } from "react-native-flash-message";
+
 const TransferConfirmation = ({ navigation }) => {
-  const { amount, receiverId } = useSelector((state) => state.transfer); //getting deatil from transfer reduxer about ammount and id
+  const { amount, contact } = useSelector((state) => state.transfer); //getting deatil from transfer reduxer about ammount and id
   //getting selected payment method detail from paymentMethodSlice which selected on paymentMethod screen
-  const paymentMethodDetail = useSelector(
-    (state) => state.paymentMethod.paymentMethodDetail
-  );
 
-  const [promoCode, setPromeCode] = useState();
+  const { user } = useSelector((state) => state.userInfo);
+
   const [showDetail, setShowDetial] = useState(false);
-  const [showModal, setShowModal] = useState(false);
 
-  const PaymentSucceed = () => {
-    setShowModal(true);
-  };
-  const closeModel = () => {
-    setShowModal(false);
+  const transfer = async () => {
+    const transferObj = {
+      source_ewallet: user.ewalletId,
+      amount: amount,
+      currency: "EUR",
+      destination_ewallet: contact?.ewalletId,
+    };
+
+    await Transfer_Funds_Between_Wallets(transferObj)
+      .then((response) => {
+        console.log(response);
+        if (response?.status?.status == "SUCCESS") {
+          navigation.replace("PaymentSuccess", {
+            lottie: images.successfulLottie2,
+          });
+        } else {
+          showMessage({
+            message: "Something Went Wrong, Please Try Again!",
+            //description: "Please select a friend",
+            type: "danger",
+          });
+          navigation.navigate("Home");
+        }
+      })
+      .catch((e) => {
+        showMessage({
+          message: "Something Went Wrong, Please Try Again!",
+          //description: "Please select a friend",
+          type: "danger",
+        });
+        navigation.navigate("Home");
+      });
   };
 
   //render
@@ -41,8 +68,8 @@ const TransferConfirmation = ({ navigation }) => {
     return (
       <Header
         title={t("paymentSummary")}
-        rightIcon={icons.close}
-        onRightIconPress={() => navigation.navigate("Home")}
+        leftIcon={icons.close}
+        onLeftIconPress={() => navigation.navigate("Home")}
       />
     );
   }
@@ -65,12 +92,12 @@ const TransferConfirmation = ({ navigation }) => {
         {/* receiverId */}
         <View style={styles.row}>
           <Text style={styles.rowText}>{t("receiver")}</Text>
-          <Text style={styles.rowText2}>Andrea Summer</Text>
+          <Text style={styles.rowText2}>{contact.username}</Text>
         </View>
         {/* payment Method */}
         <View style={styles.row}>
           <Text style={styles.rowText}>{t("paymentMethod")}</Text>
-          <Text style={styles.rowText2}>{paymentMethodDetail.name}</Text>
+          <Text style={styles.rowText2}>{t("inAppBalance")}</Text>
         </View>
       </View>
     );
@@ -127,7 +154,7 @@ const TransferConfirmation = ({ navigation }) => {
             letterSpacing: 0.3,
           }}
         >
-          Andrea Summer
+          {contact?.username}{" "}
         </Text>
         <Text
           style={{
@@ -137,7 +164,7 @@ const TransferConfirmation = ({ navigation }) => {
             marginTop: 10,
           }}
         >
-          0821 - 7654 - 3210
+          {contact?.name}
         </Text>
       </View>
     );
@@ -224,14 +251,7 @@ const TransferConfirmation = ({ navigation }) => {
           bottom: 50,
         }}
       >
-        <CustomSwipeButton
-          title={t("swipeToSend")}
-          onSwipeSuccess={() => {
-            navigation.replace("PaymentSuccess", {
-              lottie: images.successfulLottie2,
-            });
-          }}
-        />
+        <CustomSwipeButton title={t("swipeToSend")} onSwipeSuccess={transfer} />
       </View>
     </View>
   );

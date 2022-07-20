@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   amount: 0,
-  receiverId: null,
+  contact: null,
   // paymentMethod: null,
 };
 
@@ -11,8 +11,8 @@ export const transferSlice = createSlice({
   initialState,
   reducers: {
     setTransferDetails: (state, action) => {
-      state.amount = action.payload.amount;
-      state.receiverId = action.payload.selectedContact.id;
+      state.amount = action.payload.formattedAmount;
+      state.contact = action.payload.selectedContact;
       // state.paymentMethod = action.payload.paymentMethod
     },
   },

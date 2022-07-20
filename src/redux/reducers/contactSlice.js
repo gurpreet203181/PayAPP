@@ -3,10 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   //setting default recent user
   contact: {
-    id: 1,
-    name: "Samantha",
-    phoneNumber: 3278195659,
-    image: require("../../assets/dummyData/boy.png"),
+    ewalletId: null,
+    username: null,
+    image: null,
+    name: null,
   },
 };
 
@@ -15,7 +15,10 @@ export const selectedContactSilce = createSlice({
   initialState,
   reducers: {
     setSelectedContact: (state, action) => {
-      state.contact = action.payload;
+      state.contact.ewalletId = action.payload?.ewalletId;
+      state.contact.username = action.payload?.username;
+      state.contact.image = action.payload?.profileURL;
+      state.contact.name = `${action.payload?.firstName} ${action.payload?.lastName}`;
     },
   },
 });

@@ -13,6 +13,7 @@ const user = {
   balance: 0,
   cardsID: [null],
   ewalletId: null,
+  friendList: [],
 };
 const initialState = {
   user,
@@ -49,7 +50,8 @@ export const userInfoSlice = createSlice({
 
       //ewallet ID
       state.user.ewalletId = payload?.ewalletId;
-
+      //friend list with uid of all add friend
+      state.user.friendList = payload?.friendList;
       //phoneNumber verified
       // setting user number verfied to true after it verfied with tiwil otp and
       //phone number in update in database

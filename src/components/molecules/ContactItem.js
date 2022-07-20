@@ -1,9 +1,16 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { COLORS, FONTS, icons, images, SIZES } from "../../constants";
+import { Button } from "@components";
 import { t } from "../../hooks/UseI18n";
 
-const ContactItem = ({ item, onPress, isSelected, buttonComponent }) => {
+const ContactItem = ({
+  item,
+  onPress,
+  isSelected,
+  onAddPress,
+  showAddButton = false,
+}) => {
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -14,18 +21,29 @@ const ContactItem = ({ item, onPress, isSelected, buttonComponent }) => {
     >
       <View style={{ flexDirection: "row" }}>
         <Image
-          source={item?.imageAvailable ? item?.image : images.boy}
+          source={item?.profileURL ? item?.profileURL : images.boy}
           style={styles.profileImage}
         />
 
         <View style={{ marginLeft: 15 }}>
           <Text numberOfLines={1} style={styles.name}>
-            {item.name}
+            {item.username}
           </Text>
-          <Text style={styles.number}>{item?.phoneNumbers?.[0].number}</Text>
+          <Text style={styles.number}>
+            {item?.firstName} {item?.lastName}
+          </Text>
         </View>
       </View>
-      {buttonComponent}
+      {showAddButton && (
+        <View>
+          <Button
+            label={"ADD"}
+            onPress={() => {
+              onAddPress(item?.uid);
+            }}
+          />
+        </View>
+      )}
     </TouchableOpacity>
   );
 };

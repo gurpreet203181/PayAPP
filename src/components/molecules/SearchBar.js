@@ -18,17 +18,18 @@ const SearchBar = (props) => {
 
         <TextInput
           style={styles.TextInput}
-          placeholder="Search"
-          value={props.searchPhrase}
-          onChangeText={(value) => props.onChangeText(value)}
+          placeholder={props?.placeHolder}
+          // value={props.searchPhrase}
+          onChangeText={(value) => props?.onChangeText(value)}
           autoCorrect={false}
           underlineColorAndroid="white"
+          autoFocus={props?.autoFocus}
           onFocus={() => {
-            props.setClicked(true);
+            props?.onFocus();
           }}
         />
       </View>
-      {props.clicked && (
+      {props?.clicked && (
         <TouchableOpacity
           style={{
             height: 50,
@@ -37,13 +38,13 @@ const SearchBar = (props) => {
             alignItems: "center",
           }}
           onPress={() => {
-            props.onChangeText("");
+            //  props.onChangeText("");
             Keyboard.dismiss();
-            props.setClicked(false);
-            props.onCrossPress?.();
+            props?.setClicked(false);
+            props?.onArrowPress?.();
           }}
         >
-          <EvilIcons name="close" size={24} color="black" />
+          <EvilIcons name="arrow-right" size={30} color="black" />
         </TouchableOpacity>
       )}
     </View>

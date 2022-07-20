@@ -1,6 +1,28 @@
 import { t } from "@hooks/UseI18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { cloudFunction } from "src/config/firebase";
 
+//number format to currency
+function ammountFormat(amount, currency) {
+  return Number(amount)
+    .toFixed(2)
+    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+}
+
+//checking if username is already used
+async function isUsernameUsed(username) {
+  await cloudFunction
+    .httpsCallable("isUsernameUsed")({
+      username: username.toLowerCase(),
+    })
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  return;
+}
 //set item data
 function cleanItem(data) {
   const date = new Date(data?.created_at * 1000);
@@ -97,7 +119,11 @@ function validateCredentials(credentials, setError, policyChecked) {
 
   if (credentials.password.length < 6) errorMsg = t("passwordError");
 
-  if (credentials.username.length < 3) errorMsg = t("usernameError");
+  if (credentials.username.length < 3) {
+    errorMsg = t("usernameError");
+  } else if (isUsernameUsed(credentials.username)) {
+    errorMsg = t("usernameTaken");
+  }
 
   if (!isValidEmail(credentials.email)) errorMsg = t("emailError");
 
@@ -150,6 +176,7 @@ const utils = {
   editAccountValidateCredentials,
   setNotificationsAsyncStorage,
   cleanItem,
+  ammountFormat,
 };
 
 export default utils;

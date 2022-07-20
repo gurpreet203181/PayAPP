@@ -19,6 +19,8 @@ import { Provider } from "react-redux";
 import { OnBoarding } from "@screens";
 import { notification } from "src/config/firebase";
 import { utils } from "src/utils";
+import FlashMessage from "react-native-flash-message";
+
 //navgiation stack
 const Stack = createStackNavigator();
 
@@ -72,7 +74,7 @@ export default function App() {
     <Provider store={store}>
       <SafeAreaProvider>
         <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-
+        <FlashMessage position="top" />
         {viewedOnboarding ? (
           <RootNavigation />
         ) : (

@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Dimensions,
+  Alert,
 } from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import { COLORS, FONTS, icons, SIZES, dummyData } from "@constants";
@@ -26,12 +27,13 @@ import {
   get_Wallet_Transactions,
 } from "src/api/rapyd/WalletTransactionObject";
 import { utils } from "src/utils";
+import { showMessage, hideMessage } from "react-native-flash-message";
+
 const Home = ({ navigation }) => {
   // const { user } = useAuthentication();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userInfo);
   const SLIDER_WIDTH = Dimensions.get("window").width - 80;
-  const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 
   const isCarousel = React.useRef(null);
   const [index, setIndex] = React.useState(0);
@@ -56,9 +58,10 @@ const Home = ({ navigation }) => {
             profileUrl: data?.profileURL,
             uid: firebaseAuth?.currentUser?.uid,
             ewalletId: data?.ewalletId,
+            friendList: data?.friendList,
           })
         );
-        console.log(data?.ewalletId);
+        console.log(data?.friendList);
         get_Wallet_Balance(data?.ewalletId).then((response) => {
           if (response && response.length > 0) {
             dispatch(setUserBalance(response[0]?.balance));
@@ -74,6 +77,11 @@ const Home = ({ navigation }) => {
     const unsubscribe = notification.onMessage(async (remoteMessage) => {
       console.log("Message handled in the home screen!", remoteMessage);
       utils.setNotificationsAsyncStorage(remoteMessage);
+      showMessage({
+        message: remoteMessage?.notification?.title,
+        description: remoteMessage?.notification?.body + " 😘",
+        type: "info",
+      });
     });
 
     // Stop listening for updates when no longer required
@@ -82,6 +90,11 @@ const Home = ({ navigation }) => {
       unsubscribe();
     };
   }, []);
+
+  const createTwoButtonAlert = () =>
+    Alert.alert("", t("commingSoon"), [
+      { text: "OK", onPress: () => console.log("OK Pressed") },
+    ]);
   //render
   function renderHeader() {
     return (
@@ -166,10 +179,10 @@ const Home = ({ navigation }) => {
               <Text style={styles.optionText}>{t("topUp")}</Text>
             </TouchableOpacity>
 
-            {/* Withdraw */}
+            {/* bill */}
             <TouchableOpacity
               style={styles.IconButtonView}
-              //onPress={() => navigation.navigate("WithDraw")}
+              onPress={createTwoButtonAlert}
             >
               <Image source={icons.optionsBill} style={styles.optionLogo} />
               <Text style={styles.optionText}>{t("bill")}</Text>

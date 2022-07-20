@@ -6,8 +6,6 @@ import AuthStack from "./authStack";
 import { Loading } from "@components";
 import { images, COLORS } from "@constants";
 const RootNavigation = () => {
-  const [isUserReady, setIsUserReady] = useState();
-
   const { user } = useAuthentication();
 
   if (user == undefined) {
