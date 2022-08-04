@@ -6,33 +6,37 @@ import Modal from "react-native-modal";
 import { Button } from "@components";
 import { firebaseAuth, notification, firestoreDb } from "@config/firebase";
 import firestore from "@react-native-firebase/firestore";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 import { setUserInfo } from "@redux/reducers/userInfoSlice";
 import { useDispatch } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const LogoutModal = ({ isVisible, onClosePress, onLogoutPress }) => {
   const dispatch = useDispatch();
-  const userId = firebaseAuth.currentUser.uid;
+  const userId = firebaseAuth?.currentUser.uid;
   const handleSignOut = async () => {
     try {
       //gettingfcm token for deleting in firestore record
       //before deleting from device
+
       await notification.getToken().then((token) => {
         // remove the token to the users datastore
         firestoreDb
           .collection("users")
           .doc(userId)
           .update({
-            tokens: firestore.FieldValue.arrayRemove(token),
+            fcmToken: firestore.FieldValue.arrayRemove(token),
           });
 
         //removing fcm token from device after logout
         //when user login new token will created
         notification.deleteToken();
+        // dispatch(setUserInfo({ type: "DESTROY_SESSION" }));
+
         //signout user
         firebaseAuth.signOut().then(() => {
-          dispatch(setUserInfo({ type: "DESTROY_SESSION" }));
-          AsyncStorage.setItem("@notifications", JSON.stringify([]));
+          GoogleSignin.revokeAccess();
+          // AsyncStorage.setItem("@notifications", JSON.stringify([]));
         });
       });
 

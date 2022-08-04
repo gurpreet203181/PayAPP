@@ -7,6 +7,7 @@ import {
   FlatList,
   ScrollView,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import { COLORS, icons, SIZES, dummyData, FONTS } from "@constants";
 import { Header, SearchBar, Section, ContactItem, List } from "@components";
@@ -20,24 +21,26 @@ const SelectContactModel = ({ isVisible, closeModel, navigation }) => {
   const dispatch = useDispatch(); //redux dispatch to set selectedcontact
 
   const [allContacts, setAllContacts] = useState([]);
-  const [recentContacts, setRecentContacts] = useState();
-  const [listIndex, setListIndex] = useState(0);
+
   const { friendList } = useSelector((state) => state.userInfo.user);
+  const [showLoading, setLoading] = useState(true);
 
   //  const [selectedContact, setselectedContact] = useState();
 
   const getFriendListData = async () => {
-    const list = friendList.slice(listIndex, listIndex + 10);
-    if (list.length == 0) return [];
+    /*   const list = friendList.slice(listIndex, listIndex + 10);
+    if (list.length == 0) return [];*/
     await cloudFunction
       .httpsCallable("getFriendListData")({
-        friendList: list,
+        friendList: friendList,
       })
       .then((response) => {
         console.log(response);
-        setAllContacts((data) => [...data.concat(response.data)]);
-        const index = listIndex;
-        setListIndex(listIndex + 10);
+        //setAllContacts((data) => [...data.concat(response.data)]);
+        setAllContacts(response.data);
+        /*  const index = listIndex;
+        setListIndex(listIndex + 10);*/
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -46,7 +49,8 @@ const SelectContactModel = ({ isVisible, closeModel, navigation }) => {
   //getData from dummydata only once
   useEffect(() => {
     getFriendListData();
-  }, []);
+    console.log("render1");
+  }, [useSelector((state) => state.userInfo.user)]);
 
   const loadOtherFriend = () => {
     getFriendListData();
@@ -70,7 +74,7 @@ const SelectContactModel = ({ isVisible, closeModel, navigation }) => {
   function renderHeader() {
     return (
       <Header
-        title={t("contacts")}
+        title={t("friends")}
         leftIcon={icons.back_arrow}
         onLeftIconPress={closeModel}
       />
@@ -89,79 +93,13 @@ const SelectContactModel = ({ isVisible, closeModel, navigation }) => {
       >
         <SearchBar
           onFocus={() => navigation.navigate("SearchFriends")}
-          placeHolder={"Search new friend"}
+          placeHolder={t("searchFriend")}
         />
       </View>
     );
   }
 
-  function renderContacts() {
-    return (
-      <View style={styles.listsContainer}>
-        {/* recent Contacts 
-                render recent section when there is recent present */}
-
-        {recentContacts && (
-          <View>
-            <Section
-              label={t("recentsContacts")}
-              containerStyle={{ marginHorizontal: 0 }}
-            />
-            {recentContacts?.map((item) => {
-              return (
-                <ContactItem
-                  item={item}
-                  //isSelected={(selectedContact?.key == 'recent' && selectedContact?.id== item.id)}
-                  onPress={() => {
-                    dispatch(setSelectedContact(item)); //setting selected item on redux state
-                    closeModel();
-                  }}
-                />
-              );
-            })}
-          </View>
-        )}
-
-        {/* all contacts 
-                check of there is any contact if not show button add contact*/}
-        {allContacts ? (
-          <View style={{ flex: 1, marginTop: 34 }}>
-            <Section
-              label={t("allContacts")}
-              containerStyle={{ marginHorizontal: 0, paddingBottom: 12 }}
-            />
-
-            <FlatList
-              data={allContacts}
-              showsVerticalScrollIndicator={false}
-              keyExtractor={(item) => item.id}
-              onEndReachedThreshold={0.8}
-              onEndReached={loadOtherFriend}
-              renderItem={({ item }) => (
-                <View key={item.key}>
-                  <ContactItem
-                    item={item}
-                    //isSelected={(selectedContact?.key == 'allContacts' && selectedContact?.id== item.id)}
-                    onPress={() => {
-                      dispatch(setSelectedContact(item)); //setting selected item on redux state
-                      closeModel();
-                    }}
-                    onAddPress={addFriend} //on parent useCallBack is triggered with selected item as parm
-                  />
-                </View>
-              )}
-            />
-          </View>
-        ) : (
-          //No contact view
-          <View>
-            <Text>Add Friends</Text>
-          </View>
-        )}
-      </View>
-    );
-  }
-  function renderFilterList() {
+  function renderContactList() {
     return (
       <View style={styles.listsContainer}>
         <FlatList
@@ -170,6 +108,7 @@ const SelectContactModel = ({ isVisible, closeModel, navigation }) => {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <View>
+              {console.log(item)}
               <ContactItem
                 item={item}
                 //isSelected={(selectedContact?.key == 'allContacts' && selectedContact?.id== item.id)}
@@ -216,13 +155,12 @@ const SelectContactModel = ({ isVisible, closeModel, navigation }) => {
 
           {/* render searchBar  */}
           {renderSearchBar()}
-
-          <ScrollView>
-            {/* render Contacts */}
-            {/* if user searced then allContacts get list with filtered list so render 
-                     list with filterList else render all contacts and recent contacts section */}
-            {!allContacts ? renderContacts() : renderFilterList()}
-          </ScrollView>
+          {!showLoading && renderContactList()}
+          {showLoading && (
+            <View style={{ marginTop: 20 }}>
+              <ActivityIndicator color={COLORS.darkBlue3} size="large" />
+            </View>
+          )}
         </View>
       </Modal>
     </View>

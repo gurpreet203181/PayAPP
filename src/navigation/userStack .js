@@ -28,6 +28,7 @@ import {
   EditAccount,
   EditProfileImg,
   SearchFriends,
+  UrlWebview,
 } from "@screens";
 import Tabs from "./tabs";
 import { firebaseAuth } from "../config/firebase";
@@ -97,6 +98,7 @@ export default function UserStack() {
 
         {/* commonScreens */}
         <Stack.Screen name="SearchFriends" component={SearchFriends} />
+        <Stack.Screen name="UrlWebview" component={UrlWebview} />
       </Stack.Navigator>
     </NavigationContainer>
   );

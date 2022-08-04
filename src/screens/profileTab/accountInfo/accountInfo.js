@@ -136,6 +136,19 @@ const AccountInfo = ({ navigation }) => {
                 {user?.email}
               </Text>
             </View>
+
+            {/* currency */}
+
+            <View style={styles.infoRow}>
+              <Text style={styles.infoTitle}>{t("currency")}</Text>
+              <Text
+                style={styles.infoData}
+                adjustsFontSizeToFit
+                numberOfLines={1}
+              >
+                {user?.currency}
+              </Text>
+            </View>
           </View>
         </View>
 

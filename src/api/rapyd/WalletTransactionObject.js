@@ -22,7 +22,7 @@ const getSignature = (http_method, url_path, data) => {
   setSalt(); //setting salt
 
   const to_sign =
-    http_method +
+    (http_method ? http_method : "") +
     url_path +
     salt +
     timeStamp +
@@ -133,7 +133,7 @@ const get_Wallet_Transactions = async (ewalletId, page_number, page_size) => {
       //body: data,
     });
     const json = await response.json();
-    if (json?.data.length != 0 || json?.data != undefined) {
+    if (json?.data?.length != 0 || json?.data != undefined) {
       return json.data;
     } else {
       return "no_data";

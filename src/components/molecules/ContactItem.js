@@ -21,7 +21,13 @@ const ContactItem = ({
     >
       <View style={{ flexDirection: "row" }}>
         <Image
-          source={item?.profileURL ? item?.profileURL : images.boy}
+          source={
+            item?.profileURL
+              ? {
+                  uri: item?.profileURL,
+                }
+              : images.boy
+          }
           style={styles.profileImage}
         />
 
@@ -39,6 +45,7 @@ const ContactItem = ({
           <Button
             label={"ADD"}
             onPress={() => {
+              console.log(item);
               onAddPress(item?.uid);
             }}
           />

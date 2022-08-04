@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setTopUpAmount } from "@redux/reducers/topUpSlice";
 import VirtualKeyboard from "react-native-virtual-keyboard";
 
+import { showMessage } from "react-native-flash-message";
+import { utils } from "src/utils";
 const TopUp = ({ navigation }) => {
   const dispatch = useDispatch();
 
@@ -21,6 +23,27 @@ const TopUp = ({ navigation }) => {
   const amountButton = (amount, id) => {
     setselectedAmountButton(id);
     setAmount(amount);
+  };
+  //function to check amount valid and contact is selected
+  function isValid() {
+    if (amount <= 0) {
+      showMessage({
+        message: "Amount not vaild",
+        // description: "Amount not vaild",
+        type: "danger",
+      });
+      return false;
+    }
+    return true;
+  }
+  const onContinuePress = async () => {
+    if (isValid()) {
+      const formattedAmount = utils.ammountFormat(amount, "EUR");
+      dispatch(setTopUpAmount(formattedAmount));
+
+      //navigation to paymentMethod screen with nextscreen name as prop
+      navigation.navigate("TopUpConfirmation");
+    }
   };
   //render
   function renderHeader() {
@@ -153,15 +176,7 @@ const TopUp = ({ navigation }) => {
           label={t("continue")}
           containerStyle={styles.continueButton}
           labelStyle={styles.continueButtonLabel}
-          onPress={() => {
-            dispatch(setTopUpAmount(amount));
-
-            //navigation to paymentMethod screen with nextscreen name as prop
-            navigation.navigate("PaymentMethod", {
-              nextScreen: "TopUpConfirmation",
-              disableMethod: "balance",
-            });
-          }}
+          onPress={onContinuePress}
         />
       </View>
     </View>

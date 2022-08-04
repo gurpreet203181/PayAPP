@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, Image } from "react-native";
-import { COLORS, SIZES } from "../../constants";
+import { COLORS, images, SIZES } from "../../constants";
 
 const ProfileButton = ({ icon, iconStyle, containerStyle, onPress }) => {
   return (
@@ -17,9 +17,9 @@ const ProfileButton = ({ icon, iconStyle, containerStyle, onPress }) => {
       onPress={onPress}
     >
       <Image
-        source={icon}
+        source={icon ? { uri: icon } : images.boy}
         style={{
-          marginTop: 10,
+          marginTop: icon ? 0 : 10,
           height: 40,
           width: 40,
           ...iconStyle,

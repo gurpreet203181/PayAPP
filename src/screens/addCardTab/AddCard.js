@@ -3,13 +3,52 @@ import { t } from "../../hooks/UseI18n";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { COLORS, FONTS, icons, SIZES } from "../../constants";
 import { Header } from "../../components";
-import AddCardModel from "../addCardTab/AddCardModel";
+import { create_Customer } from "src/api/rapyd/customerObject";
+import { addPaymentMethod } from "src/api/rapyd/PaymentObject";
+import { firestoreDb } from "@config/firebase";
+import { useSelector } from "react-redux";
+
 const AddCard = ({ navigation }) => {
   const [isModalVisible, setModalVisible] = useState(false);
+  const { user } = useSelector((state) => state.userInfo);
 
   //Model show and close function
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
+  };
+
+  const addCard = async () => {
+    let customerId = user?.customerId !== "" ? user?.customerId : "";
+    //checking if user have customer id
+    if (customerId == "") {
+      await create_Customer(user).then((response) => {
+        if (response?.status?.status == "SUCCESS") {
+          customerId = response?.data?.id;
+        }
+        firestoreDb
+          .collection("users")
+          .doc(user?.uid)
+          .update({
+            customerId: customerId,
+          })
+          .catch((e) => {
+            console.log("add friend:" + e);
+          });
+      });
+    }
+
+    await addPaymentMethod(user, customerId)
+      .then((response) => {
+        console.log(response);
+        if (response.status?.status == "SUCCESS") {
+          const url = response.data?.redirect_url;
+          navigation.navigate("UrlWebview", { redirect_url: url });
+          //Linking.openURL(redirect_url);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   //render
@@ -26,7 +65,7 @@ const AddCard = ({ navigation }) => {
   function renderAddCard() {
     return (
       <View style={{ ...SIZES.marginHorizontal, alignItems: "center" }}>
-        <TouchableOpacity style={styles.addCard} onPress={toggleModal}>
+        <TouchableOpacity style={styles.addCard} onPress={addCard}>
           <Image source={icons.plus} style={styles.plusImg} />
           <Text style={styles.addCardText}>{t("addCard")}</Text>
         </TouchableOpacity>
@@ -40,9 +79,9 @@ const AddCard = ({ navigation }) => {
       {renderAddCard()}
 
       {/* AddCard model  */}
-      <View>
+      {/* <View>
         <AddCardModel isVisible={isModalVisible} onClosePress={toggleModal} />
-      </View>
+      </View> */}
     </View>
   );
 };

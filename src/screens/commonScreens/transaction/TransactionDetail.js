@@ -207,7 +207,7 @@ const TransactionDetail = ({ route, navigation }) => {
 
       {/* Amount and detail */}
       {renderAmountDetail()}
-
+      {console.log(item)}
       {/* Account Info */}
       <Section
         label={t("accountInfo")}

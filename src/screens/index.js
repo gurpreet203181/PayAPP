@@ -30,6 +30,7 @@ import PhoneNumber from "./profileTab/accountInfo/phoneVerfication";
 import EditAccount from "./profileTab/accountInfo/editAccount/editAccount";
 import EditProfileImg from "./profileTab/accountInfo/editProfileImg/editProfileImg";
 import SearchFriends from "./commonScreens/searchFriends/SearchFriends";
+import UrlWebview from "./commonScreens/Webview/UrlWebview";
 export {
   //Common screens
   CardDetail,
@@ -81,4 +82,6 @@ export {
   EditProfileImg,
   //search friends
   SearchFriends,
+  //webview
+  UrlWebview,
 };

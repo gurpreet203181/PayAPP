@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { t } from "@hooks/UseI18n";
 import {
   View,
@@ -27,18 +27,59 @@ import {
   get_Wallet_Transactions,
 } from "src/api/rapyd/WalletTransactionObject";
 import { utils } from "src/utils";
-import { showMessage, hideMessage } from "react-native-flash-message";
+import { showMessage } from "react-native-flash-message";
+import MultistepFormModal from "@screens/authentication/MultistepFormModal";
+import dynamicLinks from "@react-native-firebase/dynamic-links";
 
 const Home = ({ navigation }) => {
   // const { user } = useAuthentication();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userInfo);
+
   const SLIDER_WIDTH = Dimensions.get("window").width - 80;
 
   const isCarousel = React.useRef(null);
   const [index, setIndex] = React.useState(0);
   const [transactionsList, settransactionsList] = useState([]);
+  const [isModalVisible, setModalVisible] = useState(false);
 
+  const handleDynamicLink = (link) => {
+    // Handle dynamic link inside your own application
+    switch (link.url) {
+      case "https://payapptransaction.page.link/back":
+        navigation.navigate("Home");
+
+        break;
+      case "https://payapptransaction.page.link/success":
+        memoizedValue();
+        navigation.navigate("PaymentSuccess");
+
+        break;
+      case "https://payapptransaction.page.link/error_payment":
+        console.log("error");
+        break;
+      case "https://payapptransaction.page.link/cardAdded":
+        navigation.navigate("Home");
+        break;
+      default:
+        break;
+    }
+  };
+
+  //function to load rapyd e-walelt balance and transactions
+  const loadRapydData = (ewalletId) => {
+    console.log("loadrapyd");
+    get_Wallet_Balance(ewalletId).then((response) => {
+      if (response && response.length > 0) {
+        dispatch(setUserBalance(response[0]?.balance));
+      } else {
+        dispatch(setUserBalance(0));
+      }
+    });
+    get_Wallet_Transactions(ewalletId).then((data) => {
+      settransactionsList(data);
+    });
+  };
   useEffect(() => {
     //getting user data from databse and adding to redux state
     //creating a listener if any somthing change document to get real time update
@@ -46,7 +87,12 @@ const Home = ({ navigation }) => {
       .collection("users")
       .doc(firebaseAuth.currentUser.uid)
       .onSnapshot((documentSnapshot) => {
+        console.log("first");
         const data = documentSnapshot?.data();
+        //setting multiFormMOdal visible if user dosn't have username in case of goggle login
+        if (data?.username == "") {
+          setModalVisible(true);
+        }
         dispatch(
           setUserInfo({
             email: data?.email,
@@ -59,21 +105,16 @@ const Home = ({ navigation }) => {
             uid: firebaseAuth?.currentUser?.uid,
             ewalletId: data?.ewalletId,
             friendList: data?.friendList,
+            customerId: data?.customerId,
+            currency: data?.currency,
+            country: data?.country,
           })
         );
-        console.log(data?.friendList);
-        get_Wallet_Balance(data?.ewalletId).then((response) => {
-          if (response && response.length > 0) {
-            dispatch(setUserBalance(response[0]?.balance));
-          } else {
-            dispatch(setUserBalance(0));
-          }
-        });
-        get_Wallet_Transactions(data?.ewalletId).then((data) => {
-          settransactionsList(data);
-        });
+        // checking if enableLoadRapyd is true which mean it's first useEffect laod
+        //reason to use is only first only here we've ewalletid
       });
 
+    //notifcation subscriber
     const unsubscribe = notification.onMessage(async (remoteMessage) => {
       console.log("Message handled in the home screen!", remoteMessage);
       utils.setNotificationsAsyncStorage(remoteMessage);
@@ -84,13 +125,38 @@ const Home = ({ navigation }) => {
       });
     });
 
+    //dynamic link subscriber
+    const dynamicLinkUnsubscribe = dynamicLinks().onLink(handleDynamicLink);
+
     // Stop listening for updates when no longer required
     return () => {
       subscriber();
       unsubscribe();
+      dynamicLinkUnsubscribe();
     };
   }, []);
+  //rapyd collection snapshot which update trsactions list and balance on new transactions
 
+  const memoizedValue = useMemo(() => {
+    const rapydFirestore = firestoreDb
+      .collection(`users/${firebaseAuth.currentUser.uid}/transactions`)
+      .limit(1)
+      .onSnapshot((snapshot) => {
+        console.log(snapshot);
+        if (user?.ewalletId) {
+          loadRapydData(user?.ewalletId);
+          console.log("onsnapshot");
+        }
+      });
+
+    return () => {
+      rapydFirestore();
+    };
+  }, [user?.ewalletId]);
+  //Model show and close function
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
   const createTwoButtonAlert = () =>
     Alert.alert("", t("commingSoon"), [
       { text: "OK", onPress: () => console.log("OK Pressed") },
@@ -104,6 +170,7 @@ const Home = ({ navigation }) => {
           marginTop: 13,
         }}
       >
+        {console.log(user?.ewalletId)}
         {/* hello ,name and notification icon */}
         <View
           style={{
@@ -257,7 +324,6 @@ const Home = ({ navigation }) => {
         style={{ marginBottom: 22 }}
         renderItem={({ item, index }) => {
           const cleanItem = utils.cleanItem(item);
-          console.log(cleanItem);
           return (
             <View
               style={[
@@ -285,6 +351,24 @@ const Home = ({ navigation }) => {
             </View>
           );
         }}
+        ListEmptyComponent={
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 20,
+            }}
+          >
+            <Text
+              style={{
+                ...FONTS.body3,
+                color: COLORS.blue,
+              }}
+            >
+              {t("makeTransaction")}
+            </Text>
+          </View>
+        }
       />
     );
   }
@@ -306,6 +390,13 @@ const Home = ({ navigation }) => {
         onIconPress={() => navigation.navigate("Transactions", { item: "all" })}
       />
       {renderTransactions()}
+
+      <View>
+        <MultistepFormModal
+          closeModel={toggleModal}
+          isVisible={isModalVisible}
+        />
+      </View>
     </View>
   );
 };

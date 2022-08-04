@@ -14,6 +14,9 @@ const user = {
   cardsID: [null],
   ewalletId: null,
   friendList: [],
+  customerId: null,
+  currency: null,
+  country: null,
 };
 const initialState = {
   user,
@@ -56,6 +59,13 @@ export const userInfoSlice = createSlice({
       // setting user number verfied to true after it verfied with tiwil otp and
       //phone number in update in database
       state.user.phoneNumberVerified = payload?.phoneNumberVerified;
+
+      //customerId
+      state.user.customerId = payload?.customerId;
+      //currency
+      state.user.currency = payload?.currency;
+      //country
+      state.user.country = payload?.country;
     },
     setUserBalance: (state, action) => {
       state.user.balance = action?.payload;

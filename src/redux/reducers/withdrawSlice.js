@@ -2,24 +2,23 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   amount: 0,
-  bankId: null,
-  // paymentMethod: null,
+  payoutMethod: null,
 };
 
 export const withdrawSlice = createSlice({
   name: "withdrawSlice",
   initialState,
   reducers: {
-    setWithdrawAmount: (state, action) => {
-      state.amount = action.payload.amount;
-    },
-    setWithdrawBankId: (state, action) => {
-      state.bankId = action.payload.bankId;
+    setWithdrawInfo: (state, action) => {
+      state.amount = action.payload.formattedAmount;
+
+      //payout method
+      state.payoutMethod = action?.payload?.value;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setWithdrawAmount, setWithdrawBankId } = withdrawSlice.actions;
+export const { setWithdrawInfo } = withdrawSlice.actions;
 
 export default withdrawSlice.reducer;

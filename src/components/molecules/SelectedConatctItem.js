@@ -9,9 +9,9 @@ const SelectedConatctItem = ({ item, onIconPress }) => {
     <View style={styles.container}>
       <Image
         source={
-          item?.images
+          item?.image
             ? {
-                uri: item?.images,
+                uri: item?.image,
               }
             : images.userPlaceholder
         }

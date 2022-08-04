@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "functions",
+    "slug": "functions",
+    "version": "1.0.0",
+    "description": "Cloud Functions for Firebase",
+    "sdkVersion": "44.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ]
+  }
+}

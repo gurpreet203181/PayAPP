@@ -34,11 +34,15 @@ const SearchFriends = ({ navigation }) => {
 
   //add user in friend list
   const addFriend = async (frienduid) => {
+    console.log(frienduid);
     await firestoreDb
       .collection("users")
       .doc(currentUser?.uid)
       .update({
         friendList: firestore.FieldValue.arrayUnion(frienduid),
+      })
+      .catch((e) => {
+        console.log("add friend:" + e);
       });
   };
 

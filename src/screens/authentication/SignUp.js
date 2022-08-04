@@ -11,6 +11,8 @@ import { create_Personal_Wallet } from "../../api/rapyd/walletObject";
 const SignUp = ({ navigation }) => {
   const [value, setValue] = useState({
     email: "",
+    firstName: "",
+    lastName: "",
     username: "",
     password: "",
   });
@@ -30,7 +32,7 @@ const SignUp = ({ navigation }) => {
           .then((user) => {
             if (user?.additionalUserInfo?.isNewUser) {
               //creating user personal in rapyd
-              create_Personal_Wallet(user).then((response) => {
+              create_Personal_Wallet(user, value).then((response) => {
                 if (response?.status?.status == "SUCCESS") {
                   ewalletId = response?.data?.id;
                 }
@@ -39,13 +41,17 @@ const SignUp = ({ navigation }) => {
 
                 firestoreDb.collection("users").doc(user?.user?.uid).set({
                   uid: user?.user?.uid,
-                  email: value.email,
-                  username: value.username,
-                  firstName: null,
-                  lastName: null,
+                  email: value.email.trim(),
+                  username: value.username.trim(),
+                  firstName: value.firstName.trim(),
+                  lastName: value.lastName.trim(),
                   phoneNumber: null,
                   profileURL: null,
                   ewalletId: ewalletId,
+                  customerId: "",
+                  country: "",
+                  fcmToken: [],
+                  currency: null,
                 });
               });
             }
@@ -85,15 +91,33 @@ const SignUp = ({ navigation }) => {
             }
           />
           {/* Name */}
-
           <FormInput
-            value={value.username.toLowerCase()}
-            placeholder={t("username")}
+            value={value.firstName.toLowerCase()}
+            placeholder={t("firstName")}
             containStyle={{
               marginTop: SIZES.radius,
             }}
             onChange={(text) => {
-              setValue({ ...value, username: text });
+              setValue({ ...value, firstName: text });
+              setError("");
+            }}
+            // errorMsg={value.error}
+            prependComponenet={
+              <Image
+                source={icons.user}
+                style={{ width: 27, height: 27, tintColor: COLORS.black2 }}
+              />
+            }
+          />
+          {/* {lastname} */}
+          <FormInput
+            value={value.lastName.toLowerCase()}
+            placeholder={t("lastName")}
+            containStyle={{
+              marginTop: SIZES.radius,
+            }}
+            onChange={(text) => {
+              setValue({ ...value, lastName: text });
               setError("");
             }}
             // errorMsg={value.error}

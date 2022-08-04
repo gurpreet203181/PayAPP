@@ -8,13 +8,22 @@ import firestore from "@react-native-firebase/firestore";
 async function saveTokenToDatabase(token, user) {
   //  user is already signed in
   const userId = user.uid;
+  console.log("user");
+
+  console.log(user);
 
   // Add the token to the users datastore
   await firestoreDb
     .collection("users")
     .doc(userId)
     .update({
-      tokens: firestore.FieldValue.arrayUnion(token),
+      fcmToken: firestore.FieldValue.arrayUnion(token),
+    })
+    .catch((e) => {
+      console.log("use2r");
+
+      console.log(user);
+      console.log(e);
     });
 }
 export function useAuthentication() {
@@ -33,7 +42,7 @@ export function useAuthentication() {
           // Get the device token
           //creating new fcm token on auth change
           notification.getToken().then((token) => {
-            return saveTokenToDatabase(token, user);
+            saveTokenToDatabase(token, user);
           });
 
           // you may need to get the APNs token instead for iOS:

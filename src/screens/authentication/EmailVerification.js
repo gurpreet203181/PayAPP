@@ -96,8 +96,8 @@ const EmailVerfication = ({ route, navigation }) => {
               labelStyle={{ ...Styles.OtpText }}
               containerStyle={{ ...Styles.OtpButton, ...Styles.shadow }}
               onPress={() => {
-                auth.currentUser.reload().then(() => {
-                  const user = auth.currentUser;
+                firebaseAuth.currentUser.reload().then(() => {
+                  const user = firebaseAuth.currentUser;
                   user?.emailVerified
                     ? navigation.replace("Tabs")
                     : setError(t("emailVerficationErrorMsg"));

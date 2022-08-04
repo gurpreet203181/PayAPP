@@ -13,7 +13,7 @@ const Notification = ({ navigation }) => {
     const getdata = async () => {
       var notifications = await AsyncStorage.getItem("@notifications");
       notifications = JSON.parse(notifications);
-      setNotifictionsList(notifications.reverse());
+      setNotifictionsList(notifications ? notifications.reverse() : []);
     };
     getdata();
   }, []);

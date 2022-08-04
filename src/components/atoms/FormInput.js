@@ -23,6 +23,7 @@ const FormInput = ({
   autoFocus,
   multiline = false,
   numberOfLines,
+  onBlur,
 }) => {
   const [Focus, setFocus] = React.useState(false);
   return (
@@ -51,7 +52,10 @@ const FormInput = ({
           onChangeText={onChange}
           editable={editable}
           onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
+          onBlur={() => {
+            onBlur ? onBlur() : null;
+            setFocus(false);
+          }}
         />
         {appendComponenet}
       </View>

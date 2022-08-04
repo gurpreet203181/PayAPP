@@ -12,7 +12,7 @@ import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 import Constants from "expo-constants";
 import { create_Personal_Wallet } from "../../api/rapyd/walletObject";
-import MultistepFormModal from "./MultistepFormModal";
+import { create_Customer } from "src/api/rapyd/customerObject";
 const AuthLayout = ({
   childern,
   title,
@@ -23,22 +23,12 @@ const AuthLayout = ({
 }) => {
   const route = useRoute();
   const [isLoading, SetIsLoading] = useState(false);
-  const [isModalVisible, setModalVisible] = useState(false);
-
-  //Model show and close function
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
 
   async function onGoogleButtonPress() {
     GoogleSignin.configure({
-      //  iosClientId: Constants.manifest.extra.IOS_KEY, //From app.json
+      // webClientId: Constants.manifest.extra?.googleAndroidKey,
       webClientId:
         "77208043248-ppnlmfqpcshetiejruf6rrr1skc2fg5h.apps.googleusercontent.com",
-      //androidClientId: Constants.manifest?.extra?.googleAndroidKey, //From app.json
-      //androidStandaloneAppClientId: Constants.manifest?.extra?.googleAndroidKey,
-      // androidStandaloneAppClientId: Constants.manifest?.extra?.googleAndroidKey,
-      //  iosStandaloneAppClientId: 'IOS_STANDALONE_APP_CLIENT_ID',
     });
     // Get the users ID token
     const { idToken } = await GoogleSignin.signIn();
@@ -46,28 +36,37 @@ const AuthLayout = ({
     // Create a Google credential with the token
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
+    //setting MultistepFormModal to true for user to select username and wallet currency
+
     // Sign-in the user with the credential
-    return firebaseAuth
+    await firebaseAuth
       .signInWithCredential(googleCredential)
       .then((user) => {
         if (user?.additionalUserInfo?.isNewUser) {
+          let ewalletId;
+
           //creating user personal in rapyd
           create_Personal_Wallet(user).then((response) => {
             if (response?.status?.status == "SUCCESS") {
               ewalletId = response?.data?.id;
             }
+
             //if user is new creating user in database
             firestoreDb.collection("users").doc(user?.user?.uid).set({
-              username: user?.user?.displayName,
+              uid: user?.user?.uid,
+              username: "",
               email: user?.user?.email,
               firstName: user?.additionalUserInfo?.profile?.given_name,
               lastName: user?.additionalUserInfo?.profile?.family_name,
               profileURL: user?.user?.photoURL,
               phoneNumber: null,
               ewalletId: ewalletId,
+              customerId: "",
+              country: "",
+              customerId: customerId,
+              fcmToken: [],
+              currency: null,
             });
-
-            setModalVisible(true);
           });
         }
       })
@@ -76,62 +75,6 @@ const AuthLayout = ({
       });
   }
 
-  //Google sign in
-  //after sign in   onAuthStateChanged method is trigged in useAuthentication.js to make user login in app
-  const GoogleSignIn = async () => {
-    var ewalletId = "";
-
-    try {
-      //await GoogleSignIn.askForPlayServicesAsync();
-      const result = await Google.logInAsync({
-        //return an object with result token and user
-        //  iosClientId: Constants.manifest.extra.IOS_KEY, //From app.json
-        androidClientId: Constants.manifest?.extra?.googleAndroidKey, //From app.json
-        androidStandaloneAppClientId:
-          Constants.manifest?.extra?.googleAndroidKey,
-        //  iosStandaloneAppClientId: 'IOS_STANDALONE_APP_CLIENT_ID',
-      });
-      if (result.type === "success") {
-        //setIsLoading(true);
-        const credential = firebase.auth.GoogleAuthProvider.credential(
-          //Set the tokens to Firebase
-          result.idToken,
-          result.accessToken
-        );
-        await firebaseAuth
-          .signInWithCredential(credential) //Login to Firebase
-          .then((user) => {
-            if (user?.additionalUserInfo?.isNewUser) {
-              //creating user personal in rapyd
-              create_Personal_Wallet(user).then((response) => {
-                if (response?.status?.status == "SUCCESS") {
-                  ewalletId = response?.data?.id;
-                }
-                //if user is new creating user in database
-                firestoreDb.collection("users").doc(user?.user?.uid).set({
-                  username: user?.user?.displayName,
-                  email: user?.user?.email,
-                  firstName: user?.additionalUserInfo?.profile?.given_name,
-                  lastName: user?.additionalUserInfo?.profile?.family_name,
-                  profileURL: user?.user?.photoURL,
-                  phoneNumber: null,
-                  ewalletId: ewalletId,
-                });
-
-                setModalVisible(true);
-              });
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else {
-        SetIsLoading(false);
-      }
-    } catch ({ message }) {
-      console.log("login: Error:" + message);
-    }
-  };
   //facebook sign in
   //after sign in   onAuthStateChanged method is trigged in useAuthentication.js to make user login in app
 
@@ -153,12 +96,18 @@ const AuthLayout = ({
           .then((user) => {
             if (user?.additionalUserInfo?.isNewUser) {
               firestoreDb.collection("users").doc(user?.user?.uid).set({
-                username: user?.user?.displayName,
+                uid: user?.user?.uid,
+                username: "",
                 email: user?.user?.email,
-                firstName: user?.user?.firstName,
-                lastName: user?.user?.lastName,
-                profileURL: user?.profileURL,
+                firstName: user?.additionalUserInfo?.profile?.given_name,
+                lastName: user?.additionalUserInfo?.profile?.family_name,
+                profileURL: user?.user?.photoURL,
                 phoneNumber: null,
+                ewalletId: ewalletId,
+                customerId: "",
+                country: "",
+                fcmToken: [],
+                currency: null,
                 //getting user googel display name only once for default
                 // avater: user?.photoURL,
               });
@@ -269,12 +218,7 @@ const AuthLayout = ({
         </View>
       </KeyboardAwareScrollView>
       {/* select contact model  */}
-      <View>
-        <MultistepFormModal
-          isVisible={isModalVisible}
-          closeModel={toggleModal} //useCallBack to get selected contact from modal
-        />
-      </View>
+
       {isLoading && <Loading />}
     </View>
   );

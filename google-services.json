@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "77208043248-v2rnhj033cu0hj4jdnl4r7prjsfom2jr.apps.googleusercontent.com",
+          "client_id": "77208043248-c4ujd4lgaq83irk1qr98d5p0tjoskpob.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.payapp.live",
-            "certificate_hash": "b264ea18b76c6f170998018073ccf1767daa9713"
+            "certificate_hash": "9a8d247c51970ebda2ffe91bfeb6500650e5296d"
           }
         },
         {

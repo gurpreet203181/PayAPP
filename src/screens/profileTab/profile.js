@@ -60,7 +60,7 @@ const Profile = ({ navigation }) => {
         />
         <MoreItem
           icon={icons.users}
-          title={t("contactList")}
+          title={t("friendList")}
           iconStyle={{ tintColor: "#1DAB87" }}
           onPress={() => navigation.navigate("ContactsList")}
         />

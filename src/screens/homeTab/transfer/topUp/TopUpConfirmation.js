@@ -1,17 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import { t } from "@hooks/UseI18n";
 
 import { View, Text, StyleSheet } from "react-native";
 import { COLORS, icons, FONTS, SIZES, images } from "@constants";
 import { Header, CustomSwipeButton, IconButton } from "@components";
+import { useSelector } from "react-redux";
+import { topUp_Ewallet } from "src/api/rapyd/PaymentObject";
+import { firestoreDb } from "@config/firebase";
+
+import { create_Customer } from "src/api/rapyd/customerObject";
 const TopUpConfirmation = ({ navigation }) => {
+  const { amount } = useSelector((state) => state.topUp);
+  const { user } = useSelector((state) => state.userInfo);
+
+  const onSWipe = async () => {
+    let customerId = user?.customerId !== "" ? user?.customerId : "";
+    //checking if user have customer id
+    if (customerId == "") {
+      await create_Customer(user).then((response) => {
+        if (response?.status?.status == "SUCCESS") {
+          customerId = response?.data?.id;
+        }
+        firestoreDb
+          .collection("users")
+          .doc(user?.uid)
+          .update({
+            customerId: customerId,
+          })
+          .catch((e) => {
+            console.log("add friend:" + e);
+          });
+      });
+    }
+
+    await topUp_Ewallet(amount, user, customerId)
+      .then((response) => {
+        console.log(response);
+        if (response.status?.status == "SUCCESS") {
+          const url = response.data?.redirect_url;
+          navigation.navigate("UrlWebview", { redirect_url: url });
+          //Linking.openURL(redirect_url);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   //render
   function renderHeader() {
     return (
       <Header
         title={t("paymentSummary")}
         leftIcon={icons.back_arrow}
-        onLeftIconPress={() => navigation.goBack()}
+        onLeftIconPress={() => navigation.navigate("Home")}
       />
     );
   }
@@ -28,18 +70,24 @@ const TopUpConfirmation = ({ navigation }) => {
         {/* amount */}
         <View style={styles.row}>
           <Text style={styles.rowText}>{t("amount")}</Text>
-          <Text style={styles.rowText2}>€ 78</Text>
+          <Text style={styles.rowText2}>€{amount}</Text>
         </View>
 
         {/* receiverId */}
         <View style={styles.row}>
           <Text style={styles.rowText}>{t("fee")}</Text>
-          <Text style={styles.rowText2}>Andrea Summer</Text>
+          <Text style={styles.rowText2}>€ 2</Text>
         </View>
         {/* payment Method */}
         <View style={{ ...styles.row, marginTop: 50 }}>
           <Text style={styles.rowText}>{t("total")}</Text>
           <Text style={styles.rowText2}>Card</Text>
+        </View>
+
+        {/* total ammount card */}
+        <View style={styles.totalContainer}>
+          <Text style={styles.totalText}>{t("total")}</Text>
+          <Text style={styles.totalAmount}>€ {amount}</Text>
         </View>
       </View>
     );
@@ -73,14 +121,7 @@ const TopUpConfirmation = ({ navigation }) => {
           right: 0,
         }}
       >
-        <CustomSwipeButton
-          title={t("confirmTopUp")}
-          onSwipeSuccess={() => {
-            navigation.replace("PaymentSuccess", {
-              lottie: images.successfulLottie2,
-            });
-          }}
-        />
+        <CustomSwipeButton title={t("proceed")} onSwipeSuccess={onSWipe} />
       </View>
     </View>
   );
@@ -129,5 +170,30 @@ const styles = StyleSheet.create({
     marginTop: 24,
     ...FONTS.h4,
     fontSize: 16,
+  },
+  totalContainer: {
+    height: 76,
+    width: 315,
+    ...SIZES.marginHorizontal,
+    backgroundColor: "#E2E2F0",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 25,
+    borderBottomStartRadius: 30,
+    borderBottomEndRadius: 30,
+    marginTop: 40,
+  },
+  totalText: {
+    ...FONTS.h4,
+    fontSize: 16,
+    color: COLORS.darkBlue3,
+    letterSpacing: 0.3,
+  },
+  totalAmount: {
+    ...FONTS.h4,
+    fontSize: 22,
+    color: COLORS.darkBlue3,
+    paddingTop: 7,
   },
 });

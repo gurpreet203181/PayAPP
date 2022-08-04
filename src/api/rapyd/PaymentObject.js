@@ -1,64 +1,92 @@
-import Constants from "expo-constants";
-var CryptoJS = require("crypto-js");
-const access_key = Constants.manifest?.extra?.rapyd_access_key; //  Never transmit the secret key by itself.
-const secret_key = Constants.manifest?.extra?.rapyd_secret_key; //Hardkeyed for this example.
-const base_uri = Constants.manifest?.extra?.rapyd_base_uri;
-//const url_path = "/v1/user"; // Portion after the base URL.
-let timeStamp = "";
-let salt = "";
-// set timeStamp
-const setTimeStamp = () => {
-  timeStamp = (Math.floor(new Date().getTime() / 1000) - 10).toString(); // Current Unix time (seconds).
-};
-//set salt
-const setSalt = () => {
-  salt = CryptoJS.lib.WordArray.random(12); // Randomly generated for each request.
-};
-
-//getting crypto signature
-const getSignature = (http_method, url_path) => {
-  //calling method setTimeStamp and setSalt here to get updated value
-  setTimeStamp(); //setting time stamp
-  setSalt(); //setting salt
-
-  const to_sign =
-    http_method + url_path + salt + timeStamp + access_key + secret_key;
-
-  let signature = CryptoJS.enc.Hex.stringify(
-    CryptoJS.HmacSHA256(to_sign, secret_key)
-  );
-
-  signature = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(signature));
-
-  return signature;
-};
-
+import rapyd from "./config";
+const access_key = rapyd?.access_key;
+const timeStamp = rapyd?.timeStamp;
+const salt = rapyd?.salt;
 //create ewallet
-const  = async (ewalletId) => {
-  const http_method = "get";
-  const url_path = "/v1/user/" + ewalletId + "/accounts";
-  /* Not doing anything. */
-
+const topUp_Ewallet = async (amount, user, customerId) => {
+  const http_method = "post";
+  const url_path = "/v1/checkout";
   try {
+    //setting data for api call
+    const data = JSON.stringify({
+      amount: amount,
+      complete_checkout_url: "https://payapptransaction.page.link/success",
+      cancel_checkout_url: "https://payapptransaction.page.link/back",
+      country: user?.country,
+      currency: user?.currency,
+      customer: customerId,
+      error_payment_url: "https://payapptransaction.page.link/error_payment",
+      merchant_reference_id: user?.uid,
+      language: Localization.locale,
+      ewallet: user?.ewalletId,
+      metadata: {
+        merchant_defined: true,
+      },
+      payment_method_type_categories: ["card"],
+      //  expiration: Math.floor(new Date().getTime()) + 60 * 60 * 24 * 1000, // Current Unix time +24h .
+    });
+    const signatureData = rapyd.getSignature(http_method, url_path, data);
+
     //API request header
     const headers = {
       access_key,
-      signature: getSignature(http_method, url_path),
-      salt,
-      timeStamp,
+      signature: signatureData.signature,
+      salt: signatureData.salt,
+      timeStamp: signatureData.timeStamp,
       "Content-Type": `application/json`,
     };
+
     const response = await fetch(`${base_uri + url_path}`, {
       method: http_method,
       headers: headers,
-      //body: data,
+      body: data,
     });
     const json = await response.json();
-    return json.data;
+
+    return json;
   } catch (error) {
     console.log(error);
+
     return false;
   }
 };
 
-export { get_Wallet_Balance };
+const addPaymentMethod = async (user, customerId) => {
+  const http_method = "post";
+  const url_path = `/v1/hosted/collect/card`;
+  console.log(customerId);
+  try {
+    //setting data for api call
+    const data = JSON.stringify({
+      country: user?.country,
+      customer: customerId,
+      cancel_url: "https://payapptransaction.page.link/back",
+      complete_url: "https://payapptransaction.page.link/cardAdded",
+    });
+    const signatureData = rapyd.getSignature(http_method, url_path, data);
+
+    //API request header
+    const headers = {
+      access_key,
+      signature: signatureData.signature,
+      salt: signatureData.salt,
+      timeStamp: signatureData.timeStamp,
+      "Content-Type": `application/json`,
+    };
+
+    const response = await fetch(`${rapyd.base_uri + url_path}`, {
+      method: http_method,
+      headers: headers,
+      body: data,
+    });
+    const json = await response.json();
+
+    return json;
+  } catch (error) {
+    console.log(error);
+
+    return false;
+  }
+};
+
+export { topUp_Ewallet, addPaymentMethod };

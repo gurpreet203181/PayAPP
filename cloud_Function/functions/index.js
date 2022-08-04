@@ -37,7 +37,6 @@ const getSignature = (header, body) => {
     access_key +
     secret_key +
     body;
-
   let signature = CryptoJS.enc.Hex.stringify(
     CryptoJS.HmacSHA256(to_sign, secret_key)
   );
@@ -54,7 +53,6 @@ const get_post_request_Signature = (http_method, path, data) => {
   const to_sign =
     http_method + path + salt + timeStamp + access_key + secret_key + data;
 
-  console.log(to_sign);
   let signature = CryptoJS.enc.Hex.stringify(
     CryptoJS.HmacSHA256(to_sign, secret_key)
   );
@@ -63,7 +61,6 @@ const get_post_request_Signature = (http_method, path, data) => {
 
   return signature;
 };
-
 //Getting destination_ewallet_id  tokens
 
 const get_user_with_EwalletId = async (destination_ewallet_id) => {
@@ -124,10 +121,28 @@ const accept_Fund = async (id, status) => {
   }
 };
 
+const updateTransactionsArray = async (document, id, type, amount) => {
+  await firestore
+    .collection(`users/${document}/transactions`)
+    .doc(id)
+    .set({
+      id: id,
+      type: type,
+      amount: amount,
+    })
+    .catch((e) => {
+      console.log(e.message);
+    });
+};
 //sending data of friend list
 exports.getFriendListData = functions.https.onCall(async (data, context) => {
+  if (!context.auth) {
+    throw new functions.https.HttpsError(
+      "unauthenticated",
+      "Endpoint requires authentication!"
+    );
+  }
   const friendList = data?.friendList;
-  console.log(friendList);
   var promises = [];
   var result = [];
   friendList.forEach((uid) => {
@@ -145,7 +160,7 @@ exports.getFriendListData = functions.https.onCall(async (data, context) => {
         firstName: querySnapshot.data()?.firstName,
         lastName: querySnapshot.data()?.lastName,
         ewalletId: querySnapshot.data()?.ewalletId,
-        profileURL: querySnapshot.data()?.ewalletId.profileURL,
+        profileURL: querySnapshot.data()?.profileURL,
       };
       result.push(userInFo);
     });
@@ -154,12 +169,12 @@ exports.getFriendListData = functions.https.onCall(async (data, context) => {
   return result;
 });
 exports.isUsernameUsed = functions.https.onCall(async (data, context) => {
-  /*if (!context.auth) {
+  if (!context.auth) {
     throw new functions.https.HttpsError(
       "unauthenticated",
       "Endpoint requires authentication!"
     );
-  }*/
+  }
   var result;
   await firestore
     .collection("users")
@@ -167,7 +182,6 @@ exports.isUsernameUsed = functions.https.onCall(async (data, context) => {
     .limit(1)
     .get()
     .then((querySnapshot) => {
-      console.log(querySnapshot);
       if (querySnapshot?._size == 0) {
         result = false;
       } else {
@@ -182,12 +196,17 @@ exports.isUsernameUsed = functions.https.onCall(async (data, context) => {
       console.log("Error getting documents: ", error);
       result = error;
     });
-  console.log(result);
   return result;
 });
 
 exports.searchFriendByUsername = functions.https.onCall(
   async (data, context) => {
+    if (!context.auth) {
+      throw new functions.https.HttpsError(
+        "unauthenticated",
+        "Endpoint requires authentication!"
+      );
+    }
     const searchPhrase = data?.searchPhrase.toLowerCase();
     let result = [];
     await firestore
@@ -198,7 +217,6 @@ exports.searchFriendByUsername = functions.https.onCall(
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           // doc.data() is never undefined for query doc snapshots
-          console.log(doc.data());
           result.push(doc.data());
         });
       })
@@ -211,12 +229,12 @@ exports.searchFriendByUsername = functions.https.onCall(
 );
 //function to check if number is linked with a user account
 exports.isPhoneNumberLinked = functions.https.onCall(async (data, context) => {
-  /*if (!context.auth) {
+  if (!context.auth) {
     throw new functions.https.HttpsError(
       "unauthenticated",
       "Endpoint requires authentication!"
     );
-  }*/
+  }
   var result;
   await firestore
     .collection("users")
@@ -224,7 +242,6 @@ exports.isPhoneNumberLinked = functions.https.onCall(async (data, context) => {
     .limit(1)
     .get()
     .then((querySnapshot) => {
-      console.log(querySnapshot);
       if (querySnapshot?._size == 0) {
         result = false;
       } else {
@@ -239,62 +256,58 @@ exports.isPhoneNumberLinked = functions.https.onCall(async (data, context) => {
       console.log("Error getting documents: ", error);
       result = error;
     });
-  console.log(result);
   return result;
 });
 
-exports.rapydNotification = functions.https.onRequest(async (req, res) => {
+exports.rapydWebhooks = functions.https.onRequest(async (req, res) => {
   if (req.method !== "POST") {
     res.status(500).json({
-      message: "it is not working",
+      message: "Wrong request",
     });
     return;
   }
   const signature = getSignature(req.headers, JSON.stringify(req.body));
-  console.log(signature);
-  console.log(req.headers?.signature);
-  console.log(req.body?.data);
 
   // "ZGMzMmUxNThlN2UwOWUwMmIxMTQzNGIzZmNkMzYyMDJkMDk5NmUwMTljN2E4ZmFlNjM0Y2E1MGQyOTg3NGNjYw==";
-
   if (signature == req.headers?.signature) {
     switch (req.body?.type) {
-      /*case "TRANSFER_FUNDS_BETWEEN_EWALLETS_RESPONSE":
-        const destinationUser = await get_user_with_EwalletId(
-          req.body.data?.destination_ewallet_id
-        );
-
-        if (destinationUser?.tokens && req.body?.data?.status == "accept") {
-          await messaging.sendMulticast({
-            tokens: destinationUser.tokens,
-            notification: {
-              title: "Fund received",
-              body: destinationUser?.username + " sent you some funds",
-            },
-            data: {
-              test: "test1",
-            },
-          });
-        }
-        break;*/
-
-      //on Transfer fund created by user A
       case "TRANSFER_FUNDS_BETWEEN_EWALLETS_CREATED":
         //with accept_Fund() function accepting automatically transfered fund from user A for User B
         const status = "accept";
-
+        console.log(req.body.data.id);
         await accept_Fund(req.body?.data?.id, status).then((response) => {
           console.log(response);
-          if (response?.status?.status == "SUCCESS")
-            switch (response?.response_metadata?.merchant_defined) {
+          if (response?.status?.status == "SUCCESS") {
+            switch (response?.data?.response_metadata?.merchant_defined) {
               //if trasnfer is completed response is accepted
               case "accepted":
+                get_user_with_EwalletId(req.body?.data?.source_ewallet_id).then(
+                  (sourceUser) => {
+                    const type =
+                      "TRANSFER_FUNDS_BETWEEN_EWALLETS_RESPONSE_FUNDED";
+                    updateTransactionsArray(
+                      sourceUser?.uid,
+                      response?.data?.id,
+                      type,
+                      response?.data?.amount
+                    );
+                  }
+                );
+
                 get_user_with_EwalletId(
                   req.body.data?.destination_ewallet_id
                 ).then((destinationUsers) => {
-                  if (destinationUsers?.tokens) {
+                  const type =
+                    "TRANSFER_FUNDS_BETWEEN_EWALLETS_RESPONSE_RECEIVED";
+                  updateTransactionsArray(
+                    destinationUsers?.uid,
+                    response?.data?.id,
+                    type,
+                    response?.data?.amount
+                  );
+                  if (destinationUsers?.fcmToken) {
                     messaging.sendMulticast({
-                      tokens: destinationUsers.tokens,
+                      tokens: destinationUsers.fcmToken,
                       notification: {
                         title: "Fund received",
                         body:
@@ -306,21 +319,26 @@ exports.rapydNotification = functions.https.onRequest(async (req, res) => {
                     });
                   }
                 });
+
                 break;
               case "declined":
                 const status = "cancel";
                 accept_Fund(req.body?.data?.id, status);
                 break;
-              case "canceled":
-                break;
-
-              default:
-                break;
             }
+          }
         });
 
         break;
-
+      case "PAYOUT_COMPLETE":
+        get_user_with_EwalletId(req.body.data?.ewalletId).then((response) => {
+          updateTransactionsArray(
+            response?.uid,
+            req.body?.data.id,
+            req.body?.type
+          );
+        });
+        break;
       default:
         res.end();
     }

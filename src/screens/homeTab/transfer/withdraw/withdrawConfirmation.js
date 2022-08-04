@@ -3,16 +3,29 @@ import { t } from "@hooks/UseI18n";
 import { View, Text, StyleSheet } from "react-native";
 import { COLORS, icons, FONTS, SIZES, images } from "@constants";
 import { Header, IconButton, CustomSwipeButton } from "@components";
+import { useSelector } from "react-redux";
+import { create_Payout } from "src/api/rapyd/PayoutObject";
+const WithdrawConfirmation = ({ navigation, route }) => {
+  const { user } = useSelector((state) => state?.userInfo);
 
-const WithdrawConfirmation = ({ navigation }) => {
+  const finalState = route?.params?.finalState;
+
+  const onConfirm = async () => {
+    await create_Payout(user, finalState).then((response) => {
+      if (response?.status?.status == "SUCCESS") {
+        navigation.replace("PaymentSuccess", {
+          lottie: images.successfulLottie2,
+        });
+      }
+    });
+  };
   //render
-
   function renderHeader() {
     return (
       <Header
         title={t("paymentSummary")}
-        rightIcon={icons.right_arrow}
-        onRightIconPress={() => navigation.goBack()}
+        leftIcon={icons.close}
+        onLeftIconPress={() => navigation.goBack()}
       />
     );
   }
@@ -28,18 +41,18 @@ const WithdrawConfirmation = ({ navigation }) => {
         {/* amount */}
         <View style={styles.row}>
           <Text style={styles.rowText}>{t("amount")}</Text>
-          <Text style={styles.rowText2}>€ 78</Text>
+          <Text style={styles.rowText2}>{finalState?.amount}</Text>
         </View>
 
         {/* receiverId */}
         <View style={styles.row}>
-          <Text style={styles.rowText}>{t("fee")}</Text>
-          <Text style={styles.rowText2}>Andrea Summer</Text>
+          <Text style={styles.rowText}>{t("payout option")}</Text>
+          <Text style={styles.rowText2}>{finalState?.payoutMethod}</Text>
         </View>
         {/* payment Method */}
         <View style={{ ...styles.row, marginTop: 50 }}>
           <Text style={styles.rowText}>{t("total")}</Text>
-          <Text style={styles.rowText2}>Card</Text>
+          <Text style={styles.rowText2}>{finalState?.amount}</Text>
         </View>
       </View>
     );
@@ -76,11 +89,7 @@ const WithdrawConfirmation = ({ navigation }) => {
       >
         <CustomSwipeButton
           title={t("confirmWithdraw")}
-          onSwipeSuccess={() => {
-            navigation.replace("PaymentSuccess", {
-              lottie: images.successfulLottie2,
-            });
-          }}
+          onSwipeSuccess={onConfirm}
         />
       </View>
     </View>

@@ -1,32 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { t } from "@hooks/UseI18n";
-import { View, Text, FlatList, Share } from "react-native";
+import { View, Text, FlatList, Share, ActivityIndicator } from "react-native";
 import { COLORS, dummyData, FONTS, icons, SIZES } from "@constants";
 import { Header, Section, ContactItem, Button } from "@components";
-import * as Contacts from "expo-contacts";
-import { ScrollView } from "react-native-virtualized-view";
-
+//import * as Contacts from "expo-contacts";
+import { cloudFunction } from "src/config/firebase";
+import { useSelector } from "react-redux";
 const ContactsList = ({ navigation }) => {
   const [contactsList, setContactsList] = useState();
+  const { friendList } = useSelector((state) => state.userInfo.user);
+  const [showLoading, setLoading] = useState(true);
 
-  //asking Permissions for device contact and get name, number and image filed from contact
   useEffect(() => {
-    (async () => {
-      const { status } = await Contacts.requestPermissionsAsync();
-      if (status === "granted") {
-        const { data } = await Contacts.getContactsAsync({
-          fields: [Contacts.Fields.PhoneNumbers, Contacts.Fields.Image],
+    const getFriendListData = async () => {
+      await cloudFunction
+        .httpsCallable("getFriendListData")({
+          friendList: friendList,
+        })
+        .then((response) => {
+          setContactsList(response.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
         });
-        setContactsList(
-          data.filter((x) => x.phoneNumbers?.[0].number.trim().length > 9)
-        );
-      } else {
-        setContactsList();
-      }
-    })();
-  }, []);
-
-  const onShare = async () => {
+    };
+    getFriendListData();
+  }, [useSelector((state) => state.userInfo.user)]);
+  /*  const onShare = async () => {
     try {
       const result = await Share.share({
         message:
@@ -44,7 +45,7 @@ const ContactsList = ({ navigation }) => {
     } catch (error) {
       alert(error.message);
     }
-  };
+  };*/
 
   //render
   function renderHeader() {
@@ -66,76 +67,39 @@ const ContactsList = ({ navigation }) => {
         />
 
         <FlatList
-          data={dummyData.contacts}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(item) => item?.id}
-          renderItem={({ item }) => (
-            <View key={item?.key}>
-              <ContactItem
-                item={item}
-                buttonComponent={
-                  <Button
-                    label={t("poke")}
-                    labelStyle={{
-                      color: COLORS.darkBlue3,
-                      ...FONTS.body4,
-                      fontSize: 12,
-                    }}
-                    containerStyle={{
-                      //backgroundColor: COLORS.darkBlue3,
-                      borderColor: COLORS.darkBlue3,
-                      borderWidth: 1,
-                      borderRadius: 16,
-                      width: 80,
-                      height: 35,
-                    }}
-                    onPress={onShare}
-                  />
-                }
-                //isSelected={(selectedContact?.key == 'allContacts' && selectedContact?.id== item.id)}
-              />
-            </View>
-          )}
-        />
-      </View>
-    );
-  }
-  function renderContacts() {
-    return (
-      <View style={{ marginTop: 34, ...SIZES.marginHorizontal }}>
-        <Section
-          label={t("allContacts")}
-          containerStyle={{ marginHorizontal: 0, paddingBottom: 12 }}
-        />
-
-        <FlatList
           data={contactsList}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item?.id}
           renderItem={({ item }) => (
-            <View key={item?.key}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              key={item?.key}
+            >
               <ContactItem
                 item={item}
-                buttonComponent={
-                  <Button
-                    label={t("invite")}
-                    labelStyle={{
-                      color: COLORS.darkBlue3,
-                      ...FONTS.body4,
-                      fontSize: 12,
-                    }}
-                    containerStyle={{
-                      //backgroundColor: COLORS.darkBlue3,
-                      borderColor: COLORS.darkBlue3,
-                      borderWidth: 1,
-                      borderRadius: 16,
-                      width: 80,
-                      height: 35,
-                    }}
-                    onPress={onShare}
-                  />
-                }
+
                 //isSelected={(selectedContact?.key == 'allContacts' && selectedContact?.id== item.id)}
+              />
+              <Button
+                label={t("poke")}
+                labelStyle={{
+                  color: COLORS.darkBlue3,
+                  ...FONTS.body4,
+                  fontSize: 12,
+                }}
+                containerStyle={{
+                  //backgroundColor: COLORS.darkBlue3,
+                  borderColor: COLORS.darkBlue3,
+                  borderWidth: 1,
+                  borderRadius: 16,
+                  width: 80,
+                  height: 35,
+                }}
+                //onPress={onShare}
               />
             </View>
           )}
@@ -143,18 +107,18 @@ const ContactsList = ({ navigation }) => {
       </View>
     );
   }
-
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.white }}>
       {/* Header */}
       {renderHeader()}
 
-      <ScrollView>
-        {/* user Contacts which are using app already */}
-        {renderOnAppContacts()}
-        {/* All contacts */}
-        {renderContacts()}
-      </ScrollView>
+      {/* user Contacts which are using app already */}
+      {!showLoading && renderOnAppContacts()}
+      {showLoading && (
+        <View style={{ justifyContent: "center", flex: 1 }}>
+          <ActivityIndicator color={COLORS.darkBlue3} size="large" />
+        </View>
+      )}
     </View>
   );
 };

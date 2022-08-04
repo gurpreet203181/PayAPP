@@ -39,7 +39,6 @@ const TransferConfirmation = ({ navigation }) => {
 
     await Transfer_Funds_Between_Wallets(transferObj)
       .then((response) => {
-        console.log(response);
         if (response?.status?.status == "SUCCESS") {
           navigation.replace("PaymentSuccess", {
             lottie: images.successfulLottie2,
@@ -128,7 +127,7 @@ const TransferConfirmation = ({ navigation }) => {
           />
 
           <ProfileButton
-            icon={dummyData.myProfile.profileImage}
+            icon={contact?.image}
             containerStyle={{
               backgroundColor: COLORS.primary,
               marginHorizontal: 20,
@@ -154,7 +153,7 @@ const TransferConfirmation = ({ navigation }) => {
             letterSpacing: 0.3,
           }}
         >
-          {contact?.username}{" "}
+          {contact?.username}
         </Text>
         <Text
           style={{

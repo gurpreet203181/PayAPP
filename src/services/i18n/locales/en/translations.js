@@ -14,7 +14,7 @@ const en = {
   sendAgain: "Send Again",
   transactions: "Transactions",
   cards: "Cards",
-
+  makeTransaction: "Make your first transaction",
   //Welcome
   signIn: "Sign In",
   signUp: "Sign Up",
@@ -39,6 +39,8 @@ const en = {
   emailError: "Email not valid",
   checkPolicyError: "Please check policy conditons",
   userExists: "The email address is already in use by another account",
+  firstnameError: "First Name invaild",
+  lastNameError: "Last Name invaild",
   //SignIN
   authLayout_TitleSignIn: "Welcome",
   authLayout_SignIn_SubTitle:
@@ -112,10 +114,11 @@ const en = {
 
   //success
   paymentSuccess: "Payment Sucscess",
+  paymentFaild: "Payment Faild",
   procced: "Proceed",
   paymentInfoText:
     "we will send order details and invoice in your contact no. and registered email",
-
+  paymentFailInfoText: "Faild to make tranasaction. Please try agian!",
   //TransferDashboard
   yourBalance: "Your Balance",
   transfer: "Transfer",
@@ -138,7 +141,7 @@ const en = {
   allContacts: "All Contacts",
   select: "Select",
   noContacts: "No contacts found ",
-
+  addFriend: "Add Friends",
   //PaymentMethod
   inAppBalance: "Zemmo balance",
   paymentMethod: "Payment Method",
@@ -182,7 +185,7 @@ const en = {
   total: "TOTAL",
   fee: "Fee",
   topUpDetail: "TopUp Details",
-
+  proceed: "Proceed",
   //withdraw
   withdraw: "Withdraw",
   maxAmount: "Maximum",
@@ -191,6 +194,10 @@ const en = {
   confirm: "Confirm",
   withdrawDetails: "Withdraw Detail",
   confirmWithdraw: "Confirm Withdraw",
+  selectAvailableMethod: "Withdraw options ",
+  witdrawSubtitle: "FIll the fields to complete witdraw procces ",
+  beneficiary: "Beneficiary",
+  sender: "Sender",
   //activity tab
 
   activity: "Activity",
@@ -224,7 +231,8 @@ const en = {
   yourContacts: "Your contacts on Zemmo Pay",
   poke: "Poke",
   poked: "Poked",
-
+  searchFriend: "Search new friend",
+  friendList: "Friend list",
   //AccountInfo
   accountInfo: "Account Info",
   personalInfo: "Personal Info",
@@ -270,5 +278,15 @@ const en = {
 
   //username
   usernameTaken: "Username already taken ",
+  usernameUnique: "The username is unique to indefinite you",
+  userEmpty: "User can't be empty",
+
+  //currency
+  currency: "Currency",
+  currencyAbout: "Once currency selected you can't change",
+  selectCurrenecy: "Select a currency",
+  selectCountry: "Select your country",
+  countryAbout: "Once country selected you can't change",
+  country: "Country",
 };
 export default en;

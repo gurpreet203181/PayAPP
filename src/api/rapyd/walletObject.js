@@ -35,27 +35,33 @@ const getSignature = (data, http_method) => {
 };
 
 //create ewallet
-const create_Personal_Wallet = async (user) => {
+const create_Personal_Wallet = async (user, signUpUserData) => {
   const http_method = "post";
-  const userData = user?.user;
-  console.log("ss");
+  const userData = user?.additionalUserInfo;
 
-  console.log(userData);
+  const firstname = signUpUserData
+    ? signUpUserData?.firstName
+    : userData?.profile?.given_name;
+
+  const lastname = signUpUserData
+    ? signUpUserData.lastName
+    : userData?.profile?.family_name;
+  console.log(user);
   try {
     //setting data for api call
     const data = JSON.stringify({
-      first_name: userData?.additionalUserInfo?.profile?.given_name,
-      last_name: userData?.additionalUserInfo?.profile?.family_name,
-      ewallet_reference_id: userData?.uid,
+      first_name: firstname,
+      last_name: lastname,
+      ewallet_reference_id: user?.user?.uid,
       metadata: {
         merchant_defined: true,
       },
       type: "person",
       contact: {
         phone_number: "",
-        email: userData?.email,
-        first_name: userData?.additionalUserInfo?.profile?.given_name,
-        last_name: userData?.additionalUserInfo?.profile?.family_name,
+        email: userData?.profile?.email,
+        first_name: firstname,
+        last_name: lastname,
         mothers_name: "",
         contact_type: "personal",
         identification_type: "",

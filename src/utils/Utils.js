@@ -11,17 +11,22 @@ function ammountFormat(amount, currency) {
 
 //checking if username is already used
 async function isUsernameUsed(username) {
+  let result;
   await cloudFunction
     .httpsCallable("isUsernameUsed")({
       username: username.toLowerCase(),
     })
     .then((response) => {
-      return response;
+      if (response.data) {
+        result = true;
+      } else {
+        result = false;
+      }
     })
     .catch((error) => {
       console.log(error);
     });
-  return;
+  return result;
 }
 //set item data
 function cleanItem(data) {
@@ -119,11 +124,10 @@ function validateCredentials(credentials, setError, policyChecked) {
 
   if (credentials.password.length < 6) errorMsg = t("passwordError");
 
-  if (credentials.username.length < 3) {
-    errorMsg = t("usernameError");
-  } else if (isUsernameUsed(credentials.username)) {
-    errorMsg = t("usernameTaken");
+  if (credentials.firstName.trim().length == "") {
+    errorMsg = t("firstnameError");
   }
+  if (credentials.lastName.trim() == "") errorMsg = t("lastNameError");
 
   if (!isValidEmail(credentials.email)) errorMsg = t("emailError");
 
@@ -177,6 +181,7 @@ const utils = {
   setNotificationsAsyncStorage,
   cleanItem,
   ammountFormat,
+  isUsernameUsed,
 };
 
 export default utils;
