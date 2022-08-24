@@ -5,8 +5,7 @@ import { View, Image, Text, StyleSheet } from "react-native";
 import AuthLayout from "./AuthLayout";
 import { utils } from "../../utils";
 import { COLORS, FONTS, dummyData, SIZES, icons } from "@constants";
-import { firebaseAuth, firestoreDb } from "@config/firebase";
-import { create_Personal_Wallet } from "../../api/rapyd/walletObject";
+import { firebaseAuth, firestoreDb, cloudFunction } from "@config/firebase";
 
 const SignUp = ({ navigation }) => {
   const [value, setValue] = useState({
@@ -32,28 +31,33 @@ const SignUp = ({ navigation }) => {
           .then((user) => {
             if (user?.additionalUserInfo?.isNewUser) {
               //creating user personal in rapyd
-              create_Personal_Wallet(user, value).then((response) => {
-                if (response?.status?.status == "SUCCESS") {
-                  ewalletId = response?.data?.id;
-                }
-                //after sign up user as created in database and
-                // trigger onAuthStateChanged method in useAuthentication.js to make user login in app
+              cloudFunction
+                .httpsCallable("walletObject-create_Personal_Wallet")({
+                  user: user,
+                  signUpUserData: value,
+                })
+                .then((response) => {
+                  if (response.data?.status?.status == "SUCCESS") {
+                    ewalletId = response.data?.data?.id;
+                  }
+                  //after sign up user as created in database and
+                  // trigger onAuthStateChanged method in useAuthentication.js to make user login in app
 
-                firestoreDb.collection("users").doc(user?.user?.uid).set({
-                  uid: user?.user?.uid,
-                  email: value.email.trim(),
-                  username: value.username.trim(),
-                  firstName: value.firstName.trim(),
-                  lastName: value.lastName.trim(),
-                  phoneNumber: null,
-                  profileURL: null,
-                  ewalletId: ewalletId,
-                  customerId: "",
-                  country: "",
-                  fcmToken: [],
-                  currency: null,
+                  firestoreDb.collection("users").doc(user?.user?.uid).set({
+                    uid: user?.user?.uid,
+                    email: value.email.trim(),
+                    username: value.username.trim(),
+                    firstName: value.firstName.trim(),
+                    lastName: value.lastName.trim(),
+                    phoneNumber: null,
+                    profileURL: null,
+                    ewalletId: ewalletId,
+                    customerId: "",
+                    country: "",
+                    fcmToken: [],
+                    currency: null,
+                  });
                 });
-              });
             }
           });
       }

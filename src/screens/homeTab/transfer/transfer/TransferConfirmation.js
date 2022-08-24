@@ -18,7 +18,7 @@ import {
 import { useSelector } from "react-redux";
 import Dash from "react-native-dash";
 import { AntDesign } from "@expo/vector-icons";
-import { Transfer_Funds_Between_Wallets } from "src/api/rapyd/WalletTransactionObject";
+import { cloudFunction } from "src/config/firebase";
 import { showMessage } from "react-native-flash-message";
 
 const TransferConfirmation = ({ navigation }) => {
@@ -37,9 +37,12 @@ const TransferConfirmation = ({ navigation }) => {
       destination_ewallet: contact?.ewalletId,
     };
 
-    await Transfer_Funds_Between_Wallets(transferObj)
+    await cloudFunction
+      .httpsCallable("walletTransaction-Transfer_Funds_Between_Wallets")({
+        transferObj: transferObj,
+      })
       .then((response) => {
-        if (response?.status?.status == "SUCCESS") {
+        if (response.data?.status?.status == "SUCCESS") {
           navigation.replace("PaymentSuccess", {
             lottie: images.successfulLottie2,
           });

@@ -20,11 +20,19 @@ import { OnBoarding } from "@screens";
 import { notification } from "src/config/firebase";
 import { utils } from "src/utils";
 import FlashMessage from "react-native-flash-message";
-
+import DeviceCheckFaild from "src/screens/commonScreens/faild/deviceCheckFaild";
+import { View } from "react-native";
 //navgiation stack
 const Stack = createStackNavigator();
 
 export default function App() {
+  //Identify if a phone has been jail-broken or rooted for iOS/Android.
+  if (utils.suspiciousActivityTracked()) {
+    console.log("App check failed");
+
+    return <DeviceCheckFaild isVisible={true} />;
+  }
+
   // multi language configuration
   init();
 

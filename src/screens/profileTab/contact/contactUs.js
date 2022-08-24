@@ -3,7 +3,6 @@ import { t } from "@hooks/UseI18n";
 import { View, Image, Text } from "react-native";
 import { COLORS, FONTS, icons, SIZES } from "@constants";
 import { Header, FormInput, Button } from "@components";
-import { sendContactEmail } from "@api/emailjs/sendEmail";
 import { useSelector } from "react-redux";
 const ContactUs = ({ navigation }) => {
   const userId = useSelector((state) => state.userInfo.user.uid);

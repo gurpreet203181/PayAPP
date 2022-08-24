@@ -12,8 +12,6 @@ import { firestoreDb, firebaseAuth, cloudFunction } from "src/config/firebase";
 //twilio api function
 import { sendSmsVerification } from "../../../../api/twilio/verify";
 import { utils } from "src/utils";
-import { update_Personal_Wallet } from "src/api/rapyd/walletObject";
-
 const EditAccount = ({ navigation, route }) => {
   const user = route?.params?.user;
 
@@ -91,7 +89,9 @@ const EditAccount = ({ navigation, route }) => {
             username: value.username,
           });
           //updating user information
-          update_Personal_Wallet(value);
+          cloudFunction.httpsCallable("walletObject-update_Personal_Wallet")({
+            value: value,
+          });
 
           //checking if number isn't linked to account
           //sending request to firebase function

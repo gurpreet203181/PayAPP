@@ -9,7 +9,8 @@ import {
 } from "react-native";
 import { COLORS, icons, dummyData, SIZES, FONTS } from "@constants";
 import { Header, Section, TransactionItem } from "@components";
-import { get_Wallet_Transactions } from "src/api/rapyd/WalletTransactionObject";
+import { cloudFunction } from "src/config/firebase";
+
 import { useSelector } from "react-redux";
 import { utils } from "src/utils";
 import LottieView from "lottie-react-native";
@@ -27,17 +28,16 @@ const Transactions = ({ route, navigation }) => {
   useEffect(() => {
     const getData = async () => {
       //Filter
-      if (item === "all") {
-        //if user want to view all trasactions
-        await get_Wallet_Transactions(user?.ewalletId, page, 15).then(
-          (data) => {
-            data != "no_data" ? Setdata(data) : Setdata([]);
-          }
-        );
-      } else if (item) {
-        // if user want to view specific card's transactions
-        Setdata(dummyData.Transaction.filter((x) => x.card == item.id));
-      }
+      await cloudFunction
+        .httpsCallable("walletTransaction-get_Wallet_Transactions")({
+          ewalletId: user?.ewalletId,
+          page_number: page,
+          page_size: 15,
+        })
+        .then((response) => {
+          console.log(response.data);
+          response.data != "no_data" ? Setdata(response.data) : Setdata([]);
+        });
     };
     getData();
   }, []);
@@ -47,15 +47,19 @@ const Transactions = ({ route, navigation }) => {
     if (!allDataLoaded) {
       const pageNumber = page + 1;
       //calling api call to get next  trasaction page
-      await get_Wallet_Transactions(user?.ewalletId, pageNumber, 15).then(
-        (response) => {
-          if (response == "no_data") {
+      await cloudFunction
+        .httpsCallable("walletTransaction-get_Wallet_Transactions")({
+          ewalletId: user?.ewalletId,
+          page_number: page,
+          page_size: 15,
+        })
+        .then((response) => {
+          if (response.data == "no_data") {
             setAllDataLoaded(true);
           }
           setPage(pageNumber);
-          Setdata((data) => [...data.concat(response)]);
-        }
-      );
+          Setdata((data) => [...data.concat(response.data)]);
+        });
     } else return;
   };
 

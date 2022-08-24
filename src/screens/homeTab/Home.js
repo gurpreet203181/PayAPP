@@ -22,14 +22,12 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo, setUserBalance } from "src/redux/reducers/userInfoSlice";
 import { firebaseAuth, firestoreDb, notification } from "src/config/firebase";
-import {
-  get_Wallet_Balance,
-  get_Wallet_Transactions,
-} from "src/api/rapyd/WalletTransactionObject";
+
 import { utils } from "src/utils";
 import { showMessage } from "react-native-flash-message";
 import MultistepFormModal from "@screens/authentication/MultistepFormModal";
 import dynamicLinks from "@react-native-firebase/dynamic-links";
+import { cloudFunction } from "src/config/firebase";
 
 const Home = ({ navigation }) => {
   // const { user } = useAuthentication();
@@ -69,16 +67,31 @@ const Home = ({ navigation }) => {
   //function to load rapyd e-walelt balance and transactions
   const loadRapydData = (ewalletId) => {
     console.log("loadrapyd");
-    get_Wallet_Balance(ewalletId).then((response) => {
-      if (response && response.length > 0) {
-        dispatch(setUserBalance(response[0]?.balance));
-      } else {
-        dispatch(setUserBalance(0));
-      }
-    });
-    get_Wallet_Transactions(ewalletId).then((data) => {
-      settransactionsList(data);
-    });
+    try {
+      //getting wallet balance
+      cloudFunction
+        .httpsCallable("walletTransaction-get_Wallet_Balance")({
+          ewalletId: ewalletId,
+        })
+        .then((response) => {
+          if (response && response.data[0].balance > 0) {
+            dispatch(setUserBalance(response.data[0]?.balance));
+          } else {
+            dispatch(setUserBalance(0));
+          }
+        });
+
+      //getting tranasactionList
+      cloudFunction
+        .httpsCallable("walletTransaction-get_Wallet_Transactions")({
+          ewalletId: ewalletId,
+        })
+        .then((response) => {
+          settransactionsList(response.data);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     //getting user data from databse and adding to redux state

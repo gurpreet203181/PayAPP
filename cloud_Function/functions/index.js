@@ -351,25 +351,18 @@ exports.rapydWebhooks = functions.https.onRequest(async (req, res) => {
     res.end();
   }
 });
-/*
-exports.getRegisteredConatcts = functions.https.onCall(
-  async (data, context) => {
-    if (!data || data.phoneNumbers.length == 0) return;
 
-    const promises = [];
+//customerObject
+exports.customerObject = require("./src/rapyd_functions/customerObject");
 
-    data.phoneNumbers.map((number) => {
-      const q = firestore
-        .collection("users")
-        .where("phoneNumber", "==", number)
-        .limit(1)
-        .get();
+//paymentObject
+exports.paymentObject = require("./src/rapyd_functions/PaymentObject");
 
-      promises.push(q);
-    });
+//payout
+exports.payoutObject = require("./src/rapyd_functions/PayoutObject");
 
-    const querryData = await Promise.all(promises);
+//walletobject
+exports.walletObject = require("./src/rapyd_functions/walletObject");
 
-    return querryData;
-  }
-);*/
+//wallet transaction
+exports.walletTransaction = require("./src/rapyd_functions/WalletTransaction");

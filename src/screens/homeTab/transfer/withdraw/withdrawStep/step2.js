@@ -4,10 +4,10 @@ import { View, Text, StyleSheet, FlatList } from "react-native";
 import { COLORS, FONTS, icons, SIZES } from "@constants";
 import { Header, Button, FormInput } from "@components";
 import { useSelector } from "react-redux";
-import { get_Payout_Required_Fields } from "src/api/rapyd/PayoutObject";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { showMessage } from "react-native-flash-message";
-
+import { cloudFunction } from "src/config/firebase";
+import { utils } from "src/utils";
 const Step2 = (prop) => {
   const { user } = useSelector((state) => state?.userInfo);
   const [beneficiaryFields, setBeneficiaryFields] = useState();
@@ -16,16 +16,18 @@ const Step2 = (prop) => {
   const [error, setError] = useState();
   useEffect(() => {
     const getFields = async () => {
-      await get_Payout_Required_Fields(
-        user,
-        prop.getState()?.amount,
-        prop.getState()?.payoutMethod
-      )
+      await cloudFunction
+        .httpsCallable("payoutObject-get_Payout_Required_Fields")({
+          user: user,
+          amount: prop.getState()?.amount,
+          payoutMethod: prop.getState()?.payoutMethod,
+        })
         .then((response) => {
-          if (response?.status?.status == "SUCCESS") {
+          if (response.data?.status?.status == "SUCCESS") {
+            console.log(response);
             //creating beneficary object with all fields required
             let objectBeneficiary = {};
-            response?.data?.beneficiary_required_fields.map((item) => {
+            response.data?.data?.beneficiary_required_fields.map((item) => {
               if (item?.is_required) {
                 item?.name == "payment_type"
                   ? (objectBeneficiary[item?.name] = item.regex)
@@ -33,11 +35,13 @@ const Step2 = (prop) => {
               } else null;
             });
             setBeneficiaryObject(objectBeneficiary);
-            setBeneficiaryFields(response?.data?.beneficiary_required_fields);
+            setBeneficiaryFields(
+              response.data?.data?.beneficiary_required_fields
+            );
 
             //setting sender field on props.saveState for step 3
             prop.saveState({
-              senderField: response?.data?.sender_required_fields,
+              senderField: response.data?.data?.sender_required_fields,
             });
           }
         })
@@ -89,7 +93,7 @@ const Step2 = (prop) => {
             <View>
               {item?.name != "payment_type" && (
                 <FormInput
-                  placeholder={item.name}
+                  placeholder={utils.UIName(item.name)}
                   keyboradType="default"
                   onChange={(value) => {
                     setBeneficiaryObject({

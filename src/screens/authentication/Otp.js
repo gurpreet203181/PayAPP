@@ -9,8 +9,7 @@ import {
   checkVerification,
   sendSmsVerification,
 } from "../../api/twilio/verify";
-import { firebaseAuth, firestoreDb } from "src/config/firebase";
-import { update_Personal_Wallet_phonenumber } from "src/api/rapyd/walletObject";
+import { firebaseAuth, firestoreDb, cloudFunction } from "src/config/firebase";
 
 const Otp = ({ route, navigation }) => {
   const phoneNumber = route?.params?.phoneNumber;
@@ -37,8 +36,12 @@ const Otp = ({ route, navigation }) => {
           //if success is true than updating user database with phonenumber
           updateDb().then(() => {
             //updating rapyd wallet phonenumber
-            update_Personal_Wallet_phonenumber(phoneNumber, user);
-            //  update_Personal_Wallet(value);
+            cloudFunction.httpsCallable(
+              "walletObject-update_Personal_Wallet_phonenumber"
+            )({
+              phoneNumber: phoneNumber,
+              user: user,
+            });
             navigation.replace("AccountInfo");
           });
         } else {

@@ -5,7 +5,6 @@ import Step1 from "./withdrawStep/step1";
 import Step2 from "./withdrawStep/step2";
 import Step3 from "./withdrawStep/step3";
 import AnimatedMultistep from "react-native-animated-multistep";
-import { create_Payout } from "src/api/rapyd/PayoutObject";
 import { useSelector } from "react-redux";
 /* 
 summray
@@ -24,9 +23,6 @@ const WithDraw = ({ navigation }) => {
   const finish = async (finalState) => {
     console.log(finalState);
     navigation.navigate("withdrawConfirmation", { finalState });
-    /*create_Payout(user, finalState).then((response) => {
-      console.log(response);
-    });*/
   };
   const back = (prop) => {};
 

@@ -5,10 +5,8 @@ import { View, Text, StyleSheet } from "react-native";
 import { COLORS, icons, FONTS, SIZES, images } from "@constants";
 import { Header, CustomSwipeButton, IconButton } from "@components";
 import { useSelector } from "react-redux";
-import { topUp_Ewallet } from "src/api/rapyd/PaymentObject";
-import { firestoreDb } from "@config/firebase";
+import { firestoreDb, cloudFunction } from "@config/firebase";
 
-import { create_Customer } from "src/api/rapyd/customerObject";
 const TopUpConfirmation = ({ navigation }) => {
   const { amount } = useSelector((state) => state.topUp);
   const { user } = useSelector((state) => state.userInfo);
@@ -17,27 +15,37 @@ const TopUpConfirmation = ({ navigation }) => {
     let customerId = user?.customerId !== "" ? user?.customerId : "";
     //checking if user have customer id
     if (customerId == "") {
-      await create_Customer(user).then((response) => {
-        if (response?.status?.status == "SUCCESS") {
-          customerId = response?.data?.id;
-        }
-        firestoreDb
-          .collection("users")
-          .doc(user?.uid)
-          .update({
-            customerId: customerId,
-          })
-          .catch((e) => {
-            console.log("add friend:" + e);
-          });
-      });
+      await cloudFunction
+        .httpsCallable("customerObject-create_Customer")({
+          user: user,
+        })
+        .then((response) => {
+          if (response.data?.status?.status == "SUCCESS") {
+            customerId = response.data?.data?.id;
+          }
+          firestoreDb
+            .collection("users")
+            .doc(user?.uid)
+            .update({
+              customerId: customerId,
+            })
+            .catch((e) => {
+              console.log("add friend:" + e);
+            });
+        });
     }
 
-    await topUp_Ewallet(amount, user, customerId)
+    await cloudFunction
+      .httpsCallable("paymentObject-topUp_Ewallet")({
+        user: user,
+        amount: amount,
+        customerId: customerId,
+      })
       .then((response) => {
         console.log(response);
-        if (response.status?.status == "SUCCESS") {
-          const url = response.data?.redirect_url;
+        if (response.data.status?.status == "SUCCESS") {
+          const url = response.data.data?.redirect_url;
+          console.log(url);
           navigation.navigate("UrlWebview", { redirect_url: url });
           //Linking.openURL(redirect_url);
         }

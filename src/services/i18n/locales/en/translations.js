@@ -1,6 +1,7 @@
 const en = {
   //App general
   appName: "Zemmo Pay",
+  appAccessFailed: "",
   //bottomTab
   tabHome: "Home",
   tabProfile: "Profile",
@@ -114,11 +115,11 @@ const en = {
 
   //success
   paymentSuccess: "Payment Sucscess",
-  paymentFaild: "Payment Faild",
+  paymentFaild: "Payment failed",
   procced: "Proceed",
   paymentInfoText:
     "we will send order details and invoice in your contact no. and registered email",
-  paymentFailInfoText: "Faild to make tranasaction. Please try agian!",
+  paymentFailInfoText: "Failed to make tranasaction. Please try agian!",
   //TransferDashboard
   yourBalance: "Your Balance",
   transfer: "Transfer",

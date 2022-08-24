@@ -4,20 +4,32 @@ import { View, Text, StyleSheet } from "react-native";
 import { COLORS, icons, FONTS, SIZES, images } from "@constants";
 import { Header, IconButton, CustomSwipeButton } from "@components";
 import { useSelector } from "react-redux";
-import { create_Payout } from "src/api/rapyd/PayoutObject";
+import { cloudFunction } from "src/config/firebase";
+import { showMessage } from "react-native-flash-message";
 const WithdrawConfirmation = ({ navigation, route }) => {
   const { user } = useSelector((state) => state?.userInfo);
 
   const finalState = route?.params?.finalState;
 
   const onConfirm = async () => {
-    await create_Payout(user, finalState).then((response) => {
-      if (response?.status?.status == "SUCCESS") {
-        navigation.replace("PaymentSuccess", {
-          lottie: images.successfulLottie2,
-        });
-      }
-    });
+    await cloudFunction
+      .httpsCallable("payoutObject-create_Payout")({
+        user: user,
+        payout: finalState,
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.data?.status?.status == "SUCCESS") {
+          navigation.replace("PaymentSuccess", {
+            lottie: images.successfulLottie2,
+          });
+        } else {
+          showMessage({
+            message: "Something went wron try agian !",
+            type: "danger",
+          });
+        }
+      });
   };
   //render
   function renderHeader() {

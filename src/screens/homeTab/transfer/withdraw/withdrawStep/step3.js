@@ -5,7 +5,7 @@ import { COLORS, FONTS, icons, SIZES } from "@constants";
 import { Header, Button, FormInput } from "@components";
 import { useSelector } from "react-redux";
 import { showMessage } from "react-native-flash-message";
-
+import { utils } from "src/utils";
 const Step3 = (prop) => {
   const { user } = useSelector((state) => state?.userInfo);
   const [senderObject, setSenderObject] = useState([]);
@@ -67,7 +67,7 @@ const Step3 = (prop) => {
             <View>
               {item?.name != "country" && (
                 <FormInput
-                  placeholder={item.name}
+                  placeholder={utils.UIName(item.name)}
                   keyboradType="default"
                   onChange={(value) => {
                     setSenderObject({

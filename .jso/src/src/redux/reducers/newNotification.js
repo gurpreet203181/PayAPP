@@ -1,0 +1,1 @@
+Object.defineProperty(e,"__esModule",{value:!0}),e.setNewNotification=e.newNotification=e.default=void 0;var t={isnewNotification:!1},o=(0,r(d[0]).createSlice)({name:"newNotification",initialState:t,reducers:{setNewNotification:function(t,o){t.isnewNotification=o.payload}}});e.newNotification=o;var n=o.actions.setNewNotification;e.setNewNotification=n;var c=o.reducer;e.default=c

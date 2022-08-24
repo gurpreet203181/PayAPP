@@ -1,0 +1,1 @@
+var t=r(d[0]);Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0;var u=t(r(d[1])),l=(t(r(d[2])),r(d[3])),n=(r(d[4]),r(d[5])),c=function(t){return(0,u.default)(t),(0,n.jsx)(l.TouchableOpacity,{children:(0,n.jsx)(l.View,{})})};e.default=c

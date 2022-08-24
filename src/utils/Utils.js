@@ -1,7 +1,8 @@
 import { t } from "@hooks/UseI18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { cloudFunction } from "src/config/firebase";
-
+import JailMonkey from "jail-monkey";
+import { View, Text } from "react-native";
 //number format to currency
 function ammountFormat(amount, currency) {
   return Number(amount)
@@ -170,6 +171,51 @@ function editAccountValidateCredentials(credentials, setError) {
     return false;
   }
 }
+function suspiciousActivityTracked() {
+  if (JailMonkey?.isJailBroken()) return true;
+  if (JailMonkey?.canMockLocation()) return true;
+  if (__DEV__) {
+    if (JailMonkey?.isDebuggedMode()) return false;
+  } else {
+    if (JailMonkey?.isDebuggedMode()) return true;
+  }
+  if (JailMonkey?.AdbEnabled()) return true;
+  if (JailMonkey?.isOnExternalStorage()) return true; //android
+  if (JailMonkey?.hookDetected()) return true; //android
+
+  return false;
+}
+
+function UIName(name) {
+  let uiName;
+  switch (name) {
+    case "first_name":
+      uiName = t("firstName");
+      break;
+    case "last_name":
+      uiName = t("lastName");
+      break;
+    case "iban":
+      uiName = "Iban";
+      break;
+    case "banK_account":
+      uiName = t("bankAccount");
+      break;
+    case "city":
+      uiName = t("city");
+      break;
+    case "address":
+      uiName = t("address");
+      break;
+    case "date_of_birth":
+      uiName = t("dateOfBirth");
+      break;
+    default:
+      uiName = name;
+      break;
+  }
+  return uiName;
+}
 const utils = {
   isValidEmail,
   validateEmail,
@@ -182,6 +228,8 @@ const utils = {
   cleanItem,
   ammountFormat,
   isUsernameUsed,
+  suspiciousActivityTracked,
+  UIName,
 };
 
 export default utils;

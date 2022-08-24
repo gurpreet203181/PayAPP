@@ -1,0 +1,1 @@
+var o=r(d[0]),t=r(d[1]),n=o(r(d[2]));(0,t.registerRootComponent)(n.default)

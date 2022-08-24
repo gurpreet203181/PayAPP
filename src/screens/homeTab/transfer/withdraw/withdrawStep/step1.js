@@ -10,7 +10,6 @@ import { get_List_Payout_Method_Types } from "src/api/rapyd/PayoutObject";
 import { showMessage } from "react-native-flash-message";
 import { utils } from "src/utils";
 import { useNavigation } from "@react-navigation/native";
-
 const Step1 = (prop) => {
   const navigation = useNavigation();
 
@@ -37,7 +36,7 @@ const Step1 = (prop) => {
                   `${item?.beneficiary_country}_general_bank`
               ) {
                 data.push({
-                  label: item?.name,
+                  label: t("bankTransfer"),
                   value: item.payout_method_type,
                 });
               }

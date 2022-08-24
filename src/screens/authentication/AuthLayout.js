@@ -7,12 +7,10 @@ import { Loading } from "@components";
 
 //Firbase
 import auth from "@react-native-firebase/auth";
-import { firebaseAuth, firestoreDb } from "@config/firebase";
+import { firebaseAuth, firestoreDb, cloudFunction } from "@config/firebase";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 import Constants from "expo-constants";
-import { create_Personal_Wallet } from "../../api/rapyd/walletObject";
-import { create_Customer } from "src/api/rapyd/customerObject";
 const AuthLayout = ({
   childern,
   title,
@@ -46,28 +44,32 @@ const AuthLayout = ({
           let ewalletId;
 
           //creating user personal in rapyd
-          create_Personal_Wallet(user).then((response) => {
-            if (response?.status?.status == "SUCCESS") {
-              ewalletId = response?.data?.id;
-            }
+          cloudFunction
+            .httpsCallable("walletObject-create_Personal_Wallet")({
+              user: user,
+            })
+            .then((response) => {
+              if (response.data?.status?.status == "SUCCESS") {
+                ewalletId = response.data?.data?.id;
+              }
 
-            //if user is new creating user in database
-            firestoreDb.collection("users").doc(user?.user?.uid).set({
-              uid: user?.user?.uid,
-              username: "",
-              email: user?.user?.email,
-              firstName: user?.additionalUserInfo?.profile?.given_name,
-              lastName: user?.additionalUserInfo?.profile?.family_name,
-              profileURL: user?.user?.photoURL,
-              phoneNumber: null,
-              ewalletId: ewalletId,
-              customerId: "",
-              country: "",
-              customerId: customerId,
-              fcmToken: [],
-              currency: null,
+              //if user is new creating user in database
+              firestoreDb.collection("users").doc(user?.user?.uid).set({
+                uid: user?.user?.uid,
+                username: "",
+                email: user?.user?.email,
+                firstName: user?.additionalUserInfo?.profile?.given_name,
+                lastName: user?.additionalUserInfo?.profile?.family_name,
+                profileURL: user?.user?.photoURL,
+                phoneNumber: null,
+                ewalletId: ewalletId,
+                customerId: "",
+                country: "",
+                customerId: customerId,
+                fcmToken: [],
+                currency: null,
+              });
             });
-          });
         }
       })
       .catch((error) => {
