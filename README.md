@@ -1,5 +1,5 @@
 # PayAPP
- Payment App
+PayApp is an innovative mobile payment solution designed to facilitate easy and secure person-to-person money transfers. This app allows users to quickly send and receive funds using just their smartphones. Featuring a user-friendly interface, PayApp supports multiple authentication methods, including Firebase OAuth and Twilio phone number verification, to ensure transaction security. Ideal for daily transactions or splitting bills, PayApp makes managing finances convenient and hassle-free for everyone.
 
 ScreenShots - Native App
 
